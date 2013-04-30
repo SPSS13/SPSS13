@@ -1,0 +1,84 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[en,break]{ukon-infie}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+%\usepackage{pgfgantt} % Timeline 
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\usepackage{courier}
+\usepackage{textcomp}
+
+\begin{document}
+\title{{\LARGE \textbf{Software Requirements Specification}}\\ \textbf{{\large Document}}}
+	%\begin{center}
+	%\textbf{{\huge Software Requirements Specification}}
+	%\end{center}
+\author{\textbf{Graph Maga}}
+\date{\today}
+\maketitle
+
+ \tableofcontents{}
+ \clearpage
+ 
+{\large \textbf{Kommentar (Matze): }
+
+\textit{Das Dokument ist jetzt nach dem IEEE 830-1998 SRS Standard gerichtet (SE Slides 2-180) und bereits ein wenig modifiziert. Sollte jemand Verbesserungsvorschläge haben, dann kann er sie selbst ändern und/oder mir Bescheid sagen und ich erledige das dann, falls noch nicht geschehen.
+Abgesehen davon sollte man noch überlegen, in welchen Bereich des Dokuments "System Models", "System Evolution", "System Architecture" (Sommerville, Slides 2-178) passen würde.}
+
+\textit{Ich habe jetzt bei jeder Überschrift, sowohl die deutsche als auch englische Überschrift reingeschrieben, die annähernd das selbe beschreiben, vllt kann der ein oder andere mit der anderen Überschrift mehr anfangen, als der andere. Am Ende würde ich sagen entscheiden wir uns für eine Sprache, und da wir das Dokument auf deutsch schreiben wollen, bin ich dafür, dass wir dementsprechend auch die Überschriften deutsch machen. Wenn das nichts ausmachen gern auch englisch, aber dann würde ich das mit Stephan abklären.}
+
+\textit{Die geschweiften Klammern in den einzelnen Bereichen sollen darauf hindeuten, dass dies durch den späteren Inhalt ersetzt werden soll. In den Klammern hab ich versucht, falls möglich zu beschreiben, wie der Inhalt ganz grob aussehen könnte.}
+
+\textit{Ich hoffe, dass aber die Struktur ansonsten allen zusagt.. wenn soweit ist, dann haut diesen Kommentar einfach aus dem Dokument oder kommentiert es im Source-Code aus.. dann kann man nochmal nachschauen, wenn man möchte. }
+
+
+\section{Einleitung / Introduction} % 1. 
+	\{definiere erwartete Leserschaft des Dokuments \& Version History.\\
+    Grund für die Erstellung der neuen Version, bzw. Zusammenfassung der Veränderungen\}
+ 	\subsection{Zweck (des Dokuments) / Purpose} %1.1
+	\{Wieso braucht man das System. Kurze Beschreibung der System Funktionen \& wie es mit anderen Systemen arbeiten soll.\\
+	(wie passt das System in gesamte Unternehmen || stragische Ziele der Organisation d. Software)\}
+  	\subsection{Umfang (des Softwareprodukts) / Scope} %1.2
+   \{...\}
+  	\subsection{Erläuterungen zu Begriffen und / oder Abkürzungen (Glossar) / Definitions, acronyms and abbreviations} %1.3
+	\{        Definiere technische Begriffe, die im Dokument verwendet werden und nicht "klar" sind.
+	        Keine Annahmen über die Erfahrungen und Fachkenntnis des Lesers machen.\}
+  	\subsection{Verweise auf sonstige Ressourcen oder Quellen / References} %1.4
+  	\{Hyperlinks? http://www.graphclasses.org/\\
+          ISGCI, JGraphX als Grafikbibliothek, JGraphT\}
+  	\subsection{Übersicht/Überblick (Wie ist das Dokument aufgebaut?) / Overview} %1.5
+  	\{Ist dieser Abschnitt notwendig?!.. zur Not einfach kippen\}
+  	
+\section{Allgemeine Beschreibung (des Softwareprodukts) / Overall Description} %2.
+  	\subsection{Produktperspektive (zu anderen Softwareprodukten) / Product Perspective} %2.1
+	\{Beschreibung, dass unseres Produkt als "Schnittstelle" zwischen JGraphX und ISGCI fungieren wird\\
+	und wie diese miteinander interagieren, bzw. wie darauf aufgebaut wird.\}
+  	\subsection{Produktfunktionen (eine Zusammenfassung und Übersicht) / Product Functions}  %2.2
+	\{Beschreibung der Funktionen und entsprechende tabellarische Übersicht.\}     
+    \subsection{Benutzermerkmale (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics} %2.3
+	\{Welche Kenntnisse haben die potentiellen Nutzer des Systems, bzw. welche Personengruppen werden das System nutzen.\}    
+	\subsection{Einschränkungen (für den Entwickler) / Constraints} %2.4
+	\{zeitliche Einschränken, Plattformen, vorgegebene Bibliotheken, Implementationsaufwand, Kundenorientiert!!!\}
+	\subsection{Annahmen und Abhängigkeiten (nicht Realisierbares und auf spätere Versionen verschobene Eigenschaften) / Assumptions and dependencies} %2.5
+	\{Brain-Storming :-)\}
+	\subsection{Anteil der Anforderungen im Gesamten / Apportioning of requirements} %2.6
+	
+\section{Spezifische Anforderungen (im Gegensatz zu 2.) / Specific requirements} %3.
+	\subsection{funktionale Anforderungen (Stark abhängig von der Art des Softwareprodukts)} %3.1
+	\{Requirements Elicitation !!!, Funktionen / Functions\}
+	\subsection{nicht-funktionale Anforderungen} %3.2     
+	\{Requirements Elicitation !!! $\Longrightarrow$ Performance Requirements, Logical database requirements ?!?!?!, \}
+	\subsection{externe Schnittstellen} %3.3
+	\{JGraphX, JGraphT, ISGCI (ant, maven ...)\}
+	\subsection{Design Constraints (ja das englisch war so vorgegeben und darf gerne geändert werden :-)} %3.4
+	\{...\}
+	\subsection{Anforderungen an Performance} %3.5
+	\{schnelle Laufzeit, wie aktuelles System, damit Änderungen sofort sichtbar sind $\Longrightarrow$ evtl. auch in nicht-funktionalen Anforderungsbereich Punkt 3.2 verschieben!\}
+	\subsection{Qualitätsanforderungen / Software System Attributes} %3.6
+	\subsection{Sonstige Anforderungen / Organizing the specific requirements} %3.7
+	\subsection{Ergänzende Kommentare / Additional Comments} % 3.8
+\end{document}
