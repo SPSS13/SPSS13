@@ -4,6 +4,7 @@
 \usetikzlibrary{decorations.pathmorphing} %Zigzag - Timeline
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 
 \newganttlinktype{zigzag}{%
 \ganttsetstartanchor{on right=1}%
@@ -26,48 +27,48 @@
 \clearpage
 
 \section{Introduction}
-Ernst de Ridder is CEO of www.graphclasses.org and owner of ISGCI, a graph drawing application using JgraphT. This application has been developed 15 years ago and since then been updated to work with modern software. ISGCI is the biggest Information System on Graph classes on the web and a library for many users. It is an open source application and helps to create graph drawings for various purposes. This project aims to improve the maintenance costs of ISGCI and to add more functionality to make it even more attractive.
+Ernst de Ridder is CEO of \url{www.graphclasses.org} and owner of ISGCI, a graph drawing application using the Java library "JgraphT". This application was developed 15 years ago and has been updated to work with modern software. ISGCI is currently the biggest online information system about graph classes, as well as a useful library for many users. It is an open source application, that lets you create graph drawings for various purposes. Our projects goal is to improve the current functionality and implement additional features, using different libraries, in order to make the website more attractive and reduce the maintenance cost of the system.
 
 
 \section{Drawing library}
-To add extra functionality and lower maintenance costs we will use JGraphX which is a Swing graph visualization library for use in desktop environments.
+The different library mentioned, is called "JGraphX", which is a Swing graph visualization library for the use in desktop environments.
 
-\section{Members \& Responsibilities}
+\section{Members and Responsibilities}
 
 {\small 
 \hspace*{0.6cm}\textbf{\textit{Project Manager: Leonard Krämer}} \\
-{\footnotesize Responsible for the product being delivered in time. He organizes all tasks and keeps track of changes. Furthermore he leads all meetings and does risk management. He represents our product in front of the customer and is the main contact person.  }\\
+{\footnotesize The Project Manager is responsible for the product being delivered in time. He organizes all tasks and keeps track of changes. Furthermore he leads all meetings and takes care of the risk management. For the customer he is the main contact person regarding the product.  }\\
 
 \textbf{\textit{Document Manager: Matthias Miller}}\\
-{\footnotesize Responsible for a good documentation of the product. He rather specifies the boundaries of a good documentation than writing it on his own. The Document Manager keeps track of changes and takes care of a seamless and complete documentation.} \\
+{\footnotesize The Document Manager is in charge of the product documentation, as well as the development documentation. He rather specifies the boundaries of a good documentation than writing it on his own. His tasks also cover keeping track of changes and taking care of a coherent and complete documentation.} \\
 
 \textbf{\textit{Test Manager: Fabian Vollmer}}\\
-{\footnotesize Is responsible for a well tested and working Software. The Test Manager ensures that everything works and works closely with the Specification Manager.  }}\\
+{\footnotesize The Test Manager is responsible for a well tested and working Software. He ensures that the software performs and works closely with the Specification Manager.  }}\\
 
 \textbf{\textit{Version- \& File Manager: Rebecca Kehlbeck}} \\
-{\footnotesize Is responsible for proper backups and a well-conceived file structure. Takes care that other Team Members use the specified file structure. }\\
+{\footnotesize The Version \& File Manager is in charge of proper backups and a well-conceived file structure. Another important task is to make the team use consistent files and versioning software. }\\
 
 \textbf{\textit{Specification Manager: Matthias Kraus}} \\
-{\footnotesize Requirements expert. He is responsible for the elicitation of all requirements and the creation of the SRS \slash SDD. He defines the standard of these documents and ensures their correctness throughout the creation.} \\
+{\footnotesize The Specification Manager is responsible for the elicitation of all requirements and the creation of the SRS \slash SDD. He defines the standard of these documents and ensures their correctness throughout the creation.} \\
 
 \textbf{\textit{Media Manager: Nico Siebeck}} \\
-{\footnotesize Is responsible for the creation of protocols. He can also be assigned to different tasks depending on the need for resources.}\\
+{\footnotesize The Media Manager is assigned to the creation of protocols and other presentable documents. Other various tasks will depend on the use of other resources.}\\
 
 \textbf{\textit{Vice Project Manager: Philipp Hilpert }}\\
-{\footnotesize Represents the Project Manager when unavailable and helps him to keep track of everything. Provides ideas and helps all other managers with their tasks.  } \\
+{\footnotesize The Vice Project Manager represents the Project Manager when unavailable and helps him to keep track of everything. Provides ideas and helps all other managers with their tasks.  } \\
 
 All team members will contribute to the coding and documentation.
 
 
 \section{Development methodology}
 
-We use a V-Model approach to ensure a good documentation and a well defined process.
+Through the use of the V-Model approach, we will ensure a good documentation and a well defined process.
 
-\section{Project organization}
+\section{Project Organization}
 
 This section provides information about the communication used by our team and shows how we will use common tools to communicate and keep track of changes. It includes an overview of tools and forms of communication. A table of all contact information can be found online \footnote[1]{goo.gl/tVUzp}.
 
-\subsection{Communication Management plan}
+\subsection{Communication Management Plan}
 \begin{itemize}
 \item[Meetings:] We will meet weekly and discuss our success, issues and find solutions. The Project Manager leads the discussion while the Media Manager writes Protocol. Decisions are made by the whole Team. If the Project Manager is unavailable he will be represented by the Vice Project Manager. Meeting Minutes will be sent to the Customer after each meeting.
 \item[Skype:] For quick help and shorter discussions we use a Skype Group which can be used to inform other Team Members about important events. This should be avoided if not important. For emergencies and to fix appointments there is a Whatsapp Group. 
@@ -76,7 +77,7 @@ This section provides information about the communication used by our team and s
 \item[Informal Communications:] Any questions \& issues that arise when team members communicate with each other have to be forwarded to the Project Manager so that it can be acted accordingly.  
 \end{itemize}
 
-\subsection{Group-Rules}
+\subsection{Group Rules}
 \begin{enumerate}
 \item If a member is not able to attend to a meeting because of sickness or any other reason, he has to notify the Project Manager or Vice Project Manager via E-Mail of his absence as soon as possible, when possible one or two days before.
 \item Respect for other members.
@@ -145,7 +146,7 @@ today = 1
 \end{center}
 
 
-\subsection{Progress Tracking \& Issue Tracking}
+\subsection{Progress Tracking and Issue Tracking}
 
 To track progress of our project we will use the meetings and Github. At the beginning of every meeting we will check if all tasks have been completed by the team members, if not, we will discuss why the task hadn't been finished, assign a new deadline or help to resolve the issue as fast as possible. Github will help to track issues, when we are in implementation stage. It will help to provide an overview of which features have been implemented and which milestones accomplished. Optionally we will push the SRS and SDD to Github to keep track of sections to be added and content missing to complete the documentation. In addition the progress will be shown in a diagram as above.
 
