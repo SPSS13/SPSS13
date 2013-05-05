@@ -13,27 +13,58 @@
 \usepackage{textcomp}
 
 \begin{document}
-\title{{\LARGE \textbf{Software Requirements Specification}}\\ \textbf{{\large Document}}}
+% HEAD |-->
+\thispagestyle{empty} %Seitennummerierung 1 ausblenden
+\vspace*{5cm} 
+\begin{center}
+{\huge Software Requirements Specification}\\
+{\large Version 1.0}\\
+{\large 21. Mai 2013}\\
+\end{center}
+
+\begin{center}
+{\large ISGCI - Information System on Graph Classes and their Inclusions}\\
+{\large Team $Graph$ $Maga$}
+\end{center}
+% HEAD -->|
+
+
+
+
+%\title{{\LARGE \textbf{Software Requirements Specification}}\\ \textbf{{\large Document}}}
 	%\begin{center}
 	%\textbf{{\huge Software Requirements Specification}}
 	%\end{center}
-\author{\textbf{Graph Maga}}
-\date{\today}
-\maketitle
-
- \tableofcontents{}
- \clearpage
+%\author{\textbf{Graph Maga}}
+%\date{\today}
+%\maketitle
+% \clearpage
  
-{\large \textbf{Kommentar (Matze): }
+ 
+ 
+ 
+ \newpage
+ 
+ % Inhaltsverzeichnis |-->
+ \renewcommand{\contentsname}{Inhaltsverzeichnis}
+ \tableofcontents % Definiert durch Sections/Subsections
+ % Inhaltsverzeichnis -->|
+ 
+ \newpage
+ 
+ 
+ 
+ 
+%{\large \textbf{Kommentar (Matze): }
 
-\textit{Das Dokument ist jetzt nach dem IEEE 830-1998 SRS Standard gerichtet (SE Slides 2-180) und bereits ein wenig modifiziert. Sollte jemand Verbesserungsvorschläge haben, dann kann er sie selbst ändern und/oder mir Bescheid sagen und ich erledige das dann, falls noch nicht geschehen.
-Abgesehen davon sollte man noch überlegen, in welchen Bereich des Dokuments "System Models", "System Evolution", "System Architecture" (Sommerville, Slides 2-178) passen würde.}
-
-\textit{Ich habe jetzt bei jeder Überschrift, sowohl die deutsche als auch englische Überschrift reingeschrieben, die annähernd das selbe beschreiben, vllt kann der ein oder andere mit der anderen Überschrift mehr anfangen, als der andere. Am Ende würde ich sagen entscheiden wir uns für eine Sprache, und da wir das Dokument auf deutsch schreiben wollen, bin ich dafür, dass wir dementsprechend auch die Überschriften deutsch machen. Wenn das nichts ausmachen gern auch englisch, aber dann würde ich das mit Stephan abklären.}
-
-\textit{Die geschweiften Klammern in den einzelnen Bereichen sollen darauf hindeuten, dass dies durch den späteren Inhalt ersetzt werden soll. In den Klammern hab ich versucht, falls möglich zu beschreiben, wie der Inhalt ganz grob aussehen könnte.}
-
-\textit{Ich hoffe, dass aber die Struktur ansonsten allen zusagt.. wenn soweit ist, dann haut diesen Kommentar einfach aus dem Dokument oder kommentiert es im Source-Code aus.. dann kann man nochmal nachschauen, wenn man möchte. }
+%\textit{Das Dokument ist jetzt nach dem IEEE 830-1998 SRS Standard gerichtet (SE Slides 2-180) und bereits ein wenig modifiziert. Sollte jemand Verbesserungsvorschläge haben, dann kann er sie selbst ändern und/oder mir Bescheid sagen und ich erledige das dann, falls noch nicht geschehen.
+%Abgesehen davon sollte man noch überlegen, in welchen Bereich des Dokuments "System Models", "System Evolution", "System Architecture" (Sommerville, Slides 2-178) passen würde.}
+%
+%\textit{Ich habe jetzt bei jeder Überschrift, sowohl die deutsche als auch englische Überschrift reingeschrieben, die annähernd das selbe beschreiben, vllt kann der ein oder andere mit der anderen Überschrift mehr anfangen, als der andere. Am Ende würde ich sagen entscheiden wir uns für eine Sprache, und da wir das Dokument auf deutsch schreiben wollen, bin ich dafür, dass wir dementsprechend auch die Überschriften deutsch machen. Wenn das nichts ausmachen gern auch englisch, aber dann würde ich das mit Stephan abklären.}
+%
+%\textit{Die geschweiften Klammern in den einzelnen Bereichen sollen darauf hindeuten, dass dies durch den späteren Inhalt ersetzt werden soll. In den Klammern hab ich versucht, falls möglich zu beschreiben, wie der Inhalt ganz grob aussehen könnte.}
+%
+%\textit{Ich hoffe, dass aber die Struktur ansonsten allen zusagt.. wenn soweit ist, dann haut diesen Kommentar einfach aus dem Dokument oder kommentiert es im Source-Code aus.. dann kann man nochmal nachschauen, wenn man möchte. }
 
 
 \section{Einleitung / Introduction} % 1. 
@@ -53,6 +84,7 @@ Abgesehen davon sollte man noch überlegen, in welchen Bereich des Dokuments "Sy
   	\subsection{Übersicht/Überblick (Wie ist das Dokument aufgebaut?) / Overview} %1.5
   	\{Ist dieser Abschnitt notwendig?!.. zur Not einfach kippen\}
   	
+\newpage
 \section{Allgemeine Beschreibung (des Softwareprodukts) / Overall Description} %2.
   	\subsection{Produktperspektive (zu anderen Softwareprodukten) / Product Perspective} %2.1
 	\{Beschreibung, dass unseres Produkt als "Schnittstelle" zwischen JGraphX und ISGCI fungieren wird\\
@@ -66,7 +98,8 @@ Abgesehen davon sollte man noch überlegen, in welchen Bereich des Dokuments "Sy
 	\subsection{Annahmen und Abhängigkeiten (nicht Realisierbares und auf spätere Versionen verschobene Eigenschaften) / Assumptions and dependencies} %2.5
 	\{Brain-Storming :-)\}
 	\subsection{Anteil der Anforderungen im Gesamten / Apportioning of requirements} %2.6
-	
+
+\newpage
 \section{Spezifische Anforderungen (im Gegensatz zu 2.) / Specific requirements} %3.
 	\subsection{funktionale Anforderungen (Stark abhängig von der Art des Softwareprodukts)} %3.1
 	\{Requirements Elicitation !!!, Funktionen / Functions\}
