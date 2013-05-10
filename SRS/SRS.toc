@@ -5,19 +5,14 @@
 \contentsline {subsection}{\numberline {1.3}Erl\IeC {\"a}uterungen zu Begriffen und / oder Abk\IeC {\"u}rzungen (Glossar) / Definitions, acronyms and abbreviations}{3}
 \contentsline {subsection}{\numberline {1.4}Verweise auf sonstige Ressourcen oder Quellen / References}{3}
 \contentsline {subsection}{\numberline {1.5}\IeC {\"U}bersicht/\IeC {\"U}berblick (Wie ist das Dokument aufgebaut?) / Overview}{3}
-\contentsline {section}{\numberline {2}Allgemeine Beschreibung (des Softwareprodukts) / Overall Description}{4}
-\contentsline {subsection}{\numberline {2.1}Produktperspektive (zu anderen Softwareprodukten) / Product Perspective}{4}
-\contentsline {subsection}{\numberline {2.2}Produktfunktionen (eine Zusammenfassung und \IeC {\"U}bersicht) / Product Functions}{4}
-\contentsline {subsection}{\numberline {2.3}Benutzermerkmale (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics}{4}
-\contentsline {subsection}{\numberline {2.4}Einschr\IeC {\"a}nkungen (f\IeC {\"u}r den Entwickler) / Constraints}{4}
-\contentsline {subsection}{\numberline {2.5}Annahmen und Abh\IeC {\"a}ngigkeiten (nicht Realisierbares und auf sp\IeC {\"a}tere Versionen verschobene Eigenschaften) / Assumptions and dependencies}{4}
-\contentsline {subsection}{\numberline {2.6}Anteil der Anforderungen im Gesamten / Apportioning of requirements}{4}
-\contentsline {section}{\numberline {3}Spezifische Anforderungen (im Gegensatz zu 2.) / Specific requirements}{5}
-\contentsline {subsection}{\numberline {3.1}funktionale Anforderungen (Stark abh\IeC {\"a}ngig von der Art des Softwareprodukts)}{5}
-\contentsline {subsection}{\numberline {3.2}nicht-funktionale Anforderungen}{5}
-\contentsline {subsection}{\numberline {3.3}externe Schnittstellen}{5}
-\contentsline {subsection}{\numberline {3.4}Design Constraints (ja das englisch war so vorgegeben und darf gerne ge\IeC {\"a}ndert werden :-)}{5}
-\contentsline {subsection}{\numberline {3.5}Anforderungen an Performance}{5}
-\contentsline {subsection}{\numberline {3.6}Qualit\IeC {\"a}tsanforderungen / Software System Attributes}{5}
-\contentsline {subsection}{\numberline {3.7}Sonstige Anforderungen / Organizing the specific requirements}{5}
-\contentsline {subsection}{\numberline {3.8}Erg\IeC {\"a}nzende Kommentare / Additional Comments}{5}
+\contentsline {section}{\numberline {2}Allgemeine Beschreibung}{4}
+\contentsline {subsection}{\numberline {2.1}Produktperspektive}{4}
+\contentsline {subsection}{\numberline {2.2}Produktfunktionen}{4}
+\contentsline {subsection}{\numberline {2.3}Benutzermerkmale}{4}
+\contentsline {subsection}{\numberline {2.4}Einschr\IeC {\"a}nkungen}{4}
+\contentsline {subsection}{\numberline {2.5}Anteil der Anforderungen}{4}
+\contentsline {section}{\numberline {3}Spezifische Anforderungen}{5}
+\contentsline {subsection}{\numberline {3.1}Funktionale Anforderungen (Stark abh\IeC {\"a}ngig von der Art des Softwareprodukts)}{5}
+\contentsline {subsection}{\numberline {3.2}Nicht-funktionale Anforderungen}{5}
+\contentsline {subsection}{\numberline {3.3}Externe Schnittstellen - Anforderungen}{5}
+\contentsline {subsection}{\numberline {3.4}Qualit\IeC {\"a}tsanforderungen}{6}
