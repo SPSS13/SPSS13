@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Einleitung / Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Zweck \(des Dokuments\) / Purpose}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Umfang \(des Softwareprodukts\) / Scope}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Erl\344uterungen zu Begriffen und / oder Abk\374rzungen \(Glossar\) / Definitions, acronyms and abbreviations}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Verweise auf sonstige Ressourcen oder Quellen / References}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Allgemeine Beschreibung \(des Softwareprodukts\) / Overall Description}{}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Produktperspektive \(zu anderen Softwareprodukten\) / Product Perspective}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{Produktfunktionen \(eine Zusammenfassung und \334bersicht\) / Product Functions}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Benutzermerkmale \(Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis\) / User characteristics}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.4}{Einschr\344nkungen \(f\374r den Entwickler\) / Constraints}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.5}{Annahmen und Abh\344ngigkeiten \(nicht Realisierbares und auf sp\344tere Versionen verschobene Eigenschaften\) / Assumptions and dependencies}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.6}{Anteil der Anforderungen im Gesamten / Apportioning of requirements}{section.2}% 12
+\BOOKMARK [1][-]{section.3}{Spezifische Anforderungen \(im Gegensatz zu 2.\) / Specific requirements}{}% 13
+\BOOKMARK [2][-]{subsection.3.1}{funktionale Anforderungen \(Stark abh\344ngig von der Art des Softwareprodukts\)}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.2}{nicht-funktionale Anforderungen}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.3}{externe Schnittstellen}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.4}{Design Constraints \(ja das englisch war so vorgegeben und darf gerne ge\344ndert werden :-\)}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.5}{Anforderungen an Performance}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.6}{Qualit\344tsanforderungen / Software System Attributes}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.7}{Sonstige Anforderungen / Organizing the specific requirements}{section.3}% 20
+\BOOKMARK [2][-]{subsection.3.8}{Erg\344nzende Kommentare / Additional Comments}{section.3}% 21
