@@ -117,18 +117,19 @@
 \end{description}
      
     \subsection{Benutzermerkmale} % (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics} %2.3
-	Die Zielgruppe des fertigen umgesetzten Systems sind in erster Linie diejenigen, die sich mit den grundlegenden Eigenschaften bereits auskennen und dementsprechend weitere Nachforschungen in Bereich Graphen und deren Verbindungen anstellen wollen. Daher werden viele Grundlagen nicht näher erläutert. Vielmehr sollen Personen, die sich mit Zusammenhängen verschiedener Graph-Klassen näher beschäftigen wollen, durch das fertige System einfach Zugang zu Informationen verschaffen können, ohne dass sie weitere (intensive) Hilfe zur Nutzung des gesamten Systems benötigen.
-	Letztendlich dient das System also zu Forschung und zum besseren Verständnis im Studium oder Beruf von Graphen.
+	Die Zielgruppe des fertigen umgesetzten Systems sind in erster Linie Personen, die sich mit den grundlegenden Eigenschaften bereits auskennen und dementsprechend weitere Forschungen in Bereich Graphen und deren Eigenschaften anstellen wollen. Daher werden viele Grundlagen nicht näher erläutert. Vielmehr sollen Personen, die sich mit Zusammenhängen verschiedener Graph-Klassen näher beschäftigen, durch das fertige System einfach Zugang zu Informationen verschaffen können, ohne dass sie weitere Hilfe zur Nutzung des gesamten Systems benötigen.
+	Letztendlich dient das System also zu Forschung und zum besseren Verständnis von Graphen im Studium oder Beruf .
 	%\{Welche Kenntnisse haben die potentiellen Nutzer des Systems, bzw. welche Personengruppen werden das System nutzen.\}    
 	\subsection{Einschränkungen} % (für den Entwickler) / Constraints} %2.4
 	Die Implementation des Systems ist Java-basiert und die aktuelle Inkompatibilität mit aktuellen Java-Versionen erfordert eine Erneuerung des Systems. Dies führt zu verschiedenen Beschränkungen, die beachtet werden müssen.\\
-	Die Umsetzung findet für Java-Versionen ab Java 1.6 statt. Dies besagt, dass bei niedrigeren installierten Java-Versionen keine volle Funktionalität gewährleistet wird.\\
-	Die graphische Verbesserung des bestehenden Systems muss insbesondere über folgende Bibliotheken umgesetzt werden:
+	Die Umsetzung findet für Java-Versionen ab Java 1.6 statt. Deshalb kann bei niedrigeren Java-Versionen keine Funktionalität gewährleistet werden.\\
+	Die graphische Verbesserung des bestehenden Systems wird insbesondere über folgende Bibliotheken umgesetzt:
 	JGraphX wird als neue Zeichenbibliothek fungieren.\\
-	Die Umsetzung findet statt, indem die Funktionalität von JGraphT auf JGraphX übertragen wird und anschließend ISGCI an JGraphX angebunden wird. So wird JGraphT letztendlich nicht zur Ausführung der Software verwendet.\\
+	Die Umsetzung findet statt, indem die Funktionalität von JGraphT auf JGraphX übertragen wird und anschließend ISGCI an JGraphX angebunden wird. So wird JGraphT letztendlich nicht zur Ausführung der Software verwendet.\\ %Leo: Wie ist das gemeint? JgraphT braucht man also nicht?
 	Dementsprechend ist ausdrücklich gesagt, dass alle Beschränkungen, die für die genannten Bibliotheken gelten, insbesondere für die fertige Implementation gelten.\\
-	Die Software wird nach Umsetzung auf jedem System ausführbar sein, welches die angegebenen Voraussetzungen erfüllt(Java 1.6 +).\\
-	Die Software wird als Open-Source-Project gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes stattfindet, in englischer Sprache formuliert, sodass unsere Implementation zur weiteren Nutzung/Forschung beitragen kann. 
+	Die Software wird nach Umsetzung auf jedem System ausführbar sein, welches die angegebenen Voraussetzungen erfüllt (Java 1.6 +).\\
+	Die Software wird als Open-Source-Project %Englisch nötig?
+gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes stattfindet, in englischer Sprache formuliert, sodass unsere Implementation zur weiteren Nutzung/Forschung beitragen kann. 
 	%\{zeitliche Einschränkungen (Enddatum der Abgabe), Plattformen, Version, vorgegebene Bibliotheken, Implementationsaufwand, kundenorientiert!!!\}
 %	\subsection{Annahmen und Abhängigkeiten (nicht Realisierbares und auf spätere Versionen verschobene Eigenschaften) / Assumptions and dependencies} %2.5 
 %	\{Brain-Storming :-)\}
@@ -174,7 +175,7 @@
 	\subsection{Nicht-funktionale Anforderungen} %3.2     
 		\begin{itemize}
 		\item Technische Grundlage des Softwareprojekts bietet die Programmiersprache Java.
-		\item Kompatibilität: Die Software ISGCI wird Java-Runtime-Umgebungen mit Java 1.6 und Nachfolger vollständig unterstützen. Für ältere Versionen wird die Lauffähigkeit nicht garantiert.
+		\item Kompatibilität: Die Software ISGCI wird Java-Runtime-Umgebungen mit Java 1.6 und Nachfolger vollständig unterstützen, solange diese rückwärtskompatibel zu Java 1.6 sind. Für ältere Versionen wird die Lauffähigkeit nicht garantiert.
 		\item Zur Umsetzung graphischer Anwendungen wird die Grafikbibliothek JGraphX verwendet.
 		\item Das Projekt wird als OpenSource veröffentlicht.
 		\item Das Benutzerinterface soll interaktiver und userfreundlicher sein als bei der Vorgängerversion (Umsetzung: vgl. Functional Requirements).
@@ -197,7 +198,8 @@
 	\item[ISGCI:] Eine bereits umgesetzte Graphenbibliothek, welche viele Informationen über verschiedene Graphklassen beinhaltet (wie Sub-/Superklassen) und ausführliche Informationen derer Eigenschaften.
 	\item[JGraphT:] Eine freie Java Klassenbibliothek, die mathematische graphentheoretische Ziele und Algorithmen unterstützt. Diese läuft allerdings nur auf der Java 2 Plattform, welche mindestens JDK 1.6 voraussetzt.
  	\end{itemize}
-	Die Software wird eine Schnittstelle zwischen diesen beiden Bibliotheken bilden, indem die Graphzeichnungsmöglichkeiten von JGraphX genutzt werden. Dementsprechend werden die aktuellen Funktionen von ISGCI, die bis dato mit JGraphT umgesetzt sind, auf JGraphX übertragen, indem eine Schnittstelle zwischen JGraphT und JGraphX umgesetzt wird und deren Funktionalität dann von ISGCI auf JGraphX über diese Schnittstelle übertragen wird. 
+	Die Software wird eine Schnittstelle zwischen diesen %beiden 
+Bibliotheken bilden, indem die Graphzeichnungsmöglichkeiten von JGraphX genutzt werden. Dementsprechend werden die aktuellen Funktionen von ISGCI, die bis dato mit JGraphT umgesetzt sind, auf JGraphX übertragen, indem eine Schnittstelle zwischen JGraphT und JGraphX umgesetzt wird und deren Funktionalität dann von ISGCI auf JGraphX über diese Schnittstelle übertragen wird. 
 	
 	JGraphT verwendet Maven um den Build Process zur Kompilierung der Java-Klassen und um eine gute Dokumentation zu gewährleisten. Insbesondere führt Maven JUnit-Tests aus, um eben die Kontrolle über die Implementierung zu behalten. Dazu müssen allerdings entsprechende Tests vom Entwickler definiert werden.
 	\end{itemize}
@@ -219,10 +221,10 @@
 		\item \textbf{Integrität}\\
 		Alle Datensätze werden zentral auf einem Server gehalten. Die Software bietet ausschließlich lesende Funktionen an. Somit ist die Datenbank durch negative Manipulationen geschützt.
 		\item \textbf{Flexibilität}\\
-		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten(Graphen) Informationen aus der Online-Datenbank einsehen. 
+		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten (Grapheklasse) Informationen aus der Online-Datenbank einsehen. 
 		\item \textbf{Portabilität}\\
 		ISGCI ist eine Java Anwendung. Das bedeutet, dass sie plattformunabhängig ausgeführt werden kann, solange eine Java-Laufzeit-Umgebung installiert ist (als Standard vorausgesetzt).
-		Die Online-Datenbank gewährleistet 
+		Die Online-Datenbank ist unabhängig von unserem System. 
 		\item \textbf{Wartbarkeit}\\
 		Dadurch, dass die Datenbank des Programmes online, zentral gelagert wird, lassen sich Datensätze leicht und ohne Updates im Programm manipulieren oder hinzufügen.
 		\end{itemize}
