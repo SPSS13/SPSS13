@@ -90,7 +90,32 @@
 	\{Beschreibung, dass unseres Produkt als "Schnittstelle" zwischen JGraphX und ISGCI fungieren wird\\
 	und wie diese miteinander interagieren, bzw. wie darauf aufgebaut wird.\}
   	\subsection{Produktfunktionen} % (eine Zusammenfassung und Übersicht) / Product Functions}  %2.2
-	\{Beschreibung der Funktionen und entsprechende tabellarische Übersicht.\}     
+  	
+	\begin{description}[leftmargin=.9cm]
+\item[1] Das System soll einen Graphen zeichnen können, welcher Relationen zwischen Graphklassen zeigt.
+\item[2] Das System soll den erzeugten Graphen exportieren können.
+\item[3] Das System soll dazu in der Lage sein eine neue Fensterinstanz zu öffnen.
+\item[4] Das System soll die Möglichkeit bieten im gezeichneten Graphen eine Graphklasse zu suchen. 
+\item[5] Das System soll dazu in der Lage sein die Namensgebung der Graphklassen innerhalb des erzeugten Graphen nach vorgegebenen Mustern zu ändern.
+\item[6] Das System soll Fehlerhafte Inklusionen markieren können.
+\item[7] Das System soll die Graphdatenbank und die Eigenschaften der Graphklassen anzeigen können. 
+\item[8] Das System soll die Möglichkeit bieten nach Relationen zwischen Graphklassen zu suchen.
+\item[9] Das System soll die Möglichkeit bieten abhängig eines Graph-Problems die entsprechenden Graphklassen zu zeichnen.
+\item[10] Das System soll die Möglichkeit bieten Graph-Probleme im erzeugten Graphen anzuzeigen.
+\item[11] Das System soll einen Hyper-Link zu "small graphs" besitzen.
+\item[12] Das System soll einen Hyper-Link zur Hilfe Website von ISGCI besitzen.
+\item[13] Das System soll eine About Funktion besitzen.
+\item[14] Das System soll die Möglichkeit bieten einen Knoten im erzeugten Graphen zu markieren.
+\item[15] Das System soll die Möglichkeit bieten einen Knoten im erzeugten Graphen zu verschieben.
+\item[16] Das System soll die Möglichkeit bieten über ein Kontextmenü zu einer Graphklasse im erzeugten Graphen weitere Informationen zu dieser zu erhalten.
+\item[17] Das System soll die Möglichkeit bieten im erzeugten Graphen zu zoomen.
+\item[18] Das System soll einen Tooltip anzeigen wenn der Mauszeiger auf einem Knoten im erzeugten Graphen steht.
+\item[19] Das System soll, wenn ein Graph gezeichnet wird, die für die Zeichnung ausgewählte Graphklasse im Bild zentriert darstellen.
+\item[20] Das System soll die Möglichkeit bieten durch das gedrückt halten der Linken Maustaste und ziehen den Bildausschnitt zu verschieben.
+\item[21] Das System soll eine Funktion beinhalten mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der Gewählten Graphklasse ein-/ausblenden kann.
+
+\end{description}
+     
     \subsection{Benutzermerkmale} % (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics} %2.3
 	Die Zielgruppe des fertigen umgesetzten Systems sind in erster Linie diejenigen, die sich mit den grundlegenden Eigenschaften bereits auskennen und dementsprechend weitere Nachforschungen in Bereich Graphen und deren Verbindungen anstellen wollen. Daher werden viele Grundlagen nicht näher erläutert. Vielmehr sollen Personen, die sich mit Zusammenhängen verschiedener Graph-Klassen näher beschäftigen wollen, durch das fertige System einfach Zugang zu Informationen verschaffen können, ohne dass sie weitere (intensive) Hilfe zur Nutzung des gesamten Systems benötigen.
 	Letztendlich dient das System also zu Forschung und zum besseren Verständnis im Studium oder Beruf von Graphen.
@@ -112,7 +137,39 @@
 \newpage
 \section{Spezifische Anforderungen} % (im Gegensatz zu 2.) / Specific requirements} %3.
 	\subsection{Funktionale Anforderungen (Stark abhängig von der Art des Softwareprodukts)} %3.1
-	\{Requirements Elicitation !!!, Funktionen / Functions\}
+	
+	Die bisher vorhandenen funktionalen Anforderungen werden, soweit nicht abweichend angegeben, übernommen.
+
+\colorbox{red}{Möglicherweise nochmal überarbeiten da requirements ja schon am Freitag rausgeschickt}
+
+\begin{tabular}{|c|c|p{10cm}|}
+\hline 
+ & Name & Beschreibung \\ 
+\hline 
+1 & Knoten Verschieben & Die Funktion wird dahingehend abgeändert dass ein Knoten vor dem Verschieben markiert werden muss. \\ 
+\hline 
+2 & Zoom (Mausrad) & Durch das Scrollen mit dem Mausrad wird das Bild gezoomt, Mausrad nach oben entspricht hinein zoomen, Mausrad nach unten entspricht heraus zoomen. \\ 
+\hline 
+3 & Zoom (Menu-Bar) & Dem Menu-Item View werden die Funktionen "Hinein zoomen" und "Heraus zoomen" hinzugefügt. \\ 
+\hline 
+4 & Tooltip & Verweilt die Maus auf einem Knoten wird ein Tooltip angezeigt. \\ 
+\hline 
+5 & Tooltip Inhalt & Der angezeigte Tooltip entspricht den Informationen zum jeweiligen Knoten, beziehungsweise einer verkürzten Form der Informationen. \\ 
+\hline 
+6 & Zentrierung & Wird ein neuer Graph gezeichnet ist der zum Zeichnen ausgewählte Knoten im Mittelpunkt des Bildes. \\ 
+\hline 
+7 & Scrolling & Klickt man in den freien Raum und hält die linke Maustaste gedrückt so kann man durch das Bewegen der Maus den angezeigten Bildausschnitt verschieben.  \\ 
+\hline 
+8 & Kontextmenü & Man kann Knoten mit der rechten Maustaste anklicken um ein Kontextmenü zu öffnen. \\ 
+\hline 
+9 & Kontextmenü Superklassen & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Superklassen ein- oder auszublenden \\ 
+\hline 
+10 & Kontextmenü Subklassen & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Subklassen ein- oder auszublenden \\ 
+\hline 
+11 & Kontextmenü Nachbarn & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Nachbarknoten ein- oder auszublenden.  \\ 
+\hline 
+\end{tabular} 
+
 	
 	\subsection{Nicht-funktionale Anforderungen} %3.2     
 		\begin{itemize}

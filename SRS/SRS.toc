@@ -8,11 +8,11 @@
 \contentsline {section}{\numberline {2}Allgemeine Beschreibung}{4}
 \contentsline {subsection}{\numberline {2.1}Produktperspektive}{4}
 \contentsline {subsection}{\numberline {2.2}Produktfunktionen}{4}
-\contentsline {subsection}{\numberline {2.3}Benutzermerkmale}{4}
-\contentsline {subsection}{\numberline {2.4}Einschr\IeC {\"a}nkungen}{4}
-\contentsline {subsection}{\numberline {2.5}Anteil der Anforderungen}{4}
-\contentsline {section}{\numberline {3}Spezifische Anforderungen}{5}
-\contentsline {subsection}{\numberline {3.1}Funktionale Anforderungen (Stark abh\IeC {\"a}ngig von der Art des Softwareprodukts)}{5}
-\contentsline {subsection}{\numberline {3.2}Nicht-funktionale Anforderungen}{5}
-\contentsline {subsection}{\numberline {3.3}Externe Schnittstellen - Anforderungen}{5}
-\contentsline {subsection}{\numberline {3.4}Qualit\IeC {\"a}tsanforderungen}{6}
+\contentsline {subsection}{\numberline {2.3}Benutzermerkmale}{5}
+\contentsline {subsection}{\numberline {2.4}Einschr\IeC {\"a}nkungen}{5}
+\contentsline {subsection}{\numberline {2.5}Anteil der Anforderungen}{5}
+\contentsline {section}{\numberline {3}Spezifische Anforderungen}{6}
+\contentsline {subsection}{\numberline {3.1}Funktionale Anforderungen (Stark abh\IeC {\"a}ngig von der Art des Softwareprodukts)}{6}
+\contentsline {subsection}{\numberline {3.2}Nicht-funktionale Anforderungen}{6}
+\contentsline {subsection}{\numberline {3.3}Externe Schnittstellen - Anforderungen}{7}
+\contentsline {subsection}{\numberline {3.4}Qualit\IeC {\"a}tsanforderungen}{7}
