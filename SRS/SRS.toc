@@ -1,17 +1,17 @@
 \select@language {english}
-\contentsline {section}{\numberline {1}Einleitung / Introduction}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}Zweck (des Dokuments) / Purpose}{3}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Umfang (des Softwareprodukts) / Scope}{3}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Erl\IeC {\"a}uterungen zu Begriffen und / oder Abk\IeC {\"u}rzungen (Glossar) / Definitions, acronyms and abbreviations}{3}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Verweise auf sonstige Ressourcen oder Quellen / References}{3}{subsection.1.4}
+\contentsline {section}{\numberline {1}Einleitung}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Zweck}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Umfang}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Erl\IeC {\"a}uterungen zu Begriffen und Abk\IeC {\"u}rzungen}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Verweise auf sonstige Quellen}{3}{subsection.1.4}
 \contentsline {section}{\numberline {2}Allgemeine Beschreibung}{4}{section.2}
 \contentsline {subsection}{\numberline {2.1}Produktperspektive}{4}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Produktfunktionen}{4}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Benutzermerkmale}{5}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Einschr\IeC {\"a}nkungen}{5}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Anteil der Anforderungen}{5}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.5}Zuweisung der Anforderungen}{5}{subsection.2.5}
 \contentsline {section}{\numberline {3}Spezifische Anforderungen}{6}{section.3}
-\contentsline {subsection}{\numberline {3.1}Funktionale Anforderungen (Stark abh\IeC {\"a}ngig von der Art des Softwareprodukts)}{6}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Nicht-funktionale Anforderungen}{6}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Externe Schnittstellen - Anforderungen}{7}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Qualit\IeC {\"a}tsanforderungen}{7}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.1}Funktionale Anforderungen}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Nicht-funktionale Anforderungen}{8}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Externe Schnittstellen - Anforderungen}{8}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Qualit\IeC {\"a}tsanforderungen}{9}{subsection.3.4}

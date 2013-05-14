@@ -1,16 +1,16 @@
-\BOOKMARK [1][-]{section.1}{Einleitung / Introduction}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Zweck \(des Dokuments\) / Purpose}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{Umfang \(des Softwareprodukts\) / Scope}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.3}{Erl\344uterungen zu Begriffen und / oder Abk\374rzungen \(Glossar\) / Definitions, acronyms and abbreviations}{section.1}% 4
-\BOOKMARK [2][-]{subsection.1.4}{Verweise auf sonstige Ressourcen oder Quellen / References}{section.1}% 5
+\BOOKMARK [1][-]{section.1}{Einleitung}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Zweck}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Umfang}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Erl\344uterungen zu Begriffen und Abk\374rzungen}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Verweise auf sonstige Quellen}{section.1}% 5
 \BOOKMARK [1][-]{section.2}{Allgemeine Beschreibung}{}% 6
 \BOOKMARK [2][-]{subsection.2.1}{Produktperspektive}{section.2}% 7
 \BOOKMARK [2][-]{subsection.2.2}{Produktfunktionen}{section.2}% 8
 \BOOKMARK [2][-]{subsection.2.3}{Benutzermerkmale}{section.2}% 9
 \BOOKMARK [2][-]{subsection.2.4}{Einschr\344nkungen}{section.2}% 10
-\BOOKMARK [2][-]{subsection.2.5}{Anteil der Anforderungen}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.5}{Zuweisung der Anforderungen}{section.2}% 11
 \BOOKMARK [1][-]{section.3}{Spezifische Anforderungen}{}% 12
-\BOOKMARK [2][-]{subsection.3.1}{Funktionale Anforderungen \(Stark abh\344ngig von der Art des Softwareprodukts\)}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.1}{Funktionale Anforderungen}{section.3}% 13
 \BOOKMARK [2][-]{subsection.3.2}{Nicht-funktionale Anforderungen}{section.3}% 14
 \BOOKMARK [2][-]{subsection.3.3}{Externe Schnittstellen - Anforderungen}{section.3}% 15
 \BOOKMARK [2][-]{subsection.3.4}{Qualit\344tsanforderungen}{section.3}% 16
