@@ -1,11 +1,10 @@
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[en,break]{ukon-infie}
+\usepackage[de,break]{ukon-infie}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
 %\usepackage{pgfgantt} % Timeline 
-
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{wasysym}
@@ -69,30 +68,33 @@
 %\textit{Ich hoffe, dass aber die Struktur ansonsten allen zusagt.. wenn soweit ist, dann haut diesen Kommentar einfach aus dem Dokument oder kommentiert es im Source-Code aus.. dann kann man nochmal nachschauen, wenn man möchte. }
 
 
-\section{Einleitung / Introduction} % 1. 
-	\{definiere erwartete Leserschaft des Dokuments \& Version History.\\
-    Grund für die Erstellung der neuen Version, bzw. Zusammenfassung der Veränderungen\}
+\section{Einleitung}% / Introduction} % 1. 
+%	\{definiere erwartete Leserschaft des Dokuments \& Version History.\\
+%    Grund für die Erstellung der neuen Version, bzw. Zusammenfassung der Veränderungen\}
 
 
 
- 	\subsection{Zweck (des Dokuments) / Purpose} %1.1
-	Der Zweck dieses Dokuments ist eine detailreiche Beschreibung des aktualisierten "ISGCI" (Information System on Graph Classes and their Inclusions) Java Projektes. Es wird den Zweck, neue Funktionalität, Interfaces, Einschränkungen und wie es auf externe Einflüsse reagiert. Dieses Dokument ist sowohl für den Kunden als auch für die Entwickler.
+ 	\subsection{Zweck} % (des Dokuments)} % / Purpose} %1.1
+%	Der Zweck dieses Dokuments ist eine detailreiche Beschreibung des aktualisierten "ISGCI" (Information System on Graph Classes and their Inclusions) Java Projektes. Es wird den Zweck, neue Funktionalität, Interfaces, Einschränkungen und wie es auf externe Einflüsse reagiert. Dieses Dokument ist sowohl für den Kunden als auch für die Entwickler.
+	
+	Der Zweck dieses Dokuments ist es eine detailreiche Beschreibung des aktualisierten ISGCI-Projektes zu geben. Es wird neue Funktionalitäten, Schnittstellen, Einschränkungen und seine Reaktionen auf externe Einflüsse beschreiben. Dieses Dokument richtet sich sowohl an den Kunden als auch an die Entwickler.
+	
 
-  	\subsection{Umfang (des Softwareprodukts) / Scope} %1.2
-   Das gelieferte Produkt ist eine Aktualiserung der bestehenden Tools "GSGCI" (Information System on Graph Classes and their Inclusions). Das fertige Produkt wird ein Update auf eine neuere Java Version beinhalten. Auch wird das bestehende "GSGCI" um die Funktionaltität der Graphenbibliothek JgraphX erweitert und ein Teil deren Funktionalität in das GSGCI übernommen. Außerdem werden der neuen Version verschiedene neue Funktionaltitäten hinzugefügt, die im Punkt 3 genauer beschreiben werden. Zweck des Updates ist es, nicht nur die Funktionalität des Tools in Zukunft zu gewärleisten und neue Funktionalitäten zu implementieren, sondern auch die Instandhaltungskosten zu senken und das Tool für interessierte Entwickler und Nutzer ansprechender zu gestalten.
+  	\subsection{Umfang} % (des Softwareprodukts)} % / Scope} %1.2
+   Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das fertige Produkt wird ein Update auf eine neuere Java Version beinhalten. Das bestehende ISGCI wird mit Funktionalität der Graphzeichenbibliothek JGraphX erweitert. Außerdem werden der neuen Version verschiedene neue Funktionalitäten hinzugefügt, die im Punkt 3 genauer beschrieben werden. Zweck des Updates ist es, nicht nur die Funktionalität des Tools in Zukunft zu gewährleisten und neue Funktionen zu implementieren, sondern auch die Instandhaltungskosten zu senken und das Tool für interessierte Entwickler und Nutzer ansprechender zu gestalten.
 
-  	\subsection{Erläuterungen zu Begriffen und / oder Abkürzungen (Glossar) / Definitions, acronyms and abbreviations} %1.3
+  	\subsection{Erläuterungen zu Begriffen und Abkürzungen} % (Glossar)}% / Definitions, acronyms and abbreviations} %1.3
 
 	        \begin{itemize}
-	        	\item[\bf{Hier}] schreibt noch jemadn was auf..
-	        	\item[\bf{Hier}] schreibt noch jemadn was auf..
-	        	\item[\bf{Hier}] schreibt noch jemadn was auf..
-	        	\item[\bf{Hier}] schreibt noch jemadn was auf..
-	        	\item[\bf{Hier}] schreibt noch jemadn was auf..
-	        	\item[\bf{Hier}] schreibt noch jemadn was auf..
+	        \item[mxGraph] mxGraph ist eine Produktfamilie mehrerer Bibliotheken, die mit verschiedenen Technologien geschrieben sind, welche eine Ausstattung besitzen, mit der interaktive Diagramme und Graphen visualisiert werden können. Zu diesen Bibliotheken gehören unter anderem JGraphX und JGraph (vorige Versionen von JGraphX).
+	        \item[ISGCI] Information System on Graph Classes and their Inclusions
+	        \item[JGraphT] JGraphT ist eine freie Java Graphenbibliothek, welche mathematische graphentheoretische Objekte und Algorithmen unterstützt. 
+	        \item[JGraphX] JGraphX ist eine Java Swing Bibliothek von mxGraph
+	        \item[Swing] Swing ist das primäre Java GUI Widget Werkzeug, welche die Bereitstellung von grafische Benutzerschnittstellen ermöglicht.
+	        \item[Grab\&Pull] Bezeichnet eine Funktion, welche das Greifen und Ziehen von Graphelementen beinhaltet, welche den entsprechenden Graphen manipulieren können.
 	        \end{itemize}
 	        
-  	\subsection{Verweise auf sonstige Ressourcen oder Quellen / References} %1.4
+  	\subsection{Verweise auf sonstige Quellen} % / References} %1.4
   	{
           
           \begin{table}[h]
@@ -105,16 +107,13 @@
           		\hline
           		\textbf{Name} & \textbf{Quelle} & \textbf{Datum} \\
           		\hline
-          			 ISGCI & \url{http://www.graphclasses.org/} & 13.05.2013\\ \hline
-          			 JGraphT & \url{http://jgrapht.org/} & 13.05.2013 \\ \hline
-          			 JGraphX & \url{http://www.jgraph.com/} & 13.05.2013 \\  \hline
-          			  & \url{http://jgraph.github.io/mxgraph/java/docs/index.html} & 13.05.2013 \\  \hline
-          			  & \url{https://github.com/jgraph/jgraphx} & 13.05.2013\\  \hline
-					Swing & \url{http://docs.oracle.com/} & 13.05.2013 \\  \hline
-					Java & \url{http://docs.oracle.com/} & 13.05.2013 \\  \hline
-          		\hline
-          
-          		\hline
+          			 ISGCI & \href{http://www.graphclasses.org/}{Graphclasses.org - ISGCI Homepage} & 13.05.2013\\ \hline
+          			 JGraphT & \href{http://jgrapht.org/}{JGraphT Website} & 13.05.2013 \\ \hline
+          			 JGraphX & \href{http://www.jgraph.com/}{JGraph Website} & 13.05.2013 \\  \hline
+          			  & \href{http://jgraph.github.io/mxgraph/java/docs/index.html}{JGraph Dokumentation} & 13.05.2013 \\  \hline
+          			  & \href{https://github.com/jgraph/jgraphx}{JGraphX Library Quellcode} & 13.05.2013\\  \hline
+					Swing & \href{http://docs.oracle.com/javase/1.4.2/docs/api/javax/swing/package-summary.html}{Swing Dokumentation} & 13.05.2013 \\  \hline
+					Java & \href{http://docs.oracle.com/javase/6/docs/api/}{Java 6 Dokumentation SE} & 13.05.2013 \\  \hline
           		\end{tabular}
           	\end{center}
           \end{table}
@@ -126,62 +125,62 @@
 \newpage
 \section{Allgemeine Beschreibung} % (des Softwareprodukts) / Overall Description} %2.
   	\subsection{Produktperspektive} % (zu anderen Softwareprodukten) / Product Perspective} %2.1
-	\{Beschreibung, dass unseres Produkt als "Schnittstelle" zwischen JGraphX und ISGCI fungieren wird\\
-	und wie diese miteinander interagieren, bzw. wie darauf aufgebaut wird.\}
+	Unser Produkt wird als Schnittstelle zwischen JGraphX, JGraphT und ISGCI fungieren. Durch die Erweiterung von JGraphX wird dessen Funktionalität verbessert. Mit der Verknüpfung von JGraphX als Zeichenbibliothek werden verschiedene neue Interaktionen ermöglicht und ein Grundbaustein für die Umsetzung des ISGCI als Webapp gelegt. Vor allem, da JGraphX ein OpenSource Projekt ist, verspricht unser Produkt auch in der Zukunft weiterhin neue Funktionen zu erhalten und die Erweiterbarkeit zu vereinfachen.
+	%\{Beschreibung, dass unseres Produkt als "Schnittstelle" zwischen JGraphX und ISGCI fungieren wird\\
+	%und wie diese miteinander interagieren, bzw. wie darauf aufgebaut wird.\}
   	\subsection{Produktfunktionen} % (eine Zusammenfassung und Übersicht) / Product Functions}  %2.2
   	
-	\begin{description}[leftmargin=.9cm]
-\item[1] Das System soll einen Graphen zeichnen können, welcher Relationen zwischen Graphklassen zeigt.
-\item[2] Das System soll den erzeugten Graphen exportieren können.
-\item[3] Das System soll dazu in der Lage sein eine neue Fensterinstanz zu öffnen.
-\item[4] Das System soll die Möglichkeit bieten im gezeichneten Graphen eine Graphklasse zu suchen. 
-\item[5] Das System soll dazu in der Lage sein die Namensgebung der Graphklassen innerhalb des erzeugten Graphen nach vorgegebenen Mustern zu ändern.
-\item[6] Das System soll Fehlerhafte Inklusionen markieren können.
-\item[7] Das System soll die Graphdatenbank und die Eigenschaften der Graphklassen anzeigen können. 
-\item[8] Das System soll die Möglichkeit bieten nach Relationen zwischen Graphklassen zu suchen.
-\item[9] Das System soll die Möglichkeit bieten abhängig eines Graph-Problems die entsprechenden Graphklassen zu zeichnen.
-\item[10] Das System soll die Möglichkeit bieten Graph-Probleme im erzeugten Graphen anzuzeigen.
-\item[11] Das System soll einen Hyper-Link zu "small graphs" besitzen.
-\item[12] Das System soll einen Hyper-Link zur Hilfe Website von ISGCI besitzen.
-\item[13] Das System soll eine About Funktion besitzen.
-\item[14] Das System soll die Möglichkeit bieten einen Knoten im erzeugten Graphen zu markieren.
-\item[15] Das System soll die Möglichkeit bieten einen Knoten im erzeugten Graphen zu verschieben.
-\item[16] Das System soll die Möglichkeit bieten über ein Kontextmenü zu einer Graphklasse im erzeugten Graphen weitere Informationen zu dieser zu erhalten.
-\item[17] Das System soll die Möglichkeit bieten im erzeugten Graphen zu zoomen.
-\item[18] Das System soll einen Tooltip anzeigen wenn der Mauszeiger auf einem Knoten im erzeugten Graphen steht.
-\item[19] Das System soll, wenn ein Graph gezeichnet wird, die für die Zeichnung ausgewählte Graphklasse im Bild zentriert darstellen.
-\item[20] Das System soll die Möglichkeit bieten durch das gedrückt halten der Linken Maustaste und ziehen den Bildausschnitt zu verschieben.
-\item[21] Das System soll eine Funktion beinhalten mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der Gewählten Graphklasse ein-/ausblenden kann.
+	\begin{enumerate}[leftmargin=.9cm]
+\item Das System soll einen Graphen zeichnen können, welcher Relationen zwischen Graphklassen zeigt.
+\item Das System soll den erzeugten Graphen exportieren können.
+%\item Das System soll dazu in der Lage sein eine neue Fensterinstanz zu öffnen.
+\item Das System soll die Möglichkeit bieten im gezeichneten Graphen eine Graphklasse zu suchen. 
+\item Das System soll dazu in der Lage sein, die Namensgebung der Graphklassen innerhalb des erzeugten Graphen nach vorgegebenen Mustern zu ändern.
+\item Das System soll unklare Inklusionen markieren können.
+\item Das System soll die Graphdatenbank und die Eigenschaften der Graphklassen anzeigen können. 
+\item Das System soll die Möglichkeit bieten, nach Relationen zwischen Graphklassen zu suchen.
+\item Das System soll die Möglichkeit bieten, zu einem Graph-Problem die entsprechenden Lauzeitklassen zu visualisieren.
+\item Das System soll die Möglichkeit bieten, Graph-Probleme im erzeugten Graphen anzuzeigen.
+\item Das System soll einen Hyper-Link zu "small graphs" besitzen.
+\item Das System soll einen Hyper-Link zur Hilfe Website von ISGCI besitzen.
+\item Das System soll eine About Funktion besitzen, welche Versions-, Entwickler- und Software-Informationen enthält.
+\item Das System soll die Möglichkeit bieten, einen Knoten im erzeugten Graphen zu markieren.
+\item Das System soll die Möglichkeit bieten, einen Knoten im erzeugten Graphen zu verschieben.
+\item Das System soll die Möglichkeit bieten, über ein Kontextmenü zu einer Graphklasse im erzeugten Graphen weitere Informationen zu dieser zu erhalten.
+\item Das System soll die Möglichkeit bieten, im erzeugten Graphen zu zoomen.
+\item Das System soll, wenn ein Graph gezeichnet wird, die für die Zeichnung ausgewählte Graphklasse im Bild zentriert darstellen.
+\item Das System soll die Möglichkeit bieten, durch das Gedrückthalten der linken Maustaste und Ziehen den Bildausschnitt zu verschieben.
+\item Das System soll eine Funktion beinhalten, mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der gewählten Graphklasse ein-/ausblenden kann.
 
-\end{description}
+\end{enumerate}
      
     \subsection{Benutzermerkmale} % (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics} %2.3
-	Die Zielgruppe des fertigen umgesetzten Systems sind in erster Linie Personen, die sich mit den grundlegenden Eigenschaften bereits auskennen und dementsprechend weitere Forschungen in Bereich Graphen und deren Eigenschaften anstellen wollen. Daher werden viele Grundlagen nicht näher erläutert. Vielmehr sollen Personen, die sich mit Zusammenhängen verschiedener Graph-Klassen näher beschäftigen, durch das fertige System einfach Zugang zu Informationen verschaffen können, ohne dass sie weitere Hilfe zur Nutzung des gesamten Systems benötigen.
-	Letztendlich dient das System also zu Forschung und zum besseren Verständnis von Graphen im Studium oder Beruf .
+	Die Zielgruppe des fertigen umgesetzten Systems sind in erster Linie Personen, die sich mit den grundlegenden Eigenschaften von Graphen bereits auskennen und dementsprechend weitere Forschungen zu deren Eigenschaften anstellen wollen. Daher werden viele Grundlagen nicht näher erläutert. Vielmehr sollen sich Personen, die sich mit Zusammenhängen verschiedener Graph-Klassen näher beschäftigen, durch das fertige System einfach Zugang zu Informationen verschaffen können, ohne dass sie weitere Hilfe zur Nutzung des Systems benötigen.
+	Letztendlich dient das System also zur Forschung und zum besseren professionellen Verständnis von Graphen.
 	%\{Welche Kenntnisse haben die potentiellen Nutzer des Systems, bzw. welche Personengruppen werden das System nutzen.\}    
 	\subsection{Einschränkungen} % (für den Entwickler) / Constraints} %2.4
-	Die Implementation des Systems ist Java-basiert und die aktuelle Inkompatibilität mit aktuellen Java-Versionen erfordert eine Erneuerung des Systems. Dies führt zu verschiedenen Beschränkungen, die beachtet werden müssen.\\
-	Die Umsetzung findet für Java-Versionen ab Java 1.6 statt. Deshalb kann bei niedrigeren Java-Versionen keine Funktionalität gewährleistet werden.\\
-	Die graphische Verbesserung des bestehenden Systems wird insbesondere über folgende Bibliotheken umgesetzt:
-	JGraphX wird als neue Zeichenbibliothek fungieren.\\
-	Die Umsetzung findet statt, indem die Funktionalität von JGraphT auf JGraphX übertragen wird und anschließend ISGCI an JGraphX angebunden wird. So wird JGraphT letztendlich nicht zur Ausführung der Software verwendet.\\ %Leo: Wie ist das gemeint? JgraphT braucht man also nicht?
-	Dementsprechend ist ausdrücklich gesagt, dass alle Beschränkungen, die für die genannten Bibliotheken gelten, insbesondere für die fertige Implementation gelten.\\
+	Die Implementation ist Java-basiert und die Inkompatibilität mit aktuellen Java-Versionen (ab 1.6) erfordert eine Erneuerung des Systems. Dies führt zu verschiedenen Beschränkungen, die beachtet werden müssen.\\
+	Die Umsetzung findet für Java-Versionen ab Java 1.6 statt. \\
+	Deshalb kann bei niedrigeren Java-Versionen keine Funktionalität gewährleistet werden.\\
+	Die graphische Verbesserung des bestehenden Systems wird insbesondere über JGraphX als neue Zeichenbibliothek umgesetzt.\\
+	Die Umsetzung findet statt, indem die Funktionalität von JGraph(5) auf JGraphX übertragen wird und anschließend ISGCI an JGraphX angebunden wird.  %Leo: Wie ist das gemeint? JgraphT braucht man also nicht?
+	%Dementsprechend ist ausdrücklich gesagt, dass alle Beschränkungen, die für die genannte Bibliothek gelten, insbesondere für die fertige Implementation gelten. \\
 	Die Software wird nach Umsetzung auf jedem System ausführbar sein, welches die angegebenen Voraussetzungen erfüllt (Java 1.6 +).\\
 	Die Software wird als Open-Source-Project %Englisch nötig?
 gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes stattfindet, in englischer Sprache formuliert, sodass unsere Implementation zur weiteren Nutzung/Forschung beitragen kann. 
 	%\{zeitliche Einschränkungen (Enddatum der Abgabe), Plattformen, Version, vorgegebene Bibliotheken, Implementationsaufwand, kundenorientiert!!!\}
 %	\subsection{Annahmen und Abhängigkeiten (nicht Realisierbares und auf spätere Versionen verschobene Eigenschaften) / Assumptions and dependencies} %2.5 
 %	\{Brain-Storming :-)\}
-	\subsection{Anteil der Anforderungen} %im Gesamten / Apportioning of requirements} %2.6
-	Im nächsten Kapitel beschriebene funktionale Anforderungen müssen umgesetzt werden, damit das System/deren Erweiterung die entsprechende Funktionalität hat, damit ISGCI an JGraphX gebunden werden kann und alle bisherigen und hinzukommende Funktionen (außer evtl. Widersprüche) ausgeführt werden können.
+	\subsection{Zuweisung der Anforderungen} %im Gesamten / Apportioning of requirements} %2.6
+	Die im nächsten Kapitel beschriebenen funktionalen Anforderungen müssen umgesetzt werden, damit das System/deren Erweiterung die entsprechende Funktionalität hat, sodass ISGCI an JGraphX gebunden werden kann und alle bisherigen und hinzukommende Funktionen (außer evtl. Widersprüche) ausgeführt werden können.
 \newpage
 \section{Spezifische Anforderungen} % (im Gegensatz zu 2.) / Specific requirements} %3.
-	\subsection{Funktionale Anforderungen (Stark abhängig von der Art des Softwareprodukts)} %3.1
+	\subsection{Funktionale Anforderungen} % (Stark abhängig von der Art des Softwareprodukts)} %3.1
 	
 	Die bisher vorhandenen funktionalen Anforderungen werden, soweit nicht abweichend angegeben, übernommen.
 
-\colorbox{red}{Möglicherweise nochmal überarbeiten da requirements ja schon am Freitag rausgeschickt}
-
+\vspace*{1cm}
+\hspace*{-0.8cm}
 \begin{tabular}{|c|c|p{10cm}|}
 \hline 
  & Name & Beschreibung \\ 
@@ -192,9 +191,9 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline 
 3 & Zoom (Menu-Bar) & Dem Menu-Item View werden die Funktionen "Hinein zoomen" und "Heraus zoomen" hinzugefügt. \\ 
 \hline 
-4 & Tooltip & Verweilt die Maus auf einem Knoten wird ein Tooltip angezeigt. \\ 
+4 & Tooltip & Verweilt die Maus auf einem Menü-Punkt, wird ein Tooltip angezeigt. \\ 
 \hline 
-5 & Tooltip Inhalt & Der angezeigte Tooltip entspricht den Informationen zum jeweiligen Knoten, beziehungsweise einer verkürzten Form der Informationen. \\ 
+5 & Tooltip Inhalt & Der angezeigte Tooltip beinhaltet Informationen zur jeweiligen Funktion. \\ 
 \hline 
 6 & Zentrierung & Wird ein neuer Graph gezeichnet ist der zum Zeichnen ausgewählte Knoten im Mittelpunkt des Bildes. \\ 
 \hline 
@@ -208,7 +207,11 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline 
 11 & Kontextmenü Nachbarn & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Nachbarknoten ein- oder auszublenden.  \\ 
 \hline 
-\end{tabular} 
+\end{tabular} \newpage
+\begin{center}
+\includegraphics[width=13cm]{UseCaseModel.png}\\
+\hspace*{10.7cm} Abb. 1
+\end{center}\clearpage
 
 	
 	\subsection{Nicht-funktionale Anforderungen} %3.2     
@@ -218,7 +221,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 		\item Zur Umsetzung graphischer Anwendungen wird die Grafikbibliothek JGraphX verwendet.
 		\item Das Projekt wird als OpenSource veröffentlicht.
 		\item Das Benutzerinterface soll interaktiver und userfreundlicher sein als bei der Vorgängerversion (Umsetzung: vgl. Functional Requirements).
-		\item Dokumentationen werden auf Englisch verfasst, um sich dem OpenSource Standard und der restlichen Dokumentation anzupassen.
+		\item Dokumentationen werden auf Englisch verfasst, um sich dem OpenSource Standard und der restlichen Dokumentation anzupassen. Dafür muss der Standard der bisherigen Dokumentation eingehalten werden.
 		\item Zeichnungen im ISGCI sollen visuell attraktiver dargestellt werden.
 		\item Datenbank-basiertes zeichnen: Flexible Einspeisung von Datensätzen anstatt statischer Einbindung führt zu einer bessern Wartbarkeit.
 		\end{itemize}
@@ -238,9 +241,9 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 	\item[JGraphT:] Eine freie Java Klassenbibliothek, die mathematische graphentheoretische Ziele und Algorithmen unterstützt. Diese läuft allerdings nur auf der Java 2 Plattform, welche mindestens JDK 1.6 voraussetzt.
  	\end{itemize}
 	Die Software wird eine Schnittstelle zwischen diesen %beiden 
-Bibliotheken bilden, indem die Graphzeichnungsmöglichkeiten von JGraphX genutzt werden. Dementsprechend werden die aktuellen Funktionen von ISGCI, die bis dato mit JGraphT umgesetzt sind, auf JGraphX übertragen, indem eine Schnittstelle zwischen JGraphT und JGraphX umgesetzt wird und deren Funktionalität dann von ISGCI auf JGraphX über diese Schnittstelle übertragen wird. 
+Bibliotheken bilden, indem die \newline Graphzeichnungsmöglichkeiten von JGraphX genutzt werden. Dementsprechend werden die aktuellen Funktionen von ISGCI, die bis dato mit JGraph umgesetzt sind, auf JGraphX übertragen, indem eine Schnittstelle zwischen JGraphT und JGraphX umgesetzt wird und deren Funktionalität dann von ISGCI auf JGraphX über diese Schnittstelle übertragen wird. 
 	
-	JGraphT verwendet Maven um den Build Process zur Kompilierung der Java-Klassen und um eine gute Dokumentation zu gewährleisten. Insbesondere führt Maven JUnit-Tests aus, um eben die Kontrolle über die Implementierung zu behalten. Dazu müssen allerdings entsprechende Tests vom Entwickler definiert werden.
+	JGraphT verwendet Maven um den Build Process zur Kompilierung der Java-Klassen und um eine gute Dokumentation zu gewährleisten. Insbesondere führt Maven JUnit-Tests aus, um die Kontrolle über die Implementierung zu behalten. Dazu müssen entsprechende Tests vom Entwickler definiert werden.
 	\end{itemize}
 	
 %	\subsection{Design Constraints (ja das englisch war so vorgegeben und darf gerne geändert werden :-)} %3.4
@@ -256,11 +259,11 @@ Bibliotheken bilden, indem die Graphzeichnungsmöglichkeiten von JGraphX genutzt
 	\subsection{Qualitätsanforderungen} %3.6 / Software System Attributes
 		\begin{itemize}	
 		\item \textbf{Benutzerfreundlichkeit}\\
-		Das bestehende System wird vor Allem erweitert um die Benutzerfreundlichkeit zu steigern. Zwar besteht die Zielgruppe für die Software aus technisch interessierten und fähigen Leuten, dennoch soll die Software auch für Laien leicht durchschaubar und selbsterklärend sein. Intuitiv angeordnete Reiter in der Menüleiste, sowie ein interaktives Kontextmenü sollen dazu beitragen, dass benötigte Funktionen von Benutzern leicht gefunden werden können. Des Weiteren sorgen Funktionen wie Grab\&Pull oder Zoom \textit{(vgl. Funktionale Anforderungen)} für einen interaktiven Umgang mit dem System. Um die Übersichtlichkeit über komplexere Graphen zu gewährleisten, gibt es zwei Varianten des Expanding/Collapsing, mit denen man einen komplizierten Graphen in einen überschaubaren Teilgraphen herunterbrechen kann \textit{(vgl. Funktionale Anforderungen 08)}.
+		Das bestehende System wird vor allem erweitert, um die Benutzerfreundlichkeit zu steigern. Zwar besteht die Zielgruppe für die Software aus technisch interessierten und fähigen Personen, dennoch soll die Software auch für Laien leicht durchschaubar und selbsterklärend sein. Intuitiv angeordnete Reiter in der Menüleiste, sowie ein interaktives Kontextmenü sollen dazu beitragen, dass benötigte Funktionen von Benutzern leicht gefunden werden können. Des Weiteren sorgen Funktionen wie Grab\&Pull oder Zoom \textit{(vgl. Funktionale Anforderungen)} für einen interaktiven Umgang mit dem System. Um die Übersichtlichkeit über komplexere Graphen zu gewährleisten, gibt es zwei Varianten des Expanding/Collapsing, mit denen man einen komplizierten Graphen in einen überschaubaren Teilgraphen herunterbrechen kann \textit{(vgl. Funktionale Anforderungen 08)}.
 		\item \textbf{Integrität}\\
 		Alle Datensätze werden zentral auf einem Server gehalten. Die Software bietet ausschließlich lesende Funktionen an. Somit ist die Datenbank durch negative Manipulationen geschützt.
 		\item \textbf{Flexibilität}\\
-		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten (Grapheklasse) Informationen aus der Online-Datenbank einsehen. 
+		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten (Graphklasse) Informationen aus der Online-Datenbank einsehen. 
 		\item \textbf{Portabilität}\\
 		ISGCI ist eine Java Anwendung. Das bedeutet, dass sie plattformunabhängig ausgeführt werden kann, solange eine Java-Laufzeit-Umgebung installiert ist (als Standard vorausgesetzt).
 		Die Online-Datenbank ist unabhängig von unserem System. 
