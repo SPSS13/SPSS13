@@ -143,7 +143,7 @@
 %\item Das System soll dazu in der Lage sein eine neue Fensterinstanz zu öffnen.
 \item Das System soll die Möglichkeit bieten im gezeichneten Graphen eine Graphklasse zu suchen. 
 \item Das System soll dazu in der Lage sein, die Namensgebung der Graphklassen innerhalb des erzeugten Graphen nach vorgegebenen Mustern zu ändern.
-\item Das System soll unklare Inklusionen markieren können.
+\item Das System soll unklare Inklusionen markieren können. (unklare Inklusionen: Beziehungen zwischen zwei Graph-Klassen, bei denen nicht sicher ist, ob die Menge der Graphen der einen Klasse echte Teilmenge der Menge der Graphen der anderen Graphenklasse sind, oder der Menge selbst entsprechen. Keine Information bzgl. $\subset$ / $\subseteq$ in der Datenbank vorhanden.)
 \item Das System soll die Graphdatenbank und die Eigenschaften der Graphklassen anzeigen können. 
 \item Das System soll die Möglichkeit bieten, nach Relationen zwischen Graphklassen zu suchen.
 \item Das System soll die Möglichkeit bieten, zu einem Graph-Problem die entsprechenden Lauzeitklassen zu visualisieren.
@@ -230,7 +230,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 		\item Das Benutzerinterface soll interaktiver und benutzerfreundlicher sein als bei der Vorgängerversion (Umsetzung: vgl. Functional Requirements).
 		\item Die Dokumentation wird auf Englisch verfasst, um sich dem OpenSource Standard und der restlichen Dokumentation anzupassen. Dafür muss der Standard der bisherigen Dokumentation eingehalten werden.
 		\item Zeichnungen im ISGCI sollen visuell attraktiver dargestellt werden.
-		\item Datenbank-basiertes zeichnen: Flexible Einspeisung von Datensätzen anstatt statischer Einbindung führt zu einer bessern Wartbarkeit.
+		\item Online Datenbank: Flexible Einspeisung von Datensätzen anstatt statischer Einbindung führt zu einer bessern Wartbarkeit. Auslagerung der Daten auf einen Online-Server statt lokaler Speicherung.
 		\end{itemize}
 		
 	\subsection{Externe Schnittstellen - Anforderungen} %3.3
@@ -266,7 +266,7 @@ Bibliotheken bilden, indem die \newline Graphzeichnungsmöglichkeiten von JGraph
 	\subsection{Qualitätsanforderungen} %3.6 / Software System Attributes
 		\begin{itemize}	
 		\item \textbf{Benutzerfreundlichkeit}\\
-		Das bestehende System wird vor allem erweitert, um die Benutzerfreundlichkeit zu steigern. Zwar besteht die Zielgruppe für die Software aus technisch interessierten und fähigen Personen, dennoch soll die Software auch für Laien leicht durchschaubar und selbsterklärend sein. Intuitiv angeordnete Reiter in der Menüleiste, sowie ein interaktives Kontextmenü sollen dazu beitragen, dass benötigte Funktionen von Benutzern leicht gefunden werden können. Des Weiteren sorgen Funktionen wie Grab\&Pull oder Zoom \textit{(vgl. Funktionale Anforderungen)} für einen interaktiven Umgang mit dem System. Um die Übersichtlichkeit über komplexere Graphen zu gewährleisten, gibt es zwei Varianten des Expanding/Collapsing, mit denen man einen komplizierten Graphen in einen überschaubaren Teilgraphen herunterbrechen kann \textit{(vgl. Funktionale Anforderungen 08)}.
+		Das bestehende System wird vor allem erweitert, um die Benutzerfreundlichkeit zu steigern. Zwar besteht ein Teil der Zielgruppe für die Software aus technisch interessierten und fähigen Personen, dennoch gibt es auch eine breite Nachfrage im Bereich der Computer-Laien, weshalb die Software auch für diese leicht durchschaubar und selbsterklärend sein soll. Intuitiv angeordnete Reiter in der Menüleiste, sowie ein interaktives Kontextmenü sollen dazu beitragen, dass benötigte Funktionen von Benutzern leicht gefunden werden können. Des Weiteren sorgen Funktionen wie Grab\&Pull oder Zoom \textit{(vgl. Funktionale Anforderungen)} für einen interaktiven Umgang mit dem System. Um die Übersichtlichkeit über komplexere Graphen zu gewährleisten, gibt es zwei Varianten des Expanding/Collapsing, mit denen man einen komplizierten Graphen in einen überschaubaren Teilgraphen herunterbrechen kann \textit{(vgl. Funktionale Anforderungen 08)}.
 		\item \textbf{Integrität}\\
 		Alle Datensätze werden zentral auf einem Server gehalten. Die Software bietet ausschließlich lesende Funktionen an. Somit ist die Datenbank durch negative Manipulationen geschützt.
 		\item \textbf{Flexibilität}\\
