@@ -26,53 +26,79 @@
 
 \subsection{ISGCI-Package JGraphT}
 
-\textbf{Allgemein:}
+\paragraph{Allgemein:}\ \\
 JGraphT wird benötigt, um die Graph-Struktur zu verwalten und Funktionen darauf auszuführen. Der Schwerpunkt liegt auf Funktionen zur logischen Reduzierung des Graphen und Filterung bestimmter Zusammenhänge (Nachbarn bestimmen etc.). Daneben werden noch nützliche Algorithmen zur Verarbeitung von Graphen bereitgestellt (z.B. Walkers).\\
 
 
 
 
-\textbf{Annotation.java}\\
+\paragraph{Annotation.java}\ \\
 Zuständig für Informationen(Kommentare/Anmerkungen), die an Knoten oder Kanten angehängt werden (Benutzt z.B. von Walkern zur Markierung bereits besuchter Knoten).\\
 Verschiedene Funktionen ermöglichen, in einem Annotation-Objekt bestimmten Knoten/Kanten Informationen (Data) zuzuordnen und auzulesen.\\
 
-\textbf{AsWeightedDirectedGraph.java}\\
-\textit{Erweitert AsWeightedGraph und implementiert DirectedGraph}\\
+\paragraph{AsWeightedDirectedGraph.java}\ \\
+\emph{Erweitert AsWeightedGraph und implementiert DirectedGraph}\\
 Notwendig zur Darstellung des Graphen als gewichteter, gerichteter Graph.\\
 Mithilfe dieser Klasse können Algorithmen, die für ungewichtete Graphen ausgelegt sind auch auf gewichtete angewendet werden (Mapping von Kanten und Gewichten).\\
 
-\textbf{BFSWalker.java}\\
-\textit{Erweiterung von GraphWalker}\\
+\paragraph{BFSWalker.java}\ \\
+\emph{Erweiterung von GraphWalker}\\
 Beinhaltet BFS Algorithmus. Durchläuft einen Graphen, ausgehend von einem gegebenen Startknoten (benutzt nur Kanten).\\
 Umsetzung: Alle Knoten kommen in eine Warteschlange, werden nach und nach (via. BFS) besucht und aus der Queue gelöscht.\\
 
-\textbf{DFSWalker.java}\\
-\textit{Erweiterung von GraphWalker}\\
+\paragraph{DFSWalker.java}\ \\
+\emph{Erweiterung von GraphWalker}\\
 Beinhaltet DFS Algorithmus. Durchläuft alle Knoten eines Graphen, ausgehend von einem gegebenen Startknoten.\\
 Umsetzung: Über ein Annotation-Objekt können besuchte Knoten markiert werden. Durchlauf mittels DFS Algorithmus.\\
 
-\textbf{GraphWalker.java}\\
-\textit{Abstrakte Klasse}\\
+\paragraph{GraphWalker.java}\ \\
+\emph{Abstrakte Klasse}\\
 GraphWalkers werden benötigt, um einen Graphen zu durchlaufen - vgl. BFSWalker/DFSWalker. \\
 
-\textbf{CacheGraph.java}\\
-\textit{Erweiterung von ListenableDirectedGraph}\\
+\paragraph{CacheGraph.java}\ \\
+\emph{Erweiterung von ListenableDirectedGraph}\\
 Ermöglicht die Erstellung eines gerichteten Graphen mit cashing von Kanten und Knoten.\\
 Umsetzung: HashMaps jeweils für Knoten und Kanten.\\
 Überschreibt verschiedene Methoden/stellt zur Verfügung: Suchen von Knoten/Kanten, Feststellung ob Knoten/Kanten vorhanden sind und Konsistenz-Checks.\\
 
-\textbf{ClosingDFS.java}\\
-\textit{Erweiterung von DFSWalker}\\
+\paragraph{ClosingDFS.java}\ \\
+\emph{Erweiterung von DFSWalker}\\
 Definition von Closed Graph: In a directed graph G = (V, A), a set S of vertices is said to be closed if every successor of every vertex in S is also in S. Equivalently, S is closed if it has no outgoing edge.\\
 Beinhaltet DFS Algorithmus zur rekursiven Bestimmung der transitiven Abgeschlossenheit eines Graphen (Menge an Knoten/Kanten, so dass der Graph abgeschlossen ist).\\
 
-\textbf{Deducer.java}\\
+\paragraph{Deducer.java}\ \\
 Stellt einen Algorithmus zur Entfernung aller trivialen Inklusionen in einem Graphen zur \\Verfügung.\\
 Beinhaltet verschiedene Funktionen: Statistik - Auskunft über Relationen, Inklusionen und deren Beschaffenheiten; Suche und Entfernung Trivialer Inklusionen (Umformungen, teilweise Umstrukturierung des Graphen)\\
 
-\textbf{GAlg.java}\\
+\paragraph{GAlg.java}\ \\
 Beinhaltet verschiedene Algorithmen und andere Funktionen für Graphen.\\
 Funktionen: Teilen des Graphen in Zusammenhangskomponenten; Selektion aller Nachbarn eines Knoten; Bestimmung eines Pfades zwischen zwei Knoten; Angabe der Topologischen Ordnung eines Graphen(falls möglich); Transitive Reduzierung des Graphen.\\
+
+\paragraph{Inclusion.java}\ \\
+\emph{extends org.jgrapht.graph.DefaultEdge
+        implements Relation}\\
+Diese Klasse hält die Informationen einer Kante, nämlich Super- und Subklasse und ob es sich um eine unklare Inklusion handelt oder nicht.\\
+\paragraph{ISGCIVertexFactory.java}\ \\
+\emph{ implements VertexFactory<Set<GraphClass> >}\\
+Klasse um virtuelle Knoten zu erstellen\\
+\paragraph{RevBFSWalker.java}\ \\
+\emph{extends BFSWalker<V,E>}\\
+Durchläuft einen Graphen mittels gerichteter Breitensuche.\
+\paragraph{TreeBFSWalker.java}\ \\
+\emph{ extends UBFSWalker<V,E>}\\
+Durchläuft den Spannbaum eines Graphen mittels ungerichteter Beitensuche. Anmerkung: Markiert nicht selbständig den Spannbaum.\\
+\paragraph{TreeDFSWalker.java}\ \\
+\emph{extends UDFSWalker<V,E>}\\
+Durchläuft die Knoten des Spannbaums eines Graphen mittels ungerichteter Teifensuche\\
+\paragraph{UBFSWalker.java}\ \\
+\emph{ extends BFSWalker<V,E>}\\
+Durchläuft den Graph mit einer ungerichteten Breitensuche.\\
+\paragraph{UDFSWalker.java}\ \\
+\emph{extends DFSWalker<V,E>}\\
+Durchläuft den Graph mit einer ungerichteten Tiefensuche\\
+\paragraph{WalkerInfo.java}\ \\
+\emph{}\\
+Diese Klasse wird benutzt um Knoten Informationen zu geben, während der Graph mittels Tiefen- oder Breitensuche durchlaufen wird.
 
 \subsection{ISGCI-Package Layout}
 
