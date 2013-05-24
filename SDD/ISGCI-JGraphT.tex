@@ -74,7 +74,34 @@ Beinhaltet verschiedene Funktionen: Statistik - Auskunft über Relationen, Inklu
 Beinhaltet verschiedene Algorithmen und andere Funktionen für Graphen.\\
 Funktionen: Teilen des Graphen in Zusammenhangskomponenten; Selektion aller Nachbarn eines Knoten; Bestimmung eines Pfades zwischen zwei Knoten; Angabe der Topologischen Ordnung eines Graphen(falls möglich); Transitive Reduzierung des Graphen.\\
 
+\subsection{ISGCI-Package Layout}
 
+Alle Klassen, die in dem \texttt{./layout}-Ordner stehen sind für das Layout des letztendlich zu zeichnenden Graphen zuständig, dabei stehen diese stark mit den Klassen aus dem \texttt{./grapht}-Ordner in Zusammenhang. Die ganzen Klassen und deren Methoden werden über die Klassen des \texttt{./gui}-Ordners aufgerufen.
+
+Im Folgenden werden alle Klassen aus dem \texttt{./layout} grob beschrieben und deren Funktionweise und Zuständigkeit näher erläutert. Konkrete Details, wie Methodendeklarationen, Methodenaufrufe und Variablen werden spärlich erläutert. Dies sollte aber der oberflächenden Verständlichkeit nicht im Wege stehen, wenn nicht sogar dienen.
+
+\paragraph{GraphDrawInfo.java}\ \\
+\emph{Erweiterung von WalkerInfo.java}\\
+{\footnotesize Diese Klasse erweitert die Klasse \texttt{WalkerInfo.java} aus dem Package \texttt{./grapht}, welche dafür zuständig ist, ob Kanten zu einem zu berechnenden/anzuzeigenden Graphen gehört oder nicht. Bei Knoten wird auf Adjazenz geprüft (näheres in der Beschreibung bei \texttt{grapht}), ob der Knoten zum dem zu zeichnenden Graphen gehört. Sie fügt weitere Variablen, die Werte für Knoten und Kanten, die zur Graphzeichnung benötigt werden, beinhalten. Dazugehören auch virtuelle Knoten, die keinen Inhalt haben und nur zur Kantenzeichnung benötigt werden. Außerdem werden Variablen zur Ranking-Berechnung deklariert, um die spätere richtige Position in der Zeichnung zu bestimmen. Alle benötigten Variablen werden im Konstruktor mit Default-Werten instanziiert und überschrieben, sobald diese benötigt werden. (i.e. Breite des Knotens, Koordinaten, Position im Ranking usw.)}
+
+\paragraph{HierachyLayout.java}\ \\
+{\footnotesize Diese Klasse ist zur Berechnung der Hierarchie im Layout zuständig. Jedoch muss berücksichtigt werden, dass eine konsistente Hierarchie nur erreicht werden kann, wenn der Graph, zu dem die Hierarchie berechnet werden soll, ein gerichteter nicht-zyklischer Graph ist. Es muss beachtet werden, dass dieser transitiv reduziert ist. Erneut spielt die Berechnung des Rankings und der virtuellen Knoten eine entscheidende Rolle, wobei diese Berechnungen mit JGraphT stattfinden. Dazu gehört die Beschreibung des zum Knoten gehörenden Vertex (Weite, Rank..). Um das Layout der Hierarchie zu berechnen, wird die eben beschrieben Klasse \texttt{GraphDrawInfo.java} verwendet. Bei der Berechnung werden dabei die 4 Prinzipien berücksichtigt, die in der Dokumentation zur Zeichnung (\texttt{./doc/1993drawing.pdf}) näher erläutert und bei den 3 Durchläufen des "Network Simplex Algorithm" beachtet werden. Der konkrete Ablauf, welche Schritte getan werden müssen, werden dort näher erläutert. (Machbarkeitsbaumberechnung mit entsprechendem Ranking der den length-constraints genügen muss).  Es werden verschiedene Algorithmen ausgeführt, welche mit einigen Hilfsmethoden u.a. Spannbäume mit festen Kanten, machbare Rankings berechnet [...]. Hierbei muss flüchtig erwähnt werden, dass die Berechnung in den Grundzügen auf Ersetzung von Graphkanten und -knoten durch Nichtgraphkanten und -knoten, um die Machbarkeit mit einem optimalem Ranking zu erreichen, basiert. Es wird versucht ein minimalen Graphen zu finden (optimales Ranking) der den 4 Prinzipien nachkommt. Dabei werden die Variablen der Klasse \texttt{GraphDrawInfo.java} benötigt.} 
+
+\paragraph{LLWalker.java}\ \\
+\emph{Erweiterung von TreeDFSWalker.java}\\
+{\footnotesize Traversiert die Knoten eines Baumes mithilfe von Tiefensuche, indem die Methoden der Oberklasse verwendet werden.}
+
+\paragraph{Ranks.java}\ \\
+{\footnotesize In dieser Klasse werden die Knoten eines Graphen über Rankings verwaltet. Einer der Hauptaspekte für die Verwendung von Rankings ist, dass die Kantenkreuzungen soweit wie möglich minimiert werden. Ein initiales Ranking wird durch Zuweisung eines Rankings für jeden über Breitensuche (durch Traversierung), wobei bei dem niedrigsten Ranking begonnen wird (in der Anwendung von oben nach unten), erstellt. Das ist notwendig, um sicherzugehen, dass dieses Ranking ein Baum ohne Kantenkreuzungen ist. Um dies zu erreichen wird \texttt{HierarchyLayout.java} verwendet, indem über sie virtuelle Knoten erstellt und gesetzt werden, um ein optimales Ranking für die Kantenkreuzungen zu erreichen. Um die Knoten innerhalb eines Rankings effektiv zu sortieren werden Heuristiken (siehe \texttt{./doc/1993drawing.pdf}) verwendet (z.B. Median, Barycenter, Minimum, Sifting..). Es werden iterative heuristische Berechnungen entsprechend der bereits genannten Dokumentation ausgeführt, um ein bestmögliches in einem akzeptablen Rahmen des Berechnung-Aufwandes Ergebnis zu erzielen (Vertauschung von Knoten, falls dadurch Kreuzungen vermieden werden).}
+
+\paragraph{TightTreeWalker.java}\ \\
+\textit{Erweiterung von UBFSWalker.java;\\ wird in} {\small \texttt{HierarchyLayout.java}} \textit{für den "Network Simplex Algorithm"\ verwendet}\\
+{\footnotesize Diese Klasse wird benötigt um einen gerichteten Graphen mithilfe von Breitensuche \textit{ungerichtet} zu traversieren, dabei werden nur Kanten, die fest("tight"$\overset{\wedge}{=}$ slack = 0) sind, berücksichtigt. \\
+Es wird ein Startknoten definiert, mit dem diese Traversierung ausgeführt wird. Die zu traversierenden Kanten sind als Baumkanten markiert (Information aus \texttt{GraphDrawInfo.java}). Als Ergebnis erhält man einen Spannbaum für den Eingabe-Graphen.}
+
+\paragraph{TreeReranker.java}\ \\
+\emph{Erweiterung von TreeBFSWalker}\\
+{\footnotesize Mithilfe dieser Klasse werden neue Rankings auf einem Layout-Graphen (als Baum übergeben) erstellt, um ein optimales Ranking zu erhalten (durch Breitensuche). Sie wird eigentlich nur verwendet, um eine semantische Trennung zum \texttt{TreeBFSWalker.java} zu erhalten, denn jede verwendete Methode ruft eine entsprechende Methode aus der Oberklasse auf.}
 
 
 
