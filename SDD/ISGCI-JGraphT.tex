@@ -29,6 +29,26 @@
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
 \subsection{View}
+\emph{View stellt beim klicken auf den Menüreiter "View" in der Navigationsleiste verschiedene funktionen zur optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "unproper" (müsste eigentlich improper heißen) inclusions.}\\
+
+\paragraph{Search in drawing...}\ \\
+Beim Auswählen des Punktes "search in drawing", durch einen linken Mausklick, öffnet sich das Fenster "Search for a graphclass". Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das drücken von Search gesucht werden. Dabei wird stehts nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch cancel kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "search" nach einer aus der Liste gewählten Klasse,ausgewählt und der Canvas so verschoben, dass die Graphklasse sichtbar ist.
+
+
+\paragraph{Naming preference...}\ \\
+Beim Auswählen des Punktes "Naming preference..", durch einen linken Mausklick, öffnet sich das Fenster "Naming preference". Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. \\
+\begin{itemize}
+	\item[\bf{Basic}] e.g. threshold
+	\item[\bf{Forbidden subgraphs}] e.g. ($P_4,2K_2,C_4$)-free
+	\item[\bf{Derived}] e.g. cograph $\cap$ split
+\end{itemize}
+\\
+Das Auswählen einer dieser drei Optionen und das bestätigen durch "OK", hat eine Umbenennung aller Nodes im Drawing zur angegebenen Konvention zur Folge.
+
+\paragraph{Mark unproper(improper) inclusions}
+Beim Auswählen des Punktes "Mark unproper inclusions", durch einen linken Mausklick, wird dieser Menüpunkt mittels eines ein / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "unproper inclusions" durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim deaktivieren dieser Funktion verschwindet dieser graue Pfeil wieder.
+
+
 \subsection{Graph classes}
 \subsection{Problems}
 \subsection{Help}
@@ -40,8 +60,6 @@ Beschreibung der aus dem GUI ableitbaren Funktionen
 
 \paragraph{Allgemein:}\ \\
 JGraphT wird benötigt, um die Graph-Struktur zu verwalten und Funktionen darauf auszuführen. Der Schwerpunkt liegt auf Funktionen zur logischen Reduzierung des Graphen und Filterung bestimmter Zusammenhänge (Nachbarn bestimmen etc.). Daneben werden noch nützliche Algorithmen zur Verarbeitung von Graphen bereitgestellt (z.B. Walkers).\\
-
-
 
 
 \paragraph{Annotation.java}\ \\
@@ -142,9 +160,30 @@ Es wird ein Startknoten definiert, mit dem diese Traversierung ausgeführt wird.
 {\footnotesize Mithilfe dieser Klasse werden neue Rankings auf einem Layout-Graphen (als Baum übergeben) erstellt, um ein optimales Ranking zu erhalten (durch Breitensuche). Sie wird eigentlich nur verwendet, um eine semantische Trennung zum \texttt{TreeBFSWalker.java} zu erhalten, denn jede verwendete Methode ruft eine entsprechende Methode aus der Oberklasse auf.}
 
 
+\subsection{ISGCI-Package db}
+Hier liegen viele Algorithmen z.b. beinhaltet die Klasse Algo.java Algorithmen um subklassen /superklassen einer Node zu finden und diese auszugeben. Diese werden benötigt um die Inklusionsinformationen zu speichern und abzurufen.\\
+
+\subsection{ISGCI-Package gc}
+GC steht für graphclass. In Dieses Package sind alle graphclass klassen enthalten. Jede enthaltene Java Klasse beschreibt eine GraphClass und deren besondere Eigenschaften.\\
+
+\subsection{ISGCI-Package iq}
+Hier finden ISGCI Queries statt. db und gc nutzen dieses package um Queries auszuführen. \\
+
+\subsection{ISGCI-Package problem}
+Store complexity information for graph problems, in diesem Package sind alle Funktionen enthalten die dazu genutzt werden ein Problem zu beschreiben.\\
+
+\subsection{ISGCI-Package util}
+In dem util Package liegen alle für spezielle Funktionalitäten benötigte Klassen. Dazu gehört eine Reihe von Klassen, die die Verwendung von "Latex" innerhalb des ISGCI ermöglicht (d.h. das Verwenden einiger Zeichen).\\
 
 
+\subsection{ISGCI-Package xml}
+Das Package xml ist zum  input/output von XML dateien, hier werden Informationen aus XML dateien gelesen und ausgegeben. Das Package xml greift dabei auf das Package sax zu und nutzt deren Filterfunktionalität. Die Daten aus einem XML input/output werden den Klassen grapht, ISG und Util zur Verfügung gestellt. \\
 
+\subsection{ISGCI-Package isq}
+in isq werden die Graph Familien, zusammenhänge aus einer XML gelesen und zum Zeichnen vorbereitet, also an JgraphT weitergereicht. Dabei nutzt isq funktionen des util packages. 
+
+\subsection{ISGCI-Package sax}
+Das Package sax, beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter um ein XML Dokument aus einem SAX (Simple API for XML) event stream zu erzeugen. Diese Klasse wird vom XML parser benötigt.
 
 
 
