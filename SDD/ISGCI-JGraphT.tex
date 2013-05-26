@@ -2,8 +2,8 @@
 % Vorlage zur Generierung von Uebungsloesungsblaettern.
 
 \documentclass[10pt,a4paper]{article}
+\usepackage[ngerman]{babel}
 \usepackage{algorithm2e}
-\usepackage{vorlage}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}  % Für z.B. Mengenzeichen
@@ -18,7 +18,7 @@
 \usepackage{fancyhdr}
 \usepackage{multirow}
 \usepackage{color}
-\usepackage[ngerman]{babel}
+
 
 
 
@@ -29,23 +29,23 @@
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
 \subsection{View}
-\emph{View stellt beim klicken auf den Menüreiter "View" in der Navigationsleiste verschiedene funktionen zur optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "unproper" (müsste eigentlich improper heißen) inclusions.}\\
+\emph{View stellt beim klicken auf den Menüreiter "`View"'\ in der Navigationsleiste verschiedene Funktionen zur Optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "`unproper"' (müsste eigentlich improper heißen) inclusions.}\\
 
 \paragraph{Search in drawing...}\ \\
-Beim Auswählen des Punktes "search in drawing", durch einen linken Mausklick, öffnet sich das Fenster "Search for a graphclass". Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das drücken von Search gesucht werden. Dabei wird stehts nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch cancel kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "search" nach einer aus der Liste gewählten Klasse,ausgewählt und der Canvas so verschoben, dass die Graphklasse sichtbar ist.
+Beim Auswählen des Punktes "`search in drawing"' durch einen linken Mausklick, öffnet sich das Fenster "`Search for a graphclass"'. Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das Drücken von Search gesucht werden. Dabei wird stets nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch "`cancel"' kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "`search"' nach einer aus der Liste gewählten Klasse, dann wird der Canvas so verschoben, dass die Graphklasse sichtbar ist.
 
 
 \paragraph{Naming preference...}\ \\
-Beim Auswählen des Punktes "Naming preference..", durch einen linken Mausklick, öffnet sich das Fenster "Naming preference". Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. \\
+Beim Auswählen des Punktes "`Naming preference.."', durch einen linken Mausklick, öffnet sich das Fenster "`Naming preference"'. Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. (Eigenschaft der Radio-Buttons) \\
 \begin{itemize}
 	\item[\bf{Basic}] e.g. threshold
 	\item[\bf{Forbidden subgraphs}] e.g. ($P_4,2K_2,C_4$)-free
-	\item[\bf{Derived}] e.g. cograph $\cap$ split
+	\item[\bf{Derived}] e.g. cograph $\cap$ split\\
 \end{itemize}
-Das Auswählen einer dieser drei Optionen und das bestätigen durch "OK", hat eine Umbenennung aller Nodes im Drawing zur angegebenen Konvention zur Folge.
+Das Auswählen einer dieser drei Optionen und das bestätigen durch "`OK"', hat eine Umbenennung aller Nodes im Drawing zur angegebenen Konvention zur Folge.
 
-\paragraph{Mark unproper(improper) inclusions}\ \\
-Beim Auswählen des Punktes "Mark unproper inclusions", durch einen linken Mausklick, wird dieser Menüpunkt mittels eines ein / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "unproper inclusions" durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim deaktivieren dieser Funktion verschwindet dieser graue Pfeil wieder.
+\paragraph{Mark unproper(improper) inclusions}\ \\
+Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen linken Mausklick, wird dieser Menüpunkt mittels eines ein- / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "`unproper inclusions"' durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim Deaktivieren dieser Funktion verschwindet dieser graue Pfeil.
 
 
 \subsection{Graph classes}
@@ -63,7 +63,7 @@ JGraphT wird benötigt, um die Graph-Struktur zu verwalten und Funktionen darauf
 
 \paragraph{Annotation.java}\ \\
 Zuständig für Informationen(Kommentare/Anmerkungen), die an Knoten oder Kanten angehängt werden (Benutzt z.B. von Walkern zur Markierung bereits besuchter Knoten).\\
-Verschiedene Funktionen ermöglichen, in einem Annotation-Objekt bestimmten Knoten/Kanten Informationen (Data) zuzuordnen und auzulesen.\\
+Verschiedene Funktionen ermöglichen in einem Annotation-Objekt bestimmten Knoten/Kanten Informationen (Data) zuzuordnen und auszulesen.\\
 
 \paragraph{AsWeightedDirectedGraph.java}\ \\
 \emph{Erweitert AsWeightedGraph und implementiert DirectedGraph}\\
