@@ -67,7 +67,7 @@ Verschiedene Funktionen ermöglichen in einem Annotation-Objekt bestimmten Knote
 
 \paragraph{AsWeightedDirectedGraph.java}\ \\
 \emph{Erweitert AsWeightedGraph und implementiert DirectedGraph}\\
-Notwendig zur Darstellung des Graphen als gewichteter, gerichteter Graph.\\
+Notwendig zur gewichteten und gerichteten Darstellung des Graphen.\\
 Mithilfe dieser Klasse können Algorithmen, die für ungewichtete Graphen ausgelegt sind auch auf gewichtete angewendet werden (Mapping von Kanten und Gewichten).\\
 
 \paragraph{BFSWalker.java}\ \\
@@ -92,16 +92,16 @@ Umsetzung: HashMaps jeweils für Knoten und Kanten.\\
 
 \paragraph{ClosingDFS.java}\ \\
 \emph{Erweiterung von DFSWalker}\\
-Definition von Closed Graph: In a directed graph G = (V, A), a set S of vertices is said to be closed if every successor of every vertex in S is also in S. Equivalently, S is closed if it has no outgoing edge.\\
+Definition von Closed Graph: "`In a directed graph G = (V, A), a set S of vertices is said to be closed if every successor of every vertex in S is also in S. Equivalently, S is closed if it has no outgoing edge"'.\\
 Beinhaltet DFS Algorithmus zur rekursiven Bestimmung der transitiven Abgeschlossenheit eines Graphen (Menge an Knoten/Kanten, so dass der Graph abgeschlossen ist).\\
 
 \paragraph{Deducer.java}\ \\
 Stellt einen Algorithmus zur Entfernung aller trivialen Inklusionen in einem Graphen zur \\Verfügung.\\
-Beinhaltet verschiedene Funktionen: Statistik - Auskunft über Relationen, Inklusionen und deren Beschaffenheiten; Suche und Entfernung Trivialer Inklusionen (Umformungen, teilweise Umstrukturierung des Graphen)\\
+Beinhaltet verschiedene Funktionen: Statistik - Auskunft über Relationen, Inklusionen und deren Beschaffenheiten; Suche und Entfernung trivialer Inklusionen (Umformungen, teilweise Umstrukturierung des Graphen)\\
 
 \paragraph{GAlg.java}\ \\
 Beinhaltet verschiedene Algorithmen und andere Funktionen für Graphen.\\
-Funktionen: Teilen des Graphen in Zusammenhangskomponenten; Selektion aller Nachbarn eines Knoten; Bestimmung eines Pfades zwischen zwei Knoten; Angabe der Topologischen Ordnung eines Graphen(falls möglich); Transitive Reduzierung des Graphen.\\
+Funktionen: Teilen des Graphen in Zusammenhangskomponenten; Selektion aller Nachbarn eines Knoten; Bestimmung eines Pfades zwischen zwei Knoten; Angabe der topologischen Ordnung eines Graphen(falls möglich); Transitive Reduzierung des Graphen.\\
 
 \paragraph{Inclusion.java}\ \\
 \emph{extends org.jgrapht.graph.DefaultEdge
@@ -109,22 +109,22 @@ Funktionen: Teilen des Graphen in Zusammenhangskomponenten; Selektion aller Nach
 Diese Klasse hält die Informationen einer Kante, nämlich Super- und Subklasse und ob es sich um eine unklare Inklusion handelt oder nicht.\\
 \paragraph{ISGCIVertexFactory.java}\ \\
 \emph{ implements VertexFactory<Set<GraphClass> >}\\
-Klasse um virtuelle Knoten zu erstellen\\
+Klasse um virtuelle Knoten zu erstellen.\\
 \paragraph{RevBFSWalker.java}\ \\
 \emph{extends BFSWalker<V,E>}\\
 Durchläuft einen Graphen mittels gerichteter Breitensuche.\
 \paragraph{TreeBFSWalker.java}\ \\
 \emph{ extends UBFSWalker<V,E>}\\
-Durchläuft den Spannbaum eines Graphen mittels ungerichteter Beitensuche. Anmerkung: Markiert nicht selbständig den Spannbaum.\\
+Durchläuft den Spannbaum eines Graphen mittels ungerichteter Breitensuche. Anmerkung: Markiert nicht selbstständig den Spannbaum.\\
 \paragraph{TreeDFSWalker.java}\ \\
 \emph{extends UDFSWalker<V,E>}\\
-Durchläuft die Knoten des Spannbaums eines Graphen mittels ungerichteter Teifensuche\\
+Durchläuft die Knoten des Spannbaums eines Graphen mittels ungerichteter Tiefensuche.\\
 \paragraph{UBFSWalker.java}\ \\
 \emph{ extends BFSWalker<V,E>}\\
-Durchläuft den Graph mit einer ungerichteten Breitensuche.\\
+Durchläuft den Graphen mit einer ungerichteten Breitensuche.\\
 \paragraph{UDFSWalker.java}\ \\
 \emph{extends DFSWalker<V,E>}\\
-Durchläuft den Graph mit einer ungerichteten Tiefensuche\\
+Durchläuft den Graphen mit einer ungerichteten Tiefensuche.\\
 \paragraph{WalkerInfo.java}\ \\
 \emph{}\\
 Diese Klasse wird benutzt um Knoten Informationen zu geben, während der Graph mittels Tiefen- oder Breitensuche durchlaufen wird.
@@ -140,7 +140,7 @@ Im Folgenden werden alle Klassen aus dem \texttt{./layout} grob beschrieben und 
 {\footnotesize Diese Klasse erweitert die Klasse \texttt{WalkerInfo.java} aus dem Package \texttt{./grapht}, welche dafür zuständig ist, ob Kanten zu einem zu berechnenden/anzuzeigenden Graphen gehört oder nicht. Bei Knoten wird auf Adjazenz geprüft (näheres in der Beschreibung bei \texttt{grapht}), ob der Knoten zum dem zu zeichnenden Graphen gehört. Sie fügt weitere Variablen, die Werte für Knoten und Kanten, die zur Graphzeichnung benötigt werden, beinhalten. Dazugehören auch virtuelle Knoten, die keinen Inhalt haben und nur zur Kantenzeichnung benötigt werden. Außerdem werden Variablen zur Ranking-Berechnung deklariert, um die spätere richtige Position in der Zeichnung zu bestimmen. Alle benötigten Variablen werden im Konstruktor mit Default-Werten instanziiert und überschrieben, sobald diese benötigt werden. (i.e. Breite des Knotens, Koordinaten, Position im Ranking usw.)}
 
 \paragraph{HierachyLayout.java}\ \\
-{\footnotesize Diese Klasse ist zur Berechnung der Hierarchie im Layout zuständig. Jedoch muss berücksichtigt werden, dass eine konsistente Hierarchie nur erreicht werden kann, wenn der Graph, zu dem die Hierarchie berechnet werden soll, ein gerichteter nicht-zyklischer Graph ist. Es muss beachtet werden, dass dieser transitiv reduziert ist. Erneut spielt die Berechnung des Rankings und der virtuellen Knoten eine entscheidende Rolle, wobei diese Berechnungen mit JGraphT stattfinden. Dazu gehört die Beschreibung des zum Knoten gehörenden Vertex (Weite, Rank..). Um das Layout der Hierarchie zu berechnen, wird die eben beschrieben Klasse \texttt{GraphDrawInfo.java} verwendet. Bei der Berechnung werden dabei die 4 Prinzipien berücksichtigt, die in der Dokumentation zur Zeichnung (\texttt{./doc/1993drawing.pdf}) näher erläutert und bei den 3 Durchläufen des "Network Simplex Algorithm" beachtet werden. Der konkrete Ablauf, welche Schritte getan werden müssen, werden dort näher erläutert. (Machbarkeitsbaumberechnung mit entsprechendem Ranking der den length-constraints genügen muss).  Es werden verschiedene Algorithmen ausgeführt, welche mit einigen Hilfsmethoden u.a. Spannbäume mit festen Kanten, machbare Rankings berechnet [...]. Hierbei muss flüchtig erwähnt werden, dass die Berechnung in den Grundzügen auf Ersetzung von Graphkanten und -knoten durch Nichtgraphkanten und -knoten, um die Machbarkeit mit einem optimalem Ranking zu erreichen, basiert. Es wird versucht ein minimalen Graphen zu finden (optimales Ranking) der den 4 Prinzipien nachkommt. Dabei werden die Variablen der Klasse \texttt{GraphDrawInfo.java} benötigt.} 
+{\footnotesize Diese Klasse ist zur Berechnung der Hierarchie im Layout zuständig. Jedoch muss berücksichtigt werden, dass eine konsistente Hierarchie nur erreicht werden kann, wenn der Graph, zu dem die Hierarchie berechnet werden soll, ein gerichteter nicht-zyklischer Graph ist. Es muss beachtet werden, dass dieser transitiv reduziert ist. Erneut spielt die Berechnung des Rankings und der virtuellen Knoten eine entscheidende Rolle, wobei diese Berechnungen mit JGraphT stattfinden. Dazu gehört die Beschreibung des zum Knoten gehörenden Vertex (Weite, Rank..). Um das Layout der Hierarchie zu berechnen, wird die eben beschrieben Klasse \texttt{GraphDrawInfo.java} verwendet. Bei der Berechnung werden dabei die 4 Prinzipien berücksichtigt, die in der Dokumentation zur Zeichnung (\texttt{./doc/1993drawing.pdf}) näher erläutert und bei den 3 Durchläufen des "`Network Simplex Algorithm"' beachtet werden. Der konkrete Ablauf, welche Schritte getan werden müssen, werden dort näher erläutert. (Machbarkeitsbaumberechnung mit entsprechendem Ranking der den length-constraints genügen muss).  Es werden verschiedene Algorithmen ausgeführt, welche mit einigen Hilfsmethoden u.a. Spannbäume mit festen Kanten, machbare Rankings berechnet [...]. Hierbei muss flüchtig erwähnt werden, dass die Berechnung in den Grundzügen auf Ersetzung von Graphkanten und -knoten durch Nichtgraphkanten und -knoten, um die Machbarkeit mit einem optimalem Ranking zu erreichen, basiert. Es wird versucht ein minimalen Graphen zu finden (optimales Ranking) der den 4 Prinzipien nachkommt. Dabei werden die Variablen der Klasse \texttt{GraphDrawInfo.java} benötigt.} 
 
 \paragraph{LLWalker.java}\ \\
 \emph{Erweiterung von TreeDFSWalker.java}\\
@@ -150,8 +150,8 @@ Im Folgenden werden alle Klassen aus dem \texttt{./layout} grob beschrieben und 
 {\footnotesize In dieser Klasse werden die Knoten eines Graphen über Rankings verwaltet. Einer der Hauptaspekte für die Verwendung von Rankings ist, dass die Kantenkreuzungen soweit wie möglich minimiert werden. Ein initiales Ranking wird durch Zuweisung eines Rankings für jeden über Breitensuche (durch Traversierung), wobei bei dem niedrigsten Ranking begonnen wird (in der Anwendung von oben nach unten), erstellt. Das ist notwendig, um sicherzugehen, dass dieses Ranking ein Baum ohne Kantenkreuzungen ist. Um dies zu erreichen wird \texttt{HierarchyLayout.java} verwendet, indem über sie virtuelle Knoten erstellt und gesetzt werden, um ein optimales Ranking für die Kantenkreuzungen zu erreichen. Um die Knoten innerhalb eines Rankings effektiv zu sortieren werden Heuristiken (siehe \texttt{./doc/1993drawing.pdf}) verwendet (z.B. Median, Barycenter, Minimum, Sifting..). Es werden iterative heuristische Berechnungen entsprechend der bereits genannten Dokumentation ausgeführt, um ein bestmögliches in einem akzeptablen Rahmen des Berechnung-Aufwandes Ergebnis zu erzielen (Vertauschung von Knoten, falls dadurch Kreuzungen vermieden werden).}
 
 \paragraph{TightTreeWalker.java}\ \\
-\textit{Erweiterung von UBFSWalker.java;\\ wird in} {\small \texttt{HierarchyLayout.java}} \textit{für den "Network Simplex Algorithm"\ verwendet}\\
-{\footnotesize Diese Klasse wird benötigt um einen gerichteten Graphen mithilfe von Breitensuche \textit{ungerichtet} zu traversieren, dabei werden nur Kanten, die fest("tight"$\overset{\wedge}{=}$ slack = 0) sind, berücksichtigt. \\
+\textit{Erweiterung von UBFSWalker.java;\\ wird in} {\small \texttt{HierarchyLayout.java}} \textit{für den "`Network Simplex Algorithm"'\ verwendet}\\
+{\footnotesize Diese Klasse wird benötigt um einen gerichteten Graphen mithilfe von Breitensuche \textit{ungerichtet} zu traversieren, dabei werden nur Kanten, die fest("`tight"'$\overset{\wedge}{=}$ slack = 0) sind, berücksichtigt. \\
 Es wird ein Startknoten definiert, mit dem diese Traversierung ausgeführt wird. Die zu traversierenden Kanten sind als Baumkanten markiert (Information aus \texttt{GraphDrawInfo.java}). Als Ergebnis erhält man einen Spannbaum für den Eingabe-Graphen.}
 
 \paragraph{TreeReranker.java}\ \\
@@ -160,29 +160,29 @@ Es wird ein Startknoten definiert, mit dem diese Traversierung ausgeführt wird.
 
 
 \subsection{ISGCI-Package db}
-Hier liegen viele Algorithmen z.b. beinhaltet die Klasse Algo.java Algorithmen um subklassen /superklassen einer Node zu finden und diese auszugeben. Diese werden benötigt um die Inklusionsinformationen zu speichern und abzurufen.\\
+Hier liegen viele Algorithmen; z.B. beinhaltet die Klasse Algo.java Algorithmen um Subklassen/Superklassen eines Knoten zu finden und diese auszugeben. Diese werden benötigt um die Inklusionsinformationen zu speichern und abzurufen.\\
 
 \subsection{ISGCI-Package gc}
-GC steht für graphclass. In Dieses Package sind alle graphclass klassen enthalten. Jede enthaltene Java Klasse beschreibt eine GraphClass und deren besondere Eigenschaften.\\
+GC steht für GraphClass. In diesem Package sind alle GraphClass Klassen enthalten. Jede enthaltene Java Klasse beschreibt eine GraphClass und deren besondere Eigenschaften.\\
 
 \subsection{ISGCI-Package iq}
-Hier finden ISGCI Queries statt. db und gc nutzen dieses package um Queries auszuführen. \\
+Hier finden ISGCI Queries statt. db und gc nutzen dieses Package um Queries auszuführen. \\
 
 \subsection{ISGCI-Package problem}
-Store complexity information for graph problems, in diesem Package sind alle Funktionen enthalten die dazu genutzt werden ein Problem zu beschreiben.\\
+Store complexity information for graph problems, in diesem Package sind alle Funktionen enthalten, die dazu genutzt werden ein Problem zu beschreiben.\\
 
 \subsection{ISGCI-Package util}
-In dem util Package liegen alle für spezielle Funktionalitäten benötigte Klassen. Dazu gehört eine Reihe von Klassen, die die Verwendung von "Latex" innerhalb des ISGCI ermöglicht (d.h. das Verwenden einiger Zeichen).\\
+In dem util Package liegen alle für spezielle Funktionalitäten benötigte Klassen. Dazu gehört eine Reihe von Klassen, die die Verwendung von "`LaTeX"' innerhalb des ISGCI ermöglicht (d.h. das Verwenden einiger LaTeX-Symbole).\\
 
 
 \subsection{ISGCI-Package xml}
-Das Package xml ist zum  input/output von XML dateien, hier werden Informationen aus XML dateien gelesen und ausgegeben. Das Package xml greift dabei auf das Package sax zu und nutzt deren Filterfunktionalität. Die Daten aus einem XML input/output werden den Klassen grapht, ISG und Util zur Verfügung gestellt. \\
+Das Package xml ist zum Input/Output von XML Dateien; hier werden Informationen aus XML Dateien gelesen und ausgegeben. Das Package xml greift dabei auf das Package sax zu und nutzt deren Filterfunktionalität. Die Daten aus einem XML input/output werden den Klassen Grapht, ISG und Util zur Verfügung gestellt. \\
 
 \subsection{ISGCI-Package isq}
-in isq werden die Graph Familien, zusammenhänge aus einer XML gelesen und zum Zeichnen vorbereitet, also an JgraphT weitergereicht. Dabei nutzt isq funktionen des util packages. 
+In isq werden die Graph Familien, Zusammenhänge aus einer XML gelesen und zum Zeichnen vorbereitet, also an JGraphT weitergereicht. Dabei nutzt isq Funktionen des util Packages. 
 
 \subsection{ISGCI-Package sax}
-Das Package sax, beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter um ein XML Dokument aus einem SAX (Simple API for XML) event stream zu erzeugen. Diese Klasse wird vom XML parser benötigt.
+Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter um ein XML Dokument aus einem SAX (Simple API for XML) event stream zu erzeugen. Diese Klasse wird vom XML Parser benötigt.
 
 
 
