@@ -18,13 +18,27 @@
 \usepackage{fancyhdr}
 \usepackage{multirow}
 \usepackage{color}
+\usepackage{hyperref}
 
 
 
 
 \begin{document}
 
+\section{Änderungsverlauf}
+\begin{tabular}{|c|c|c|}\hline
+ \textbf{Version}&\textbf{Datum}&\textbf{Beschreibung der \"Anderung}\\\hline
+ 0.4&26.05.2013&Arbeitsversion\\\hline
+ %1.0&28.05.2013&Basissversion\\\hline
+\end{tabular}
+\section{Einleitung}
+\subsection{Designziele}
+%copy pasta aus dem SRS
 
+\subsection{Referenzen}
+http://www.graphclasses.org/help.html
+
+\subsection{\"Ubersicht}  
 \section{Funktionen des bestehenden Systems}
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
@@ -50,11 +64,39 @@ Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen linken Mau
 
 \subsection{Graph classes}
 \subsection{Problems}
+\emph{Der Menüpunkt Problems stellt Funktionen zur Verfügung mit denen man untersuchen kann ob und in welcher Laufzeit ein Graphproblem auf den verschiedenen Graphklassen gelöst ist} \\
+\href{http://www.graphclasses.org/help.html\#problems}{http://www.graphclasses.org/help.html\#problems}
+\paragraph{Boundary/Open Classes} \ \\
+Wird benutzt um herauszufinden, welche Probleme in P oder in NP liegen und wo die grenzen sind. Man kann mit dieser Funktion neue Graphen zeichnen.
+Implementierte Probleme:
+\begin{itemize}
+\item Recognition
+\item Treewidth
+\item Cliquewidth
+\item Cliquewidth expression
+\item Weighted independend set
+\item Independend set
+\item Clique
+\item Domination
+\item Colourability
+\item Clique cover
+\item 3-Colourability
+\item Cutwidth
+\item Hamilton circle
+\item Hamilton path
+\item Weighted feedback vertex set
+\item Feedback vertex set
+\end{itemize}
+\paragraph{Colour for Problem} \ \\
+Zeigt an in welcher Laufzeit ein Algo in der jeweiligen Klasse zu lösen ist.  Bei einigen Algos gibt es spezielle Regeln, wie die Einfärbung funktioniert. Beschreibung siehe \href{http://www.graphclasses.org/help.html\#problemdefs}{http://www.graphclasses.org/help.html\#problemdefs} \\
+Implementierte Probleme:
+Siehe oben.
+
 \subsection{Help}
 \subsection{Rechtsklick auf gezeichneten Knoten}
 \subsection{Information Fenster}
 
-\section{wichtige Klassen des bestehenden Systems}
+\section{Wichtige Klassen des bestehenden Systems}
 \subsection{ISGCI-Package JGraphT}
 
 \paragraph{Allgemein:}\ \\
@@ -184,6 +226,19 @@ In isq werden die Graph Familien, Zusammenhänge aus einer XML gelesen und zum Z
 \subsection{ISGCI-Package sax}
 Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter um ein XML Dokument aus einem SAX (Simple API for XML) event stream zu erzeugen. Diese Klasse wird vom XML Parser benötigt.
 
+
+
+%%ab hier wirds ernst
+\section{Vorgeschlagene Software Architektur}
+\subsection{Übersicht}
+%evtl unnötig
+\section{Hardware/Software Mapping}
+\subsection{Management der Persistenten Daten}
+\subsection{Randbedingungen}
+
+
+%Fabis Reich
+\section{Integrationtests}
 
 
 
