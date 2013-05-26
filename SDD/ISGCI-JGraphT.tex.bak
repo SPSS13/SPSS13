@@ -43,14 +43,14 @@ http://www.graphclasses.org/help.html
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
 \subsection{View}
-\emph{View stellt beim Klicken auf den Menüreiter "`View"'\ in der Navigationsleiste verschiedene Funktionen zur Optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "`unproper"' (müsste eigentlich improper heißen) inclusions.}\\
+\emph{View stellt beim klicken auf den Menüreiter "`View"'\ in der Navigationsleiste verschiedene Funktionen zur Optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "`unproper"' (müsste eigentlich improper heißen) inclusions.}\\
 
 \paragraph{Search in drawing...}\ \\
-Beim Auswählen des Punktes "`search in drawing"' durch einen Mausklick, öffnet sich das Fenster "`Search for a graphclass"'. Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das Drücken von Search gesucht werden. Dabei wird stets nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch "`cancel"' kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "`search"' nach einer aus der Liste gewählten Klasse, dann wird der Canvas so verschoben, dass die Graphklasse sichtbar ist.
+Beim Auswählen des Punktes "`search in drawing"' durch einen linken Mausklick, öffnet sich das Fenster "`Search for a graphclass"'. Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das Drücken von Search gesucht werden. Dabei wird stets nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch "`cancel"' kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "`search"' nach einer aus der Liste gewählten Klasse, dann wird der Canvas so verschoben, dass die Graphklasse sichtbar ist.
 
 
 \paragraph{Naming preference...}\ \\
-Beim Auswählen des Punktes "`Naming preference.."', durch einen Mausklick, öffnet sich das Fenster "`Naming preference"'. Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. (Eigenschaft der Radio-Buttons) \\
+Beim Auswählen des Punktes "`Naming preference.."', durch einen linken Mausklick, öffnet sich das Fenster "`Naming preference"'. Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. (Eigenschaft der Radio-Buttons) \\
 \begin{itemize}
 	\item[\bf{Basic}] e.g. threshold
 	\item[\bf{Forbidden subgraphs}] e.g. ($P_4,2K_2,C_4$)-free
@@ -59,42 +59,14 @@ Beim Auswählen des Punktes "`Naming preference.."', durch einen Mausklick, öff
 Das Auswählen einer dieser drei Optionen und das bestätigen durch "`OK"', hat eine Umbenennung aller Nodes im Drawing zur angegebenen Konvention zur Folge.
 
 \paragraph{Mark unproper(improper) inclusions}\ \\
-Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen Mausklick, wird dieser Menüpunkt mittels eines ein- / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "`unproper inclusions"' durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim Deaktivieren dieser Funktion verschwindet dieser graue Pfeil.
+Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen linken Mausklick, wird dieser Menüpunkt mittels eines ein- / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "`unproper inclusions"' durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim Deaktivieren dieser Funktion verschwindet dieser graue Pfeil.
 
 
 \subsection{Graph classes}
-\emph{Der Reiter "`Graph classes"' in der Menüleiste stellt verschiedene Funktionen zum Finden von Klassen anhand derer Eigenschaften und Browsen durch die Graph-Klassen-Datenbank zur Verfügung, die im Folgenden näher erläutert werden.}
-Bevor folgende Schritte getan werden können, muss der bereits genannte Reiter per Mausklick (egal ob rechts oder links) ausgewählt(geöffnet) werden.\\
-Ein wichtiger Punkt ist, dass egal welche Fenster geöffnet sind, der Benutzer in keinem Fenster blockiert wird, auch wenn er über dieses bereits ein anderes geöffnet hat, dabei bleiben diese im Vordergrund, wenn das Hauptfenster angewählt wird. Dies ist für den Benutzer sehr hilfreich, da er sich keine Informationen zur aktuellen Einstellung (z.B. im "`Browse Database"') merken muss und kurzzeitig nach etwas anderem schauen kann.
-\paragraph{Browse Database}\ \\
-Durch Klicken auf die Auswahlmöglichkeit "`Browse Database"' öffnet sich das Fenster "`Graph Class Information"'. Nun hat man die Möglichkeit Graph-Klassen anzuwählen, um über diese Informationen zur Komplexität der Probleme zu Graphklassen zu erhalten (Eine Tabelle mit 2 Spalten: Problem und Complexity; nicht alphabetisch geordnet). Außerdem steht ein Filter zu Verfügung, mit dem man durch Eingeben des Namens oder nur ein Teil davon, dabei ist egal, an welcher Stelle er im Namen der Graph-Klasse steht, die Informationen zu Klassen, welche die Eingabe beinhalten, angezeigt bekommt.\\
-Zu diesen Informationen gehören allerdings nicht nur die Komplexität von Problemen. Unter der bereits genannten Tabelle sind 3 weitere, nebeneinanderstehende Listen mit gleicher Breite angeordnet. Diese Listen beinhalten (von links nach rechts erklärt) alle Superklassen, Äquivalenzklassen und Subklassen (zur in der ersten Liste ausgewählten Graphklasse). Durch Verändern der Breite und Höhe des Fensters verändert sich dynamisch die Größe der Listen. Während sich bei der Tabelle nur die Breite verändert, da diese eine feste Anzahl an Zeilen hat, verändert sich die Höhe der Listen ebenfalls relativ zur Fenstergröße. Die Breite der "`Graph Class"'-Liste erstreckt sich über die Breite des gesamten Fensters(entsprechend der 3 Listen im unteren Teil zusammen). In jeder Liste sind die Klassen alphabetisch angeordnet (Groß- vor Kleinbuchstaben; Sonderzeichen werden ignoriert), sodass man seine gewünschte Graph-Klasse auch darüber filtern kann. Wichtig ist, dass in jeder der 4 Listen, in denen die aktuellen Graph-Klassen bezüglich ihrer Eigenschaft zur Auswahl, angewählt werden können, sodass man sich durch die Zusammenhänge der Klassen "`klicken"' kann. Zu beachten ist, dass durch einfaches Anwählen die Klassen in den unteren 3 Listen nur markiert werden und erst deren Informationen nach einem Doppelklick(Linksklick) angezeigt werden, während man durch einfaches Anwählen einer Klasse in der oberen Liste, sofort dessen Informationen zu entsprechenden Problemen erhält (ohne Doppelklick).\\
-Ganz unten im Fenster werden zentriert verschiedene Buttons angezeigt:
-\begin{itemize}
-\item[Class details:] Ist der 1. Button (von links). Durch einfachen Linksklick wird die entsprechende Detail-Seite im Standard-Browser geöffnet und zeigt ausführlichere Informationen zur aktuell ausgewählten Graph Klasse der oberen Liste im Fenster. Dazu gehören "`References, Related classes, Inclusions, Problems(alphabetisch geordnet)"'
-\item[Inclusion info:] Ein Linksklick auf diesen Button (2.) öffnet ein weiteres (kleines) Fenster("`Relation"'), welches Informationen zu Inklusionen zu anderen Graphklassen anzeigt. Im unteren Teil dieses Fensters befinden sich 3 Buttons:
-\begin{itemize}
-\item View references: öffnet eine Seite im Standard-Browser mit Referenzen auf Literatur bezüglich der angegebenen Inklusion(en) ("`Relation"').
-\item Draw: Zeichnet im Hauptfenster("`ISGCI"') einen Graphen inklusiv der Inklusionen zu den aktuell im Relation-Fenster angezeigten Inklusion.
-\item OK: Einfacher Button, dessen Betätigung zur Schließung des Relation-Fensters führt.
-\end{itemize}
-\item[Draw:] Durch Betätigung dieses Buttons(3.) wird ein weiteres Fenster ("`Select Graph Classes"') geöffnet, welches wie im vorigen einen analogen Filter zur Limitierung der angezeigten Klassen in der darunter befindlichen Liste hervorruft. In diesem Fenster steht im Gegensatz zum vorigen Fenster ("`Graph Class Information"') nur eine Liste, welche als Standard-Auswahl immer die Graph-Klasse des vorigen Fensters ausgewählt hat, damit der Benutzer nicht erneut die Klasse suchen muss, welche er im Hauptfentser ("`ISGCI"') anzeigen möchte. Der Benutzer hat zusätzlich über zwei Checkboxen, die sich unter der Liste befinden, die Möglichkeit, zu der ausgewählten Graph-Klasse auch deren Super- bzw. Subklasse durch Aktivieren der Checkboxen für die jeweiligen Klassen mit in dem zu zeichnenden Graphen anzuzeigen. \\ Im unteren Teil dieses Fenster befinden sich der Button "`New drawing"' über den der Benutzer seine Auswahl bestätigen kann, sich das Fenster schließt und im Hauptfenster das Ergebnis (den gezeichneten Graphen mit/ohne seine Super-/Subklassen) betrachten kann. Rechts neben dem eben genannten Button befindet sich ein "`Cancel"'-Button, welcher das Fenster schließt, ohne dass sonst etwas im Programm geschieht und der Benutzer wird zu dem Fenster zurückgeführt, von dem aus er dieses geöffnet hat ("`Graph Class Information"').
-\item[Close:] Wenn der User diesen Button (ganz rechts; 4.) klickt (Linksklick), wird das Fenster "`Graph Class Information"' geschlossen und der Benutzer gelangt zum Hauptfenster "`ISGCI"' zurück, in dem die letzte ausgewählte Zeichnung noch angezeigt wird.
-\end{itemize}
-\paragraph{Find Relation...} \ \\
-Über diesen Auswahlpunkt öffnet sich durch Klicken (rechts/links) das Fenster "`Find Relation"'. In diesem hat der Benutzer die Möglichkeit über 2 untereinander dargestellte Listen, welche alle Graph-Klassen beinhalten, oder über einen Filter (je Liste), zwei Graph-Klassen anzuwählen und sich über einen darunter befindlichen Button "`Find Relation"' deren Verbindung anzusehen. Die Filter Funktion ist dabei analog zu der Filter-Funktion in dem Auswahlpunkt "`Browse Database"' umgesetzt. Nach Betätigung des eben genannten "`Find relation"' Buttons öffnet sich ein weiteres Fenster, welches nun Informationen zur Relation der angewählten Klassen anzeigt (wird im links oben auf dem Bildschirm geöffnet). Die anzeigten Verbindungen der beiden Klassen werden begründet, in welchem Zusammenhang sie stehen und nicht nur dass sie es tun ("`by definition, forbidden subgraphs ..."'). Dabei zu beachten ist, dass sich die Größe des Fenster an der Menge des zu anzeigenden Textes orientiert, sodass das Fenster möglich wenig Platz auf dem Bildschirm einnimmt. Zusätzlich zu diesen Relation-Informationen kann man über den Button "`View references"' (links unten im Fenster) Referenzen zu Literatur über die graphclasses.org - Homepage anzeigen lassen, über einen weiteren Button (rechts von "`View references"') kann der Benutzer diese Relation im Hauptfenster zeichnen lassen (mit dazwischenliegenden Klassen), analog zur "`Draw"'-Funktion des bereits erklärten Auswahlpunktes. Ein dritter Button "`OK"' (rechts von "`Draw"') führt (ebenfalls analog) zur Schließung des "`Relation"' Fensters und der Benutzer kommt zum "`Parent-Fenster"' zurück.\\
-Rechts neben dem Button "`Find relation"' befindet sich der Button "`Close"' (beide ganz unten im Fenster horizontal zentriert), der ebenfalls analog zur schon bereits genannten Funktion dieses Fenster schließt und zum Hauptfenster zurückgelangt.
-
-\paragraph{Draw...}\ \\
-Dieser letzte Auswahlpunkt im Reiter "`Graph classes"' der Menüleiste führt zu dem exakt identischen Fenster, wie beim Klicken des "`Draw"' Buttons über den Auswahlpunkt "`Browse Database"' (nur eben nicht über diesen Umweg), falls der Benutzer schon weiß, welche Klassen er gezeichnet bekommen möchte. Dieses Fenster hat den selben Namen "`Select Graph Classes"' und beinhaltet ebenso einen Filter und eine Liste zu allen Graph-Klassen, in dem die gewünschte Klassen angewählt und mit/ohne deren Super-/Subklassen gezeichnet werden kann. Mit der Bestätigung über den Button "`New drawing"' schließt sich das Fenster und die Auswahl wird in dem Hauptfenster graphisch dargestellt.
-
-
-
 \subsection{Problems}
 \emph{Der Menüpunkt Problems stellt Funktionen zur Verfügung mit denen man untersuchen kann ob und in welcher Laufzeit ein Graphproblem auf den verschiedenen Graphklassen gelöst ist} \\
 \href{http://www.graphclasses.org/help.html\#problems}{http://www.graphclasses.org/help.html\#problems}
 \paragraph{Boundary/Open Classes} \ \\
-Wird benutzt um herauszufinden, welche Probleme in P oder in NP liegen und wo die grenzen sind. Man kann mit dieser Funktion neue Graphen zeichnen.
 Implementierte Probleme:
 \begin{itemize}
 \item Recognition
@@ -115,9 +87,26 @@ Implementierte Probleme:
 \item Feedback vertex set
 \end{itemize}
 \paragraph{Colour for Problem} \ \\
-Zeigt an in welcher Laufzeit ein Algo in der jeweiligen Klasse zu lösen ist.  Bei einigen Algos gibt es spezielle Regeln, wie die Einfärbung funktioniert. Beschreibung siehe \href{http://www.graphclasses.org/help.html\#problemdefs}{http://www.graphclasses.org/help.html\#problemdefs} \\
+Zeigt an in welcher Laufzeit ein Algo in der jeweiligen Klasse zu lösen ist. Beschreibung siehe \href{http://www.graphclasses.org/help.html\#problemdefs}{http://www.graphclasses.org/help.html\#problemdefs} \\ Bei einigen Algos gibt es spezielle Regeln, wie die einfärbung Funktioni
 Implementierte Probleme:
-Siehe oben.
+\begin{itemize}
+\item Recognition
+\item Treewidth
+\item Cliquewidth
+\item Cliquewidth expression
+\item Weighted independend set
+\item Independend set
+\item Clique
+\item Domination
+\item Colourability
+\item Clique cover
+\item 3-Colourability
+\item Cutwidth
+\item Hamilton circle
+\item Hamilton path
+\item Weighted feedback vertex set
+\item Feedback vertex set
+\end{itemize}
 
 \subsection{Help}
 \subsection{Rechtsklick auf gezeichneten Knoten}
