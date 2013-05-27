@@ -46,11 +46,11 @@ Beschreibung der aus dem GUI ableitbaren Funktionen
 \emph{View stellt beim klicken auf den Menüreiter "`View"'\ in der Navigationsleiste verschiedene Funktionen zur Optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "`unproper"' (müsste eigentlich improper heißen) inclusions.}\\
 
 \paragraph{Search in drawing...}\ \\
-Beim Auswählen des Punktes "`search in drawing"' durch einen Mausklick, öffnet sich das Fenster "`Search for a graphclass"'. Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das Drücken von Search gesucht werden. Dabei wird stets nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch "`cancel"' kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "`search"' nach einer aus der Liste gewählten Klasse, dann wird der Canvas so verschoben, dass die Graphklasse sichtbar ist.
+Beim Auswählen des Punktes "`search in drawing"' durch einen linken Mausklick, öffnet sich das Fenster "`Search for a graphclass"'. Aus einer Liste kann in diesem Feld eine Graphklasse, aus allen Graphklassen ausgewählt werden und durch das Drücken von Search gesucht werden. Dabei wird stets nur die Graphklassen angezeigt, die im Drawing auffindbar sind. Durch "`cancel"' kann der Suchvorgang abgebrochen werden. Sucht man durch Drücken auf "`search"' nach einer aus der Liste gewählten Klasse, dann wird der Canvas so verschoben, dass die Graphklasse sichtbar ist.
 
 
 \paragraph{Naming preference...}\ \\
-Beim Auswählen des Punktes "`Naming preference.."', durch einen Mausklick, öffnet sich das Fenster "`Naming preference"'. Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. (Eigenschaft der Radio-Buttons) \\
+Beim Auswählen des Punktes "`Naming preference.."', durch einen linken Mausklick, öffnet sich das Fenster "`Naming preference"'. Dieses stellt drei Möglichkeiten durch Radio-Buttons zur Auswahl. Dabei kann immer nur ein Radio-Button aktiv sein. (Eigenschaft der Radio-Buttons) \\
 \begin{itemize}
 	\item[\bf{Basic}] e.g. threshold
 	\item[\bf{Forbidden subgraphs}] e.g. ($P_4,2K_2,C_4$)-free
@@ -59,7 +59,7 @@ Beim Auswählen des Punktes "`Naming preference.."', durch einen Mausklick, öff
 Das Auswählen einer dieser drei Optionen und das bestätigen durch "`OK"', hat eine Umbenennung aller Nodes im Drawing zur angegebenen Konvention zur Folge.
 
 \paragraph{Mark unproper(improper) inclusions}\ \\
-Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen Mausklick, wird dieser Menüpunkt mittels eines ein- / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "`unproper inclusions"' durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim Deaktivieren dieser Funktion verschwindet dieser graue Pfeil.
+Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen linken Mausklick, wird dieser Menüpunkt mittels eines ein- / ausblendbaren Häkchen als aktiv / inaktiv gekennzeichnet. Wird dieser Menüpunkt als aktiv gekennzeichnet, so werden alle "`unproper inclusions"' durch verblasste (geringere Opacity, Grauwert anstelle von Schwarz) Pfeile an einer Edge dargestellt. Wobei der Pfeil auf die Graphklasse mit unproper inclusions zeigt. Beim Deaktivieren dieser Funktion verschwindet dieser graue Pfeil.
 
 
 \subsection{Graph classes}
@@ -67,7 +67,6 @@ Beim Auswählen des Punktes "`Mark unproper inclusions"', durch einen Mausklick,
 \emph{Der Menüpunkt Problems stellt Funktionen zur Verfügung mit denen man untersuchen kann ob und in welcher Laufzeit ein Graphproblem auf den verschiedenen Graphklassen gelöst ist} \\
 \href{http://www.graphclasses.org/help.html\#problems}{http://www.graphclasses.org/help.html\#problems}
 \paragraph{Boundary/Open Classes} \ \\
-Wird benutzt um herauszufinden, welche Probleme in P oder in NP liegen und wo die grenzen sind. Man kann mit dieser Funktion neue Graphen zeichnen.
 Implementierte Probleme:
 \begin{itemize}
 \item Recognition
@@ -88,59 +87,29 @@ Implementierte Probleme:
 \item Feedback vertex set
 \end{itemize}
 \paragraph{Colour for Problem} \ \\
-Zeigt an in welcher Laufzeit ein Algo in der jeweiligen Klasse zu lösen ist.  Bei einigen Algos gibt es spezielle Regeln, wie die Einfärbung funktioniert. Beschreibung siehe \href{http://www.graphclasses.org/help.html\#problemdefs}{http://www.graphclasses.org/help.html\#problemdefs} \\
+Zeigt an in welcher Laufzeit ein Algo in der jeweiligen Klasse zu lösen ist. Beschreibung siehe \href{http://www.graphclasses.org/help.html\#problemdefs}{http://www.graphclasses.org/help.html\#problemdefs} \\ Bei einigen Algos gibt es spezielle Regeln, wie die einfärbung Funktioni
 Implementierte Probleme:
-Siehe oben.
+\begin{itemize}
+\item Recognition
+\item Treewidth
+\item Cliquewidth
+\item Cliquewidth expression
+\item Weighted independend set
+\item Independend set
+\item Clique
+\item Domination
+\item Colourability
+\item Clique cover
+\item 3-Colourability
+\item Cutwidth
+\item Hamilton circle
+\item Hamilton path
+\item Weighted feedback vertex set
+\item Feedback vertex set
+\end{itemize}
 
 \subsection{Help}
-<<<<<<< HEAD
-\paragraph{Small Graphs}\ \\
-Beim Auswählen des Punktes Small Graph wird der URL http://www.graphclasses.org/smallgraphs.html aufgerufen.\\
-\paragraph{Help}\ \\
-Beim Auswählen des Punktes Help wird der URL www.graphclasses.org/help.html aufgerufen.\\
-\paragraph{About}\ \\
-Beim Auswählen des Punktes About öffnet sich ein Fenster mit dem Namen "About ISGCI". Darin steht, für was ISGCI steht (Information System on Graph Classes and their Inclusions). Es ist außerdem die Versionsnummer aufgeführt, das es von H.N. de Ridder et al. geschrieben wurde und das es das JGraph Library nutzt. Es wird weiterhin aufgeführt wie viele Klassen und Inklusionen in der Datenbank sind, und wann diese erstellt wurde. Es ist ein Link zur Website angegeben. Um das Fenster zu schließen, kann man auf einen Knopf drücken, auf dem "OK" steht.\\
 \subsection{Rechtsklick auf gezeichneten Knoten}
-=======
-\subsection{Zeichenfläche/Kontextmenüs}
-\begin{itemize}
-\item Fenstergröße veränderbar
-\item bei leerem Fenster: keine Interaktion möglich (über die Navigationsleiste natürlich schon) - Rechts-/Links-Klick ohne Auswirkungen.
-\item Fenstergröße und Position(absolut) verändert sich durch neues Zeichnen nicht automatisch. (Ausnahme: falls der alte Sichtbereich nicht mehr im Sichtbereich der neuen Zeichnung liegt, wird die nächst mögliche Ansicht gewählt.)
-\item Klicks in den leeren Raum haben keine Auswirkungen.
-\item Kontextmenü (Rechtsklick auf Kanten/Knoten):
-\begin{itemize}
-\item Knoten: 
-\begin{itemize}
-\item Information:
-\begin{itemize}
-\item Es öffnet sich ein neues Fenster (Graph Class Information). Aktuell ausgewählt ist die Graphen-Klasse, über die man Information angeklickt hat. Es ist möglich andere Klassen auszuwählen.
-\item Filter: Über ein Filter-Eingabefeld kann man bestimmte Graph-Klassen suchen und auswählen.
-\item Von der ausgewählten Klasse werden folgende Dinge gelistet: Probleme (Problem), die bei dieser Graph-Klasse vorkommen, und jeweils deren zugehörige Komplexität (Complexity); Superklassen (Superclasses); Äquivalente Klassen (Equivalent Classes); Unterklassen (Subclasses).
-\item Über Doppelklick auf eine Klasse in einer der Listen Superklassen, Äquivalente Klassen oder Unterklassen wird die aktuell ausgewählte Klasse neu gesetzt und die angezeigten Informationen entsprechend angepasst.
-\item Class-details-Button:\\ Standard-Browser wird geöffnet. Weiterleitung zu graphclasses.org - Detailseite zur aktuell ausgewählten Graph-Klasse.
-\item Inclusion-info-Button: \\
-Funktioniert nur, falls eine Klasse in Superklassen, Äquivalenten Klassen oder Unterklassen markiert (ausgewählt) ist.\\
-Es öffnet sich ein Pop-Up, in dem die Relation zwischen der aktuell ausgewählten Graph-Klasse und der unten markierten Klasse dargestellt wird (Zusammenhang - Mengenbeziehungen).\\
-Es sind drei Buttons zu finden: View references - Öffnet im Standardbrowser die Referenz-Seite von GraphClasses.org; Draw - Zeichnet alle in der Relation beteiligten Graph-Klassen und deren Zusammenhang; OK - Pop-Up schließen.\\
-Während Pop-Up offen ist, wird die restliche Anwendung blockiert.
-\item Draw-Button:\\ Ruft Draw-Pop-Up auf. Gleiches Pop-Up wie unter Reiter "`Graph classes"'-"`Draw"'.
-\item Close-Button: \\Schließt "`Graph Class Information"'-Fenster.
-\end{itemize}
-\item Change Name:\\
-Im Kontextmenü erscheint eine weitere Eben, in der alle äquivalenten Klassen zu der jeweiligen Klasse aufgelistet werden. Durch anklicken einer dieser Klassen, wird der Name des Knoten entsprechend geändert.
-\end{itemize}
-\item Kanten:
-\begin{itemize}
-\item Information:\\
-Klickt man mit Rechtsklick auf eine Kante, dann auf "`Information"', erscheint ein Pop-Up, das die Relation zwischen den beiden verbundenen Knoten zeigt (gleiches Pop-Up bei Knoten/"`Information"'/"`Inclusion info"' - vgl. oben)
-\end{itemize}
-\end{itemize}
-\item Knoten-Position: Knoten können verschoben werden (halten Linksklick, ziehen). Da die Knoten Nach einem Algorithmus gezeichnet wurden, der hierarchisch alle Ebenen durchgeht, bleiben Kanten, die von dem verschobenen Knoten ausgehen/ankommen in der Ebene darunter/darüber an einem bestimmten Punkt oder Knoten fixiert.
-\item Pfeile: "`normale"', schwarze Pfeile deuten eine Inklusion in Richtung der Pfeilspitze an. Befindet sich am anderen Ende des Pfeiles noch entgegengesetzt eine graue Pfeilspitze, bedeutet dass, dass die eine Graph-Klasse nicht notwendigerweise eine Teilmenge der anderen ist - es könnte auch Gleichheit herrschen (Unbekannt/Datenbank-Lücke). 
-\end{itemize}
-
->>>>>>> 9d5e15224ccfdd44d8c4cd4ede1e53cf6c7a032b
 \subsection{Information Fenster}
 
 \section{Wichtige Klassen des bestehenden Systems}
