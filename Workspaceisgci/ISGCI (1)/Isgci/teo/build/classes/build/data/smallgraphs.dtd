@@ -1,0 +1,188 @@
+<!-- $Header: /home/ux/CVSROOT/teo/data/smallgraphs.dtd,v 1.22 2011/10/11 07:12:18 ux Exp $ -->
+
+<!ELEMENT SMALLGRAPHS (simple*, hmt-grammar*, family*, configuration*,
+   fakefamily*, link*, incl*)>
+
+<!-- Defines a simple graph; name defines name of the simple graph that is in
+  - the output of ISGCI, it should not contain commas.
+ -->
+<!ELEMENT simple (nodes, edges, alias*, link, expl?, complement)>
+<!ATTLIST simple name CDATA #REQUIRED>
+
+<!-- Defines a complement of the current graph/family; name defines name of the
+  - complement graph/family that is in the output of ISGCI, it should not
+  - contain commas.  If link to the complement is the same as the link to the
+  - current graph/family, it needn't be specified.
+ -->
+<!ELEMENT complement (alias*, link?, expl?)>
+<!ATTLIST complement name CDATA #REQUIRED>
+
+<!-- Defines a configuration; name defines name of the configuration, it should
+  - not contain commas.
+ -->
+<!ELEMENT configuration (nodes, edges, (nonedges|optedges), contains*, (induced|induced1)*, link, expl?, complement)>
+<!ATTLIST configuration name CDATA #REQUIRED>
+
+<!-- Defines a family of graphs; name defines name of the family, it should not
+  - contain commas.
+ -->
+<!ELEMENT family (alias*, (
+      ((contains|induced-rest|induced-rest1|induced|induced1)*)|
+      (smallmember*, (hmt-grammar|use-grammar),(induced|induced1)*)|
+      subfamily+
+   ), link, expl?, complement)>
+<!ATTLIST family type CDATA #REQUIRED>
+<!ATTLIST family name CDATA #REQUIRED>
+
+<!-- count gives number of nodes in the current graph/configuration. -->
+<!ELEMENT nodes EMPTY>
+<!ATTLIST nodes count CDATA #REQUIRED>
+
+<!-- Gives a semicolon-separated set of edges of the current
+  - graph/configuration. Each edge must look as follows: "a - b", where a,b are
+  - numbers of nodes (numbering starts with 0).
+ -->
+<!ELEMENT edges (#PCDATA)>
+
+<!-- Gives a semicolon-separated set of nonedges of the current configuration.
+  - Each nonedge should look as follows: "a - b", where a, b are numbers of
+  - nodes (numbering starts with 0).
+ -->
+<!ELEMENT nonedges (#PCDATA)>
+
+<!-- Gives a semicolon-separated set of optional edges of the current
+  - configuration. Each optedge should look as follows: "a - b", where a, b are 
+  - numbers of nodes (numbering starts with 0).
+ -->
+<!ELEMENT optedges (#PCDATA)>
+
+<!-- Defines a Head-Mid-Tail grammar for a family of graphs; type defines the
+  -  type of the grammar (size of extension, attachment).
+ -->
+<!ELEMENT hmt-grammar (head, mid, tail)>
+<!ATTLIST hmt-grammar type CDATA #REQUIRED>
+<!ATTLIST hmt-grammar name CDATA #IMPLIED>
+
+<!-- Says which grammar with which index is used for building elements of the
+  - family.
+ -->
+<!ELEMENT use-grammar EMPTY>
+<!ATTLIST use-grammar name CDATA #REQUIRED>
+<!ATTLIST use-grammar index CDATA #REQUIRED>
+
+<!-- Defines head in a Head-Mid-Tail grammar. -->
+<!ELEMENT head (nodes, edges, attachment)>
+
+<!-- Defines mid in a Head-Mid-Tail grammar. -->
+<!ELEMENT mid (nodes, edges, extension, attachment)>
+
+<!-- Defines tail in a Head-Mid-Tail grammar. -->
+<!ELEMENT tail (nodes, edges, extension)>
+
+<!-- Gives a comma-separated array of extension nodes in a Head-Mid-Tail
+  - grammar.
+  -->
+<!ELEMENT extension (#PCDATA)>
+
+<!-- Gives a comma-separated array of attachment nodes in a Head-Mid-Tail grammar. -->
+<!ELEMENT attachment (#PCDATA)>
+
+<!-- Gives the name of a subfamily in this UnionFamily -->
+<!ELEMENT subfamily (#PCDATA)>
+
+<!-- Gives the name of an element of contains of the current family, i.e. a
+  - smallgraph that is a member of the current family
+ -->
+<!ELEMENT contains (#PCDATA)>
+
+<!-- Gives a semicolon-separated set of smallgraphs such that
+  - 1) every element of the current family has some element of induced as an
+  -  induced subgraph,
+  - 2) every element of induced is an induced subgraph of some element of the
+  -  family.
+ -->
+<!ELEMENT induced (smallgraph*)>
+<!ELEMENT induced1 (#PCDATA)>
+
+<!-- Gives a semicolon-separated set of smallgraphs such that
+  - 1) every element of the current family not listed in contains has some
+  -  element of induced-rest as an induced subgraph,
+  - 2) every element of induced-rest is an induced subgraph of some element of
+  -  the family.
+ -->
+<!ELEMENT induced-rest (smallgraph*)>
+<!ELEMENT induced-rest1 (#PCDATA)>
+
+<!-- Gives one of a set of N names of elements of smallmembers of
+  - the current family, i.e. a smallgraph that is a member of the current
+  - family. N equals the largest size of smallgraphs + 1.
+ -->
+<!ELEMENT smallmember (#PCDATA)>
+
+<!-- Defines another name for the current graph, that can be used only in the
+  - input of ISGCI. It should not contain commas.
+ -->
+<!ELEMENT alias EMPTY>
+<!ATTLIST alias name CDATA #REQUIRED>
+
+<!-- address gives the last part of the link to the drawing of the current
+  - smallgraph that needs to be added to the initial link:
+  - "http://...isgci site.../smallgraphs.html#"
+  - relay causes the address, img and imgname to be taken from the given relay
+  - smallgraph.
+  - Either address or relay should be present in smallgraphs.xml.
+  - img is the filename of the image file for inline use in the graph class
+  - pages.
+  - imgname is the name of the graph depicted in the image, if this is
+  - different from name.
+  - img and imgname should not be used in smallgraphs.xml, they're generated.
+ -->
+<!ELEMENT link EMPTY>
+<!ATTLIST link name CDATA #IMPLIED
+   address CDATA #IMPLIED
+   relay CDATA #IMPLIED
+   img CDATA #IMPLIED imgname CDATA #IMPLIED>
+
+<!--
+  - A fakefamily is used to generate an entry at the smallgraphs page, but does
+  - not actually define a smallgraph.
+ -->
+<!ELEMENT fakefamily (alias*,link, expl)>
+<!ATTLIST fakefamily name CDATA #REQUIRED>
+
+<!-- Data for explaining the graph to the human user of the system.
+ -->
+<!ELEMENT expl (#PCDATA|xfig|p)*>
+
+<!-- XFig source code for the drawing of the current graph.
+  -  file is the name of the fig/gif file that will be generated from the code.
+ -->
+<!ELEMENT xfig (#PCDATA)>
+<!ATTLIST xfig file CDATA #REQUIRED>
+
+<!-- An subgraph relation. Do not use in the input file.
+  -->
+<!ELEMENT incl EMPTY>
+<!ATTLIST incl super CDATA #REQUIRED sub CDATA #REQUIRED>
+
+<!-- *******************************************************************
+  - html codes to prevent the parser from spitting out uninteresting errors.
+ -->
+<!ELEMENT smallgraph (#PCDATA)>
+<!ELEMENT p ANY>
+<!ELEMENT ul ANY>
+<!ELEMENT li ANY>
+<!ELEMENT i ANY>
+<!ELEMENT sub ANY>
+<!ELEMENT sup ANY>
+<!ELEMENT br EMPTY>
+<!ELEMENT img ANY>
+<!ATTLIST img src CDATA #IMPLIED>
+<!ELEMENT table ANY>
+<!ELEMENT tr ANY>
+<!ELEMENT td ANY>
+<!ATTLIST td valign CDATA #IMPLIED>
+<!ELEMENT a ANY>
+<!ATTLIST a href CDATA #IMPLIED>
+
+<!-- EOF -->

@@ -57,6 +57,9 @@ public class ISGCIMainFrame extends JFrame
     protected JMenuItem miCut, miCopy, miPaste, miDelete, miSelectAll;
     protected JMenu miOpenProblem, miColourProblem;
     protected JMenuItem miSmallgraphs, miHelp, miAbout;
+    //Selected MenuItems
+    protected JMenuItem miToggleNeighbours;
+    
 
     // This is where the drawing goes.
     protected JScrollPane drawingPane;
@@ -215,7 +218,7 @@ public class ISGCIMainFrame extends JFrame
      */
     protected JMenuBar createMenus() {
         JMenuBar mainMenuBar = new JMenuBar();
-        JMenu fileMenu, editMenu, viewMenu,  graphMenu, helpMenu, problemsMenu;
+        JMenu fileMenu, editMenu, viewMenu,  graphMenu, helpMenu, problemsMenu, selectedMenu;
         JMenuItem menu;
 
         fileMenu = new JMenu("File");
@@ -238,6 +241,12 @@ public class ISGCIMainFrame extends JFrame
         menu.setEnabled(false);
         viewMenu.add(menu); */
         mainMenuBar.add(viewMenu);
+        
+        //Create new Menu to add to the TopMenuBar named Selected
+        selectedMenu = new JMenu("Selected");
+        // Add MenuItems
+        selectedMenu.add(miToggleNeighbours = new JMenuItem("Toggle Neighbours"));
+        mainMenuBar.add(selectedMenu);
 
         graphMenu = new JMenu("Graph classes");
         miGraphClassInformation = new JMenuItem("Browse Database");
