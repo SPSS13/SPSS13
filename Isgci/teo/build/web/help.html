@@ -1,0 +1,237 @@
+<html>
+<title>ISGCI Help</title>
+<body bgcolor=white>
+
+<a name="contents"></a><h2>Contents</h2>
+<menu>
+   <li><a href="#main">Main window</a></li>
+   <li><a href="#file">File menu</a></li>
+   <li><a href="#view">View menu</a></li>
+   <li><a href="#classes">Graph classes menu</a></li>
+   <li><a href="#problems">Problems menu</a></li>
+   <li><a href="#problemdefs">Problem definitions</a></li>
+   <li><a href="#filter">Filtering lists of graph classes</a></li>
+</menu>
+<br>
+
+<a name="main"></a><h2>Main window</h2>
+   Inclusion diagrams are drawn here. Superclasses are drawn above their
+   subclasses, with a directed arrow going from superclass to subclass. If
+   ISGCI has no information indicating that an inclusion is proper, a grey
+   arrowhead is drawn at the superclass end of the arrow. For the meaning of
+   the colours, see <a href="#problemdefs">Problem definitions</a>.<br>
+   =&gt; Dragging a graph class will move it.<br>
+   =&gt; Right-click on a graph class or on an edge will display a menu for
+   the class or inclusion.<br><br>
+   <a href="#contents">Back to contents</a>
+
+<a name="file"></a><h2>File menu</h2>
+   <dl>
+      <dt>New window</dt>
+	 <dd>Open a new, independent ISGCI window.</dd>
+      <dt>Export drawing...</dt>
+	 <dd>Export the current drawing as an Encapsulated Postscript (EPS),
+	 Structured Vector Graphics (SVG) or GraphML file.<br/>
+	 A Postscript file can be included directly in your papers. Papersize,
+	 scaling and colour or black-and-white print can be selected.<br/>
+	 An SVG file cannot be included directly in a LaTeX paper, but it can
+	 be manipulated by many drawing programs, allowing you to e.g. add
+	 classes.<br/>
+	 A GraphML file contains a list of classes and the relations between
+	 them, but no drawing.<br/>
+	 </dd>
+      <dt>Exit</dt>
+	 <dd>Close all windows and exit ISGCI.</dd>
+   </dl>
+   <a href="#contents">Back to contents</a>
+
+<a name="view"></a><h2>View menu</h2>
+   <dl>
+      <dt>Search...</dt>
+	 <dd>Centers the drawing on a graph class that can be selected from a
+	 list of all displayed classes.</dd>
+   </dl>
+   <dl>
+      <dt>Naming preference</dt>
+	 <dd>Select the prefered name for classes in inclusion diagrams. A
+	 class can be defined in different ways and accordingly have
+	 different names. This menu item will popup a dialogue box that
+	 allows you to select the prefered name for classes that have more
+	 than one name. The options are:
+	 <ul>
+	    <li><em>Basic</em>. Any name that does not qualify as one of the
+	    other preferences.</li>
+	    <li><em>Forbidden subgraphs</em>. Characterization by forbidden
+	    subgraphs.</li>
+	    <li><em>Derived</em>. Characterization by set operations
+	    (intersect, union, complement) on (an)other graph class(es).</li>
+	 </ul></dd>
+   </dl>
+   <dl>
+      <dt>Mark unproper inclusions</dt>
+	 <dd>When checked, inclusions that are not known to be proper are marked by a grey arrowhead at the superclass end of the arrow.</dd>
+   </dl>
+   <a href="#contents">Back to contents</a>
+
+
+<a name="classes"></a><h2>Graph classes menu</h2>
+   <dl>
+      <dt>Browse database</dt>
+	 <dd>Browse the database by class name. The top half of the dialogue
+	 box display a list of classes.  The <a href="#filter">Filter
+	 box</a> can be used to limit the display of classes.  Classes are
+	 sorted alphabetically, where capitals come before lower case, and
+	 special characters are ignored for the sorting order. Clicking on a
+	 class will select it and display information in the lower half of
+	 the window.<br> The information displayed is the complexity on the
+	 current graph class for one problem, and, below that, super-, sub-
+	 and equivalent classes.<br>
+	 =&gt; Single clicking a class in one of the three lower lists
+	 selects it and double clicking will display information on it in
+	 the current window.<br>
+	 =&gt; Clicking <em>Class info</em> will display information on the
+	 current graphclass, including the complexity of all problems.<br>
+	 =&gt; Clicking <em>Inclusion info</em> will display the inclusion
+	 between the current graph class and the selected one from one of
+	 the super/sub/equivalent lists.</dd>
+      <dt>Find relation</dt>
+	 <dd>Select a graph class in the top list, and one in the bottom
+	 list and press <em>Find relation</em> to find the relation between
+	 them.  The <a href="#filter">Filter boxes</a> can be used to limit
+	 the display of classes in both lists.  If one of the classes is a
+	 subclass of the other an inclusion path will be displayed.
+	 Otherwise the minimal common superclasses and maximal common
+	 subclasses are displayed.<br> =&gt; Clicking on an inclusion button
+	 in the result window will display references to this
+	 inclusion.</dd>
+      <dt>Draw</dt>
+	 <dd>Select one or more graph classes, whether you would like
+	 their super/subclasses to be drawn also, and click <em>New
+	 drawing</em> to create a new inclusion diagram in the current
+	 window.  The <a href="#filter">Filter box</a> can be used to limit
+	 the display of classes.
+	 </dd>
+   </dl>
+   <a href="#contents">Back to contents</a>
+
+<a name="problems"></a><h2>Problems menu</h2>
+   <dl>
+      <dt>Boundary/open classes</dt>
+	 <dd>Selecting a problem from the submenu to this item will display
+	 a dialogue box with three lists of graph classes:<br>
+	 <em>Minimal NP-complete</em> classes have a direct subclass for
+	 which the problem is not NP-complete,<br>
+	 <em>open</em> classes for which the complexity is unknown and<br>
+	 <em>maximal P</em> classes have a direct superclass for which the
+	 problem is not known to be in P.<br>
+	 =&gt; Clicking on a class will select it.<br>
+	 =&gt; Clicking <em>Draw</em> will display the border between P and
+	 NP-complete surrounding the selected graph class.<br>
+	 =&gt; Clicking <em>Class info</em> will display information on the
+	 selected graph class.</dd>
+      <dt>Colour for problem</dt>
+	 <dd>Selecting a problem from the submenu to this item will colour
+	 inclusion diagrams according to the complexity of the selected
+	 problem, see <a href="#problemdefs">problem definitions</a></dd>
+   </dl>
+   <a href="#contents">Back to contents</a>
+
+<a name="problemdefs"></a><h2>Problem definitions</h2>
+   Normal rules for colouring are as follows:
+   <ul>
+      <li><b><font color=red>Red</font></b> for NP-complete classes.</li>
+      <li><b><font color='#CC8080'>Light red</font></b> for GI-complete
+      (GraphIsomorphism-complete) classes.</li>
+      <li>White for open classes.</li>
+      <li><b><font color=darkgreen>Dark green</font></b> for classes in
+      P.</li>
+      <li><b><font color=lightgreen>Light green</font></b> for classes on
+      which the problem can be solved in linear time.</li>
+   </ul>
+   Some pseudo-problems (cliquewidth, cliquewidth expression) have their own
+   rules; see the descriptions below.
+   <dl>
+      <dt>Recognition</dt>
+	 <dd>The recognition problem for a graphclass <i>X</i> has as input a
+	 graph <i>G</i> and asks whether <i>G</i> is in <i>X</i>.
+	 </dd>
+      <dt>Independent set</dt>
+	 <dd>An independent set of a graph is a pairwise independent
+	 subset of its vertices. The independent set problem has
+	 as input a graph <i>G</i> and a natural number <i>k</i> and asks
+	 whether <i>G</i> has an independent set of at least <i>k</i>
+	 vertices.</dd>
+      <dt>Weighted independent set</dt>
+	 <dd>The weighted independent set problem has as input a vertex
+	 weighted graph <i>G</i> and a real number <i>k</i> and asks whether
+	 <i>G</i> has an independent set with total weight at least
+	 <i>k</i>.</dd>
+      <dt>Domination</dt>
+	 <dd>A dominating set of a graph G is a subset of its vertices such
+	 that every vertex of the graph is either in the set itself or has a
+	 neighbour in the set. The domination (or dominating set) problem
+	 has as input a graph <i>G</i> and a natural number <i>k</i> and
+	 asks whether <i>G</i> has a dominating set of size at most
+	 <i>k</i>.</dd>
+      <dt>Clique</dt>
+	 <dd>A clique of a graph is a pairwise adjacent subset of its vertices.
+	 The maximum clique problem has as input a graph <i>G</i> and a natural
+	 number <i>k</i> and asks whether <i>G</i> has a clique of at least
+	 <i>k</i> vertices.</dd>
+      <dt>Weighted clique</dt>
+	 <dd>The weighted clique problem has as input a vertex weighted graph
+	 <i>G</i> and a real number <i>k</i> and asks whether <i>G</i> has a
+	 clique with total weight at least <i>k</i>.</dd>
+      <dt>Cliquewidth</dt>
+	 <dd>The cliquewidth of a graph is the number of different labels
+	 that is needed to construct the graph using the following
+	 operations:
+	 <ul>
+	    <li>creation of a vertex with label <i>i</i>,</li>
+	    <li>disjoint union,</li>
+	    <li>renaming labels <i>i</i> to label <i>j</i>,</li>
+	    <li>connecting all vertices with label <i>i</i> to all
+	    vertices with label <i>j</i>.
+	 </ul>
+	 The colouring happens in the following way:
+	 <ul>
+	    <li><b><font color=red>Red</font></b> for classes whose
+	    cliquewidth is not constant bounded.</li>
+	    <li>White for open classes.</li>
+	    <li><b><font color=lightgreen>Light green</font></b> for classes
+	    with constant bounded cliquewidth.</li>
+	 </ul>
+	 </dd>
+      <dt>Cliquewidth expression</dt>
+	 <dd>The cliquewidth expression problem has as input a graph
+	 <i>G</i> and as output an expression constructing that graph that
+	 uses only a constant number of labels.
+	 The colouring happens in the following way:
+	    <ul>
+	       <li><b><font color=red>Red</font></b> for classes whose
+	       cliquewidth is not constant bounded, or for which finding a
+	       clique expression is NP-complete.</li>
+	       <li>White for open classes.</li>
+	       <li><b><font color=darkgreen>Dark green</font></b> for
+	       classes that have constant bounded cliquewidth, and a clique
+	       expression can be found in polynomial time.</li>
+	       <li><b><font color=lightgreen>Light green</font></b> for
+	       classes with constant bounded cliquewidth and for which a
+	       clique expression can be found in linear time.</li>
+	    </ul>
+	 </dd>
+   </dl>
+   <a href="#contents">Back to contents</a>
+
+<a name="filter"></a><h2>Filtering lists of graph classes</h2>
+   To limit the display of classes, enter one or more keywords in the filter
+   box and press ENTER. Only classes that contain all given keywords
+   anywhere in their name or definition will be displayed. To list all
+   available classes, clear the filter box and press ENTER.<p>
+   Filtering is case insensitive and the filtering process has some limited
+   knowledge about graph names. E.g. if you filter on 'chair', 'fork' will
+   also be found.<p>
+   <a href="#contents">Back to contents</a>
+
+</body>
+</html>
