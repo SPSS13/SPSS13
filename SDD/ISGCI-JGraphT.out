@@ -1,0 +1,31 @@
+\BOOKMARK [1][-]{section.1}{\304nderungsverlauf}{}% 1
+\BOOKMARK [1][-]{section.2}{Einleitung}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Designziele}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Referenzen}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{\334bersicht}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Funktionen des bestehenden Systems}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{File}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{View}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Graph classes}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{Problems}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.5}{Help}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.6}{Zeichenfl\344che/Kontextmen\374s}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.7}{Information Fenster}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Wichtige Klassen des bestehenden Systems}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{ISGCI-Package JGraphT}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{ISGCI-Package Layout}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{ISGCI-Package db}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.4}{ISGCI-Package gc}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.5}{ISGCI-Package iq}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.6}{ISGCI-Package problem}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.7}{ISGCI-Package util}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.8}{ISGCI-Package xml}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.9}{ISGCI-Package isq}{section.4}% 23
+\BOOKMARK [2][-]{subsection.4.10}{ISGCI-Package sax}{section.4}% 24
+\BOOKMARK [2][-]{subsection.4.11}{ISGCI-Package GUI}{section.4}% 25
+\BOOKMARK [1][-]{section.5}{Vorgeschlagene Software Architektur}{}% 26
+\BOOKMARK [2][-]{subsection.5.1}{\334bersicht}{section.5}% 27
+\BOOKMARK [1][-]{section.6}{Hardware/Software Mapping}{}% 28
+\BOOKMARK [2][-]{subsection.6.1}{Management der persistenten Daten}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.2}{Randbedingungen}{section.6}% 30
+\BOOKMARK [1][-]{section.7}{Integrationtests}{}% 31
