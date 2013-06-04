@@ -24,21 +24,69 @@
 
 
 \begin{document}
+
+
+\thispagestyle{empty} %Seitennummerierung 1 ausblenden
+
+
+
+\vspace*{5cm} 
+\begin{center}
+{\huge Software Design Document}\\
+{\large Version 1.0}\\
+{\large 04. Juni 2013}\\
+\end{center}
+
+\begin{center}
+{\large ISGCI - Information System on Graph Classes and their Inclusions}\\
+{\large Team $Graph$ $Maga$}
+\end{center}
+\vfill
+\begin{center}
+\includegraphics*[width=4cm]{Logo.png}
+\end{center}
+\newpage
+
+
 \tableofcontents
+\newpage
 \section{Änderungsverlauf}
 \begin{tabular}{|c|c|c|}\hline
  \textbf{Version}&\textbf{Datum}&\textbf{Beschreibung der \"Anderung}\\\hline
  0.4&26.05.2013&Arbeitsversion\\\hline
  %1.0&28.05.2013&Basissversion\\\hline
-\end{tabular}
+\end{tabular}\\
 \section{Einleitung}
+Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das bestehende ISGCI wird mit Funktionalität der Graphzeichenbibliothek JGraphX erweitert. Außerdem werden der neuen Version verschiedene neue Funktionalitäten hinzugefügt, die zur Verbesserung der Benutzerfreundlichkeit beitragen sollen. Zweck des Updates ist es, nicht nur die Funktionalität des Tools in Zukunft zu gewährleisten und neue Funktionen zu implementieren, sondern auch die Instandhaltungskosten zu senken und das Tool für interessierte Entwickler und Nutzer ansprechender zu gestalten.
 \subsection{Designziele}
 %copy pasta aus dem SRS
 
-\subsection{Referenzen}
-http://www.graphclasses.org/help.html
 
+
+\subsection{Referenzen}
+%http://www.graphclasses.org/help.html
+\begin{table}[h]
+          	\caption{Verweise}
+          	\label{fig:figurename}
+          	\begin{center}
+          		\begin{tabular}{|l|p{10cm}|c|}
+          		\hline
+          
+          		\hline
+          		\textbf{Name} & \textbf{Quelle} & \textbf{Datum} \\
+          		\hline
+          			 ISGCI & \href{http://www.graphclasses.org/help.html}{Graphclasses.org - ISGCI Homepage} & 04.06.2013\\ \hline
+          			 JGraphT & \href{http://jgrapht.org/}{JGraphT Website} & 04.06.2013 \\ \hline
+          			 JGraphX & \href{http://www.jgraph.com/}{JGraph Website} & 04.06.2013 \\  \hline
+          			  & \href{http://jgraph.github.io/mxgraph/java/docs/index.html}{JGraph Dokumentation} & 04.06.2013 \\  \hline
+          			  & \href{https://github.com/jgraph/jgraphx}{JGraphX Library Quellcode} & 04.06.2013\\  \hline
+					Swing & \href{http://docs.oracle.com/javase/1.4.2/docs/api/javax/swing/package-summary.html}{Swing Dokumentation} & 04.06.2013 \\  \hline
+					Java & \href{http://docs.oracle.com/javase/6/docs/api/}{Java 6 Dokumentation SE} & 04.06.2013 \\  \hline
+          		\end{tabular}
+          	\end{center}
+          \end{table}
 \subsection{Übersicht}  
+\newpage
 \section{Funktionen des bestehenden Systems}
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
@@ -168,7 +216,7 @@ Klickt man mit Rechtsklick auf eine Kante, dann auf "`Information"', erscheint e
 \subsection{Information Fenster}
 Das Information Fenster enthält eine Liste aller enthaltenen Graph-Klassen, in welcher eine Klasse mithilfe der Maus ausgewählt werden kann. Entsprechend der Auswahl wird unterhalb eine Tabelle angezeigt, welche alle Probleme enthält und die zur ausgewählten Klasse zugehörige Komplexität angibt. Im Unteren Bereich werden zusätzlich Listen für Superklassen, Äquivalente Klassen und Subklassen angezeigt, innerhalb dieser drei Listen kann eine weitere Klasse ausgewählt werden. Es ist ein Textfeld vorhanden, welches bei bestehender Internetverbindung eine WebSearch (Packagebeschreibung GUI) ausführt um die Liste der Graph-Klassen zu filtern. Neben einem Close Button um das Information Fenster zu schließen existieren außerdem ein Draw Button der zum Zeichnen des gewählten Graphen auf dem GraphCanvas dient, ein Inclusion info Button der, falls eine Graph-Klasse und innerhalb der unteren Listen eine weitere Klasse ausgewählt wurde, ein Fenster mit Informationen zur Inklusion dieser beiden Klassen öffnet, sowie ein Class details Button welcher einen Hyperlink zum entsprechendenDatenbankeintrag auf www.graphclasses.org/classes/... führt.\\
 Inclusion info Fenster: Das Fenster enthält Informationen zur gewählten Inklusion in textueller Form, sowie die Buttons OK, zum schließen des Fensters, Draw, zum Zeichnen der Inklusion auf dem GraphCanvas und View references, welche einen Hyperlink zum entsprechenden Datenbankeintrag auf http://www.graphclasses.org/classes/... führt.
-
+\newpage
 \section{Wichtige Klassen des bestehenden Systems}
 \subsection{ISGCI-Package JGraphT}
 
@@ -370,7 +418,7 @@ Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter u
 \paragraph{WebSearch}\ \\Eine Klasse welche von JTextField erbt und ein Textfeld zur Suche innerhalb der ISGCI Online Datenbank dient. Hierzu wird eine Verbindung zur Webseite hergestellt und die Suche über den Browser realisiert indem der eingegebene Suchbegriff als Parameter in die URL hinzugefügt wird. die dabei entstehenden Suchergebnisse werden zeilenweise eingelesen und der ergebnisliste hinzugefügt. Anschließend wird aus DataSet die entstandene Liste als Liste von auswählbaren Elementen umgewandelt und in der Liste der Graph-Klassen angezeigt. 
 
 
-
+\newpage
 %%ab hier wirds ernst
 \section{Vorgeschlagene Software Architektur}
 \subsection{Übersicht}
