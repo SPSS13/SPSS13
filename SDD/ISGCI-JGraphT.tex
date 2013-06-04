@@ -27,10 +27,12 @@
 
 
 \thispagestyle{empty} %Seitennummerierung 1 ausblenden
+\begin{center}
+\includegraphics*[width=11cm]{Logo.png}
+\end{center}
 
 
-
-\vspace*{5cm} 
+\vspace*{1cm} 
 \begin{center}
 {\huge Software Design Document}\\
 {\large Version 1.0}\\
@@ -41,10 +43,8 @@
 {\large ISGCI - Information System on Graph Classes and their Inclusions}\\
 {\large Team $Graph$ $Maga$}
 \end{center}
-\vfill
-\begin{center}
-\includegraphics*[width=4cm]{Logo.png}
-\end{center}
+
+
 \newpage
 
 
@@ -60,7 +60,19 @@
 Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das bestehende ISGCI wird mit Funktionalität der Graphzeichenbibliothek JGraphX erweitert. Außerdem werden der neuen Version verschiedene neue Funktionalitäten hinzugefügt, die zur Verbesserung der Benutzerfreundlichkeit beitragen sollen. Zweck des Updates ist es, nicht nur die Funktionalität des Tools in Zukunft zu gewährleisten und neue Funktionen zu implementieren, sondern auch die Instandhaltungskosten zu senken und das Tool für interessierte Entwickler und Nutzer ansprechender zu gestalten.
 \subsection{Designziele}
 %copy pasta aus dem SRS
-
+\begin{itemize}	
+		\item \textbf{Benutzerfreundlichkeit}\\
+		Das bestehende System wird vor allem erweitert, um die Benutzerfreundlichkeit zu steigern. Zwar besteht ein Teil der Zielgruppe für die Software aus technisch interessierten und fähigen Personen, dennoch gibt es auch eine breite Nachfrage im Bereich der Computer-Laien, weshalb die Software auch für diese leicht durchschaubar und selbsterklärend sein soll. Intuitiv angeordnete Reiter in der Menüleiste, sowie ein interaktives Kontextmenü sollen dazu beitragen, dass benötigte Funktionen von Benutzern leicht gefunden werden können. Des Weiteren sorgen Funktionen wie Grab\&Pull oder Zoom für einen interaktiven Umgang mit dem System. Um die Übersichtlichkeit über komplexere Graphen zu gewährleisten, gibt es zwei Varianten des Expanding/Collapsing, mit denen man einen komplizierten Graphen in einen überschaubaren Teilgraphen herunterbrechen kann.
+		\item \textbf{Integrität}\\
+		Alle Datensätze werden zentral auf einem Server gehalten. Die Software bietet ausschließlich lesende Funktionen an. Somit ist die Datenbank durch negative Manipulationen geschützt.
+		\item \textbf{Flexibilität}\\
+		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten (Graphklasse) Informationen aus der Online-Datenbank einsehen. 
+		\item \textbf{Portabilität}\\
+		ISGCI ist eine Java Anwendung. Das bedeutet, dass sie plattformunabhängig ausgeführt werden kann, solange eine Java-Laufzeit-Umgebung installiert ist (als Standard vorausgesetzt).
+		Die Online-Datenbank ist unabhängig von unserem System. 
+		\item \textbf{Wartbarkeit}\\
+		Dadurch, dass die Datenbank des Programmes online, zentral gelagert wird, lassen sich Datensätze leicht und ohne Updates im Programm manipulieren oder hinzufügen.
+		\end{itemize}
 
 
 \subsection{Referenzen}
@@ -85,14 +97,23 @@ Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das besteh
           		\end{tabular}
           	\end{center}
           \end{table}
-\subsection{Übersicht}  
+\subsection{Übersicht}
+\begin{itemize}
+\item Funktionen des bestehenden Systems\\
+\textit{Beschreibung des bestehenden Systems mit all seinen Funktionen. Systematische Aufgliederung aller Reiter und Interaktions-Möglichkeiten.}
+\item Wichtige Klassen des bestehenden Systems\\
+\textit{Kurze Erläuterung der Aufgaben benötigter Packages und deren Klassen. Heraushebung der Zusammenhänge innerhalb der Packages.}
+\item Vorgeschlagene Software Architektur\\
+\textit{Definition des Aufbaus und der neuen Funktionen im erweiterten System.}
+\item Hardware/Software Mapping\\
+\textit{Beschreibung des notwendigen Software-Umfeldes der Software und Hardwarevoraussetzungen.}
+\item Integrationstests\\
+\textit{Aufstellung aller Integrations-Tests.}
+\end{itemize}  
 \newpage
 \section{Funktionen des bestehenden Systems}
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
-Der Menüreiter "`File"'\ enthält drei grundlegende Funktionen zur Bedienung des Programms. Es lässt sich ein weiteres Fenster der ISGCI Applikation öffnen, falls man beispielsweise mehrere Graphen gleichzeitig zeichnen lassen und betrachten möchte.\\
-Desweiteren lässt sich das Dialogfenster "`Export drawing..."'\ öffnen um einen gezeichneten Graphen in eine Datei zu exportieren. Dabei stehen drei Dateiformate zu Verfügung: Postscript, Structured Vector Graphics und GraphML. Zuletzt lässt sich mit "`Exit"'\ das aktuelle Fenster schließen.\\
-
 \subsection{View}
 \emph{View stellt beim Klicken auf den Menüreiter "`View"'\ in der Navigationsleiste verschiedene Funktionen zur Optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "`unproper"' (müsste eigentlich improper heißen) inclusions.}\\
 
