@@ -1,0 +1,521 @@
+%%BeginProlog
+%%BeginResource: procset ISGCI-Prolog 3.2 1
+/ISGCI 60 dict def ISGCI begin
+
+%======================== Utility ========================
+
+/lodup { 1 index exch } bind def	% x y - x x y
+/nip { exch pop } bind def		% x y - y
+/under { 3 1 roll } bind def		% x y z - z x y
+/tuck { dup under } bind def
+
+/2over { 3 index 3 index } bind def	% a b - a b a
+/2under { 6 2 roll } bind def
+/2exch { 4 2 roll } bind def
+/2lodup { 2over 2exch } bind def
+/2dup { 2 copy } bind def
+/2pop { pop pop } bind def
+/2nip { 2exch 2pop } bind def
+/2tuck { 2dup 2under } bind def
+/2rev { 2under 2exch } bind def		% a b c - c b a
+
+% x1 y1 x2 y2 - (x1.x2) (y1.y2)
+/2sub { exch under sub under sub exch } bind def
+/2add { exch under add under add exch } bind def
+/2abs { abs exch abs exch } bind def
+
+% x y n - (x.n) (y.n)
+/Mmul { tuck mul under mul exch } bind def
+/Mdiv { tuck div under div exch } bind def
+
+% x1 y1 x2 y2 - n
+% Returns the angle wrt. the positive x-axis of the vector 2->1
+/angle { 2sub exch atan } bind def
+
+% cc0 cc1 cc2 - bisecting angle
+/Bisec {
+   2over angle
+   5 1 roll angle
+   add 2 div
+} bind def
+
+% cc0 cc1 cc2 - bisecting angle of 1->0, -(1->2) 
+/-Bisec {
+   2lodup 2over 2sub 2sub Bisec
+} bind def
+
+% cc0 cc1 - length of 0->1
+/Length {
+   2sub dup mul exch dup mul add sqrt
+} bind def
+
+% a i n - a[i] ... a[i+n-1]
+/Getseg {
+   getinterval aload pop
+} bind def
+
+% x y - x|y
+/min { 2 copy ge {exch} if pop } bind def
+
+% x in [0,255] - y in [0.2,0.7]
+% y=x^3-0.3x^2
+/Colornorm {
+    255 div
+    dup dup mul
+    dup -0.3 mul under
+    mul add
+} bind def
+
+% r g b -
+% r/g/b in [0,255].
+/Setcolor {
+    3 copy 2 index eq under eq and not {        % not grey?
+        2 copy 0 eq exch 0 eq and {             % only red?
+            pop pop 
+            1.0 exch 0.7 mul Colornorm dup } {
+        2 index 1 index 0 eq exch 0 eq and {    % only green?
+            pop exch pop
+            Colornorm dup 1.0 exch } {
+        2 index 2 index 0 eq exch 0 eq and {    % only blue?
+            under pop pop
+            Colornorm dup 1.0 } {               % all components
+	    255 div under 255 div under 255 div under
+        } ifelse } ifelse } ifelse 
+    } if
+    setrgbcolor
+} bind def
+   
+%======================== Debug ========================
+
+% x y --
+/Dot {
+   gsave
+   matrix currentmatrix under
+   translate
+   10 10 scale
+   newpath 0 0 1 0 360 arc closepath
+   setmatrix
+   0.5 setgray stroke
+   grestore
+} bind def
+
+% ccA ccB cc2 --
+/CURVETO {
+   currentpoint Dot 6 copy Dot Dot Dot
+   gsave
+      currentlinewidth 0.5 mul setlinewidth
+      6 copy
+      gsave
+	 moveto lineto stroke
+      grestore
+      lineto stroke
+   grestore
+   curveto
+} bind def
+
+
+%======================== Nodes ========================
+
+% left top width height -
+% Draws an ellipse touching the given box on the inside.
+% Changes current path.
+/Ellipse {
+   matrix currentmatrix 5 1 roll
+      2 Mdiv 2tuck neg 2add translate scale
+      newpath 0 0 1 0 360 arc closepath
+   setmatrix
+} bind def
+
+% left top width height -
+% Stroke an ellipse in the given box in black and fill it with the
+% current colour.
+/Node {
+   gsave
+   Ellipse gsave fill grestore 0 setgray stroke
+   grestore
+} bind def
+
+%======================== Arrows ========================
+
+% - height width inset
+% Uses the graphic state to calculate the appropriate size for an arrow
+% and leaves it on the stack.
+/Arrowsize {
+   currentlinewidth
+   dup 8 mul exch
+   dup 3 mul exch
+   2 mul
+} bind def
+
+% height width inset - x y
+% Draws an arrowhead with its point at the origin, pointing left.
+% Leaves a point appropriately for connecting a tail on the stack.
+% To understand the parameternames, image it pointing down.
+% Changes currentpath
+/i 0 def  /w 0 def  /h 0 def
+/Arrowhead {
+   /i exch def
+   /w exch def
+   /h exch def
+   newpath
+   0 0 moveto
+   h w neg lineto
+   h i sub dup 0 lineto			% x
+   h w lineto
+   closepath
+   0					% y
+} bind def
+
+% x1 y1 x2 y2 -
+% Strokes an arrowhead with it point at 2, leaving currentpoint appropriately
+% for connecting a tail.
+/ctm 0 def
+/Mkhead {
+   /ctm matrix currentmatrix def
+      2dup translate
+      angle rotate
+      Arrowsize Arrowhead fill moveto
+   ctm setmatrix
+} bind def
+
+% x1 y1 x2 y2 - x3 y3
+% Strokes a grey reverse (point at 1) arrowhead. Leaves the attachment
+% point on the stack.
+/Mkrevhead {
+   gsave
+   2exch 0.75 setgray Mkhead currentpoint
+   grestore
+} bind def
+
+
+% x1 y1 ... xn yn n -
+% Stroke an arrow from (x1,y1) to (xn,yn), using straight line segments
+% connecting the given points.
+% Note that we actually draw it in reverse order (starting with the head).
+/Arrowline {
+   gsave
+   5 copy pop Mkhead nip nip 		% Remove old final point
+   1 sub {lineto} repeat stroke
+   grestore
+} bind def
+
+% x1 y1 ... xn yn n - x1 y1 x2 y2
+% Leaves the start of the arrow on the stack (for drawing a head).
+/Arrowlinestart {
+   2 sub 2 mul {pop} repeat
+} bind def
+
+% cc0 cc1 - bool
+% Is the given vector either very flat or very steep?
+/Flat? {
+   %2sub 2abs 2dup ge {exch} if 3 div le
+   2sub 2abs 3 mul ge
+} bind def
+
+/Scaffrac 0.2 def			% Scaffold length wrt segment length
+
+% cc1 cc2 - ccA
+% Calculates the first scaffold point for a bezier curve from (x1,y1) to
+% (x2,y2), assuming (x1,y1) is an exterior point.
+/Scaffoldext {
+   2lodup 2sub 2 mul
+   2dup 0 0 2exch Flat? {2 mul} if
+   Scaffrac Mmul 2sub
+} bind def
+
+% cc0 cc1 - length of scaffold for 0->1
+/Scaflength {
+   4 copy 2sub abs nip 5 1 roll
+   4 copy Length 5 1 roll
+   Flat? {0.8 mul} if
+   Scaffrac mul
+   min
+} bind def
+
+% cc0 cc1 cc2 - ccA
+% Calculates the first scaffold point for a bezier curve from (x1,y1) to
+% (x2,y2), assuming the curve starts at (x0,y0).
+/ScaffoldintA {
+   6 copy -Bisec
+   5 1 roll 2lodup Scaflength neg 0
+   5 4 roll matrix rotate dtransform 2add
+   2nip
+} bind def
+
+% cc1 cc2 cc3 - ccB
+% Calculates the third scaffold point for a bezier curve from (x1,y1) to
+% (x2,y2), assuming the curve continues to (x3,y3).
+/ScaffoldintB {
+  2rev ScaffoldintA
+} bind def
+
+% cc1 cc2 - cc1 ccA ccB cc2
+% Calculates the bezier points for a curve with 2 exterior points.
+/Spline2 {
+   2lodup 4 copy Scaffoldext 2under
+   2tuck 2exch Scaffoldext 2exch
+} bind def
+
+% cc1 cc2 cc3 - ccA ccB cc2
+% Calculates the bezier points for an exterior segment from 1 to 2 (to 3).
+/Splineext {
+   6 copy ScaffoldintB 2nip
+   6 copy 2pop Scaffoldext
+   2rev
+   8 6 roll 2pop
+} bind def
+
+% cc0 cc1 cc2 - ccA ccB cc2
+% Calculates the bezier points for an exterior segment (from 0) to 1 to 2.
+/SplineextE {
+   6 copy ScaffoldintA
+   6 copy 2pop 2exch Scaffoldext
+   10 4 roll 2nip 2nip
+} bind def
+
+% cc0 cc1 cc2 cc3 - ccA ccB cc2
+/Splineint {
+   6 copy ScaffoldintB 2nip
+   8 copy 2pop ScaffoldintA
+   2rev
+   10 6 roll 2pop 2pop
+} bind def
+
+% x1 y1 ... xn yn n -
+% Stroke an arrow from (x1,y1) to (xn,yn), through the given points.
+/Arrowspline {
+   gsave
+   dup 3 ge 
+   {  7 copy pop SplineextE Mkhead 2pop currentpoint 5 2 roll nip nip
+      2 mul array astore
+      dup 0 2 Getseg moveto
+      dup 0 6 Getseg Splineext curveto
+	 dup length 8 sub 0 2  3 2 roll
+	 {lodup 8 Getseg Splineint curveto}
+      for
+      dup length 6 sub 6 Getseg SplineextE curveto
+      stroke}
+   {  pop 4 copy Flat?
+	 {Spline2 4 copy Mkhead 2pop currentpoint 8 6 roll moveto curveto}
+	 {2lodup Mkhead lineto}
+      ifelse
+      stroke}
+   ifelse
+   grestore
+} bind def
+
+% x1 y1 ... xn yn n - x1 y1 xA yA
+% Leaves the start of the arrow on the stack (for drawing a head).
+/Arrowsplinestart {
+   dup 3 ge 
+   {  3 sub 2 mul {pop} repeat
+      5 index 5 index  8 2 roll
+      Splineext 2pop 2pop}
+   {  pop 4 copy Flat?
+	 {Spline2 2pop 2pop}
+      if}
+   ifelse
+} bind def
+
+% x1 y1 x2 y2...xn yn n - x0 y0 x2 y2...xn yn n
+% Draws the head (point at 1) at the start of a double arrow, replacing the
+% starting point of the arrow by the attachment point of this head.
+/n 0 def
+/DArrowstart {
+   /n exch def
+   n 2 mul copy n
+   Arrowstart Mkrevhead
+   n 1 add 2 mul 2 roll
+   n 2 mul -2 roll 2pop
+   n
+} bind def
+
+/Arrow /Arrowline load def
+/Arrowstart /Arrowlinestart load def
+/Usesplines {
+   /Arrow /Arrowspline load def
+   /Arrowstart /Arrowsplinestart load def
+} bind def
+
+/DArrow {
+   DArrowstart Arrow
+} bind def
+
+%======================== Font ========================
+% N.B. With the current definions, postscript will not cache the
+% font bitmaps.
+8 dict begin
+   /FontType 3 def
+   /FontMatrix [.001 0 0 .001 0 0] def
+   /FontBBox [0 -19 590 675] def
+
+   /Encoding 256 array def
+   0 1 255 {Encoding exch /.notdef put} for
+   Encoding  32 /space put
+   Encoding  97 /intersection put
+   Encoding  98 /union put
+   Encoding  99 /tau put
+   Encoding 100 /greaterequal put
+   Encoding 101 /calC put
+   Encoding 102 /calP put
+   Encoding 103 /beta put
+
+   /CharProcs 9 dict def
+   CharProcs begin
+      /.notdef { } def
+      /space {300 0 setcharwidth} bind def
+      /intersection {
+         600 0 setcharwidth
+         10 0 moveto
+         10 150 lineto
+         60 575 540 575 590 150 curveto
+         590 0 lineto
+         515 0 lineto
+         515 150 lineto
+         490 480 110 480 84 150 curveto
+         85 0 lineto
+         fill
+      } bind def
+      /union {
+         600 0 setcharwidth
+         10 450 moveto
+         10 300 lineto
+         60 -125 540 -125 590 300 curveto
+         590 450 lineto
+         515 450 lineto
+         515 300 lineto
+         490 -30 110 -30 84 300 curveto
+         85 450 lineto
+         fill
+      } bind def
+      /tau {
+         500 0 setcharwidth
+         150 0 moveto
+         225 0 lineto
+         300 375 lineto
+         470 375 lineto
+         490 450 lineto
+         250 450 lineto
+         150 450 50 450 10 375 curveto
+         10 300 lineto
+         50 375 200 375 200 375 curveto
+         225 375 lineto
+         fill
+      } bind def
+      /greaterequal {
+         500 0 setcharwidth
+         10 0 moveto
+         10 75 lineto
+         490 75 lineto
+         490 0 lineto
+         fill
+         10 375 moveto
+         10 450 lineto
+         490 312.5 lineto
+         490 237.5 lineto
+         fill
+         10 100 moveto
+         10 175 lineto
+         490 312.5 lineto
+         490 237.5 lineto
+         fill
+      } bind def
+      /calC {
+         600 0 setcharwidth
+         520 180 moveto
+         400 -12 275 -12 250 -12 curveto
+         100 -12 10 100 10 250 curveto
+         10 500 300 675 450 675 curveto
+         590 675 590 450 550 450 curveto
+         475 450 lineto
+         500 450 500 595 450 595 curveto
+         300 595 85 425 85 250 curveto
+         85 125 175 75 250 75 curveto
+         275 75 350 75 450 225 curveto
+         fill
+      } bind def
+      /calP {
+         600 0 setcharwidth
+         75 0 moveto
+         225 200 225 400 225 600 curveto
+         150 600 lineto
+         150 400 150 200 0 0 curveto
+         fill
+         200 270 moveto
+         500 270 590 320 590 470 curveto
+         590 560 500 660 400 660 curveto
+         250 660 lineto
+         150 660 50 660 10 585 curveto
+         10 510 lineto
+         50 585 200 585 200 585 curveto
+         350 585 lineto
+         400 585 500 560 515 470 curveto
+         515 370 425 345 200 345 curveto
+         fill
+      } bind def
+      /beta {
+         400 0 setcharwidth
+         26 -4 moveto
+	 26 -4 97 344 133 526 curveto
+	 143 563 167 607 203 628 curveto
+	 232 642 273 646 300 641 curveto
+	 333 633 356 611 357 583 curveto
+	 363 540 360 517 325 486 curveto
+	 289 446 197 414 186 422 curveto
+	 220 419 292 400 320 377 curveto
+	 347 356 356 319 351 300 curveto
+	 343 258 337 234 297 199 curveto
+	 223 130 127 174 127 174 curveto
+	 50 setlinewidth
+	 5 setmiterlimit
+         stroke
+      } bind def
+   end
+   /BuildGlyph {
+      exch /CharProcs get exch
+      2 copy known not {pop /.notdef} if
+      get exec
+   } bind def
+   /BuildChar {
+      1 index /Encoding get exch get
+      1 index /BuildGlyph get exec
+   } bind def
+
+   currentdict
+end
+/ISGCIFont exch definefont pop
+
+%======================== Text ========================
+
+/Normalsize 12 def
+/Setnormalsize { /Normalsize exch def } bind def
+
+% text and symbol fonts in normal and script sizes
+/FTN {/Helvetica findfont Normalsize scalefont} bind def
+/FTS {/Helvetica findfont Normalsize 1.5 div scalefont} bind def
+/FSN {/ISGCIFont findfont Normalsize scalefont} bind def
+/FSS {/ISGCIFont findfont Normalsize 1.5 div scalefont} bind def
+
+% string x y font -
+% Draws the text at (x,y) using the given font.
+/Text {
+   gsave
+   setfont moveto show
+   grestore
+} bind def
+
+% x0 y0 x1 y1 -
+% Draws a line (overline etc.)
+/Line {
+   gsave
+   0.5 setlinewidth
+   moveto lineto stroke
+   grestore
+} bind def
+
+end
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Helvetica
+%%EndSetup

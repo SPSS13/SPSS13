@@ -1,0 +1,5 @@
+JAVAWS_TRACE_NATIVE=1
+JAVAWS_VM_ARGS='-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8989,server=y'
+
+en bovendien het j2see element weghalen (dat soort een nieuwe VM, alternatief
+-J zonder spatie voor elke optie.) Daarna attach met debugger.
