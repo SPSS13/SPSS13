@@ -445,13 +445,28 @@ Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter u
 \newpage
 %%ab hier wirds ernst
 \section{Vorgeschlagene Software Architektur}
-\subsection{Übersicht}
-%evtl unnötig
+%\subsection{Übersicht}
+\subsection{ISGCIGraph}
+Wir erstellen eine neue Klasse ISGCIGraph, die das Interface DirectedGraph(JGraphT) implementiert und die Klasse mxGraph(JGraphX) erweitert.\\
+Die Erweiterung der Klasse mxGraph ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird das mxHierarchical Layout verwendet, das den Look des Graphen verbessert. 
+
+
+Durch die Implementierung des DirectedGraph-Interfaces können wir den neuen ISGCI Graph verwenden wie den Directed-Graph der vorherigen Version. Diese Funktionen beinhalten 
+
+
+
+\newpage
 \section{Hardware/Software Mapping}
+\subsection{Architektur}
+ISGCI benötigt als Hard-/Software Umgebung eine lauffähige Java-Laufzeit-Umgebung. Für weitere Informationen zu den Hard-/Software-Anforderungen besuchen Sie bitte 
+\href{http://www.oracle.com/technetwork/java/javase/system-configurations-135212.html}{Java 6 - Anforderungen} (06.06.2013).
+
 \subsection{Management der persistenten Daten}
-\subsection{Randbedingungen}
+Alle zu speichernde Daten werden in der Datenbank online gespeichert. Lädt man sich das Programm lokal herunter, so wird die Datenbank mitgeliefert, und bei Programmausführung verwendet. Gibt es Probleme beim Zugriff auf die lokale Datenbank, so wird auf die Online-Datenbank zugegriffen. Da es sich um relativ statische Daten handelt - und diese sich i.d.R. nicht ständig ändern, ist ein solches Vorgehen sehr gut geeignet (keine unnötige Auslastung der Internetverbindung, geringere Lade-/Zugriffszeiten, geringere Belastung des Servers). 
 
+%\subsection{Randbedingungen}
 
+\newpage
 %Fabis Reich
 \section{Integrationtests}
 
