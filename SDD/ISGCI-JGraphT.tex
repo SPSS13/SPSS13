@@ -114,6 +114,9 @@ Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das besteh
 \section{Funktionen des bestehenden Systems}
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
+Der Menüreiter "`File"'\ enthält drei grundlegende Funktionen zur Bedienung des Programms. Es lässt sich ein weiteres Fenster der ISGCI Applikation öffnen, falls man beispielsweise mehrere Graphen gleichzeitig zeichnen lassen und betrachten möchte.\\
+Desweiteren lässt sich das Dialogfenster "`Export drawing..."'\ öffnen um einen gezeichneten Graphen in eine Datei zu exportieren. Dabei stehen drei Dateiformate zu Verfügung: Postscript, Structured Vector Graphics und GraphML. Zuletzt lässt sich mit "`Exit"'\ das aktuelle Fenster schließen.\\
+
 \subsection{View}
 \emph{View stellt beim Klicken auf den Menüreiter "`View"'\ in der Navigationsleiste verschiedene Funktionen zur Optimierung der Ansicht zur Verfügung. Darunter fällt das Suchen nach einer Graphklasse, die Einstellung der Namensanzeige und das Markieren von "`unproper"' (müsste eigentlich improper heißen) inclusions.}\\
 
@@ -446,12 +449,56 @@ Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter u
 %%ab hier wirds ernst
 \section{Vorgeschlagene Software Architektur}
 %\subsection{Übersicht}
+
+\subsection{ISGCI.Gui}
+
+\paragraph{Knoten Verschieben}\ \\ 
+
+Wird in der ISGCIGraphCanvas.java realisiert werden. Hierzu wird eine geeignete Methode im Abschnitt für MouseListener stuff implementiert die sich die Funktionalität von JGraphX zu nutze macht.
+
+\paragraph{Zoom (Mausrad)}\ \\ 
+
+Wird in der ISGCIGraphCanvas.java realisiert werden. Hierzu wird eine geeignete Methode im Abschnitt für MouseListener stuff implementiert die sich die Funktionalität von JGraphX zu nutze macht.
+
+\paragraph{Zoom (Menu-Bar)}\ \\ 
+
+In der ISGCIMainFrame.java Klasse werden die Menüs und dazugehörigen Items erzeugt. Hier werden wir die Methoden, createMenus() und registerListeners() anpassen. Anschließend wird die interaktive Funktionalität der neu hinzugefügten Komponenten durch eine Anpassung der actionPerformed() (beziehungsweise der itemStateChanged() nur falls nötig) gewährleistet.
+
+\paragraph{Tooltip}\ \\ 
+
+Wird in der ISGCIGraphCanvas.java realisiert werden. Hierzu wird eine geeignete Methode im Abschnitt für MouseListener stuff implementiert, welche den Tooltip auslöst. Der Tooltip selbst wird durch die Funktionalität von JGraphX erstellt (evtl. bekommt er sogar eine eigene Klasse wie EdgePopup und NodePopup).
+
+\paragraph{Tooltip Inhalt}\ \\ 
+
+ Der Tooltip bekommt Daten von der Klasse DataSet.java aus dem Package isgci.db. hierauf wird beim erzeugen des Tooltips in der entsprechend implementierten Methode (siehe Tooltip) zugegriffen.
+
+
+\paragraph{Scrolling}\ \\ 
+
+In der ISGCIMainFrame.java Klasse existiert bereits eine Methode (createCanvasPanel()), welche den Canvas und die Scrollbalken unten und rechts des Canvas erzeugt. Um sich darin auch per click and pull bewegen zu können müssen wir eine weitere Methode in dieser Klasse erstellen, die diese Funktionalität implementiert.
+
+\paragraph{Kontextmenü}\ \\ 
+
+NodePopup.java ist ein bereits existierendes Kontextmenü, dass bei einem Event, das in der ISGCIGraphCanvas.java festgelegt wurde aufgerufen wird. Dieses wird von uns durch die Benötigte Funktionalität erweitert (siehe Kontextmenü: Superklassen, Subklassen, Nachbarn).
+
+\paragraph{Kontextmenü Superklassen}\ \\ 
+
+In NodePopup.java wird das neue Item durch anpassen der Methoden NodePopup( ) implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() methode aufgerufen. actionPerformed() ruft dabei Informationen über die Ausgewählte Node,deren Superklassen ab und zeichnet das Ergebnis auf den Canvas. Hierzu werden wir die schon implementierte Funktionalität, zum anzeigen aller Superklassen einer ausgewählten Node der GraphClassInformationDialog.java, nutzen.
+
+\paragraph{Kontextmenü Subklassen}\ \\ 
+
+In NodePopup.java wird das neue Item durch anpassen der Methoden NodePopup( ) implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() methode aufgerufen. actionPerformed() ruft dabei Informationen über die Ausgewählte Node,deren Subklassen ab und zeichnet das Ergebnis auf den Canvas. Hierzu werden wir die schon implementierte Funktionalität, zum anzeigen aller Subklassen einer ausgewählten Node der GraphClassInformationDialog.java, nutzen.
+
+\paragraph{Kontextmenü Nachbarn}\ \\ 
+
+In NodePopup.java wird das neue Item durch anpassen der Methoden NodePopup( ) implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() methode aufgerufen. actionPerformed() ruft dabei Informationen über die Ausgewählte Node,deren Nachbarn ab und zeichnet das Ergebnis auf den Canvas. 
+
 \subsection{ISGCIGraph}
 Wir erstellen eine neue Klasse ISGCIGraph, die das Interface DirectedGraph(JGraphT) implementiert und die Klasse mxGraph(JGraphX) erweitert.\\
 Die Erweiterung der Klasse mxGraph ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird das mxHierarchical Layout verwendet, das den Look des Graphen verbessert. 
 
 
-Durch die Implementierung des DirectedGraph-Interfaces können wir den neuen ISGCI Graph verwenden wie den Directed-Graph der vorherigen Version. Diese Funktionen beinhalten 
+Durch die Implementierung des DirectedGraph-Interfaces können wir den neuen ISGCI Graph wie den Directed-Graph der vorherigen Version essbar . Diese Funktionen beinhalten [....]
 
 
 
