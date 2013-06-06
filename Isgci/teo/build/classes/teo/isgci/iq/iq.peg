@@ -1,0 +1,32 @@
+// $Header: /home/ux/CVSROOT/teo/teo/isgci/iq/iq.peg,v 1.1 2012/04/22 07:45:35 ux Exp $
+
+top             = space expr EOF {top} ~{bad}
+                / _++ EOF ;
+expr            = term (or term)* {binop} ;
+term            = notfactor (and notfactor)* {binop} ;
+notfactor       = not? factor {not} ;
+factor          = rel {dup}
+                / lparen expr (rparen / EOF) {paren} ;
+
+rel             = op graphclass {rel} ;
+op              = ("<=" / "<" / ">=" / ">" / "=") space ;
+
+graphclass      = (id / name) space {gc} ;
+name            = &["] "\"" thename (["] / EOL ) ;
+thename         = ^["\r\n]* ;
+
+id              = !keyword idstart idchar* ;
+idstart         = [a-z] / [A-Z] ;
+idchar          = idstart / [0-9] / "_" ;
+
+keyword         = (and / or / not) ;
+not             = "not" !idchar space <'not'> ;
+or              = "or" !idchar space <'or'> ;
+and             = "and" !idchar space <'and'> ;
+
+lparen          = "(" space ;
+rparen          = ")" space ;
+
+space           = [ \t\r\n]* {space} ;
+EOL             = [\r\n] / EOF {space} ;
+EOF             = !_ ;

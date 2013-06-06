@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Header: /home/ux/CVSROOT/teo/data/isgci.jnlp,v 1.5 2011/08/16 20:25:09 ux Exp $ -->
+<jnlp spec="1.0+"
+   codebase="/home/ux/Isgci/teo/build/web/"
+   href="isgci.jnlp">
+   <information>
+      <title>ISGCI</title>
+      <vendor>H.N. de Ridder et al.</vendor>
+      <description>Information System on Graph Classes and their Inclusions</description>
+      <homepage href="/home/ux/Isgci/teo/build/web/"/>
+      <offline-allowed/>
+   </information>
+   <security>
+      <all-permissions/>
+   </security>
+   <resources>
+      <j2se version="1.6+"/>
+      <jar href="ISGCI.jar"/>
+      <jar href="jgrapht.jar"/>
+   </resources>
+   <application-desc main-class="teo.Loader">
+      <argument>/home/ux/Isgci/teo/build/web/</argument>
+   </application-desc>
+</jnlp>
