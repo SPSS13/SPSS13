@@ -468,8 +468,31 @@ Alle zu speichernde Daten werden in der Datenbank online gespeichert. Lädt man 
 
 \newpage
 %Fabis Reich
-\section{Integrationtests}
+\section{Testing}
+Es wird ein Grey Box testing Ansatz verwendet, dass heißt, der Testende hat gegebenenfalls Zugriff auf den Sourcecode, kennt allerdings nicht unbedingt die vollständige Implementierung der Funktion. Dabei wird gegen die Beschreibung des bereits bestehenden Systems getestet.\\
+Wir gliedern das Testing in folgende Testphasen:
+\begin{itemize}
+\item Unit Testing
+\item Integrationstesting (Modultesting)
+\item Software Testing
+\item Functionality Testing
+\item Acceptance Testing
+\end{itemize}
+Diese sind folgendermaßen aufgebaut:
+\subparagraph{Unit Testing}\ \\
+Für jede angepasste bzw. selbst geschriebene Klasse wird bereits während deren Implementation ein JUnit Testfile entworfen. Dieses beinhaltet Tests zu jeder Methode, welche mit fiktiven Parametern aufgerufen werden, um deren korrekte Ausführung zu testen. Die Testfiles werden jeweils nicht den Programmierern der Methoden bzw. Klassen geschrieben, sondern von einem anderen Teammitglied. 
 
+\subparagraph{Integration Testing}\ \\
+Sind alle JUnit Tests erfolgreich durchgeführt worden werden die einzelne Module (Packages) auf ihre Funktionalität alleine und in Kombination getestet. Hierbei wird das angehängte Testprotokoll verwendet. Beim Test eines Moduls werden benötigte Parameter, die über Schnittstellen zur Verfügung gestellt werden sollten, durch sinnvolle fiktive Eingabewerte ersetzt. Ist ein Modul auf diese Weise erfolgreich getestet worden, so werden inkrementell benötigte andere Module, sofern diese auch erfolgreich getestet wurden, hinzugefügt. Die Zusammengesetzten Module werden wieder auf ihre Funktionalität überprüft, bis dabei das gesamte System zusammengefügt wurde.
+
+\subparagraph{Software Testing}\ \\
+Hierbei wird der zur Verfügung stehende Prototyp auf die Umsetzung der funktionalen Anforderungen überprüft. Dazu werden spezifische Testszenarien festgelegt, die Benutzerinteraktion darstellen sollen. Die Testszenarien werden jeweils von einem Teammitglied durchgeführt und das Ergebnis wird protokolliert. 
+
+\subparagraph{Functionality Testing}\ \\
+Für die Beta Version und den Release Candidate wird ein Functionality Testing durchgeführt. Dabei wird das System auf einem Endbenutzergerät ausgeführt, auf dem bisher keinerlei Entwicklung stattgefunden hat, wobei ein reales Nutzungsszenario simuliert wird. Dieses wird von der durchführenden Person protokolliert.
+
+\subparagraph{Acceptance Testing}\ \\
+Nachdem der Release Candidate fertig gestellt wurde, wird dieser dem Kunden für Acceptance Tests zur Verfügung gestellt. 
 
 
 
