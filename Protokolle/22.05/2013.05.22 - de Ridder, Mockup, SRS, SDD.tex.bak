@@ -1,0 +1,68 @@
+\documentclass{scrartcl}
+
+\usepackage[de,break]{ukon-infie}
+
+\Names{L. Kr\"amer}
+\Term{SS 13}
+\Lecture[SWP]{Softwareprojekt}
+\date{21.05.2013}
+\title{Protokoll 1. de Ridder-Meeting Dienstag 22.05. 13:30}
+\def\oder{\vee}
+\def\und{\wedge}
+
+\begin{document}
+\maketitle
+\section{Ort und Zeit}
+Z 705, 13:30-14:45 \\
+\section{Anwesenheit}
+Leonard Krämer, Philipp Hilpert, Ernde de Ridder
+\section{Agenda}
+\begin{itemize}
+\item Mockup
+\item SRS Verbesserungen
+\item SDD-Fragen / ISGCI Erklärungen
+\end{itemize}
+
+\section{Mockup}
+\begin{itemize}
+\item Show und View haben zu ähnliche Namen, wir sollten uns einen besseren überlegen
+\item[Tooltipp] Die zusätzlichen Informationen sind sehr gut. Man kann sich überlegen was man hier macht, entweder einen Tooltipp, oder eine Einblendung auf der Seite des Fensters. Wir erarbeiten eine Lösung mit Mockups.
+\item Zoom soll ganz normaler Zoom werden (skalieren um einen Faktor in x- und y-Richtung
+\item Super- und Subklassen ein/ausblenden vorerst nur ein Level pro Klick
+\item Berücksichtigung von Farbenblinden ist laut Kunde 'nett' $\rightarrow$ kein wichtiges Feature
+\end{itemize}
+\section{SRS}
+Wir sind das Feedback in der Mail durchgegangen und werden die geforderten Änderungen durchführen
+\begin{itemize}
+\item "unklare" Inklusionen in "unechte" Inklusionen ändern
+\item "show" und "view" sind zu ähnlich. Da "show" auf die aktuelle Selektion
+  wirkt, würde ich diesen Menüpunkt eher "Selection" nennen, oder ganz
+  raus lassen
+  \item Was ist gemeint mit "Datenbank-basiertes zeichnen" (in SRS 3.2)? \\
+  $\rightarrow$ genauer erklären
+  \item Was passiert wen man wiederholt Superklassen (oder Subklassen, oder
+  Nachbarn) ausblendet und dann wieder einblendet? Wird alles wieder
+  eingeblendet, oder nur die vom letzten Schritt? Ich nehme an, dass es
+  zwischen Alpha- und Beta-Version möglich ist, das Benehmen des System zu
+  evaluieren und evtl. zu ändern?
+  \\ $\rightarrow$ So Formulieren, dass klar wird, dass immer nur ein Level gezeichnet wird. Eventuell können wir später rekursive Ein- und Ausblendungen einbauen.
+  \item Zielgruppe: Graphentheoretiker, z.B. der älteren Generation, sind nicht
+  notwendig "technisch interessiert und fähig" (SRS 3.4) \\
+  $\rightarrow$ Zielgruppe so Formulieren, dass es klingt als wollen wir Laien im Umgang mit dem Computer erreichen. Also einen großen Fokus auf Usability.
+\end{itemize}
+\section{SDD-Fragen / ISGCI Erklärungen}
+Graph wird in ISGCI nicht verwendet, alle Zeichenfunktionen sind im Layout-Package
+Herr de Ridder hat uns einige der Packages von ISGCI genauer erklärt:
+\begin{itemize}
+\item[Layout] Zeichnet den Graphen $\rightarrow$ wird überflüssig
+\item[GUI] Hier sind die Funktionen für das Fenster\\
+GraphCanvas: Hierauf wird gezeichnet\\
+GraphView: Abbildungen\\
+NodeView \& EdgeView: Hier stehen Informationen zu den Knoten und Edges \\
+Dazu gibt es ein schönes Bildchen, das bei Leo einsehbar ist.
+\item[IQ] $\ldots \rightarrow$ für uns uninteressant 
+\item[GraphT] Teilweise für das LAyout sind hier einige Klassen um Graphen zu verändern - für uns weitgehend uninteressant
+\item[DB] Hier wird das XML gelesen und ein directedgraph erstellt
+\item[problem] Graphprobleme erkennen und anmalen
+\end{itemize}
+\end{document}

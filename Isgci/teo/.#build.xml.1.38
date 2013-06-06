@@ -1,0 +1,678 @@
+<?xml version="1.0"?>
+<project name="isgci">
+<taskdef resource="net/sf/antcontrib/antlib.xml">
+   <classpath>
+      <pathelement location="/usr/share/ant-contrib/lib/ant-contrib.jar"/>
+   </classpath>
+</taskdef>
+
+<!-- Input and output files/dirs -->
+<property name="distrib.dir" location="distrib"/>
+<property name="distrib.tar" location="isgci.tar.gz"/>
+<property name="build.dir" location="build"/>
+<property name="build.classes.dir" location="${build.dir}/classes"/>
+
+<property name="data.dir" location="data"/>
+<property name="build.data.dir" location="${build.dir}/data"/>
+<property name="smallgraphs.xml.in" location="${data.dir}/smallgraphs.xml"/>
+<property name="smallgraphs.xml.out" location="${build.data.dir}/smallgraphs.xml"/>
+<property name="isgci.xml.in" location="${data.dir}/masterdata.xml"/>
+<property name="isgci.xml.out" location="${build.data.dir}/isgci.xml"/>
+<property name="isgci.full.xml.out" location="${build.data.dir}/full.xml"/>
+<property name="autocache.txt" location="autocache.txt"/>
+<property name="generate.trace" location="generate.trace"/>
+<property name="relations.trace" location="relations.trace"/>
+<property name="names.txt" location="names.txt"/>
+
+<!--
+  - web.dir is the path to where we write the files.
+  - home.url is the full url to ISGCI on the web.
+  - root.url is the absolute url on the webserver to ISGCI root.
+  - Examples:
+  - web.dir = "build/web" (always)
+  - home.url = "http://www.isgci.org", root.url = ""
+  - home.url = "localhost/build", root.url = "/build"
+ -->
+<!-- Must NOT end in / for @HOMEURL@ replacement! -->
+<property name="web.dir" location="${build.dir}/web"/>
+<!-- Full URL to the ISGCI homepage -->
+<!-- Must NOT end in / for @HOMEURL@ replacement! -->
+<property name="home.url" value="http://www.graphclasses.org"/>
+<!-- Absolute path on the webserver to the homedirectory, must NOT end in / -->
+<property name="root.url" value=""/>
+<!-- These two are relative to web.dir and to root.url -->
+<property name="web.classes.rel" value="classes"/>
+<property name="web.images.rel" value="images"/>
+<property name="web.maps.rel" value="maps"/>
+
+<property name="web.maps.dir" location="${web.dir}/${web.maps.rel}"/>
+<property name="web.classes.dir" location="${web.dir}/${web.classes.rel}"/>
+<property name="web.keys.dir" location="${web.dir}/Keys"/>
+<property name="web.images.dir" location="${web.dir}/${web.images.rel}"/>
+<property name="smallgraphs.html.out" location="${web.dir}/smallgraphs.html"/>
+<property name="smallgraphs.url" value="${home.url}/smallgraphs.html"/>
+<property name="graphlinks.xml.out" location="${build.data.dir}/graphlinks.xml"/>
+<property name="search.cgi.in" location="${data.dir}/searchhead.cgi"/>
+<property name="search.cgi.data" location="${build.data.dir}/searchtail.cgi"/>
+<property name="search.cgi.out" location="${web.dir}/search.cgi"/>
+<property name="refs.xml.in" location="${data.dir}/refs.xml"/>
+<property name="isgci.jar" location="${web.dir}/ISGCI.jar"/>
+
+<!-- classpaths -->
+<property name="jarlib.dir" location="/home/ux/Isgci/lib"/>
+<property name="jgrapht.jar" location="${jarlib.dir}/jgrapht.jar"/>
+
+<path id="compile.classpath">
+   <pathelement location="${jarlib.dir}/getopt.jar"/>
+   <pathelement location="${jgrapht.jar}"/>
+</path>
+
+<path id="run.classpath">
+   <path refid="compile.classpath"/>
+   <pathelement location="${jarlib.dir}/crimson.jar"/>
+   <pathelement location="${build.classes.dir}"/>
+</path>
+
+<!-- Targets -->
+
+<target name="init"
+   description="Initialize the build environment">
+
+   <mkdir dir="${build.classes.dir}"/>
+   <mkdir dir="${build.data.dir}"/>
+</target>
+
+
+<target name="init.web"
+   depends="init"
+   description="Installs basic web files">
+
+   <mkdir dir="${web.dir}"/>
+   <mkdir dir="${web.classes.dir}"/>
+   <mkdir dir="${web.keys.dir}"/>
+   <mkdir dir="${web.images.dir}"/>
+   <mkdir dir="${web.maps.dir}"/>
+   <exec executable="rm">
+      <arg value="-f"/>
+      <arg value="${web.classes.dir}/images"/>
+   </exec>
+   <exec executable="ln">
+      <arg value="-s"/>
+      <arg value="../images"/>
+      <arg value="${web.classes.dir}/images"/>
+   </exec>
+</target>
+
+
+<target name="clean.compile"
+   description="Deletes all created class/jar files">
+
+   <delete dir="${build.classes.dir}"/>
+   <mkdir dir="${build.classes.dir}"/>
+   <delete file="${build.dir}/compile.timestamp"/>
+</target>
+
+
+<target name="clean.web"
+   description="Deletes the web files">
+
+   <delete dir="${web.dir}"/>
+   <delete file="${build.dir}/smallgraphs.html.timestamp"/>
+   <delete file="${build.dir}/classes.html.timestamp"/>
+</target>
+
+
+<target name="clean"
+   description="Deletes all created files">
+
+   <delete dir="${build.dir}"/>
+</target>
+
+
+<target name="compile"
+   description="Compile the java classes">
+
+   <javac srcdir="."
+	 destdir="${build.classes.dir}"
+	 includeantruntime="false"
+	 debug="yes">
+      <classpath refid="compile.classpath"/>
+      <include name="**/*.java"/>
+      <exclude name="teo/isgci/oldgraph/*.java"/>
+      <exclude name="IQ.java"/>
+      <exclude name="Parsetree.java"/>
+      <exclude name="XsltUtil.java"/>
+      <exclude name="Yylex.java"/>
+      <exclude name="parser.java"/>
+      <exclude name="sym.java"/>
+   </javac>
+   <javac srcdir="."
+	 destdir="."
+	 includeantruntime="false">
+      <classpath refid="compile.classpath"/>
+      <include name="XsltUtil.java"/>
+   </javac>
+   <outofdate>
+      <sourcefiles>
+	 <fileset dir="${build.classes.dir}" includes="**/*.class"/>
+      </sourcefiles>
+      <targetfiles path="${build.dir}/compile.timestamp"/>
+      <sequential>
+	 <touch file="${build.dir}/compile.timestamp"/>
+      </sequential>
+   </outofdate>
+</target>
+
+
+<target name="jar"
+   description="Create a jar file containing the ISGCI application">
+
+   <delete file="${isgci.jar}"/>
+   <jar destfile="${isgci.jar}"
+	 index="false"> <!-- otherwise Class-Path doesn't work -->
+      <manifest>
+	 <attribute name="Main-Class" value="teo.Loader"/>
+	 <attribute name="Class-Path" value="jgrapht.jar"/>
+      </manifest>
+      <fileset dir="${build.classes.dir}">
+	 <include name="teo/**"/>
+	 <exclude name="teo/isg/"/>
+	 <exclude name="teo/isgci/graph/InclGraph*.class"/>
+	 <exclude name="teo/isgci/xml/SmallGraph*.class"/>
+	 <exclude name="teo/isgci/xml/ISGCIWriter*.class"/>
+      </fileset>
+      <fileset dir="${build.classes.dir}">
+	 <include name="teo/isg/GraphSet.class"/>
+	 <include name="teo/isg/Graph.class"/>
+      </fileset>
+      <fileset dir="${build.dir}">
+	 <include name="data/isgci.xml"/>
+	 <include name="data/isgci.dtd"/>
+      </fileset>
+      <fileset dir=".">
+	 <include name="data/psprolog.txt"/>
+	 <include name="images/*.gif"/>
+      </fileset>
+      <fileset dir="${data.dir}">
+	 <include name="images/*.gif"/>
+      </fileset>
+   </jar>
+   <signjar alias="isgci"
+	 jar="${isgci.jar}"
+	 keystore="${data.dir}/keystore"
+	 storepass="graphclasses.org"/>
+   <signjar alias="isgci"
+	 jar="${jgrapht.jar}"
+	 signedjar="${web.dir}/jgrapht.jar"
+	 keystore="${data.dir}/keystore"
+	 storepass="graphclasses.org"/>
+   <!-- <signjar alias="isgci"
+	 jar="${isgci.jar}"
+	 keystore="${data.dir}/keystore"
+	 storepass="isgciteo"/> -->
+</target>
+
+
+<target name="jar.full"
+   depends="compile, deductions.full"
+   description="jar, with full dependency handling">
+
+   <outofdate>
+      <sourcefiles>
+	 <pathelement path="${build.dir}/compile.timestamp"/>
+	 <pathelement path="${isgci.xml.out}"/>
+	 <pathelement path="${data.dir}/psprolog.txt"/>
+	 <pathelement path="${data.dir}/keystore"/>
+      </sourcefiles>
+      <targetfiles>
+	 <pathelement path="${isgci.jar}"/>
+      </targetfiles>
+      <sequential>
+	 <antcall target="jar"/>
+      </sequential>
+   </outofdate>
+</target>
+
+
+<target name="smallgraphs"
+   description="Deduce smallgraph relations">
+
+   <java classname="teo.isg.FindISG" fork="true"
+      classpathref="run.classpath">
+      <arg file="${smallgraphs.xml.in}"/>
+      <arg file="${smallgraphs.xml.out}"/>
+   </java>
+   <copy todir="${build.data.dir}">
+      <fileset dir="${data.dir}" includes="smallgraphs.dtd"/>
+   </copy>
+</target>
+
+<target name="smallgraphs.full"
+   depends="compile"
+   description="smallgraphs, with full dependency handling">
+
+   <outofdate>
+      <sourcefiles>
+	 <pathelement path="${smallgraphs.xml.in}"/>
+      </sourcefiles>
+      <targetfiles>
+	 <pathelement path="${smallgraphs.xml.out}"/> 
+      </targetfiles>
+      <sequential>
+	 <antcall target="smallgraphs"/>
+      </sequential>
+   </outofdate>
+</target>
+
+<target name="smallgraphs.touch"
+   description="touches the smallgraphs output files">
+
+   <touch file="${smallgraphs.xml.out}"/>
+</target>
+
+
+<target name="deductions"
+   description="Deduce graphclass relations">
+
+   <java classname="Generate" fork="true"
+      maxmemory="2500M"
+      classpathref="run.classpath">
+      <!-- <arg value="-C"/> -->
+      <!-- <arg value="-x"/> -->
+      <arg value="-a"/><arg file="${autocache.txt}"/>
+      <arg value="-l"/><arg file="${generate.trace}"/>
+      <arg value="-r"/><arg file="${relations.trace}"/>
+      <arg file="${isgci.xml.in}"/>
+      <arg file="${smallgraphs.xml.out}"/>
+      <arg file="${isgci.full.xml.out}"/>
+      <arg file="${isgci.xml.out}"/>
+      <arg file="${names.txt}"/>
+   </java>
+   <copy todir="${build.data.dir}">
+      <fileset dir="${data.dir}" includes="isgci.dtd"/>
+   </copy>
+</target>
+
+
+<target name="deductions.full"
+   depends="smallgraphs.full, compile"
+   description="deductions, with full dependency handling">
+
+   <outofdate>
+      <sourcefiles>
+	 <pathelement path="${smallgraphs.xml.out}"/>
+	 <pathelement path="${isgci.xml.in}"/>
+      </sourcefiles>
+      <targetfiles>
+	 <pathelement path="${isgci.xml.out}"/> 
+	 <pathelement path="${isgci.full.xml.out}"/> 
+      </targetfiles>
+      <sequential>
+	 <antcall target="deductions"/>
+      </sequential>
+   </outofdate>
+</target>
+
+
+<target name="deductions.touch"
+   description="touches the deductions output files">
+
+   <touch file="${isgci.xml.out}"/> 
+   <touch file="${isgci.full.xml.out}"/> 
+</target>
+
+
+<target name="maps"
+   description="Create maps for every class">
+
+   <java jar="${isgci.jar}" fork="true">
+      <arg value="file://${web.dir}/"/>
+      <sysproperty key="org.isgci.mappath" value="${web.maps.dir}"/>
+   </java>
+</target>
+
+
+<target name="maps.full"
+   depends="compile, init.web, deductions.full, jar.full"
+   description="maps, with full dependency handling">
+
+   <antcall target="maps"/>
+</target>
+
+
+
+<target name="smallgraphs.html"
+   description="Create smallgraphs html and gif files">
+
+   <delete>
+      <fileset dir="${web.images.dir}" includes="g_*"/>
+      <fileset file="${graphlinks.xml.out}"/>
+   </delete>
+   <xslt style="graphlinks.xsl"
+      in="${smallgraphs.xml.in}"
+      out="${graphlinks.xml.out}"
+      force="true"
+      processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison">
+      <!-- processor is work-around for ant 1.8.1 -->
+      <classpath path="/usr/share/saxon/lib/saxon8.jar"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="homeurl" expression="${home.url}"/>
+      <param name="homedir" expression="${web.dir}"/>
+      <param name="rooturl" expression="${root.url}"/>
+      <param name="imagedir" expression="${web.images.rel}"/>
+   </xslt>
+   <xslt style="smallgraphs.xsl"
+      in="${smallgraphs.xml.in}"
+      out="/dev/null"
+      processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison">
+      <!-- processor is work-around for ant 1.8.1 -->
+      <classpath path="/usr/share/saxon/lib/saxon8.jar"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="homeurl" expression="${home.url}"/>
+      <param name="homedir" expression="${web.dir}"/>
+      <param name="rooturl" expression="${root.url}"/>
+      <param name="imagedir" expression="${web.images.rel}"/>
+   </xslt>
+   <touch file="${build.dir}/smallgraphs.html.timestamp"/>
+</target>
+
+
+<target name="smallgraphs.html.full"
+   depends="compile, init.web, smallgraphs.full"
+   description="smallgraphs.html, with full dependency handling">
+
+   <outofdate>
+      <sourcefiles>
+	 <pathelement path="${build.dir}/compile.timestamp"/>
+	 <pathelement path="${smallgraphs.xml.in}"/>
+      </sourcefiles>
+      <targetfiles>
+	 <pathelement path="${graphlinks.xml.out}"/>
+	 <pathelement path="${smallgraphs.html.out}"/> 
+      </targetfiles>
+      <sequential>
+	 <exec executable="ant">
+	    <arg value="smallgraphs.html"/>
+	 </exec>
+      </sequential>
+   </outofdate>
+</target>
+
+<target name="classes.html"
+   description="Create classes html and gif files">
+
+   <delete>
+      <fileset dir="${web.classes.dir}" includes="*.html"/>
+      <fileset dir="${web.keys.dir}" includes="*"/>
+   </delete>
+   <xslt style="isgci.xsl"
+      in="${isgci.full.xml.out}"
+      out="${search.cgi.data}"
+      force="true"
+      processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison">
+      <!-- processor is work-around for ant 1.8.1 -->
+      <classpath location="../lib/saxon8.jar"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="homeurl" expression="${home.url}"/>
+      <param name="homedir" expression="${web.dir}"/>
+      <param name="rooturl" expression="${root.url}"/>
+      <param name="classesdir" expression="${web.classes.rel}"/>
+      <param name="mapsdir" expression="${web.maps.rel}"/>
+      <param name="statsfile" expression="${build.data.dir}/status.inc"/>
+      <param name="graphlinks" expression="${graphlinks.xml.out}"/>
+   </xslt>
+   <concat destfile="${search.cgi.out}">
+      <fileset file="${search.cgi.in}"/>
+      <fileset file="${search.cgi.data}"/>
+   </concat>
+   <chmod perm="ugo+x" file="${search.cgi.out}"/>
+   <xslt style="isgci.xsl"
+      in="${refs.xml.in}"
+      out="/dev/null"
+      force="true"
+      processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison">
+      <!-- processor is work-around for ant 1.8.1 -->
+      <classpath location="../lib/saxon8.jar"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="homeurl" expression="${home.url}"/>
+      <param name="homedir" expression="${web.dir}"/>
+      <param name="rooturl" expression="${root.url}"/>
+      <param name="classesdir" expression="${web.classes.rel}"/>
+   </xslt>
+   <xslt style="mkkeywords.xsl"
+      in="${isgci.full.xml.out}"
+      out="/dev/null"
+      force="true"
+      processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison">
+      <!-- processor is work-around for ant 1.8.1 -->
+      <classpath location="../lib/saxon8.jar"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="dir" expression="${web.keys.dir}"/>
+      <param name="smallgraphs" expression="${smallgraphs.xml.in}"/>
+   </xslt>
+   <touch file="${build.dir}/classes.html.timestamp"/>
+</target>
+
+
+<target name="classes.html.full"
+   depends="compile, init.web, smallgraphs.full, smallgraphs.html.full,
+	 deductions.full"
+   description="classes.html, with full dependency handling">
+
+   <outofdate>
+      <sourcefiles>
+	 <pathelement path="${build.dir}/smallgraphs.html.timestamp"/>
+	 <pathelement path="${isgci.full.xml.out}"/>
+	 <pathelement path="${search.cgi.in}"/>
+	 <pathelement path="${refs.xml.in}"/> 
+	 <pathelement path="${smallgraphs.xml.in}"/> 
+      </sourcefiles>
+      <targetfiles>
+	 <pathelement path="${search.cgi.data}"/>
+	 <pathelement path="${search.cgi.out}"/> 
+      </targetfiles>
+      <sequential>
+	 <antcall target="classes.html"/>
+      </sequential>
+   </outofdate>
+</target>
+
+
+<target name="static.html"
+   description="Creates all web data other than classes/smallgraphs">
+
+   <copy todir="${web.dir}" file="${data.dir}/isgci.jnlp" overwrite="yes">
+      <filterset>
+	 <!-- HOMEURL will be set to home.url by distrib target -->
+	 <filter token="HOMEURL" value="${web.dir}/"/>
+      </filterset>
+   </copy>
+   <copy todir="${web.dir}">
+      <fileset dir="web" includes="**"/>
+   </copy>
+   <chmod perm="ugo+x">
+      <fileset dir="${web.dir}" includes="*.cgi"/>
+   </chmod>
+
+   <exec executable="xpath"
+	 input="${data.dir}/new.html.3"
+	 output="${build.data.dir}/news.inc"
+	 error="/dev/null">
+      <arg value="//li[position() &lt; 4]"/>
+   </exec>
+   <concat force="yes" destfile="${build.data.dir}/static.4">
+      <fileset file="${data.dir}/static.4.0"/>
+      <fileset file="${build.data.dir}/status.inc"/>
+      <fileset file="${data.dir}/static.4.2"/>
+      <fileset file="${build.data.dir}/news.inc"/>
+      <fileset file="${data.dir}/static.4.4"/>
+      <filterchain>
+	 <replacetokens>
+	    <token key="HOMEURL" value="${home.url}"/>
+	 </replacetokens>
+      </filterchain>
+   </concat>
+
+   <concat force="yes" destfile="${web.dir}/index.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/index.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/index.html.3.0"/>
+      <fileset file="${build.data.dir}/classics.inc"/>
+      <fileset file="${data.dir}/index.html.3.2"/>
+      <fileset file="${build.data.dir}/problems.inc"/>
+      <fileset file="${data.dir}/index.html.3.4"/>
+      <fileset file="${build.data.dir}/static.4"/>
+   </concat>
+   <concat force="yes" destfile="${web.dir}/about.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/about.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/about.html.3"/>
+      <fileset file="${build.data.dir}/static.4"/>
+      <filterchain>
+	 <replacetokens>
+	    <token key="HOMEURL" value="${home.url}"/>
+	 </replacetokens>
+      </filterchain>
+   </concat>
+   <concat force="yes" destfile="${web.dir}/screenshots.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/screenshots.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/screenshots.html.3"/>
+      <fileset file="${build.data.dir}/static.4"/>
+   </concat>
+   <concat force="yes" destfile="${web.dir}/new.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/new.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/new.html.3"/>
+      <fileset file="${build.data.dir}/static.4"/>
+   </concat>
+   <concat force="yes" destfile="${web.dir}/faq.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/faq.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/faq.html.3"/>
+      <fileset file="${build.data.dir}/static.4"/>
+   </concat>
+   <concat force="yes" destfile="${web.dir}/contact.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/contact.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/contact.html.3"/>
+      <fileset file="${build.data.dir}/static.4"/>
+   </concat>
+   <concat force="yes" destfile="${web.dir}/impressum.html">
+      <fileset file="${data.dir}/static.0"/>
+      <fileset file="${data.dir}/impressum.html.1"/>
+      <fileset file="${data.dir}/static.2"/>
+      <fileset file="${data.dir}/impressum.html.3"/>
+      <fileset file="${build.data.dir}/static.4"/>
+   </concat>
+</target>
+
+
+<target name="static.html.full"
+   depends="init.web, smallgraphs.html.full, classes.html.full"
+   description="static.html, with full dependency handling">
+
+   <antcall target="static.html"/>
+</target>
+
+
+<target name="distrib"
+      description="Create the distribution tar file">
+
+   <delete dir="${distrib.dir}"/>
+   <exec executable="cp">
+      <arg value="-a"/>
+      <arg value="${web.dir}"/>
+      <arg value="${distrib.dir}"/>
+   </exec>
+   <copy todir="${distrib.dir}" file="${data.dir}/isgci.jnlp" overwrite="yes">
+      <filterset>
+	 <filter token="HOMEURL" value="${home.url}/"/>
+      </filterset>
+   </copy>
+   <exec executable="tar">
+      <arg value="czf"/> <arg value="${distrib.tar}"/>
+      <arg value="-C"/> <arg value="${distrib.dir}"/>
+      <arg value="."/>
+   </exec>
+   <exec executable="bash">
+      <arg value="-c"/>
+      <arg value="(cat ${autocache.txt}; cat ${names.txt} | grep '^AUTO_') |
+	 sort -u > ${autocache.txt}.new;
+	 mv ${autocache.txt}.new ${autocache.txt}"/>
+   </exec>
+</target>
+
+
+<target name="web.full"
+   depends="maps.full, smallgraphs.html.full, classes.html.full,
+	 static.html.full"
+   description="All the *.html.full targets">
+</target>
+
+
+<target name="distrib.full"
+   depends="jar.full, web.full"
+   description="distrib, with full dependency handling">
+
+   <outofdate>
+      <sourcefiles>
+	 <pathelement path="${isgci.jar}"/>
+	 <pathelement path="${build.dir}/smallgraphs.html.timestamp"/>
+	 <pathelement path="${build.dir}/classes.html.timestamp"/>
+	 <fileset dir="${web.dir}"/>
+      </sourcefiles>
+      <targetfiles>
+	 <pathelement path="${distrib.tar}"/>
+      </targetfiles>
+      <sequential>
+	 <antcall target="distrib"/>
+      </sequential>
+   </outofdate>
+</target>
+
+<target name="run"
+   description="Run isgci">
+
+   <java jar="${isgci.jar}" fork="true">
+      <arg value="file://${web.dir}/"/>
+   </java>
+</target>
+
+<target name="testforbidden"
+   description="Manually test forbidden subgraphs">
+
+   <java classname="teo.isgci.gc.ForbiddenClass" fork="true"
+      classpathref="run.classpath">
+      <arg file="${smallgraphs.xml.out}"/>
+   </java>
+</target>
+
+<target name="test">
+
+   <java classname="teo.isgci.layout.HierarchyLayout" fork="true"
+      classpathref="run.classpath">
+   </java>
+</target>
+
+<target name="families.graphml"
+   description="Create graphML for families">
+
+   <xslt style="smallgraphs-yed.xsl"
+      in="${smallgraphs.xml.in}"
+      out="families.graphml"
+      force="true"
+      processor="org.apache.tools.ant.taskdefs.optional.TraXLiaison">
+      <!-- processor is work-around for ant 1.8.1 -->
+      <classpath path="/usr/share/saxon/lib/saxon8.jar"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+   </xslt>
+</target>
+
+</project>

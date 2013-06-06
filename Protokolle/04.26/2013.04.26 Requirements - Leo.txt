@@ -1,0 +1,27 @@
+Funktional:
+Provide an interface between JgraphT and a graph drawing library for projects
+using the JgraphT library.
+
+Use a standard graph drawing library in ISGCI
+
+Enhance the user interface of ISGCI using standard functionality pro-
+vided by the library, e.g. tooltips, zooming, scaling, scrolling, export-
+ing.
+
+Make the hierarchies drawn by ISGCI more navigable by allowing the user
+to change or navigate them.
+
+
+
+
+Nicht Funktional:
+
+The quality of the code and
+other deliverables should meet the requirements for distributing it as part of ISGCI
+and JgraphT.
+
+No TABs!
+
+No more than 79 characters on a line!
+
+Code, comments and documentation in English!
