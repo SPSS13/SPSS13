@@ -573,7 +573,7 @@ Wenn keine Internetverbindung: Fenster "'Anwendungsfehler: Anwendung kann nicht 
 \paragraph{Beenden der Anwendung}
 Es wird kein Zustand gespeichert, die Anwendung beendet sich sofort.
 \section{Testing}
-Es wird ein Grey Box Testing Ansatz verwendet, dass heißt, der Testende hat gegebenenfalls Zugriff auf den Sourcecode, kennt allerdings nicht unbedingt die vollständige Implementierung der Funktion. Dabei wird gegen die Beschreibung des bereits bestehenden Systems (siehe: \autoref{sec:bestSys}) getestet.\\
+Es wird ein \G{Grey Box testing} Ansatz verwendet, d.h. der Testende hat gegebenenfalls Zugriff auf den Sourcecode, kennt allerdings nicht unbedingt die vollständige Implementierung der Funktion. Dabei wird gegen die Beschreibung des bereits bestehenden Systems (siehe: \autoref{sec:bestSys}) getestet.\\
 Wir gliedern das Testing in folgende Testphasen:
 {\small\begin{itemize}
 \item Unit Testing
@@ -587,7 +587,7 @@ Diese sind folgendermaßen aufgebaut:
 Für jede angepasste bzw. selbst geschriebene Klasse wird bereits während deren Implementation ein JUnit Testfile entworfen. Dieses beinhaltet Tests zu jeder Methode, welche mit fiktiven Parametern aufgerufen werden, um deren korrekte Ausführung zu testen. Die Testfiles werden jeweils nicht von den Programmierern der Methoden bzw. Klassen geschrieben, sondern von einem anderen Teammitglied. Das Feedback hat Änderungen am Programmcode zur Folge, falls Abweichungen auftreten.
 
 \subparagraph{Integration Testing}\ \\
-Sind alle JUnit Tests erfolgreich durchgeführt worden werden die einzelne Module (Packages) auf ihre Funktionalität, alleine und in Kombination, getestet. Hierbei wird das angehängte Testprotokoll (siehe: \autoref{sec:testp}) verwendet. Beim Test eines Moduls werden benötigte Parameter, die über Schnittstellen zur Verfügung gestellt werden sollten, durch sinnvolle fiktive Eingabewerte ersetzt. Ist ein Modul auf diese Weise erfolgreich getestet worden, so werden inkrementell benötigte andere Module, sofern diese auch erfolgreich getestet wurden, hinzugefügt. Die zusammengesetzten Module werden nach dem selben Prinzip auf ihre Funktionalität überprüft, bis dabei das gesamte System zusammengefügt wurde. Das Feedback hat Änderungen am Programmcode zur Folge, falls Abweichungen auftreten.
+Sind alle JUnit Tests erfolgreich durchgeführt worden, werden die einzelne Module (Packages) auf ihre Funktionalität, alleine und in Kombination, getestet. Hierbei wird das angehängte Testprotokoll (siehe: \autoref{sec:testp}) verwendet. Beim Test eines Moduls werden benötigte Parameter, die über Schnittstellen zur Verfügung gestellt werden sollten, durch sinnvolle fiktive Eingabewerte ersetzt. Ist ein Modul auf diese Weise erfolgreich getestet worden, so werden inkrementell benötigte andere Module, sofern diese auch erfolgreich getestet wurden, hinzugefügt. Die zusammengesetzten Module werden nach dem selben Prinzip auf ihre Funktionalität überprüft, bis dabei das gesamte System zusammengefügt wurde. Das Feedback hat Änderungen am Programmcode zur Folge, falls Abweichungen auftreten.
 
 \subparagraph{Software Testing}\ \\
 Hierbei wird der zur Verfügung stehende Prototyp auf die Umsetzung der funktionalen Anforderungen überprüft. Dazu werden spezifische Testszenarien (Template siehe: \autoref{sec:tests}) festgelegt, die Benutzerinteraktion darstellen. Die Testszenarien werden jeweils von einem Teammitglied durchgeführt und das Ergebnis wird im Template protokolliert. Das Feedback hat Änderungen am Softwaredesign zur Folge, falls Abweichungen auftreten.
