@@ -241,7 +241,7 @@ Klickt man mit Rechtsklick auf eine Kante, dann auf "`Information"', erscheint e
 \item Pfeile: "`normale"', schwarze Pfeile deuten eine Inklusion in Richtung der Pfeilspitze an. Befindet sich am anderen Ende des Pfeiles noch entgegengesetzt eine graue Pfeilspitze, bedeutet dass, dass die eine Graph-Klasse nicht notwendigerweise eine Teilmenge der anderen ist - es könnte auch Gleichheit herrschen (Unbekannt/Datenbank-Lücke). 
 \end{itemize}
 \subsection{Information Fenster}
-Das Information Fenster enthält eine Liste aller enthaltenen Graph-Klassen, in welcher eine Klasse mithilfe der Maus ausgewählt werden kann. Entsprechend der Auswahl wird unterhalb eine Tabelle angezeigt, welche alle Probleme enthält und die zur ausgewählten Klasse zugehörige Komplexität angibt. Im Unteren Bereich werden zusätzlich Listen für Superklassen, Äquivalente Klassen und Subklassen angezeigt, innerhalb dieser drei Listen kann eine weitere Klasse ausgewählt werden. Es ist ein Textfeld vorhanden, welches bei bestehender Internetverbindung eine WebSearch (Packagebeschreibung GUI) ausführt um die Liste der Graph-Klassen zu filtern. Neben einem Close Button um das Information Fenster zu schließen existieren außerdem ein Draw Button der zum Zeichnen des gewählten Graphen auf dem GraphCanvas dient, ein Inclusion info Button der, falls eine Graph-Klasse und innerhalb der unteren Listen eine weitere Klasse ausgewählt wurde, ein Fenster mit Informationen zur Inklusion dieser beiden Klassen öffnet, sowie ein "`Class details"' Button welcher einen Hyperlink zum entsprechenden Datenbankeintrag auf www.graphclasses.org/classes/... führt.\\
+Das Information Fenster enthält eine Liste aller enthaltenen Graph-Klassen, in welcher eine Klasse mithilfe der Maus ausgewählt werden kann. Entsprechend der Auswahl wird unterhalb eine Tabelle angezeigt, welche alle Probleme enthält und die zur ausgewählten Klasse zugehörige Komplexität angibt. Im Unteren Bereich werden zusätzlich Listen für Superklassen, Äquivalente Klassen und Subklassen angezeigt, innerhalb dieser drei Listen kann eine weitere Klasse ausgewählt werden. Es ist ein Textfeld vorhanden, welches bei bestehender Internetverbindung eine WebSearch (Packagebeschreibung GUI) ausführt um die Liste der Graph-Klassen zu filtern. Neben einem Close Button um das Information Fenster zu schließen existieren außerdem ein Draw Button der zum Zeichnen des gewählten Graphen auf dem GraphCanvas dient, ein "`Inclusion"' Info Button der, falls eine Graph-Klasse und innerhalb der unteren Listen eine weitere Klasse ausgewählt wurde, ein Fenster mit Informationen zur Inklusion dieser beiden Klassen öffnet, sowie ein "`Class details"' Button welcher einen Hyperlink zum entsprechenden Datenbankeintrag auf www.graphclasses.org/classes/... führt.\\
 Inclusion info Fenster: Das Fenster enthält Informationen zur gewählten Inklusion in textueller Form, sowie die Buttons OK, zum schließen des Fensters, Draw, zum Zeichnen der Inklusion auf dem GraphCanvas und View references, welche einen Hyperlink zum entsprechenden Datenbankeintrag auf http://www.graphclasses.org/classes/... führt.
 \newpage
 \section{Wichtige Klassen des bestehenden Systems}
@@ -267,8 +267,8 @@ Umsetzung: Alle Knoten kommen in eine Warteschlange, werden nach und nach (via. 
 
 \paragraph{DFSWalker.java}\ \\
 \emph{Erweiterung von GraphWalker}\\
-Beinhaltet DFS Algorithmus. Durchläuft alle Knoten eines Graphen, ausgehend von einem gegebenen Startknoten.\\
-Umsetzung: Über ein Annotation-Objekt können besuchte Knoten markiert werden. Durchlauf mittels DFS Algorithmus.\\
+Beinhaltet tiefensuch-Algorithmus. Durchläuft alle Knoten eines Graphen, ausgehend von einem gegebenen Startknoten.\\
+Umsetzung: Über ein Annotation-Objekt können besuchte Knoten markiert werden. Durchlauf mittels tiefensuch-Algorithmus.\\
 
 \paragraph{GraphWalker.java}\ \\
 \emph{Abstrakte Klasse}\\
@@ -276,7 +276,7 @@ GraphWalkers werden benötigt, um einen Graphen zu durchlaufen - vgl. BFSWalker/
 
 \paragraph{CacheGraph.java}\ \\
 \emph{Erweiterung von ListenableDirectedGraph}\\
-Ermöglicht die Erstellung eines gerichteten Graphen mit cashing von Kanten und Knoten.\\
+Ermöglicht die Erstellung eines gerichteten Graphen mit Caching von Kanten und Knoten.\\
 Umsetzung: HashMaps jeweils für Knoten und Kanten.\\
 Überschreibt verschiedene Methoden/stellt zur Verfügung: Suchen von Knoten/Kanten, Feststellung ob Knoten/Kanten vorhanden sind und Konsistenz-Checks.\\
 
@@ -449,13 +449,14 @@ Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter u
 %%ab hier wirds ernst
 \section{Vorgeschlagene Software Architektur}
 \subsection{Übersicht}
-Um neue Funktionalität von JgraphX hinzuzufügen werden grundlegende Änderungen an ISGCI vorgenommen. Dies umfasst einführen einer neuen Struktur, in der die Graphdaten (Knoten (Graphklassen) und Kanten (Inklusionen)) gespeichert werden, Veränderungen an der Canvas auf die der Graph gezeichnet wird und Veränderungen am GUI um die neuen Funktionen für den User sichtbar zu machen.
+Um neue Funktionalität von JgraphX hinzuzufügen werden grundlegende Änderungen an ISGCI vorgenommen. Dies umfasst Einführen einer neuen Struktur, in der die Graphdaten (Knoten (Graphklassen) und Kanten (Inklusionen)) gespeichert werden, Veränderungen an dem Canvas auf dem der Graph gezeichnet wird und Veränderungen am GUI um die neuen Funktionen für den User sichtbar zu machen.
 \subsection{ISGCIGraph.java}
-Wir erstellen eine neue Klasse ISGCIGraph im neuen Package .teo.isgci.jgraphx, die das Interface DirectedGraph(JGraphT) implementiert und die Klasse mxGraph(JGraphX) erweitert und als Schnittstelle zwischen ISGCI, JgraphT und JgraphX fungiert.\\
-Die Erweiterung der Klasse mxGraph ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird das mxHierarchical Layout verwendet, das den Look des Graphen verbessert. 
- Durch die Zusammenführung des DirectedGraph(JgraphT) und mxGraph(JgraphX) sorgen wir dafür, dass keine Doppelte Datenhaltung vorliegt, denn alle Knoten und Kanten werden in JgraphX-Cells abgelegt, sie sind weiterhin wie ein DirectedGraph erreichbar. Bei der Implementierung ist besonders darauf zu achten, dass der Zugriff auf Kanten und Knoten des Graphen effizient umgesetzt wird, damit die Userexperience nicht unter langen Wartezeiten leidet.
+Wir erstellen eine neue Klasse ISGCIGraph im neuen Package .teo.isgci.jgraphx, die die Klasse mxGraph(JGraphX) erweitert und als Schnittstelle zwischen ISGCI und JgraphX fungiert.\\
+Zusätzlich erhält dieses Package eine weitere neue Klasse ISGCIGraphWrapper, die das Interface DirectedGraph(JGraphT) implementiert und auf den ISGCIGraph zugreift, den sie als Instanzvariable hält. Dieser Wrapper ist die Schnittstelle zwischen JgraphX und JgraphT. Dadurch bleibt die Schnittstelle JgraphT-ISGCI unangetastet.
+Die Erweiterung der Klasse mxGraph ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird das mxHierarchicalLayout verwendet, das das Aussehen des Graphen verbessert. 
+ Durch die Zusammenführung des DirectedGraph(JgraphT) und mxGraph(JgraphX) sorgen wir dafür, dass keine doppelte Datenhaltung vorliegt, denn alle Knoten und Kanten werden in JgraphX-Cells abgelegt, sie sind weiterhin wie in einem DirectedGraph erreichbar. Bei der Implementierung ist besonders darauf zu achten, dass der Zugriff auf Kanten und Knoten des Graphen effizient umgesetzt wird, damit die Userexperience nicht unter langen Wartezeiten leidet.
 
-Durch die Implementierung des DirectedGraph-Interfaces und setzen der Instanzvariablen "`protected boolean multigraph = false"' und "`allowLoops = false;`"' des mxGraphs können wir den neuen ISGCIGraph verwenden wie den SimpleDirectedGraph der bisherigen Implementation. Diese Funktionen beinhalten unter anderem: \begin{itemize}
+Durch die Implementierung des DirectedGraph-Interfaces und setzen der Instanzvariablen "`protected boolean multigraph = false"' und "`allowLoops = false;`"' des mxGraphs können wir den neuen ISGCIGraph wie den SimpleDirectedGraph der bisherigen Implementation verwenden, da sie die selben Eigenschaften (gerichtet, keine Kreise und keine Multikanten) haben. Diese Funktionen beinhalten unter anderem: \begin{itemize}
 \item Erstellen des Graphen aus der heruntergeladenen ISGCI.xml
 \item Mittels Walkern aus dem .teo.jgrapht-Package den Graphen traversieren
 \item Suche nach Problemklassen mittels des .teo.problem-Packages
@@ -463,7 +464,7 @@ Durch die Implementierung des DirectedGraph-Interfaces und setzen der Instanzvar
 \item Zeichnen des Graphen
 
 \end{itemize}
-Dazu müssen folgende Klassen angepasst werden, die einen SimpleDirectedGraph verwenden und jetzt einen gleichwertigen ISGCIGraph verwenden werden: \begin{description}
+Dazu müssen folgende Klassen angepasst werden, die einen SimpleDirectedGraph verwenden und jetzt einen gleichwertigen ISGCIGraphWrapper verwenden werden: \begin{description}
 \item FindISG.java
 \item Algo.java
 \item DataSet.java
@@ -472,20 +473,21 @@ Dazu müssen folgende Klassen angepasst werden, die einen SimpleDirectedGraph ve
 \item Deducer.java
 \item DFSWalker.java
 \item GAlg.java
-\item GraphCanvas.java
-\item GraphView.java
-\item ISGCIGraphCanvas.java (hier finden noch weitere, grundlegende Änderungen statt)
-\item ISGCIMainFrame.java
+\item GraphCanvas.java (hier finden noch weitere, grundlegende Änderungen statt, s.u.)
+\item GraphView.java (hier finden noch weitere, grundlegende Änderungen statt, s.u.)
+\item ISGCIGraphCanvas.java (hier finden noch weitere, grundlegende Änderungen statt, s.u.)
+\item ISGCIMainFrame.java (hier finden noch weitere, grundlegende Änderungen statt, s.u.)
 \item LandMarks.java
 \item ISGCIWriter.java
 \end{description}
- Durch das erweitern des mxGraph erhalten wir zudem folgende Funktionalität: \begin{itemize}
- \item Automatisches Layout mittels mxGraph.layout.mxHierarchyLayout; \\dies ersetzt das .layout-Package der bisherigen Implementation.
+ Durch das erweitern des mxGraph erhalten wir zudem folgende Funktionalität: 
+ \begin{itemize}
+ \item Automatisches Layout mittels mxGraph.layout.mxHierarchyLayout; \\dies ersetzt das teo.layout-Package der bisherigen Implementation.
  \item Zeichnen des Graphen mittels JgraphX-Funktionen auf eine mxICanvas
  \item Effizienter Zugriff auf alle Elemente des Graphen
  \item Verschieben von Knoten
  \end{itemize}
-Die JGraphX-Cells (mxGraph.model.mxCell) werden so erweitert, dass sie die GraphClass Information von ISGCI speichern können und für alle Klassen die den Graphen als DirectedGraph als GraphClass erscheinen.
+Die JGraphX-Cells (mxGraph.model.mxCell) werden so erweitert, dass sie die GraphClass Information von ISGCI speichern können und für alle Klassen, die den ISGCIGraphWrapper benutzen, als GraphClass erscheinen.
 \subsection{ISGCI.Gui}
 \paragraph{Grundlegende Änderungen}
 Die bereits existierende Klasse ISGCIGraphCanvas.java Klasse aus dem ISGCI Projekt wird so erweitert, dass sie das Interface mxICanvas.java implementiert, sodass dem aktuellen ISGCIGraphCanvas die Funktionalitäten hinzugefügt werden, die der ISGCIGraph (abgeleitet von mxGraph.java) benötigt um den Graphen in der Darstellung, wie JGraphX einen Graphen interpretiert, zu zeichnen. Dadurch entfallen einige Klassen aus dem GUI-Package (z.B. NodeView, EdgeView), die momentan zur Speicherung von Daten, wie ein Knoten gezeichnet werden muss, beinhalten. Diese werden beim Erstellen des ISGCIGraph (extends mxGraph) entsprechend in der JGraphX-Darstellung gespeichert (Mapping von NodeView, EdgeView auf mxCellState). Da JGraphX Knoten und Kanten über eine Klasse mxCell definiert und einen Flag besitzt, welcher angibt, ob die aktuelle mxCell eine Kante oder ein Knoten ist, wird die aktuelle Repräsentation einer mxCell in der Klasse mxCellState.java gespeichert und kann ausgelesen werden. Dies übernimmt JGraphX selbst benötigt dafür das entsprechende Mapping von dem aktuellen Graphen auf die Darstellung des Graphen in JGraphX (also statt Knoten und Kanten eben Cells mit entsprechenden Eigenschaften). Nun müssen weitere wichtige Aspekte berücksichtigt werden. Das Setzen der Farbe von Knoten findet Problem-spezifisch statt und da JGraphX die Gestaltungsinformationen in einem String style hält, müssen diese Informationen ebenfalls entsprechend konvertiert und abgebildet werden.
@@ -547,14 +549,17 @@ Durch die Implementierung des DirectedGraph-Interfaces können wir den neuen ISG
 \subsection{Architektur}
 ISGCI benötigt als Hard-/Software Umgebung eine lauffähige Java-Laufzeit-Umgebung. Für weitere Informationen zu den Hard-/Software-Anforderungen besuchen Sie bitte 
 \href{http://www.oracle.com/technetwork/java/javase/system-configurations-135212.html}{Java 6 - Anforderungen} (06.06.2013).
+\\Zusätzlich wird für die Filterfunktion eine ständige Internetverbindung vorausgesetzt.
 
 \subsection{Management der persistenten Daten}
-Alle zu speichernde Daten werden in der Datenbank online gespeichert. Lädt man sich das Programm lokal herunter, so wird die Datenbank mitgeliefert, und bei Programmausführung verwendet. Gibt es Probleme beim Zugriff auf die lokale Datenbank, so wird auf die Online-Datenbank zugegriffen. Da es sich um relativ statische Daten handelt - und diese sich i.d.R. nicht ständig ändern, ist ein solches Vorgehen sehr gut geeignet (keine unnötige Auslastung der Internetverbindung, geringere Lade-/Zugriffszeiten, geringere Belastung des Servers). 
+Alle zu speichernde Daten werden in der Datenbank online gespeichert und werden beim Start der Anwendung heruntergeladen. Sie liegen im XML-Format vor.
 
-%\subsection{Randbedingungen}
-
+\subsection{Randbedingungen}
+\paragraph{Starten der Anwendung}
+Wenn keine Internetverbindung: Fenster "'Anwendungsfehler: Anwendung kann nicht gestartet werden."'
+\paragraph{Beenden der Anwendung}
+Es wird kein Zustand gespeichert, die Anwendung beendet sich sofort.
 \newpage
-%Fabis Reich
 \section{Testing}
 Es wird ein Grey Box testing Ansatz verwendet, dass heißt, der Testende hat gegebenenfalls Zugriff auf den Sourcecode, kennt allerdings nicht unbedingt die vollständige Implementierung der Funktion. Dabei wird gegen die Beschreibung des bereits bestehenden Systems getestet.\\
 Wir gliedern das Testing in folgende Testphasen:
@@ -581,7 +586,15 @@ Für die Beta Version und den Release Candidate wird ein Functionality Testing d
 \subparagraph{Acceptance Testing}\ \\
 Nachdem der Release Candidate fertig gestellt wurde, wird dieser dem Kunden für Acceptance Tests zur Verfügung gestellt. 
 
+\section{Anhang} \ \\
 
+Anbei das Protokoll Layout zur Nutzung während der Modultests und ein Beispielszenario zur Nutzung während dem Software Testing.\\
+\newpage
+\subsection{Testprotokoll}
+\input{Testprotokoll}
+\newpage
+\subsection{Testszenario}
+\input{Testszenario}
 
 
 \end{document}
