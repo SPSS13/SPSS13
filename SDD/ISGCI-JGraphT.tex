@@ -112,6 +112,7 @@ Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das besteh
 \end{itemize}  
 \newpage
 \section{Funktionen des bestehenden Systems}
+\label{sec:bestSys}
 Beschreibung der aus dem GUI ableitbaren Funktionen
 \subsection{File}
 Der Menüreiter "`File"'\ enthält drei grundlegende Funktionen zur Bedienung des Programms. Es lässt sich ein weiteres Fenster der ISGCI Applikation öffnen, falls man beispielsweise mehrere Graphen gleichzeitig zeichnen lassen und betrachten möchte.\\
@@ -493,59 +494,51 @@ Die JGraphX-Cells (mxGraph.model.mxCell) werden in einer Klasse ISGCImxCell im t
 Die bereits existierende Klasse ISGCIGraphCanvas.java aus dem ISGCI Projekt wird so erweitert, dass sie das Interface mxICanvas.java implementiert, sodass dem aktuellen ISGCIGraphCanvas die Funktionalitäten hinzugefügt werden, die der ISGCIGraph (abgeleitet von mxGraph) benötigt um den Graphen in der Darstellung, wie JGraphX einen Graphen interpretiert, zu zeichnen. 
 %hier Bildchen einfügen
 Dadurch entfallen einige Klassen aus dem GUI-Package (z.B. NodeView, EdgeView), die momentan zur Speicherung der Daten, wie ein Knoten oder eine Kante gezeichnet wird, beinhalten. Diese werden beim Erstellen des ISGCIGraph (extends mxGraph) entsprechend in der JGraphX-Darstellung gespeichert (Mapping von NodeView und EdgeView auf mxCellState). Die "`isProper"' Information des EdgeView können wir hierbei vernachlässigen, da sie schon in den "`Inclusions"' gespeichert ist, zum Zeichnen wird hierauf zurückgegriffen. 
-JGraphX übernimmt mit dem ISGCIGraph, den angehängten mxCells, mxCellStates und der ISGCICanvas selbstständig das Zeichnen des Graphen unter Zuhilfenahme eines mxGraphViews, den wir mit den entsprechenden Parametern, je nach Kundenwunsch, initialisieren. 
-Das Setzen der Farbe von Knoten findet Problem-spezifisch statt und da JGraphX die Gestaltungsinformationen in einem String style hält, müssen diese Informationen ebenfalls entsprechend konvertiert und abgebildet werden.
-\paragraph{Layoutverbesserungen}
+JGraphX übernimmt mit dem ISGCIGraph, den angehängten mxCells, mxCellStates und der ISGCICanvas selbstständig das Zeichnen des Graphen.
+Die setProblem(Problem p) Methode in der ISGCIGraphCanvas wird angepasst um die Farben in den mxCellStates zu ändern.
+%\paragraph{Layoutverbesserungen}
 
 \paragraph{Knoten Verschieben}\ \\ 
 
-Wird in der ISGCIGraphCanvas.java realisiert werden. Hierzu wird eine geeignete Methode im Abschnitt für MouseListener stuff implementiert die sich die Funktionalität von JGraphX zu nutze macht.
+Wird wie bisher in der ISGCIGraphCanvas.java Klasse realisiert.
 
 \paragraph{Zoom (Mausrad)}\ \\ 
 
-Wird in der ISGCIGraphCanvas.java realisiert werden. Hierzu wird eine geeignete Methode im Abschnitt für MouseListener stuff implementiert die sich die Funktionalität von JGraphX zu nutze macht.
+Wird über Veränderung der "`Scale"'-Variable im ISGCIGraph assoziierten GraphView und auswerten eines MouseWheelListeners gelöst.
 
 \paragraph{Zoom (Menu-Bar)}\ \\ 
 
-In der ISGCIMainFrame.java Klasse werden die Menüs und dazugehörigen Items erzeugt. Hier werden wir die Methoden, createMenus() und registerListeners() anpassen. Anschließend wird die interaktive Funktionalität der neu hinzugefügten Komponenten durch eine Anpassung der actionPerformed() (beziehungsweise der itemStateChanged() nur falls nötig) gewährleistet.
+In der ISGCIMainFrame.java Klasse werden die Menüs und dazugehörigen Items erzeugt. Hier werden wir die Methoden, createMenus() und registerListeners() anpassen. Anschließend wird die interaktive Funktionalität der neu hinzugefügten Komponenten durch eine Anpassung der actionPerformed() gewährleistet. Hier wird auch die "`Scale"'-Variable im ISGCIGraph assoziierten GraphView verändert.
 
 \paragraph{Tooltip}\ \\ 
 
-Wird in der ISGCIGraphCanvas.java realisiert werden. Hierzu wird eine geeignete Methode im Abschnitt für MouseListener stuff implementiert, welche den Tooltip auslöst. Der Tooltip selbst wird durch die Funktionalität von JGraphX erstellt (evtl. bekommt er sogar eine eigene Klasse wie EdgePopup und NodePopup).
+Wird in der ISGCIGraphCanvas.java realisiert. Es wird über den MouseListener implementiert, der falls er über dem Knoten verweilt den Tooltip, dessen Form in der neuen Klasse ISGCINodeTooltip beschrieben wird.
 
 \paragraph{Tooltip Inhalt}\ \\ 
 
- Der Tooltip bekommt Daten von der Klasse DataSet.java aus dem Package isgci.db. hierauf wird beim erzeugen des Tooltips in der entsprechend implementierten Methode (siehe Tooltip) zugegriffen.
+ Der ISGCINodeTooltip greift auf Daten in der Klasse DataSet.java aus dem Package teo.isgci.db zu. Er enthält alle alternativen Namen des Nodes (der aktuelle Name inbegriffen) in Listenform.
 
 
 \paragraph{Scrolling}\ \\ 
 
-In der ISGCIMainFrame.java Klasse existiert bereits eine Methode (createCanvasPanel()), welche den Canvas und die Scrollbalken unten und rechts des Canvas erzeugt. Um sich darin auch per click and pull bewegen zu können müssen wir eine weitere Methode in dieser Klasse erstellen, die diese Funktionalität implementiert.
+In der ISGCIMainFrame.java Klasse existiert bereits eine Methode createCanvasPanel(), welche den Canvas und die Scrollbalken unten und rechts des Canvas erzeugt. Um sich darin auch per click and pull bewegen zu können erstellen wir eine weitere Methode in dieser Klasse, die das MousePressed Event auswertet, wenn es nicht auf einem Knoten liegt und den Viewport anpasst.
 
 \paragraph{Kontextmenü}\ \\ 
 
-NodePopup.java ist ein bereits existierendes Kontextmenü, dass bei einem Event, das in der ISGCIGraphCanvas.java festgelegt wurde aufgerufen wird. Dieses wird von uns durch die Benötigte Funktionalität erweitert (siehe Kontextmenü: Superklassen, Subklassen, Nachbarn).
+NodePopup.java ist eine bereits existierende Klasse die das Kontextmenü bereitstellt, das bei einem Rechtsklick, auf einen Knoten, aufgerufen wird. Dieses wird von uns um die folgenden Punkte erweitert. 
+%(Dieser Punkt wird in der 2. Version des SDD ausgeführt)
 
 \paragraph{Kontextmenü Superklassen}\ \\ 
 
-In NodePopup.java wird das neue Item durch anpassen der Methoden NodePopup( ) implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() methode aufgerufen. actionPerformed() ruft dabei Informationen über die Ausgewählte Node,deren Superklassen ab und zeichnet das Ergebnis auf den Canvas. Hierzu werden wir die schon implementierte Funktionalität, zum anzeigen aller Superklassen einer ausgewählten Node der GraphClassInformationDialog.java, nutzen.
+In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Superklassen ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getSupernodes(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, suchen aus dem Ergebnis alle Vorgängerknoten heraus (rekursiv für Kanten, die eine Kante als Vorgänger haben) und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 \paragraph{Kontextmenü Subklassen}\ \\ 
 
-In NodePopup.java wird das neue Item durch anpassen der Methoden NodePopup( ) implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() methode aufgerufen. actionPerformed() ruft dabei Informationen über die Ausgewählte Node,deren Subklassen ab und zeichnet das Ergebnis auf den Canvas. Hierzu werden wir die schon implementierte Funktionalität, zum anzeigen aller Subklassen einer ausgewählten Node der GraphClassInformationDialog.java, nutzen.
+In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Subklassen ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getSubnodes(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, suchen aus dem Ergebnis alle Nachfolgerknoten heraus (rekursiv für Kanten, die eine Kante als Nachfolgerknoten haben) und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 \paragraph{Kontextmenü Nachbarn}\ \\ 
 
-In NodePopup.java wird das neue Item durch anpassen der Methoden NodePopup( ) implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() methode aufgerufen. actionPerformed() ruft dabei Informationen über die Ausgewählte Node,deren Nachbarn ab und zeichnet das Ergebnis auf den Canvas. 
-
-\subsection{ISGCIGraph}
-Wir erstellen eine neue Klasse ISGCIGraph, die das Interface DirectedGraph(JGraphT) implementiert und die Klasse mxGraph(JGraphX) erweitert.\\
-Die Erweiterung der Klasse mxGraph ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird das mxHierarchical Layout verwendet, das den Look des Graphen verbessert. 
-
-
-Durch die Implementierung des DirectedGraph-Interfaces können wir den neuen ISGCI Graph wie den Directed-Graph der vorherigen Version verwenden. Diese Funktionen beinhalten [....]
-
-
+In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Nachbarn ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getNeighbour(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 
 \newpage
@@ -560,44 +553,46 @@ Alle zu speichernde Daten werden in der Datenbank online gespeichert und werden 
 
 \subsection{Randbedingungen}
 \paragraph{Starten der Anwendung}
-Wenn keine Internetverbindung: Fenster "'Anwendungsfehler: Anwendung kann nicht gestartet werden."'
+Wenn keine Internetverbindung: Fenster "'Anwendungsfehler: Anwendung kann nicht gestartet werden."' dies tritt nicht immer auf; das Verhalten ist nicht spezifiziert.
 \paragraph{Beenden der Anwendung}
 Es wird kein Zustand gespeichert, die Anwendung beendet sich sofort.
 \newpage
 \section{Testing}
-Es wird ein Grey Box testing Ansatz verwendet, dass heißt, der Testende hat gegebenenfalls Zugriff auf den Sourcecode, kennt allerdings nicht unbedingt die vollständige Implementierung der Funktion. Dabei wird gegen die Beschreibung des bereits bestehenden Systems getestet.\\
+Es wird ein Grey Box Testing Ansatz verwendet, dass heißt, der Testende hat gegebenenfalls Zugriff auf den Sourcecode, kennt allerdings nicht unbedingt die vollständige Implementierung der Funktion. Dabei wird gegen die Beschreibung des bereits bestehenden Systems (siehe: \autoref{sec:bestSys}) getestet.\\
 Wir gliedern das Testing in folgende Testphasen:
 \begin{itemize}
 \item Unit Testing
-\item Integrationstesting (Modultesting)
+\item Integration Testing (Modul Testing)
 \item Software Testing
 \item Functionality Testing
 \item Acceptance Testing
 \end{itemize}
 Diese sind folgendermaßen aufgebaut:
 \subparagraph{Unit Testing}\ \\
-Für jede angepasste bzw. selbst geschriebene Klasse wird bereits während deren Implementation ein JUnit Testfile entworfen. Dieses beinhaltet Tests zu jeder Methode, welche mit fiktiven Parametern aufgerufen werden, um deren korrekte Ausführung zu testen. Die Testfiles werden jeweils nicht den Programmierern der Methoden bzw. Klassen geschrieben, sondern von einem anderen Teammitglied. 
+Für jede angepasste bzw. selbst geschriebene Klasse wird bereits während deren Implementation ein JUnit Testfile entworfen. Dieses beinhaltet Tests zu jeder Methode, welche mit fiktiven Parametern aufgerufen werden, um deren korrekte Ausführung zu testen. Die Testfiles werden jeweils nicht von den Programmierern der Methoden bzw. Klassen geschrieben, sondern von einem anderen Teammitglied. Das Feedback hat Änderungen am Programmcode zur Folge, falls Abweichungen auftreten.
 
 \subparagraph{Integration Testing}\ \\
-Sind alle JUnit Tests erfolgreich durchgeführt worden werden die einzelne Module (Packages) auf ihre Funktionalität alleine und in Kombination getestet. Hierbei wird das angehängte Testprotokoll verwendet. Beim Test eines Moduls werden benötigte Parameter, die über Schnittstellen zur Verfügung gestellt werden sollten, durch sinnvolle fiktive Eingabewerte ersetzt. Ist ein Modul auf diese Weise erfolgreich getestet worden, so werden inkrementell benötigte andere Module, sofern diese auch erfolgreich getestet wurden, hinzugefügt. Die Zusammengesetzten Module werden wieder auf ihre Funktionalität überprüft, bis dabei das gesamte System zusammengefügt wurde.
+Sind alle JUnit Tests erfolgreich durchgeführt worden werden die einzelne Module (Packages) auf ihre Funktionalität, alleine und in Kombination, getestet. Hierbei wird das angehängte Testprotokoll (siehe: \autoref{sec:testp}) verwendet. Beim Test eines Moduls werden benötigte Parameter, die über Schnittstellen zur Verfügung gestellt werden sollten, durch sinnvolle fiktive Eingabewerte ersetzt. Ist ein Modul auf diese Weise erfolgreich getestet worden, so werden inkrementell benötigte andere Module, sofern diese auch erfolgreich getestet wurden, hinzugefügt. Die zusammengesetzten Module werden nach dem selben Prinzip auf ihre Funktionalität überprüft, bis dabei das gesamte System zusammengefügt wurde. Das Feedback hat Änderungen am Programmcode zur Folge, falls Abweichungen auftreten.
 
 \subparagraph{Software Testing}\ \\
-Hierbei wird der zur Verfügung stehende Prototyp auf die Umsetzung der funktionalen Anforderungen überprüft. Dazu werden spezifische Testszenarien festgelegt, die Benutzerinteraktion darstellen sollen. Die Testszenarien werden jeweils von einem Teammitglied durchgeführt und das Ergebnis wird protokolliert. 
+Hierbei wird der zur Verfügung stehende Prototyp auf die Umsetzung der funktionalen Anforderungen überprüft. Dazu werden spezifische Testszenarien (Template siehe: \autoref{sec:tests}) festgelegt, die Benutzerinteraktion darstellen. Die Testszenarien werden jeweils von einem Teammitglied durchgeführt und das Ergebnis wird im Template protokolliert. Das Feedback hat Änderungen am Softwaredesign zur Folge, falls Abweichungen auftreten.
 
 \subparagraph{Functionality Testing}\ \\
-Für die Beta Version und den Release Candidate wird ein Functionality Testing durchgeführt. Dabei wird das System auf einem Endbenutzergerät ausgeführt, auf dem bisher keinerlei Entwicklung stattgefunden hat, wobei ein reales Nutzungsszenario simuliert wird. Dieses wird von der durchführenden Person protokolliert.
+Für die Beta Version und den Release Candidate wird ein Functionality Testing durchgeführt. Dabei wird das System auf einem Endbenutzergerät ausgeführt, auf dem bisher keinerlei Entwicklung stattgefunden hat, wobei ein reales Nutzungsszenario simuliert wird, der Tester versucht das System zum Zusammenbrechen zu bringen. Dieses wird von der durchführenden Person protokolliert, insbesondere Fehler und der Weg zu ihnen. Es wird das gleiche Template (\autoref{sec:tests}) wie für Szenarien verwendet. Das Feedback hat Änderungen am Softwaredesign zur Folge, falls Abweichungen auftreten.
 
 \subparagraph{Acceptance Testing}\ \\
-Nachdem der Release Candidate fertig gestellt wurde, wird dieser dem Kunden für Acceptance Tests zur Verfügung gestellt. 
+Nachdem der Release Candidate fertig gestellt wurde, wird dieser dem Kunden zum Acceptance Testing zur Verfügung gestellt. Das Feedback des Kunden hat Änderungen an der Spezifikation zur Folge, insofern sie im Zeitplan umsetzbar sind. Sind die Änderungen umfangreicher wird der Releasetermin und das Budget neu verhandelt.
 
 \section{Anhang} \ \\
 
 Anbei das Protokoll Layout zur Nutzung während der Modultests und ein Beispielszenario zur Nutzung während dem Software Testing.\\
 \newpage
 \subsection{Testprotokoll}
+\label{sec:testp}
 \input{Testprotokoll}
 \newpage
 \subsection{Testszenario}
+\label{sec:tests}
 \input{Testszenario}
 
 
