@@ -1,0 +1,72 @@
+http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
+
+3.1 A file template is provided as etc/template.java
+3.1.2 The package names are to be teo.isgci.*, not de.uni_rostock.informatik.*
+
+4 TAB characters (ascii 8) should not appear in the source. The CVS repository
+  will reject check-ins of java files containing TABs.
+
+5 While drawing boxes is a bad idea, drawing lines can improve navigation in
+  files containing several classes (eg inner classes and private helper
+  classes). From big blocks to small blocks, the following can be used:
+  '****' (top level classes), '====' (inner classes), '----' (functions or
+  function groups).
+
+6.2 Initialize local variables only when you've got a meaningful value that
+  can be assigned to them. Habitually assigning 0 to every variable makes
+  it difficult for the reader of the program to understand where 0 is
+  actually required by the algorithm.
+
+
+7 Under circumstances it can be clearer to write a control statement on a
+  single line instead of breaking it. In this case braces need not be used:
+  	if      (temp <  0) s = "Freezing";
+	else if (temp < 10) s = "Cold";
+	else if (temp < 20) s = "Moderate";
+	else                s = "Warm";
+
+   Do while loops are always written with braces:
+	do {
+		nothing;
+	} while (1);
+
+   Do NOT write empty statements as proposed in Sun's Java style guide.
+   Instead, use an empty block:
+   	while (condition);		// FALSE!
+	while (condition) {}		// Right
+
+   Cases in a switch statement have an extra indent:
+	switch (cond) {
+		case a:
+			foo();
+			break;
+		case b:
+			bar();
+			break;
+		default:
+			die();
+	}
+
+8.1 The amount of blank lines used can be taken more liberally.
+
+8.2 Casts need not be followed by a blank:
+	myMethod((byte)aNum, (Object)x);
+
+10.3 This should not be taken to hard. Common sense is needed here.
+
+10.4 Using the result of an assignment is allowed in simple cases:
+	i = j = 0;		// OK
+	d = (a = b+c) + r;	// Not OK.
+
+10.5.1 Do not use parentheses too liberally. Too many parentheses hamper
+   readability, especially in situations where the intuitive meaning matches
+   the intended meaning. As a rule of thumb, expressions involving only
+   comparisons and logical operators do not require extra parentheses. If
+   you'd like to improve readability, consider adding extra spaces:
+	if ((a == b) && (c == d))	// AVOID!
+	if (a == b && c == d)		// OK
+	if (a == b  &&  c == d)		// Even better
+	if (a==b && c==d)		// Even better, too.
+
+10.5.4 Use !!! statt XXX.
+

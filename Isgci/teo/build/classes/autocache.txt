@@ -1,0 +1,312 @@
+AUTO_1075	(P_5,anti-hole,co-domino)--free
+AUTO_1441	(3K_1,\co{3K_2})--free
+AUTO_1442	(K_4,S_3)--free
+AUTO_1443	(C_4,S_3)--free
+AUTO_1444	(3K_1,paw)--free
+AUTO_1445	(3K_1,\co{X_{172}})--free
+AUTO_1446	(3K_1,\co{P_2 \cup P_4})--free
+AUTO_1447	(3K_1,\co{P_6})--free
+AUTO_1448	(\co{K_{1,4}},co-paw)--free
+AUTO_1449	(4K_1,co-claw,co-diamond)--free
+AUTO_1450	(2K_2,4K_1,C_5,co-diamond)--free
+AUTO_1451	(3K_1,\co{2P_3})--free
+AUTO_1452	(2K_2,3K_1)--free
+AUTO_1453	(co-butterfly,co-gem)--free
+AUTO_1454	(K_2 \cup K_3,P_4,butterfly)--free
+AUTO_1455	(P_4,triangle)--free
+AUTO_1456	(C_5,P_5,\co{A},\co{C_6},\co{P_6},co-domino)--free
+AUTO_1457	(bull,hole,odd anti-hole)--free
+AUTO_1458	(co-diamond,even anti-hole)--free
+AUTO_1459	(\co{P},\co{star_{1,2,3}})--free
+AUTO_1460	(2K_2,\co{P_6})--free
+AUTO_1461	(\co{P},\co{P_7})--free
+AUTO_1462	(P_2 \cup P_3,house)--free
+AUTO_1463	(K_3 \cup P_3,\co{C_6},\co{P},\co{P_7},\co{X_{37}},\co{X_{41}})--free
+AUTO_1464	(\co{P},\co{T_2})--free
+AUTO_1465	(\co{E},\co{P})--free
+AUTO_1466	(3K_2,E,P_2 \cup P_4,net)--free
+AUTO_1467	(co-claw,co-diamond)--free
+AUTO_1468	(2K_3,2K_3 + e,3K_1,\co{A},\co{H},\co{T_2},\co{X_{18}},\co{X_{45}},co-domino)--free
+AUTO_1469	(3K_1,C_5,butterfly,diamond)--free
+AUTO_1470	(C_6,house)--free
+AUTO_1471	(4K_1,house)--free
+AUTO_1472	(3K_1,house)--free
+AUTO_1473	(C_5,house)--free
+AUTO_1474	(3K_2,C_4 \cup P_2,C_5,C_6,K_2 \cup K_3,K_{3,3},K_{3,3}+e,P_2 \cup P_4,P_6,X_{18},X_5,\co{2P_3},\co{C_6},\co{C_7},\co{X_{84}},antenna,domino,fish)--free
+AUTO_1475	(2K_2,C_5,triangle)--free
+AUTO_1476	(2K_3 + e,house)--free
+AUTO_1477	(3K_1,\co{E})--free
+AUTO_1478	(3K_1,\co{H})--free
+AUTO_1479	(4K_1,P_4)--free
+AUTO_1480	(3K_1,co-cross)--free
+AUTO_1481	(3K_1,co-fork)--free
+AUTO_1482	(K_2 \cup K_3,co-diamond)--free
+AUTO_1483	(2K_3,2P_3,C_4,K_3 \cup P_3,P_4)--free
+AUTO_1484	(P_5,\co{X_{38}},co-gem)--free
+AUTO_1485	(K_2 \cup K_3,P_5,\co{X_{37}},\co{X_{38}},co-diamond,co-domino,co-twin-C_5)--free
+AUTO_1488	(P_5,co-domino,co-gem)--free
+AUTO_1489	(P_5,bull,odd anti-hole)--free
+AUTO_1490	(\co{A},\co{P_6},co-domino)--free
+AUTO_1491	(C_4,\co{A},\co{H})--free
+AUTO_1492	(3K_1,\co{T_2},\co{X_2},\co{X_3},anti-hole)--free
+AUTO_1493	(P_5,S_3,\co{A},\co{E},\co{X_1},anti-hole,co-domino,co-rising sun,net)--free
+AUTO_1494	(2K_2,C_5,\co{C_6},\co{C_7},\co{C_8},co-claw,co-diamond)--free
+AUTO_1495	(C_5,co-gem,house)--free
+AUTO_1496	(P,co-gem,house)--free
+AUTO_1497	(C_5,P,\co{P},bull,co-fork,gem,house)--free
+AUTO_1498	(C_5,P,co-fork,fork,gem,house)--free
+AUTO_1499	(co-claw,co-paw)--free
+AUTO_1500	(C_4,co-claw)--free
+AUTO_1501	(2K_2,4K_1,co-claw,co-diamond)--free
+AUTO_1502	(P_5,bull,co-fork)--free
+AUTO_1503	(P,P_5,co-fork)--free
+AUTO_1504	(bull,co-fork,co-gem)--free
+AUTO_1505	(P,co-fork,co-gem)--free
+AUTO_1506	(2K_2,co-diamond)--free
+AUTO_1507	(co-gem,house)--free
+AUTO_1508	(fork,house)--free
+AUTO_1509	(co-fork,house)--free
+AUTO_1510	(P,co-fork)--free
+AUTO_1511	(2K_3,house)--free
+AUTO_1512	(2K_2,house)--free
+AUTO_1513	(C_5,P_2 \cup P_3,house)--free
+AUTO_1514	(2K_3 + e,\co{X_{98}},house)--free
+AUTO_1515	(co-cricket,house)--free
+AUTO_1516	(P,co-butterfly,co-fork,co-gem)--free
+AUTO_1517	(\co{K_{1,4}},\co{P},co-fork,house)--free
+AUTO_1518	(\co{K_{1,4}},co-diamond)--free
+AUTO_1519	(3K_2,\co{P},co-gem,house)--free
+AUTO_1520	(\co{P},house)--free
+AUTO_1521	(co-diamond,house)--free
+AUTO_1522	(\co{K_{1,4}},house)--free
+AUTO_1523	(co-claw,house)--free
+AUTO_1524	(K_2 \cup K_3,\co{P},house)--free
+AUTO_1525	(K_2 \cup K_3,house)--free
+AUTO_1526	(2K_2,C_5,\co{T_2})--free
+AUTO_1527	(K_2 \cup K_3,\co{P},anti-hole)--free
+AUTO_1528	(bull,co-fork)--free
+AUTO_1529	(2K_2,C_5)--free
+AUTO_1530	(S_3,co-claw,net)--free
+AUTO_1531	(P_5,\co{A},anti-hole,co-domino)--free
+AUTO_1532	(co-claw,co-diamond,odd anti-hole)--free
+AUTO_1533	(C_5,P_5,\co{P},house)--free
+AUTO_1534	(P_5,anti-hole,co-gem)--free
+AUTO_1535	(P_5,anti-hole,co-domino,co-gem)--free
+AUTO_1536	(2K_2,C_4,C_5,S_3,net,rising sun)--free
+AUTO_1537	(S_3,co-claw)--free
+AUTO_1538	(P_5,\co{P},anti-hole)--free
+AUTO_1545	(2K_2,C_4,C_5,sun)--free
+AUTO_1561	(3K_2,E,net,odd anti-hole)--free
+AUTO_1562	(3K_2,co-paw,odd anti-hole)--free
+AUTO_1563	(3K_2,C_5,P_2 \cup P_4,net)--free
+AUTO_1611	(2K_2,odd anti-hole)--free
+AUTO_1635	(3K_1,\co{C_6})--free
+AUTO_1636	(2K_2,C_5,\co{C_6},net)--free
+AUTO_1644	(anti-hole,fork)--free
+AUTO_1700	(2P_3,P_4)--free
+AUTO_1710	(3K_1,C_5,\co{C_6},\co{P_6})--free
+AUTO_202	\co{P_2 \cup P_4}--free
+AUTO_2069	(P_5,anti-hole,co-domino,co-sun)--free
+AUTO_2070	odd anti-cycle--free
+AUTO_2071	(\co{W_4},co-claw,co-gem)--free
+AUTO_2072	(P_5,anti-hole,co-bicycle,co-domino)--free
+AUTO_2073	(A,C_4 \cup 2K_1,P_2 \cup P_3,R,\co{K_5 - e},\co{W_5},co-claw,twin-C_5,twin-house)--free
+AUTO_2074	(2K_2,P_4,co-dart)--free
+AUTO_2075	co-sun--free
+AUTO_2076	odd co-sun--free
+AUTO_2077	\co{C_{n+4}}--free
+AUTO_2078	\co{P_3}--free
+AUTO_2079	(2K_4,house)--free
+AUTO_2080	(\co{P_7},\co{star_{1,2,3}},\co{sunlet_4},odd anti-cycle)--free
+AUTO_2081	(\co{P_7},\co{star_{1,2,3}},odd anti-cycle)--free
+AUTO_2082	(\co{E},odd anti-cycle)--free
+AUTO_2083	(\co{star_{1,2,3}},\co{sunlet_4},odd anti-cycle)--free
+AUTO_2084	(\co{star_{1,2,3}},odd anti-cycle)--free
+AUTO_2085	(co-fork,odd anti-cycle)--free
+AUTO_2086	(\co{A},\co{T_2},odd anti-cycle)--free
+AUTO_2087	(P_5,\co{A},\co{P_6},anti clique wheel,anti-hole,co-domino)--free
+AUTO_2088	(C_6,P_6,\co{P_6},\co{X_{10}},\co{X_{11}},\co{X_{12}},\co{X_{13}},\co{X_{14}},\co{X_{15}},\co{X_5},\co{X_6},\co{X_7},\co{X_8},\co{X_9},anti-hole,co-antenna)--free
+AUTO_2089	(C_5,C_6,P_6,\co{C_6},\co{P_6},\co{X_{17}},\co{X_{18}},\co{X_5},\co{X_{98}},co-antenna,co-domino)--free
+AUTO_2090	(C_5,P_5,\co{C_6},\co{C_7},\co{C_8},\co{P_8},\co{X_{19}},\co{X_{20}},\co{X_{21}},\co{X_{22}},co-gem)--free
+AUTO_2091	(\co{2C_4},\co{3K_2},\co{C_6},\co{E},\co{P_2 \cup P_4},\co{P_6},\co{X_{25}},\co{X_{26}},\co{X_{27}},\co{X_{28}},\co{X_{29}},odd anti-cycle)--free
+AUTO_2092	(2K_3,X_{42},\co{A},\co{H},\co{X_{45}},\co{X_{46}},\co{X_{47}},\co{X_{48}},\co{X_{49}},\co{X_{50}},\co{X_{51}},\co{X_{52}},\co{X_{53}},\co{X_{54}},\co{X_{55}},\co{X_{56}},\co{X_{57}})--free
+AUTO_2093	(\co{C_{n+4}},\co{X_{59}},co-longhorn)--free
+AUTO_2094	(\co{W_4},co-claw)--free
+AUTO_2095	(S_3,\co{C_{n+4}},\co{T_2})--free
+AUTO_2096	(\co{X_{79}},\co{X_{80}})--free
+AUTO_2097	\co{BW_3}--free
+AUTO_2098	\co{XC_{10}}--free
+AUTO_2099	(XC_7,\co{XC_1},\co{XC_2},\co{XC_3},\co{XC_4},\co{XC_5},\co{XC_6},\co{XC_8})--free
+AUTO_2100	(\co{X_{30}},\co{XZ_1},\co{XZ_4},co-longhorn)--free
+AUTO_2101	(\co{T_3},\co{X_{81}},co-cycle)--free
+AUTO_2102	(\co{W_4},\co{W_5},co-butterfly)--free
+AUTO_2103	co-cycle--free
+AUTO_2104	(\co{X_{82}},\co{X_{83}},house)--free
+AUTO_2105	(\co{C_{n+4}},bull,co-dart,co-gem)--free
+AUTO_2106	(4K_1,\co{C_{n+4}})--free
+AUTO_2107	(K_{3,3},\co{C_{n+4}})--free
+AUTO_2108	(K_{3,3,3},\co{C_{n+4}})--free
+AUTO_2109	(2K_2,3K_1,C_5,\co{C_6},\co{C_7},\co{C_8},\co{H},\co{X_{85}})--free
+AUTO_2110	(\co{P_6},\co{X_{30}},\co{X_8})--free
+AUTO_2111	(3K_1,C_5,K_5 - e,\co{C_6 \cup K_1},\co{C_7},\co{K_{3,3} \cup K_1},\co{K_{3,3}-e \cup K_1},\co{domino \cup K_1})--free
+AUTO_2112	(2K_3,4K_1,C_7,X_{38},X_{39},\co{W_4 \cup K_1},\co{W_5},\co{X_{86}},\co{X_{87}},\co{X_{88}},\co{X_{89}},\co{X_{90}},butterfly \cup K_1,diamond)--free
+AUTO_2113	(2K_2,\co{X_{91}},co-claw)--free
+AUTO_2114	(2K_3,2K_3 + e,\co{A},\co{H},\co{X_{45}},\co{XZ_5},co-domino)--free
+AUTO_2115	(3K_1,C_5,K_3 \cup K_4,\co{BW_3},\co{K_{3,4}-e},\co{T_2},\co{X_{18}},\co{X_{92}},\co{X_{93}})--free
+AUTO_2116	(2K_3 + e,3K_1,C_5,\co{T_2},\co{X_{18}},\co{X_{94}},co-domino)--free
+AUTO_2117	(\co{W_4},co-gem)--free
+AUTO_2118	even anti-cycle--free
+AUTO_2119	(\co{W_4},co-claw,co-gem,odd anti-hole)--free
+AUTO_2120	(A \cup K_1,\co{K_{1,4}},\co{W_4},\co{W_5},co-4-fan,co-fork \cup K_1,gem \cup K_1,net \cup K_1)--free
+AUTO_2121	\co{XC_{11}}--free
+AUTO_2122	\co{XC_{12}}--free
+AUTO_2123	\co{K_2 \cup claw}--free
+AUTO_2124	(\co{P},\co{P_8})--free
+AUTO_2125	(2K_3 + e,\co{X_{99}},house)--free
+AUTO_2126	(\co{C_{n+4}},\co{T_2},\co{X_{31}},co-XF_2^{n+1},co-XF_3^n)--free
+AUTO_2127	(\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{35}},\co{X_{36}},\co{X_{37}},\co{X_{38}},\co{X_{39}},\co{X_{40}},\co{X_{41}},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n)--free
+AUTO_2128	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{35},X_{36},XF_2^{n+1},XF_3^n,XF_4^n,co-XF_1^{2n+3},co-XF_5^{2n+3},co-XF_6^{2n+2},odd anti-hole)--free
+AUTO_2129	(S_3,\co{C_{n+6}},\co{X_{37}},antenna,co-claw,co-sun)--free
+AUTO_2130	(\co{C_{n+4}},\co{T_2},co-XF_2^{n+1})--free
+AUTO_2131	(H,K_3 \cup 2K_1,\co{C_{n+4}},\co{K_5 - e},co-4-fan,net)--free
+AUTO_2132	(H,K_3 \cup 2K_1,\co{C_{n+4}},\co{K_5 - e},\co{X_{100}},\co{X_{101}},\co{X_{102}},co-4-fan,net)--free
+AUTO_2133	(\co{C_{n+4}},co-claw,co-gem,house)--free
+AUTO_2134	(C_6,C_8,T_2,X_3,\co{BW_3},\co{W_5},\co{W_7},\co{X_{103}},\co{X_{105}},\co{X_{106}},\co{X_{107}},\co{X_{108}},\co{X_{109}},\co{X_{110}},\co{X_{111}},\co{X_{112}},\co{X_{113}},\co{X_{114}},\co{X_{115}},\co{X_{116}},\co{X_{117}},\co{X_{118}},\co{X_{119}},\co{X_{120}},\co{X_{121}},\co{X_{122}},\co{X_{123}},\co{X_{124}},\co{X_{125}},\co{X_{126}},\co{X_{53}},\co{X_{88}},co-X_{104})--free
+AUTO_2135	(S_3,\co{C_{n+4}},\co{S_3 \cup K_1},co-claw)--free
+AUTO_2136	(\co{T_2},co-cycle)--free
+AUTO_2137	(2P_3,3K_2,C_4 \cup P_2,C_6,K_{2,3},P_6,X_{130},X_{132},X_{134},X_{152},X_{153},X_{154},X_{155},X_{156},X_{157},X_{158},X_{18},X_{84},\co{X_{11}},\co{X_{127}},\co{X_{128}},\co{X_{129}},\co{X_{131}},\co{X_{133}},\co{X_{135}},\co{X_{136}},\co{X_{137}},\co{X_{138}},\co{X_{139}},\co{X_{140}},\co{X_{141}},\co{X_{142}},\co{X_{143}},\co{X_{144}},\co{X_{145}},\co{X_{146}},\co{X_{147}},\co{X_{148}},\co{X_{149}},\co{X_{150}},\co{X_{151}},\co{X_{30}},\co{X_{35}},\co{X_{46}},co-XF_1^{2n+3},co-XF_6^{2n+3},co-antenna,co-eiffeltower,co-longhorn,domino,fish,odd anti-hole)--free
+AUTO_2138	(2P_4,A,C_5,C_6,C_7,E,K_{3,3}-e,P_7,R,X_1,X_{103},X_5,X_{58},X_{84},X_{98},\co{C_6},\co{P_6},\co{X_5},\co{sunlet_4},co-antenna,co-domino,co-rising sun,domino,parachute,parapluie,rising sun,twin-house)--free
+AUTO_2139	(2P_3,3K_2,C_4,C_5,H,P_2 \cup P_4,P_5,S_3,X_1,X_{160},\co{X_{159}},\co{X_{161}},\co{X_{162}},\co{X_{46}},\co{X_{70}},net,rising sun)--free
+AUTO_2140	(K_2 \cup K_3,\co{P},\co{X_{163}},\co{X_{95}},co-diamond,house)--free
+AUTO_2141	(\co{P},co-star_{1,2,5})--free
+AUTO_2142	(\co{P},co-star_{1,2,4})--free
+AUTO_2143	\co{C_{n+7}}--free
+AUTO_2144	(\co{3K_2},\co{C_6},\co{P_7},\co{X_{164}},\co{X_{165}},\co{sunlet_4},odd anti-cycle)--free
+AUTO_2145	(\co{XC_{12}},co-cycle)--free
+AUTO_2146	(K_2 \cup K_3,X_{90},\co{C_{n+4} \cup K_1},\co{T_2},co-domino,co-paw,co-twin-C_5)--free
+AUTO_2147	(X_{103},\co{C_{n+4}},\co{S_3 \cup K_1},\co{net \cup K_1},co-claw,co-eiffeltower)--free
+AUTO_2148	(C_6,K_2 \cup K_3,X_{103},X_{37},X_{88},X_{90},\co{C_{n+4} \cup K_1},\co{T_2},\co{net \cup K_1},co-diamond,co-domino,co-eiffeltower,co-twin-C_5)--free
+AUTO_2149	(co-odd building,odd anti-hole)--free
+AUTO_2150	(S_3,T_2,X_2,X_3,\co{C_{n+4} \cup K_1},\co{S_3 \cup K_1},\co{X_{42}},even-hole,odd-cycle \cup K_1)--free
+AUTO_2151	(S_3,T_2,X_2,X_3,\co{C_{n+4} \cup K_1},\co{C(n,k)},\co{X_{42}},even-hole,odd-cycle \cup K_1)--free
+AUTO_2152	(S_3,\co{C_{n+4} \cup K_1},\co{W_4},even-hole,net,odd-cycle \cup K_1)--free
+AUTO_2153	(3K_1,\co{K_{1,5}})--free
+AUTO_2154	(3K_1,\co{K_2 \cup claw})--free
+AUTO_2155	(4K_1,C_7,S_3,X_{175},X_{176},X_{42},\co{X_{36}},claw,co-antenna,net,odd anti-hole)--free
+AUTO_2156	(\co{claw \cup 3K_1},odd anti-cycle)--free
+AUTO_2157	(\co{X_{177}},odd anti-cycle)--free
+AUTO_2158	(\co{K_{1,4}},odd anti-cycle)--free
+AUTO_2159	\co{(n+4)-pan}--free
+AUTO_2188	(3K_2,C_5,C_7,P_2 \cup P_4,X_{173},\co{X_{11}},net)--free
+AUTO_2191	(S_3,\co{C_{n+4} \cup K_1},\co{C(n,k)},\co{W_4},even-hole,odd-cycle \cup K_1)--free
+AUTO_2206	(co-diamond,even anti-cycle)--free
+AUTO_2207	(\co{X_{37}},co-diamond,even anti-cycle)--free
+AUTO_2208	co-building--free
+AUTO_2248	(5-pan,A,P_6,X_{186},\co{3P_3},\co{P_3 \cup P_4},\co{X_{102}},\co{X_{180}},\co{X_{181}},\co{X_{182}},\co{X_{183}},\co{X_{184}},\co{X_{185}},\co{X_{187}},\co{X_{188}},\co{X_{189}},\co{X_{190}},\co{X_{191}},\co{X_{192}},\co{X_{193}},house,twin-C_5)--free
+AUTO_224	\co{2P_3}--free
+AUTO_2255	(\co{T_3},co-cycle)--free
+AUTO_2276	(\co{C_{n+3} \cup K_1},co-diamond,co-paw)--free
+AUTO_2277	(3K_1,C_5,\co{C_6},\co{X_{164}},\co{X_{165}},\co{sunlet_4})--free
+AUTO_2287	(4K_1,C_7,X_{38},X_{39},\co{W_5},\co{X_{194}},\co{X_{86}},\co{X_{88}},\co{X_{89}},\co{X_{90}},house)--free
+AUTO_2292	(4K_1,C_7,X_{195},X_{196},X_{38},X_{39},\co{W_5},\co{X_{194}},\co{X_{86}},\co{X_{88}},\co{X_{89}},\co{X_{90}},house)--free
+AUTO_2758	(anti-hole,odd anti-cycle)--free
+AUTO_2760	(\co{C_{n+4}},co-claw)--free
+AUTO_2761	(S_3,\co{C_{n+4}},co-claw)--free
+AUTO_2763	(2K_2,\co{C_6},odd anti-cycle)--free
+AUTO_2764	(co-claw,odd anti-cycle)--free
+AUTO_2765	(\co{C_{n+4}},\co{H})--free
+AUTO_2766	(2K_3,3K_1,\co{A},\co{H},\co{X_{45}})--free
+AUTO_2767	(\co{C_{n+4}},bull,house)--free
+AUTO_2768	(\co{C_{n+4}},co-claw,co-gem)--free
+AUTO_2769	(4K_1,odd anti-hole,odd-hole)--free
+AUTO_2770	(co-diamond,odd anti-hole)--free
+AUTO_2771	(co-claw,odd anti-hole)--free
+AUTO_2772	(co-claw,odd-hole)--free
+AUTO_2773	(K_{3,3},K_{3,3}+e,\co{2P_3},\co{C_{n+4}})--free
+AUTO_2774	(\co{C_{n+4}},co-diamond)--free
+AUTO_2775	(anti-hole,co-sun,hole)--free
+AUTO_2776	(\co{XC_{11}},co-claw,co-diamond)--free
+AUTO_2777	(\co{C_{n+4}},co-sun)--free
+AUTO_2778	(\co{C_{n+4}},co-gem)--free
+AUTO_2779	(S_3,\co{C_{n+4}},co-claw,net)--free
+AUTO_2780	(co-paw,odd anti-hole)--free
+AUTO_2781	(co-claw,odd anti-hole,odd-hole)--free
+AUTO_2782	(\co{C_{n+6}},odd anti-cycle)--free
+AUTO_2783	(anti-hole,co-domino,odd anti-cycle)--free
+AUTO_2784	(\co{C_{n+4}},odd co-sun)--free
+AUTO_2785	(S_3,\co{C_{n+4}},net)--free
+AUTO_2786	(\co{C_{n+4}},net)--free
+AUTO_2787	(2K_2,3K_1,C_5,\co{C_6},\co{C_7},\co{C_8},\co{H},\co{K_{1,4}},\co{X_{85}})--free
+AUTO_2839	(3K_2,E,P_2 \cup P_4,net,odd anti-hole,odd-hole)--free
+AUTO_2990	(2K_2,C_4,C_5,H,S_3,X_{160},\co{X_{159}},net,rising sun)--free
+AUTO_2994	(A,C_4 \cup 2K_1,P_2 \cup P_3,R,\co{K_5 - e},co-claw,odd anti-hole,twin-house)--free
+AUTO_2997	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{35},X_{36},XF_2^{n+1},XF_3^n,XF_4^n,anti-hole,co-XF_1^{2n+3},co-XF_5^{2n+3},co-XF_6^{2n+2})--free
+AUTO_2998	(X_{34},X_{36},XF_2^{n+1},XF_3^n,\co{C_{n+4}},co-XF_1^{2n+3},co-XF_6^{2n+2})--free
+AUTO_2	\co{P}--free
+AUTO_3050	(3K_2,A,C_4 \cup 2K_1,E,P_2 \cup P_3,R,\co{K_5 - e},co-claw,net,odd anti-hole,twin-house)--free
+AUTO_3069	(T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{35},X_{36},XF_2^{n+1},XF_3^n,XF_4^n,anti-hole,co-XF_1^{2n+3},co-XF_5^{2n+3},co-XF_6^{2n+2},hole)--free
+AUTO_3081	(\co{XC_{11}},odd anti-cycle)--free
+AUTO_3209	(2K_2,C_4,C_5,co-sun)--free
+AUTO_329	\co{P_7}--free
+AUTO_3585	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{36},XF_1^{2n+3},XF_2^{n+1},XF_3^n,XF_4^n,XF_5^{2n+3},XF_6^{2n+2},\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{36}},co-XF_1^{2n+3},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,co-XF_5^{2n+3},co-XF_6^{2n+2},odd anti-hole)--free
+AUTO_3594	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{36},XF_1^{2n+3},XF_2^{n+1},XF_3^n,XF_4^n,XF_5^{2n+3},XF_6^{2n+2},\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{36}},co-XF_1^{2n+3},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,co-XF_5^{2n+3},co-XF_6^{2n+2},odd-hole)--free
+AUTO_3602	(C_5,XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9})--free
+AUTO_3683	(3K_2,C_5,P_2 \cup P_4,XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9},net)--free
+AUTO_3686	(C_5,S_3,XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{3K_2},\co{P_2 \cup P_4},\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9})--free
+AUTO_3827	(3P_3,C_{n+4},P_3 \cup P_4,P_5,X_{102},X_{180},X_{181},X_{182},X_{183},\co{A})--free
+AUTO_3856	(A,\co{3P_3},\co{C_{n+4}},\co{P_3 \cup P_4},\co{X_{102}},\co{X_{180}},\co{X_{181}},\co{X_{182}},\co{X_{183}},house)--free
+AUTO_399	3K_1--free
+AUTO_3	co-fork--free
+AUTO_407	co-domino--free
+AUTO_41	\co{P_6}--free
+AUTO_497	\co{E}--free
+AUTO_4	net--free
+AUTO_526	\co{C_{n+6}}--free
+AUTO_726	(C_{n+4},S_3)--free
+AUTO_727	(C_{n+4},S_3,net)--free
+AUTO_728	(C_{n+4},odd-sun)--free
+AUTO_729	(bull,odd anti-hole,odd-hole)--free
+AUTO_731	(domino,hole,odd-cycle)--free
+AUTO_732	(C_{n+6},odd-cycle)--free
+AUTO_733	(claw,odd anti-hole,odd-hole)--free
+AUTO_734	(C_5,C_6,P_6,\co{C_6},\co{P_6})--free
+AUTO_736	(odd-hole,paw)--free
+AUTO_737	(C_{n+4},S_3,claw,net)--free
+AUTO_738	(C_{n+4},gem)--free
+AUTO_739	(C_{n+4},sun)--free
+AUTO_740	(C_4,C_5,C_6,C_7,C_8,H,K_{1,4},X_{85},triangle)--free
+AUTO_741	(XC_{11},claw,diamond)--free
+AUTO_743	(P_5,anti-hole)--free
+AUTO_744	(2K_2,C_4,C_5,S_3,X_{159},X_{160},\co{H},co-rising sun,net)--free
+AUTO_745	(anti-hole,hole,sun)--free
+AUTO_746	(C_{n+4},diamond)--free
+AUTO_747	(2K_3,2P_3,C_{n+4},K_3 \cup P_3)--free
+AUTO_748	(claw,odd anti-hole)--free
+AUTO_749	(claw,odd anti-hole)--free $\cap$ tripartite
+AUTO_750	(claw,odd-hole)--free
+AUTO_751	(claw,odd-hole)--free $\cap$ tripartite
+AUTO_752	(diamond,odd-hole)--free
+AUTO_753	(K_4,odd anti-hole,odd-hole)--free
+AUTO_754	(C_{n+4},claw,gem)--free
+AUTO_755	(C_{n+4},P_5,bull)--free
+AUTO_756	(A,H,K_{3,3},X_{45},triangle)--free
+AUTO_757	(C_{n+4},H)--free
+AUTO_758	(claw,odd-cycle)--free
+AUTO_759	(C_4,C_6,odd-cycle)--free
+AUTO_762	(C_{n+4},claw,net)--free
+AUTO_764	(K_5 - e,S_3,\co{3K_2},\co{A},\co{C_4 \cup 2K_1},\co{E},\co{P_2 \cup P_3},\co{R},claw,co-twin-house,odd-hole)--free
+AUTO_765	(C_{n+4},claw)--free
+AUTO_766	(S_3,\co{3K_2},\co{E},\co{P_2 \cup P_4},odd anti-hole,odd-hole)--free
+AUTO_767	(K_5 - e,\co{A},\co{C_4 \cup 2K_1},\co{P_2 \cup P_3},\co{R},claw,co-twin-house,odd-hole)--free
+AUTO_768	$P_4$--tidy $\cap$ (S_3,\co{3K_2},\co{E},\co{P_2 \cup P_4},odd anti-hole,odd-hole)--free
+AUTO_771	(XF_1^{2n+3},XF_5^{2n+3},XF_6^{2n+2},\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{35}},\co{X_{36}},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,hole)--free
+AUTO_772	(C_{n+4},XF_1^{2n+3},XF_6^{2n+2},\co{X_{34}},\co{X_{36}},co-XF_2^{n+1},co-XF_3^n)--free
+AUTO_773	(hole,odd-cycle)--free
+AUTO_77	co-diamond--free
+AUTO_784	(XF_1^{2n+3},XF_5^{2n+3},XF_6^{2n+2},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{35}},\co{X_{36}},anti-hole,co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,hole)--free
+AUTO_79	co-claw--free
+AUTO_817	(K_4,odd anti-hole,odd-hole)--free $\cap$ dually chordal
+AUTO_823	(XC_{11},odd-cycle)--free
+AUTO_824	(XC_{11},odd-cycle)--free $\cap$ planar
+AUTO_92	\co{C_6}--free
+AUTO_94	anti-hole--free
