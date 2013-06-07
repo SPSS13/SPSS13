@@ -66,7 +66,7 @@ Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das besteh
 		\item \textbf{Integrität}\\
 		Alle Datensätze werden zentral auf einem Server gehalten. Die Software bietet ausschließlich lesende Funktionen an. Somit ist die Datenbank durch negative Manipulationen geschützt.
 		\item \textbf{Flexibilität}\\
-		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten (Graphklasse) Informationen aus der Online-Datenbank einsehen. 
+		Nutzer können ihren Wunschgraphen zeichnen lassen, diesen auf verschiedene Arten manipulieren (z.B.: neu anordnen, reduzieren, Knoten-Hierarchien anzeigen lassen) und den entstandenen Graphen exportieren. Dazu lassen sich zu jedem Graph-Knoten (Graphklasse) Informationen aus der Online-Datenbank einsehen.  
 		\item \textbf{Portabilität}\\
 		ISGCI ist eine Java Anwendung. Das bedeutet, dass sie plattformunabhängig ausgeführt werden kann, solange eine Java-Laufzeit-Umgebung installiert ist (als Standard vorausgesetzt).
 		Die Online-Datenbank ist unabhängig von unserem System. 
@@ -189,7 +189,7 @@ Implementierte Probleme:
 \item Weighted feedback vertex set
 \item Feedback vertex set
 \end{itemize}
-\paragraph{Colour for Problem} \ \\
+\paragraph{Color for Problem} \ \\
 Zeigt an in welcher Laufzeit ein Algo in der jeweiligen Klasse zu lösen ist.  Bei einigen Algos gibt es spezielle Regeln, wie die Einfärbung funktioniert. Beschreibung siehe \href{http://www.graphclasses.org/help.html\#problemdefs}{http://www.graphclasses.org/help.html\#problemdefs} \\
 Implementierte Probleme:
 Siehe oben.
@@ -241,7 +241,7 @@ Klickt man mit Rechtsklick auf eine Kante, dann auf "`Information"', erscheint e
 \item Pfeile: "`normale"', schwarze Pfeile deuten eine Inklusion in Richtung der Pfeilspitze an. Befindet sich am anderen Ende des Pfeiles noch entgegengesetzt eine graue Pfeilspitze, bedeutet dass, dass die eine Graph-Klasse nicht notwendigerweise eine Teilmenge der anderen ist - es könnte auch Gleichheit herrschen (Unbekannt/Datenbank-Lücke). 
 \end{itemize}
 \subsection{Information Fenster}
-Das Information Fenster enthält eine Liste aller enthaltenen Graph-Klassen, in welcher eine Klasse mithilfe der Maus ausgewählt werden kann. Entsprechend der Auswahl wird unterhalb eine Tabelle angezeigt, welche alle Probleme enthält und die zur ausgewählten Klasse zugehörige Komplexität angibt. Im Unteren Bereich werden zusätzlich Listen für Superklassen, Äquivalente Klassen und Subklassen angezeigt, innerhalb dieser drei Listen kann eine weitere Klasse ausgewählt werden. Es ist ein Textfeld vorhanden, welches bei bestehender Internetverbindung eine WebSearch (Packagebeschreibung GUI) ausführt um die Liste der Graph-Klassen zu filtern. Neben einem Close Button um das Information Fenster zu schließen existieren außerdem ein Draw Button der zum Zeichnen des gewählten Graphen auf dem GraphCanvas dient, ein Inclusion info Button der, falls eine Graph-Klasse und innerhalb der unteren Listen eine weitere Klasse ausgewählt wurde, ein Fenster mit Informationen zur Inklusion dieser beiden Klassen öffnet, sowie ein Class details Button welcher einen Hyperlink zum entsprechendenDatenbankeintrag auf www.graphclasses.org/classes/... führt.\\
+Das Information Fenster enthält eine Liste aller enthaltenen Graph-Klassen, in welcher eine Klasse mithilfe der Maus ausgewählt werden kann. Entsprechend der Auswahl wird unterhalb eine Tabelle angezeigt, welche alle Probleme enthält und die zur ausgewählten Klasse zugehörige Komplexität angibt. Im Unteren Bereich werden zusätzlich Listen für Superklassen, Äquivalente Klassen und Subklassen angezeigt, innerhalb dieser drei Listen kann eine weitere Klasse ausgewählt werden. Es ist ein Textfeld vorhanden, welches bei bestehender Internetverbindung eine WebSearch (Packagebeschreibung GUI) ausführt um die Liste der Graph-Klassen zu filtern. Neben einem Close Button um das Information Fenster zu schließen existieren außerdem ein Draw Button der zum Zeichnen des gewählten Graphen auf dem GraphCanvas dient, ein Inclusion info Button der, falls eine Graph-Klasse und innerhalb der unteren Listen eine weitere Klasse ausgewählt wurde, ein Fenster mit Informationen zur Inklusion dieser beiden Klassen öffnet, sowie ein "`Class details"' Button welcher einen Hyperlink zum entsprechenden Datenbankeintrag auf www.graphclasses.org/classes/... führt.\\
 Inclusion info Fenster: Das Fenster enthält Informationen zur gewählten Inklusion in textueller Form, sowie die Buttons OK, zum schließen des Fensters, Draw, zum Zeichnen der Inklusion auf dem GraphCanvas und View references, welche einen Hyperlink zum entsprechenden Datenbankeintrag auf http://www.graphclasses.org/classes/... führt.
 \newpage
 \section{Wichtige Klassen des bestehenden Systems}
@@ -384,15 +384,15 @@ Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter u
 
 \paragraph{EdgeView}\ \\Erzeugt einen View von einer Edge. Zeichnet die Edge und sorgt dafür das Pfeilspitzen angezeigt werden.
 
-\paragraph{ExportDialog}\ \\Eine Klasse die einen Export Dialog erzeugt, in dem der Nutzer Fileformat, postscrip options und GraphML Optionen auswählen kann. Es kann die Zieldatein ausgewählt werden. Bei Bestätigung wird die Datei mit den Einstellungen erzeugt. Sonst wird ein Error erzeugt.
+\paragraph{ExportDialog}\ \\Eine Klasse die einen Export Dialog erzeugt, in dem der Nutzer Fileformat, postscrip options und GraphML Optionen auswählen kann. Es kann die Zieldateien ausgewählt werden. Bei Bestätigung wird die Datei mit den Einstellungen erzeugt. Sonst wird ein Error erzeugt.
 
 \paragraph{GraphCanvas}\ \\Das Display auf dem der Graph gezeichnet wird. Dabei kann der Canvas gelöscht werden, und es kann einen übergebenen Graph dem Canvas hinzufügt werden.
 
 \paragraph{GraphClassInformationDialog}\ \\Zeigt den Dialog Graph Class Information an. Dabei werden von der selektierte Graph Klasse die Probleme, deren Komplexität und Superclasses, Equivalent classes und Subclasses angezeigt.
 
-\paragraph{GraphClassSelectionDialog}\ \\Zeigt den Dialog Graph Classes Selection an, der erscheint, wenn man bei Graph Class Information auf Draw klickt. Bei Doppelklick wird der Canvas neu gezeichnet mit der Klasse die markiert wurde. Kann eine Collection der Classes zurückgeben, die durch den user selektiert wurden. 
+\paragraph{GraphClassSelectionDialog}\ \\Zeigt den Dialog Graph Classes Selection an, der erscheint, wenn man bei Graph Class Information auf Draw klickt. Bei Doppelklick wird der Canvas neu gezeichnet mit der Klasse die markiert wurde. Kann eine Collection der Classes zurückgeben, die durch den User selektiert wurden. 
 
-\paragraph{GraphView}\ \\Zeigt den Graphen auf dem Canvas an. Es wird eine neuer GraphView mit den Nodes aus DataSet.inclGraph gezeichnet. Dabei wird der GraphCanvas der dies anzeigen soll und die Nodes übergeben. Kann checken, ob eine Node virtuel ist oder nicht. Im layout() werden EdgeViews erstellt und an die richtige Position bewegt. Dabei werden jeweils immer die Bounds neu berechnet.
+\paragraph{GraphView}\ \\Zeigt den Graphen auf dem Canvas an. Es wird eine neuer GraphView mit den Nodes aus DataSet.inclGraph gezeichnet. Dabei wird der GraphCanvas der dies anzeigen soll und die Nodes übergeben. Kann checken, ob eine Node virtuell ist oder nicht. Im layout() werden EdgeViews erstellt und an die richtige Position bewegt. Dabei werden jeweils immer die Bounds neu berechnet.
 
 \paragraph{InclusionResultDialog}\ \\Zeigt nach Klick auf Find Relation an, ob eine relation zwischen zwei Graph Klassen besteht. Wenn nein, werden die minimal ähnlichen Superklassen und die maximal ähnlichen Subklassen angezeigt. Gibt auch an, warum keine Relation existiert. Falls eine relation existiert, 
 
@@ -449,12 +449,47 @@ Das Package sax beinhaltet nur die Klasse XMLWriter.java. Diese ist ein Filter u
 %%ab hier wirds ernst
 \section{Vorgeschlagene Software Architektur}
 \subsection{Übersicht}
-%evtl unnötig
-Die bereits existierende Klasse ISGCIGraphCanvas.java Klasse aus dem ISGCI Project wird so erweitert, dass es das Interface mxICanvas.java implementiert, sodass dem aktuellen ISGCIGraphCanvas die Funktionalitäten hinzugefügt werden, die der ISGCIGraph (abgeleitet von mxGraph.java) benötigt um den Graphen in der Darstellung, wie JGraphX einen Graphen interpretiert, zu zeichnen. Dadurch entfallen einige Klassen aus dem GUI-Package (z.B. NodeView, EdgeView), die momentan zur Speicherung von Daten, wie ein Knoten gezeichnet werden muss, beinhalten. Diese werden beim Erstellen des ISGCIGraph (extends mxGraph) entsprechend in der JGraphX-Darstellung gespeichert (Mapping von NodeView, EdgeView auf mxCellState). Da JGraphX Knoten und Kanten über eine Klasse mxCell definiert und einen Flag besitzt, welcher angibt, ob die aktuelle mxCell eine Kante oder ein Knoten ist, wird die aktuelle Repräsentation einer mxCell in der Klasse mxCellState.java gespeichert und kann ausgelesen werden. Dies übernimmt JGraphX selbst benötigt dafür das entsprechende Mapping von dem aktuellen Graphen auf die Darstellung des Graphen in JGraphX (also statt Knoten und Kanten eben Cells mit entsprechenden Eigenschaften). Nun müssen weitere wichtige Aspekte berücksichtigt werden. Das Setzen der Farbe von Knoten findet Problem-spezifisch statt und da JGraphX die Gestaltungsinformationen in einem String style hält, müssen diese Informationen ebenfalls entsprechend konvertiert und abgebildet werden.
-=======
-%\subsection{Übersicht}
+Um neue Funktionalität von JgraphX hinzuzufügen werden grundlegende Änderungen an ISGCI vorgenommen. Dies umfasst einführen einer neuen Struktur, in der die Graphdaten (Knoten (Graphklassen) und Kanten (Inklusionen)) gespeichert werden, Veränderungen an der Canvas auf die der Graph gezeichnet wird und Veränderungen am GUI um die neuen Funktionen für den User sichtbar zu machen.
+\subsection{ISGCIGraph.java}
+Wir erstellen eine neue Klasse ISGCIGraph im neuen Package .teo.isgci.jgraphx, die das Interface DirectedGraph(JGraphT) implementiert und die Klasse mxGraph(JGraphX) erweitert und als Schnittstelle zwischen ISGCI, JgraphT und JgraphX fungiert.\\
+Die Erweiterung der Klasse mxGraph ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird das mxHierarchical Layout verwendet, das den Look des Graphen verbessert. 
+ Durch die Zusammenführung des DirectedGraph(JgraphT) und mxGraph(JgraphX) sorgen wir dafür, dass keine Doppelte Datenhaltung vorliegt, denn alle Knoten und Kanten werden in JgraphX-Cells abgelegt, sie sind weiterhin wie ein DirectedGraph erreichbar. Bei der Implementierung ist besonders darauf zu achten, dass der Zugriff auf Kanten und Knoten des Graphen effizient umgesetzt wird, damit die Userexperience nicht unter langen Wartezeiten leidet.
 
+Durch die Implementierung des DirectedGraph-Interfaces und setzen der Instanzvariablen "`protected boolean multigraph = false"' und "`allowLoops = false;`"' des mxGraphs können wir den neuen ISGCIGraph verwenden wie den SimpleDirectedGraph der bisherigen Implementation. Diese Funktionen beinhalten unter anderem: \begin{itemize}
+\item Erstellen des Graphen aus der heruntergeladenen ISGCI.xml
+\item Mittels Walkern aus dem .teo.jgrapht-Package den Graphen traversieren
+\item Suche nach Problemklassen mittels des .teo.problem-Packages
+\item Export des Graphen
+\item Zeichnen des Graphen
+
+\end{itemize}
+Dazu müssen folgende Klassen angepasst werden, die einen SimpleDirectedGraph verwenden und jetzt einen gleichwertigen ISGCIGraph verwenden werden: \begin{description}
+\item FindISG.java
+\item Algo.java
+\item DataSet.java
+\item ForbiddenClass.java
+\item BFSWalker.java
+\item Deducer.java
+\item DFSWalker.java
+\item GAlg.java
+\item GraphCanvas.java
+\item GraphView.java
+\item ISGCIGraphCanvas.java (hier finden noch weitere, grundlegende Änderungen statt)
+\item ISGCIMainFrame.java
+\item LandMarks.java
+\item ISGCIWriter.java
+\end{description}
+ Durch das erweitern des mxGraph erhalten wir zudem folgende Funktionalität: \begin{itemize}
+ \item Automatisches Layout mittels mxGraph.layout.mxHierarchyLayout; \\dies ersetzt das .layout-Package der bisherigen Implementation.
+ \item Zeichnen des Graphen mittels JgraphX-Funktionen auf eine mxICanvas
+ \item Effizienter Zugriff auf alle Elemente des Graphen
+ \item Verschieben von Knoten
+ \end{itemize}
+Die JGraphX-Cells (mxGraph.model.mxCell) werden so erweitert, dass sie die GraphClass Information von ISGCI speichern können und für alle Klassen die den Graphen als DirectedGraph als GraphClass erscheinen.
 \subsection{ISGCI.Gui}
+\paragraph{Grundlegende Änderungen}
+Die bereits existierende Klasse ISGCIGraphCanvas.java Klasse aus dem ISGCI Projekt wird so erweitert, dass sie das Interface mxICanvas.java implementiert, sodass dem aktuellen ISGCIGraphCanvas die Funktionalitäten hinzugefügt werden, die der ISGCIGraph (abgeleitet von mxGraph.java) benötigt um den Graphen in der Darstellung, wie JGraphX einen Graphen interpretiert, zu zeichnen. Dadurch entfallen einige Klassen aus dem GUI-Package (z.B. NodeView, EdgeView), die momentan zur Speicherung von Daten, wie ein Knoten gezeichnet werden muss, beinhalten. Diese werden beim Erstellen des ISGCIGraph (extends mxGraph) entsprechend in der JGraphX-Darstellung gespeichert (Mapping von NodeView, EdgeView auf mxCellState). Da JGraphX Knoten und Kanten über eine Klasse mxCell definiert und einen Flag besitzt, welcher angibt, ob die aktuelle mxCell eine Kante oder ein Knoten ist, wird die aktuelle Repräsentation einer mxCell in der Klasse mxCellState.java gespeichert und kann ausgelesen werden. Dies übernimmt JGraphX selbst benötigt dafür das entsprechende Mapping von dem aktuellen Graphen auf die Darstellung des Graphen in JGraphX (also statt Knoten und Kanten eben Cells mit entsprechenden Eigenschaften). Nun müssen weitere wichtige Aspekte berücksichtigt werden. Das Setzen der Farbe von Knoten findet Problem-spezifisch statt und da JGraphX die Gestaltungsinformationen in einem String style hält, müssen diese Informationen ebenfalls entsprechend konvertiert und abgebildet werden.
+\paragraph{Layoutverbesserungen}
 
 \paragraph{Knoten Verschieben}\ \\ 
 
