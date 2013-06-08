@@ -19,8 +19,8 @@
 \vspace*{5cm} 
 \begin{center}
 {\huge Software Requirements Specification}\\
-{\large Version 1.0}\\
-{\large 21. Mai 2013}\\
+{\large Version 1.2}\\
+{\large 07. Juni 2013}\\
 \end{center}
 
 \begin{center}
@@ -58,12 +58,14 @@
 \begin{tabular}{|l|l|p{10.5cm}|}\hline
  \textbf{Version}&\textbf{Datum}&\textbf{Beschreibung der \"Anderung}\\\hline
  1.0&21.05.2013&\textbf{Veröffentlichung}\\\hline
- 1.1& 07.06.2013 & \textbf{SRS den Aktuellen Mockups anpassen} \\\hline
+ 1.1&23.05.2013& \textbf{Änderungen nach Meeting} \\\hline
+   & & Formulierungen \\\hline
+ 1.2& 07.06.2013 & \textbf{SRS den Aktuellen Mockups anpassen} \\\hline
  & 07.06.2013 &  Einschränkungen ergänzt durch: ISGCI benötigt Internet  \\\hline
   & 07.06.2013 &  Funktionale Anforderungen ergänzt durch:  \\\hline
    &  &  Kontextmenü komplett überarbeitet \\\hline 
     &  &  Selection (Menü-Bar-Parent) ergänzt \\\hline
-     &  &  Details-Sidebar hinzugefügt (Mockup) \\\hline
+     &  &  Sidebar hinzugefügt (Mockup) \\\hline
  
  
  
@@ -109,7 +111,9 @@
 	        \item[JGraphT] JGraphT ist eine freie Java Graphenbibliothek, welche mathematische graphentheoretische Objekte und Algorithmen unterstützt. 
 	        \item[JGraphX] JGraphX ist eine Java Swing Bibliothek von mxGraph
 	        \item[Swing] Swing ist das primäre Java GUI Widget Werkzeug, welche die Bereitstellung von grafische Benutzerschnittstellen ermöglicht.
-	        \item[Grab\&Pull] Bezeichnet eine Funktion, welche das Greifen und Ziehen von Graphelementen beinhaltet, welche den entsprechenden Graphen manipulieren können.
+	        \item[Click\&Drag] Bezeichnet eine Funktion, welche das Greifen und Ziehen von Graphelementen beinhaltet, welche den entsprechenden Graphen manipulieren können.
+	        \item[Menu-Bar-Parent] Bezeichnet einen Reiter in der oberen Navigationsbar.
+	        \item[Menu-Bar-Child] Bezeichnet ein Item unterhalb des Reiters in der Menu-Bar.
 	        \end{itemize}
 	        
   	\subsection{Verweise auf sonstige Quellen} % / References} %1.4
@@ -209,13 +213,13 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline 
 2 & Zoom (Mausrad) & Durch das Scrollen mit dem Mausrad wird das Bild gezoomt, Mausrad nach oben entspricht hinein zoomen, Mausrad nach unten entspricht heraus zoomen. \\ 
 \hline 
-3 & Zoom (Menu-Bar) & Dem Menu-Item View werden die Funktionen "Zoom in" und "Zoom out" hinzugefügt, diese können auch per Shortcut ausgeführt werden (alt + +, alt + -). \\ 
+3 & Zoom (Menu-Bar) & Dem Menu-Bar-Parent View werden die Funktionen "Zoom in" und "Zoom out" hinzugefügt, diese können auch per Shortcut ausgeführt werden (alt + +, alt + -). \\ 
 \hline 
 4 & Fit in window & Der Zoom wird so angepasst, dass der komplette Graph im Canvas sichtbar ist. \\
 \hline
 5 & Tooltip Werkzeuge& Verweilt die Maus auf einem Menü-Punkt, wird ein Tooltip angezeigt. Der angezeigte Tooltip beinhaltet Informationen zur jeweiligen Funktion. \\ 
 \hline
-6 & Tooltip Knoten& Verweilt die Maus auf einem Knoten im Graphen, werden alle äquivalenten Graphklassen im Tooltip angezeigt (vgl. rechtsklick, change name). \\ 
+6 & Tooltip Knoten& Verweilt die Maus auf einem Knoten im Graphen, werden alle äquivalenten Graphklassen im Tooltip angezeigt (vgl. Rechtsklick, change name). \\ 
 \hline 
 7 & Zentrierung & Wird ein neuer Graph gezeichnet ist der zum Zeichnen ausgewählte Knoten im Mittelpunkt des Bildes. \\ 
 \hline 
@@ -225,7 +229,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline
 10 & Kontextmenü Show information & Beinhaltet die bereits vorhandene Funktionalität. \\
 \hline
-11 & Kontextmenü Show details & Blendet die details sidebar ein. (vgl. details sidebar Punkt 21) \\
+11 & Kontextmenü Show details & Blendet die Sidebar ein. (vgl. Sidebar Punkt 21) \\
 \hline
 12 & Kontextmenü Change name & Beinhaltet die bereits vorhandene Funktionalität. \\
 \hline
@@ -245,29 +249,52 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \vspace*{1cm}
 \begin{tabular}{|c|p{5cm}|p{10cm}|}
 \hline 
-19 & Selection (Menu-Bar-Parent) & Es soll einen neuen Reiter in der Menu-Bar geben, der alle Funktionen des Kontextmenüs für einen ausgewählten Knoten zur Verfügung stellt (Funktionen 10-18). Wenn kein Knoten ausgewählt ist, werden alle Child-Items grau dargestellt und besitzten keine Funktionalität.  \\
+19 & Selection (Menu-Bar-Parent) & Es soll einen neuen Reiter in der Menu-Bar geben, der alle Funktionen des Kontextmenüs, außer 12 Change Name, für einen ausgewählten Knoten zur Verfügung stellt (Funktionen 10,11,13-18). Wenn kein Knoten ausgewählt ist, werden alle Child-Items grau dargestellt und besitzten keine Funktionalität.  \\
 \hline
-20 & Details visible (Menu-Bar-Child) & Im Menu-Bar-Parent View soll ein Punkt Details visible existieren. Dieser signalisiert (mit einem Häkchen) ob, die Details-Sidebar ein- (Häckchen) oder ausgeblendet (kein Häkchen) ist. Außerdem kann über diesen auch die Details-Sidebar ein und ausgeblendet werden.\\ 
+20 & Details visible (Menu-Bar-Child) & Im Menu-Bar-Parent View soll ein Punkt Details visible existieren. Dieser signalisiert (mit einem Häkchen) ob, die Sidebar ein- (Häckchen) oder ausgeblendet (kein Häkchen) ist. Außerdem kann über diesen auch die Sidebar ein und ausgeblendet werden.\\ 
 \hline
-21 & Details-Sidebar & Die Sidebar soll sich durch 3 verschiedene Wege öffnen lassen. Im Kontextmenü über Show details, im Menu-Bar-Parent Selection mit Show details und im Menu-Bar-Parent View über Details visible, falls noch nicht sichtbar. Die Sidebar soll auf der linken Seite sein und wenn nötig eine Scrollbar auf der rechten Seite haben. Die Scrollbar wird in seiner Größe anpassbar sein. Durch einen Button oben in der Details-Sidebar lässt sie sich ausblenden. Außerdem über Details visible in View. Durch das Markieren eines anderen Knoten wird der Inhalt der Details-Sidebar entsprechend angepasst. Ist kein Knoten narkiert, werden die Informationen der zuletzt ausgewählten Graphklasse (falls vorhanden) angezeigt. In der Details-Sidebar wird es möglich sein vertikal in einer Accordion-Navigation zu navigieren. Diese besitzt drei Selektionsmöglichkeiten: Graphclasses, Inclusions, Problems. Dabei führt die Auswahl einer Selektion, zum Einklappen der anderen Selektionsmöglichkeiten. \\
+21 & Sidebar & Die Sidebar soll sich durch 3 verschiedene Wege öffnen lassen. Im Kontextmenü über Show details, im Menu-Bar-Parent Selection mit Show details und im Menu-Bar-Parent View über Details visible, falls noch nicht sichtbar. Die Sidebar soll auf der linken Seite sein und wenn nötig eine Scrollbar auf der rechten Seite haben. Die Sidebar wird in ihrer Breite anpassbar sein. Durch einen Button oben in der Sidebar lässt sie sich ausblenden. Außerdem über Details visible in View. Durch das Markieren eines anderen Knoten wird der Inhalt der Sidebar auf die ausgewählte Graphklasse angepasst und deren Informationen in dargestellt. Ist kein Knoten markiert, werden die Informationen der zuletzt ausgewählten Graphklasse angezeigt. Sollte die Sidebar ohne eine Auswahl getroffen zu haben, angezeigt werden, wird die Sidebar leer dargestellt. In der Sidebar wird es möglich sein vertikal in einer Accordion-Navigation zu navigieren. Diese besitzt drei Selektionsmöglichkeiten: Graphclasses, Inclusions, Problems. Dabei führt die Auswahl einer Selektion, zum Einklappen der anderen Selektionsmöglichkeiten. \\
 \hline
-21 & Details-Sidebar - Selection:Graphclasses  & In der Selection:Graphclasses werden allgemeine Informationen über die ausgewählte Graphklasse angezeigt. \\
+21 & Sidebar - Selection:Graphclasses  & In der Selection:Graphclasses werden allgemeine Informationen über die ausgewählte Graphklasse angezeigt. \\
 \hline
-21 & Details-Sidebar - Selection:Inclusions & In der Selection:Inclusions werden Informationen über die Inklusionen der ausgewählten Graphklasse angezeigt. \\
+21 & Sidebar - Selection:Inclusions & In der Selection:Inclusions werden Informationen über die Inklusionen der ausgewählten Graphklasse angezeigt. \\
 \hline
-21 & Details-Sidebar - Selection:Problems & In der Selection:Problems werden die Probleme der ausgewählten Graphklasse angezeigt. \\
+21 & Sidebar - Selection:Problems & In der Selection:Problems werden die Probleme der ausgewählten Graphklasse angezeigt. \\
 \hline
 \end{tabular} \newpage
-\begin{center}
-\includegraphics[width=13cm]{UseCaseModel.png}\\
+
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=13cm]{Menueoptionen.PNG}\\
+	\end{center}
+	\caption{Dieses Usecase dient der Veranschaulichung der Interaktionen eines Users mit dem System. Hauptsächlich werden in diesem Usecase alle Interaktionen mit der oberen Menü-Bar dargestellt.}
+	\label{fig:figure1}
+\end{figure}
+\newpage
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=13cm]{Graphmanipulation.PNG}\\
+	\end{center}
+	\caption{Dieses Usecase zeigt, wie ein Benutzer mit einem Graphen interagieren kann und ihn manipulieren. Dazu gehören Funktionen wie Zoom, Knoten verschieben, Bildausschnitt Verschieben und Tooltips anzeigen.}
+	\label{fig:figure1}
+\end{figure}
+
+\newpage
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=13cm]{Sidebar.PNG}	
+	\end{center}
+	\caption{Dieses Usecase veranschaulicht die möglichen Interaktionsmöglichkeiten mit der Sidebar, welche neu im ISGCI sein wird.}
+	\label{fig:figure1}
+\end{figure}
+\newpage
 \hspace*{10.7cm} Abb. 1
-\end{center}\clearpage
 
 	
 	\subsection{Nicht-funktionale Anforderungen} %3.2     
 		\begin{itemize}
 		\item Technische Grundlage des Softwareprojekts bietet die Programmiersprache Java.
-		\item Kompatibilität: Die Software ISGCI wird Java-Runtime-Umgebungen mit Java 1.6 und Nachfolger vollständig unterstützen, solange diese rückwärtskompatibel zu Java 1.6 sind. Für ältere Versionen wird die Lauffähigkeit nicht garantiert.
+		\item Kompatibilität: Die Software ISGCI wird Java-Runtime-Umgebungen mit Java 1.6 und Nachfolger vollständig unterstützen, solange diese abwärtskompatibel zu Java 1.6 sind. Für ältere Versionen wird die Lauffähigkeit nicht garantiert.
 		\item Zur Umsetzung graphischer Anwendungen wird die Grafikbibliothek JGraphX verwendet.
 		\item Das Projekt wird als OpenSource veröffentlicht.
 		\item Das Benutzerinterface soll interaktiver und userfreundlicher sein als bei der Vorgängerversion (Umsetzung: vgl. Functional Requirements).
