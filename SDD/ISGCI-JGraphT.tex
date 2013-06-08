@@ -35,8 +35,8 @@
 \vspace*{1cm} 
 \begin{center}
 {\huge Software Design Document}\\
-{\large Version 1.0}\\
-{\large 04. Juni 2013}\\
+{\large Version 1.1}\\
+{\large 08. Juni 2013}\\
 \end{center}
 
 \begin{center}
@@ -54,26 +54,27 @@
 \hspace*{-1cm}
 \begin{tabular}{|l|l|p{10.5cm}|}\hline
  \textbf{Version}&\textbf{Datum}&\textbf{Beschreibung der \"Anderung}\\\hline
- 0.4&26.05.2013&Arbeitsversion\\\hline
- 0.5& 07.06.2013 & 1. Einleitung verbessert, Ausdruck\\\hline
- 0.5& 07.06.2013 & 2. Designziele verbessert, Ausdruck\\\hline
- 0.5& 07.06.2013 & 3. ProblemsFunktionen des bestehenden Systems: Formulierungen\\\hline
- 0.5& 07.06.2013 & Help, About, Zeichenfläche Kontextmenüs: Kommasetzung, Quoted Text (Gänsefüßchen), Format angepasst\\\hline
- 0.5& 07.06.2013 & Information $-$ Verweis auf Browse Database $\rightarrow$ erledigt, \newline
+ 0.1&26.05.2013&Arbeitsversion\\\hline
+ 0.5& 07.06.2013 & Alle Sections zusammengeführt; 1. Einleitung verbessert, Ausdruck\\\hline
+ 0.51& 07.06.2013 & 2. Designziele verbessert, Ausdruck\\\hline
+ 0.52& 07.06.2013 & 3. ProblemsFunktionen des bestehenden Systems: Formulierungen\\\hline
+ 0.53& 07.06.2013 & Help, About, Zeichenfläche Kontextmenüs: Kommasetzung, Quoted Text (Gänsefüßchen), Format angepasst\\\hline
+ 0.54& 07.06.2013 & Information $-$ Verweis auf Browse Database $\rightarrow$ erledigt, \newline
  			      Ausdruck verbessert.\\\hline
- 0.5& 07.06.2013 & 4. {Wichtige Klassen des bestehenden Systems}\newline
+ 0.55& 07.06.2013 & 4. {Wichtige Klassen des bestehenden Systems}\newline
  				  JGraphT: Formulierungen angepasst\newline
  				  Layout: Formulierungen, Kommata, Quotes      \newline 
  				  GUI: Formulierungen, Kommata, Quotes\\\hline 
- 0.5& 07.06.2013 & 5. Vorgeschlagene Software Architektur: \newline
+ 0.56& 07.06.2013 & 5. Vorgeschlagene Software Architektur: \newline
  				  5.1 Übersicht: Kommata, Ausdruck, Formulierungen, Quotes\newline
- 				  5.2 ISGCIGraph.java: Kommata, Ausdruck
+ 				  5.2 ISGCIGraph.java: Kommata, Ausdruck\newline
  				  5.3 ISGCI.gui: Kommata, Ausdruck\\\hline
- 0.5& 07.06.2013 & 6. HW/SW Mapping \newline
+ 0.57& 07.06.2013 & 6. HW/SW Mapping \newline
  					Ausdruck, Kommata, Formulierungen\\\hline
- 0.5& 07.06.2013 & 7. Testing: Kommata, Formulierungen verbessert.\\\hline
+ 0.58& 07.06.2013 & 7. Testing: Kommata, Formulierungen verbessert.\\\hline
  0.6& 07.06.2013 & Gesamtes SDD: Rechtschreibung verbessert.\\\hline
- 
+ 1.0& 07.06.2013 & SDD Version 1.0 \\\hline
+ 1.1& 08.06.2013 & Änderungen Punkt 5: Vorgeschlagene Software Architektur. \newline Umsetzung nach altem Design nicht möglich. \newline Vgl. 5.3 - ISGCI.GUI Grundlegende Änderungen\\\hline
  %1.0&28.05.2013&Basissversion\\\hline
 \end{tabular}\\
 \section{Einleitung}
@@ -262,8 +263,8 @@ Klickt man mit Rechtsklick auf eine Kante und dann auf "`Information"', erschein
 \end{itemize}
 \subsection{Information Fenster}
 Das \G{Information} Fenster enthält eine Liste aller enthaltenen Graph-Klassen, aus welcher eine Klasse mithilfe der Maus ausgewählt werden kann. Entsprechend der Auswahl wird unterhalb eine Tabelle angezeigt, welche alle Probleme enthält und die zur ausgewählten Klasse zugehörige Komplexität angibt. Im Unteren Bereich werden zusätzlich Listen für Superklassen, Äquivalente Klassen und Subklassen angezeigt, innerhalb dieser drei Listen kann eine weitere Klasse ausgewählt werden. Es ist ein Textfeld vorhanden, welches bei bestehender Internetverbindung eine WebSearch (Packagebeschreibung GUI) ausführt, um die Liste der Graph-Klassen zu filtern. Neben einem Close Button um das Information Fenster zu schließen existieren außerdem ein \G{Draw} Button der zum Zeichnen des gewählten Graphen auf dem GraphCanvas dient, ein "`Inclusion"' Info Button der, falls eine Graph-Klasse und innerhalb der unteren Listen eine weitere Klasse ausgewählt wurde, ein Fenster mit Informationen zur Inklusion dieser beiden Klassen öffnet, sowie ein "`Class details"' Button, welcher einen Hyperlink zum entsprechenden Datenbankeintrag auf www.graphclasses.org/classes/... enthält.\\
-\G{Inclusion info} Fenster: Das Fenster enthält Informationen zur gewählten Inklusion in textueller Form, sowie die Buttons \G{OK}, zum Schließen des Fensters, \G{Draw}, zum Zeichnen der Inklusion auf dem GraphCanvas und \G{View references}, welche einen Hyperlink zum entsprechenden Datenbankeintrag auf http://www.graphclasses.org/classes/... enthält.
-\newpage
+\G{Inclusion info} Fenster: Das Fenster enthält Informationen zur gewählten Inklusion in textueller Form, sowie die Buttons \G{OK}, zum Schließen des Fensters, \G{Draw}, zum Zeichnen der Inklusion auf dem GraphCanvas und \G{View references}, welche einen Hyperlink zum entsprechenden Datenbankeintrag auf \\http://www.graphclasses.org/classes/... enthält.
+
 \section{Wichtige Klassen des bestehenden Systems}
 \subsection{ISGCI-Package JGraphT}
 
@@ -469,18 +470,20 @@ Wird für einen gezeichneten Graphen benutzt, damit man nur einen Knoten anwähl
 Um neue Funktionalitäten von JGraphX hinzufügen zu können, werden grundlegende Änderungen am ISGCI vorgenommen. Dies umfasst das Einführen einer neuen Struktur, in der die Graphinformationen (Knoten (Graphklassen) und Kanten (Inklusionen)) gespeichert werden, Veränderungen des Canvas, auf dem der Graph gezeichnet wird und Veränderungen am GUI, um die neuen Funktionen für den User sichtbar zu machen.
 \subsection{ISGCIGraph.java}
 Wir erstellen eine neue Klasse ISGCIGraph im neuen Package .teo.isgci.jgraphx, welche die Klasse mxGraph(JGraphX) erweitert und als Schnittstelle zwischen ISGCI und JgraphX fungiert.\\
-Zusätzlich erhält dieses Package eine weitere neue Klasse \G{ISGCIGraphWrapper}, die das Interface \G{DirectedGraph}(JGraphT) implementiert und auf den \G{ISGCIGraph} zugreift, den sie als Instanzvariable hält. Dieser \G{Wrapper} ist die Schnittstelle zwischen JGraphX und JGraphT. Dadurch bleibt die Schnittstelle JGraphT$-$ISGCI unangetastet.
-Die Erweiterung der Klasse \G{mxGraph} ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird die Klasse \G{mxHierarchicalLayout.java} verwendet, die das Aussehen des Graphen(über Ranking) verbessert. 
+Die Erweiterung der Klasse \G{mxGraph} ermöglicht uns die Benutzung der Layout-Funktionen der JGraphX-Bibliothek. Für das Layout wird die Klasse "`mxHierarchicalLayout.java"' verwendet, die das Aussehen des Graphen(über Ranking) verbessert. 
  Durch die Zusammenführung des \G{DirectedGraph}(JGraphT) und \G{mxGraph}(JGraphX) sorgen wir dafür, dass keine doppelte Datenhaltung vorliegt, denn alle Knoten und Kanten werden in JGraphX-Cells abgelegt. Sie sind weiterhin wie in einem \G{DirectedGraph} erreichbar. Bei der Implementierung ist besonders darauf zu achten, dass der Zugriff auf Kanten und Knoten des Graphen effizient umgesetzt wird, damit \G{Userexperience} und \G{Usability} nicht unter langen Wartezeiten leidet.\\\\
-Durch die Implementierung des \G{DirectedGraph}-Interfaces und setzen der Instanzvariablen "`protected boolean multigraph = false"' und "`allowLoops = false;"' des \G{mxGraph}s können wir den neuen \G{ISGCIGraph} wie den \G{SimpleDirectedGraph} der bisherigen Implementation verwenden, da sie die selben Eigenschaften (gerichtet, keine Kreise und keine Multikanten) haben. Diese Funktionen beinhalten unter anderem: 
+Durch die Implementierung des \G{DirectedGraph}-Interfaces und setzen der Instanzvariablen "`protected boolean multigraph = false"' und "`allowLoops = false;"' des \G{mxGraph}s können wir den neuen \G{ISGCIGraph} wie den "`SimpleDirectedGraph"' der bisherigen Implementation verwenden, da sie die selben Eigenschaften (gerichtet, keine Kreise und keine Multikanten) haben. Diese Funktionen beinhalten unter anderem: 
+{\small
 \begin{itemize}
 \item Erstellen des Graphen aus der heruntergeladenen \G{ISGCI.xml}
 \item Mittels Walkern, aus dem \G{.teo.jgrapht}-Package, den Graphen traversieren
 \item Suche nach Problemklassen mittels des \G{.teo.problem}-Packages
 \item Export des Graphen
-\item Zeichnen des Graphen
+\item Zeichnen des Graphen\\
 \end{itemize}
-Dazu müssen folgende Klassen angepasst werden, die einen \G{SimpleDirectedGraph} verwenden und jetzt einen gleichwertigen \G{ISGCIGraphWrapper} verwenden werden: 
+}
+\ \\
+Dazu müssen folgende Klassen angepasst werden, die einen \G{SimpleDirectedGraph} verwenden:
 {\small 
 \begin{description}
 \item FindISG.java
@@ -497,23 +500,30 @@ Dazu müssen folgende Klassen angepasst werden, die einen \G{SimpleDirectedGraph
 \item ISGCIMainFrame.java (hier finden noch weitere, grundl. Änderungen statt, s.u.)
 \item LandMarks.java
 \item ISGCIWriter.java
-\end{description}}
- Durch das Erweitern des \G{mxGraph} erhalten wir zudem folgende Funktionalität: 
+\end{description}}\ \\
+ Durch das Erweitern des \G{mxGraph} erhalten wir folgende Funktionalität: 
  \begin{itemize}
  \item Automatisches Layout mittels \G{mxGraph.layout.mxHierarchyLayout;} \\dies ersetzt das \G{teo.layout}$-$Package der bisherigen Implementation.
  \item Zeichnen des Graphen mittels JGraphX-Funktionen auf eine \G{mxICanvas}
  \item Effizienter Zugriff auf alle Elemente des Graphen
  \item Verschieben von Knoten
  \end{itemize}
-Die JGraphX-Cells (mxGraph.model.mxCell) werden in einer Klasse ISGCImxCell im teo.isgci.jgraphx-Package so erweitert, dass sie die "`GraphClass"' und "`Inclusion"' Information von ISGCI speichern können und für alle Klassen, die den ISGCIGraphWrapper benutzen, als "`GraphClass"' oder "`Inclusion"' erscheinen.
 \subsection{ISGCI.Gui}
-\paragraph{Grundlegende Änderungen}
-Die bereits existierende Klasse ISGCIGraphCanvas.java aus dem ISGCI Projekt wird so erweitert, dass sie das Interface mxICanvas.java implementiert, sodass dem aktuellen ISGCIGraphCanvas die Funktionalitäten hinzugefügt werden, die der ISGCIGraph (abgeleitet von mxGraph) benötigt um den Graphen in der Darstellung, wie JGraphX einen Graphen interpretiert, zu zeichnen. 
+\paragraph{Grundlegende Änderungen}\ \\
+Die bereits existierende Klasse \G{ISGCIGraphCanvas.java} aus dem ISGCI Projekt wird so verändert, dass sie die Funktionalität der \G{mxGraphics2Dcanvas.java} realisiert. Die Klasse \G{NodeView.java} wird durch eine Klasse \G{NodeCell.java} ersetzt, diese erweitert die Klasse \G{mxCell.java}. Die Klasse \G{NodeCell} enthält Methoden, welche die NodeView Funktionalitäten dahingehend umsetzen, dass sie die Parameter in das für die \G{NodeCell} entsprechende Format überführen. Weiterhin wird eine Klasse \G{EdgeCell.java} die bisherige Klasse \G{EdgeView.java} ersetzen. Hier werden jedoch nun \G{Inclusions} gespeichert. 
 %hier Bildchen einfügen
-Dadurch entfallen einige Klassen aus dem GUI-Package (z.B. NodeView, EdgeView), die momentan zur Speicherung der Daten, wie ein Knoten oder eine Kante gezeichnet wird, beinhalten. Diese werden beim Erstellen des ISGCIGraph (extends mxGraph) entsprechend in der JGraphX-Darstellung gespeichert (Mapping von NodeView und EdgeView auf mxCellState). Die "`isProper"' Information des EdgeView können wir hierbei vernachlässigen, da sie schon in den "`Inclusions"' gespeichert ist, zum Zeichnen wird hierauf zurückgegriffen. 
-JGraphX übernimmt mit dem ISGCIGraph, den angehängten mxCells, mxCellStates und der ISGCICanvas selbstständig das Zeichnen des Graphen.
-Die setProblem(Problem p) Methode in der ISGCIGraphCanvas wird angepasst um die Farben in den mxCellStates zu ändern.
+JGraphX übernimmt mit dem ISGCIGraph, den angehängten \G{mxCells}, \G{mxCellStates} und der \G{ISGCIGraphCanvas} selbstständig das Zeichnen des Graphen.
+
 %\paragraph{Layoutverbesserungen}
+\paragraph{Detail-Sidebar} \ \\
+Es wird eine Klasse \G{Sidebar.java} im Package \G{teo.isgci.gui} implementiert, welche Details zu einem ausgewählten Knoten enthält. Diese Klasse erweitert die Klasse \G{JPanel}. Die anzuzeigenden Informationen werden mithilfe der Klasse \G{DataSet} ausgelesen. Bei Programmstart ist die \G{Sidebar} ausgeblendet. Es werden folgende Optionen zum Anzeigen der Sidebar implementiert:
+\begin{itemize}
+\item Menu-Bar-Parent \G{View}; \G{Details visible}, welche in der \G{ISGCIMainFrame} Klasse implementiert wird. 
+\item Kontext-Menü; \G{Show Details}, vgl. Kontextmenü. 
+\item Menu-Bar-Parent \G{Selected}, \G{Show Details}, welche in der \G{ISGCIMainFrame} Klasse implementiert wird. 
+\end{itemize} 
+Es existiert ein Button, um die Sidebar auszublenden. Das ist zudem auch über das Menu-Bar-Parent \G{View}, \G{Details visible} möglich.\\
+
 
 \paragraph{Knoten Verschieben}\ \\ 
 
@@ -521,7 +531,7 @@ Wird wie bisher in der ISGCIGraphCanvas.java Klasse realisiert.
 
 \paragraph{Zoom (Mausrad)}\ \\ 
 
-Wird über Veränderung der "`Scale"'-Variable im ISGCIGraph assoziierten GraphView und auswerten eines MouseWheelListeners gelöst.
+Wird über Veränderung der "`Scale"'-Variable im ISGCIGraph assoziierten GraphView und auswerten eines MouseWheelListeners ausgelöst.
 
 \paragraph{Zoom (Menu-Bar)}\ \\ 
 
@@ -535,26 +545,20 @@ Wird in der ISGCIGraphCanvas.java realisiert. Es wird über den MouseListener im
 
  Der ISGCINodeTooltip greift auf Daten in der Klasse DataSet.java aus dem Package teo.isgci.db zu. Er enthält alle alternativen Namen des Nodes (der aktuelle Name inbegriffen) in Listenform.
 
-
 \paragraph{Scrolling}\ \\ 
-
 In der ISGCIMainFrame.java Klasse existiert bereits eine Methode createCanvasPanel(), welche den Canvas und die Scrollbalken unten und rechts des Canvas erzeugt. Um sich darin auch per click and pull bewegen zu können erstellen wir eine weitere Methode in dieser Klasse, die das MousePressed Event auswertet, wenn es nicht auf einem Knoten liegt und den Viewport anpasst.
 
 \paragraph{Kontextmenü}\ \\ 
-
 NodePopup.java ist eine bereits existierende Klasse die das Kontextmenü bereitstellt, das bei einem Rechtsklick, auf einen Knoten, aufgerufen wird. Dieses wird von uns um die folgenden Punkte erweitert. 
 %(Dieser Punkt wird in der 2. Version des SDD ausgeführt)
 
 \paragraph{Kontextmenü Superklassen}\ \\ 
-
 In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Superklassen ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getSupernodes(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, suchen aus dem Ergebnis alle Vorgängerknoten heraus (rekursiv für Kanten, die eine Kante als Vorgänger haben) und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 \paragraph{Kontextmenü Subklassen}\ \\ 
-
 In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Subklassen ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getSubnodes(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, suchen aus dem Ergebnis alle Nachfolgerknoten heraus (rekursiv für Kanten, die eine Kante als Nachfolgerknoten haben) und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 \paragraph{Kontextmenü Nachbarn}\ \\ 
-
 In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Nachbarn ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getNeighbour(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 
@@ -600,7 +604,7 @@ Nachdem der Release Candidate fertig gestellt wurde, wird dieser dem Kunden zum 
 
 \section{Anhang} \ \\
 
-Anbei das Protokoll Layout zur Nutzung während der Modultests und ein Beispielszenario zur Nutzung während dem Software Testing.\\
+Anbei das Protokoll Layout zur Nutzung während der Modultests und ein Beispielszenario zur Nutzung während dem Software Testing.
 \newpage
 \subsection{Testprotokoll}
 \label{sec:testp}
