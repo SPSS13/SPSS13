@@ -1,0 +1,154 @@
+<!-- $Header: /home/ux/CVSROOT/teo/data/isgci.dtd,v 1.35 2012/10/28 16:00:44 ux Exp $ -->
+
+<!ELEMENT ISGCI (stats?, Problem*, GraphClasses, Inclusions)>
+<!ATTLIST stats date CDATA #REQUIRED
+   nodes CDATA #REQUIRED
+   edges CDATA #REQUIRED>
+<!ELEMENT stats EMPTY>
+
+<!-- ******************************************************************
+  - Graph classes
+ -->
+<!ELEMENT GraphClasses (GraphClass*)>
+<!-- In masterdata.xml only algo should be used. -->
+<!-- Defines a graphclass. name is derived automatically. A definition can be
+  - given in a note name="definition". Related stuff can be given in a note
+  - name="see-also", a single conjecture in "conjecture" and a single open
+  - problem in "open-problem". Do not use problem in masterdata.xml.
+ -->
+<!ELEMENT GraphClass (name?,(graphclass*|smallgraph*),hereditary?,self-complementary?,clique-fixed?,(ref|note)*,(problem|algo)*)>
+<!ATTLIST GraphClass id ID #REQUIRED
+    type (base|intersect|union|forbidden|induced-hereditary|connected-hereditary|isometric-hereditary|complement|probe|clique) #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT hereditary EMPTY>
+<!ATTLIST hereditary type (induced-hereditary|connected-hereditary|isometric-hereditary) #REQUIRED>
+<!ELEMENT self-complementary EMPTY>
+<!ELEMENT clique-fixed EMPTY>
+
+
+<!-- *******************************************************************
+  - Problems and algorithms
+ -->
+<!-- Defines a problem. parent is a problem that implies solvability of this
+  - one. It must have been defined before. complement is a problem that is
+  - polytime equivalent to this one, but on the complement graph.
+  - note contains the definition of the problem.
+ -->
+<!ELEMENT Problem (from*,note?)>
+<!ATTLIST Problem name CDATA #REQUIRED
+   complement CDATA #IMPLIED>
+
+<!-- Gives a problem from which solvability of this one follows. Either in the
+  -  same timebound (Lin) or in P.
+ -->
+<!ELEMENT from EMPTY>
+<!ATTLIST from
+   name CDATA #REQUIRED
+   complexity (Lin|Linear|P|Polynomial) "Linear">
+
+<!-- Gives the complexity of a problem. DO NOT USE this in masterdata.xml.
+  - The applet will only ever see this as an empty element.
+ -->
+<!ELEMENT problem (algo*)>
+<!ATTLIST problem name CDATA #REQUIRED
+   complexity (Linear|Lin|Polynomial|P|GI-complete|GIC|NP-complete|NPC|NP-hard|NPh|coNP-complete|coNPC|Open|Unknown|Bounded|Unbounded) #REQUIRED>
+<!-- Gives details on an algorithm. name is the name of the problem it solves.
+  - Generate.java sees this but the applet doesn't.
+  - DO NOT USE graphclass in masterdata.xml.  It gives the class this
+  - algorithm is defined on and is set automatically.
+ -->
+<!ELEMENT algo (graphclass?,(ref|note)*)>
+<!ATTLIST algo name CDATA #REQUIRED
+   complexity (Linear|Lin|Polynomial|P|GI-complete|GIC|NP-complete|NPC|NP-hard|NPh|coNP-complete|coNPC|Open|Unknown|Bounded|Unbounded) #REQUIRED
+   bounds CDATA #IMPLIED>
+
+<!-- *******************************************************************
+  - Defining inclusions
+  - The value of the proper attribute doesn't matter; only its presence counts.
+ -->
+<!ELEMENT Inclusions ((incl|equ|disjoint|incmp)*)>
+<!ELEMENT incl (ref*)>
+<!ATTLIST incl super IDREF #REQUIRED sub IDREF #REQUIRED
+   proper CDATA #IMPLIED
+   confidence (unpublished) #IMPLIED>
+<!ELEMENT equ (ref*)>
+<!ATTLIST equ gc1 IDREF #REQUIRED gc2 IDREF #REQUIRED
+   confidence (unpublished) #IMPLIED>
+<!ELEMENT disjoint (ref*)>
+<!ATTLIST disjoint gc1 IDREF #REQUIRED gc2 IDREF #REQUIRED
+   confidence (unpublished) #IMPLIED>
+<!ELEMENT incmp (ref*)>
+<!ATTLIST incmp gc1 IDREF #REQUIRED gc2 IDREF #REQUIRED
+   confidence (unpublished) #IMPLIED>
+
+<!-- *******************************************************************
+  - A note may contain arbitrary data, provided it's  well-formed. This is
+  - useful for entering pre-formatted  html. See also the graphclass and
+  - smallgraph elements. note ELEMENTS CANNOT BE NESTED! Do not use CDATA
+  - for escaping. For GraphClass/note name="definition" signals that this note
+  - contains the definition of the graphclass.
+ -->
+<!ELEMENT note ANY>
+<!ATTLIST note name CDATA #IMPLIED>
+
+<!-- *******************************************************************
+  - Defining references
+ -->
+<!ELEMENT REFS (Ref*)>
+<!ELEMENT Ref (bib|note)>
+<!ATTLIST Ref id ID #REQUIRED>
+<!-- Literature reference -->
+<!ELEMENT bib (authors,title,rest?,doi?,zm?,link?,note*)>
+<!ELEMENT authors (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT rest (#PCDATA)>
+<!ELEMENT doi (#PCDATA)>
+
+<!-- *******************************************************************
+  - Refering to stuff
+ -->
+
+<!-- A reference IDREF or one of def,trivial,forbidden,complement,
+  - hereditary, basederived -->
+<!ELEMENT ref (#PCDATA)>
+<!-- A graphclass IDREF -->
+<!ELEMENT graphclass (#PCDATA)>
+<!-- Name of a small graph -->
+<!ELEMENT smallgraph (#PCDATA)>
+
+<!-- *******************************************************************
+  - Zentralblatt number, Rutcor Research Report
+  - zm: Zmath-ID found automatically
+  - zm_prob: ZMath-ID found automatically, program is not sure it's correct
+  - zm_user: ZMath-ID provided by the user
+  - zm_ignore: Entry to be ignored when searching Zentralblatt
+  - rrr: Rutcor link
+ -->
+<!ELEMENT link EMPTY>
+<!ATTLIST link
+	zm CDATA #IMPLIED
+	zm_prob CDATA #IMPLIED
+	zm_user CDATA #IMPLIED
+	zm_ignore (yes|no) "no"
+	rrr CDATA #IMPLIED
+>
+
+<!-- *******************************************************************
+  - html codes to prevent the parser from spitting out uninteresting errors.
+ -->
+<!ELEMENT ul ANY>
+<!ELEMENT li ANY>
+<!ELEMENT i ANY>
+<!ELEMENT sub ANY>
+<!ELEMENT sup ANY>
+<!ELEMENT br EMPTY>
+<!ELEMENT img ANY>
+<!ATTLIST img src CDATA #IMPLIED>
+<!ELEMENT table ANY>
+<!ELEMENT tr ANY>
+<!ELEMENT td ANY>
+<!ATTLIST td valign CDATA #IMPLIED>
+<!ELEMENT a ANY>
+<!ATTLIST a href CDATA #IMPLIED>
+
+<!-- EOF -->

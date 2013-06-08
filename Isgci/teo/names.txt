@@ -1,0 +1,1437 @@
+gc_1	(2K_2,C_4)--free
+gc_2	pseudo--split
+gc_3	$P_4$--brittle
+gc_4	perfectly orderable
+gc_5	$P_4$--bipartite
+gc_6	$P_4$--comparability
+gc_7	$P_4$--extendible
+gc_8	$P_4$--tidy
+gc_9	$P_4$--laden
+gc_10	brittle
+gc_11	extended $P_4$--laden
+gc_12	$P_4$--lite
+gc_14	weakly chordal
+gc_15	$P_4$--reducible
+gc_17	(C_5,P,P_5,S_3,\co{P},co-fork,fork,house,net)--free
+gc_18	$P_4$--sparse
+gc_19	extended $P_4$--reducible
+gc_20	forest--perfect
+gc_21	HHDS--free
+gc_23	permutation
+gc_24	(C_5,P,P_5,\co{P},co-fork,fork,house)--free
+gc_25	alternately orientable
+gc_26	extended $P_4$--sparse
+gc_27	superbrittle
+gc_28	Welsh--Powell opposition
+gc_32	chordal
+gc_35	$\tau_k$--perfect for all $k \ge 2$
+gc_38	(2K_2,C_4,C_5,S_3,net)--free
+gc_39	split
+gc_40	2--interval
+gc_41	3--interval
+gc_42	2--outerplanar
+gc_43	planar
+gc_44	2--threshold
+gc_45	absolute bipartite retract
+gc_46	half--disk Helly
+gc_49	dismantlable
+gc_50	modular
+gc_51	open--neighbourhood--Helly
+gc_52	absolute reflexive retract
+gc_54	clique--Helly
+gc_55	absorbantly perfect
+gc_56	perfect
+gc_57	bip$^*$
+gc_59	trapezoid
+gc_61	AT--free
+gc_62	claw--free
+gc_65	strict quasi--parity
+gc_66	biconvex
+gc_67	convex
+gc_68	bipartable
+gc_69	bipartite
+gc_70	odd-cycle--free
+gc_72	comparability
+gc_73	Gallai
+gc_74	Gallai--perfect
+gc_75	parity
+gc_76	unimodular
+gc_79	chordal bipartite
+gc_80	distance--hereditary
+gc_81	bipartite permutation
+gc_82	AT--free $\cap$ bipartite
+gc_85	X--star--chordal
+gc_87	bipolarizable
+gc_88	co--perfectly orderable
+gc_89	opposition
+gc_90	weak bipolarizable
+gc_91	bithreshold
+gc_92	2--split
+gc_93	block
+gc_95	ptolemaic
+gc_96	geodetic
+gc_97	bounded tolerance
+gc_98	intersection graphs of parallelograms (squares)
+gc_99	bridged
+gc_100	hereditary dismantlable
+gc_103	bridged $\cap$ clique--Helly
+gc_105	Helly
+gc_106	domination
+gc_107	quasi--brittle
+gc_108	cactus
+gc_109	almost tree (1)
+gc_110	outerplanar
+gc_111	circle-polygon
+gc_112	good
+gc_113	HHP--free
+gc_114	slightly triangulated
+gc_116	bipartite $\cap$ weakly chordal
+gc_119	bipartite $\cap$ co--perfectly orderable
+gc_121	hereditary modular
+gc_122	perfect elimination bipartite
+gc_123	chordal $\cap$ comparability
+gc_124	comparability graphs of dimension 4 posets
+gc_125	strongly chordal
+gc_126	comparability $\cap$ weakly chordal
+gc_128	EPT
+gc_129	undirected path
+gc_131	neighbourhood perfect
+gc_132	circle
+gc_133	circular arc
+gc_134	circular arc $\cap$ comparability
+gc_135	circular permutation
+gc_136	containment graphs of circular arcs
+gc_137	(claw,net)--free
+gc_138	Hamiltonian hereditary
+gc_139	claw--free $\cap$ perfect
+gc_141	clique
+gc_142	clique separable
+gc_143	preperfect
+gc_144	co--bithreshold
+gc_145	co--chordal
+gc_146	absolutely perfect
+gc_147	co--comparability
+gc_148	co--comparability $\cup$ comparability
+gc_149	co--Gallai
+gc_150	quasi--parity
+gc_151	cograph
+gc_152	P_4--free
+gc_153	comparability graphs of series--parallel posets
+gc_154	cograph contraction
+gc_155	tree--perfect
+gc_156	co--$P_4$--brittle
+gc_158	co--chordal $\cap$ comparability
+gc_159	comparability graphs of semiorders
+gc_160	comparability graphs of dimension 3 posets
+gc_161	containment graph of circles
+gc_163	containment graphs
+gc_164	superperfect
+gc_165	comparability $\cap$ split
+gc_166	(2K_2,C_4,C_5,S_3,co-rising sun,net)--free
+gc_167	interval bigraph
+gc_169	tolerance
+gc_171	(2K_2,P_4)--free
+gc_173	Dilworth 3
+gc_174	Dilworth 4
+gc_175	directed path
+gc_176	cop--win
+gc_177	(5,2)--crossing--chordal
+gc_178	HHDG--free
+gc_179	domino
+gc_180	(W_4,claw,gem)--free
+gc_181	doubly chordal
+gc_185	dually chordal
+gc_187	homogeneously orderable
+gc_188	(P,P_5,S_3,\co{P},co-fork,fork,house,net)--free
+gc_189	(P,P_5,\co{P},co-fork,fork,house)--free
+gc_190	semi--$P_4$--sparse
+gc_191	$i$--triangulated
+gc_192	(5,2)--odd--noncrossing--chordal
+gc_194	Meyniel
+gc_195	bigeodetic
+gc_196	weakly geodetic
+gc_197	quasitriangulated
+gc_198	Halin
+gc_199	partial 3--tree
+gc_201	3--Helly
+gc_202	neighbourhood--Helly
+gc_203	pseudo--modular
+gc_204	chordal $\cap$ clique--Helly
+gc_205	Helly circular arc
+gc_207	HHDbicycle--free
+gc_208	HHD--free
+gc_211	median
+gc_212	bipartite $\cap$ bridged
+gc_213	hereditary absolute bipartite retract
+gc_215	$N^*$--perfect
+gc_216	HHG--free
+gc_218	murky
+gc_220	$V$--perfect
+gc_221	isometric--HH--free
+gc_222	weakly modular
+gc_223	hereditary Welsh--Powell opposition
+gc_224	(C_5,P,P_5,house)--free
+gc_225	maxibrittle
+gc_228	HH--free
+gc_230	(5,2)--chordal
+gc_232	(house,hole,domino,sun)--free
+gc_233	hereditary homogeneously orderable
+gc_234	interval
+gc_235	AT--free $\cap$ chordal
+gc_236	boxicity 1
+gc_238	chordal $\cap$ co--comparability
+gc_239	boxicity 2
+gc_240	PI
+gc_242	chordal $\cap$ co--chordal $\cap$ co--comparability $\cap$ comparability
+gc_243	permutation $\cap$ split
+gc_245	(2K_2,C_4,C_5,S_3,co-rising sun,net,rising sun)--free
+gc_246	threshold signed
+gc_248	chordal $\cup$ co--chordal
+gc_249	line
+gc_250	(K_5 - e,W_5,\co{A},\co{C_4 \cup 2K_1},\co{P_2 \cup P_3},\co{R},claw,co-twin-C_5,co-twin-house)--free
+gc_251	line graphs of bipartite graphs
+gc_252	(claw,diamond,odd-hole)--free
+gc_253	line $\cap$ perfect
+gc_254	locally perfect
+gc_255	matrogenic
+gc_256	unigraph
+gc_257	matroidal
+gc_259	Matula perfect
+gc_260	(C_5,P_5,co-fish,fish,house)--free
+gc_261	Hilbertian
+gc_262	pseudo--median
+gc_263	quasi--median
+gc_264	(5,2)--odd--chordal
+gc_265	very strongly perfect
+gc_266	perfectly contractile
+gc_267	strongly perfect
+gc_268	(C_5,P_5,house)--free
+gc_270	minimally imperfect
+gc_271	partitionable
+gc_272	multitolerance
+gc_273	(C_5,P_6,\co{P_6})--free
+gc_274	Berge
+gc_275	series--parallel
+gc_276	(5,2)--odd--crossing--chordal
+gc_277	unbreakable
+gc_279	${\cal C}(G)$--perfect
+gc_280	perfectly 1--transversable
+gc_281	kernel solvable
+gc_282	normal
+gc_283	perfect $\cap$ planar
+gc_285	circle graph with equator
+gc_286	co--comparability $\cap$ comparability
+gc_287	comparability graphs of dimension 2 posets
+gc_288	containment graph of intervals
+gc_290	PI$^*$
+gc_291	genus 0
+gc_292	${\cal P}_3$--perfect
+gc_293	toroidal
+gc_294	power--chordal
+gc_296	clique--chordal
+gc_297	proper circular arc
+gc_298	proper interval
+gc_299	unit interval
+gc_301	claw--free $\cap$ interval
+gc_302	astral triple--free
+gc_303	chordal $\cap$ claw--free
+gc_304	unit circular arc
+gc_305	proper tolerance
+gc_306	chordal $\cap$ distance--hereditary
+gc_308	(P_5,co-fork,house)--free
+gc_309	$K_4$--minor--free
+gc_310	partial 2--tree
+gc_311	short--chorded
+gc_312	chordal $\cap$ co--chordal
+gc_313	(2K_2,C_4,C_5)--free
+gc_314	polar
+gc_315	split $\cap$ strongly chordal
+gc_316	strict 2--threshold
+gc_318	hereditary dually chordal
+gc_319	generalized strongly chordal
+gc_320	strongly orderable
+gc_321	strong tree--cograph
+gc_322	Birkhoff
+gc_323	tree--cograph
+gc_324	(A,C_5,P_5,\co{A},house,parachute,parapluie)--free
+gc_325	superfragile
+gc_326	(C_4,P_4,dart)--free
+gc_327	trivially perfect
+gc_328	threshold
+gc_329	(2K_2,C_4,P_4)--free
+gc_330	Dilworth 1
+gc_332	comparability graphs of threshold orders
+gc_333	cograph $\cap$ split
+gc_335	Dilworth 2
+gc_336	threshold tolerance
+gc_337	co--strongly chordal
+gc_338	co--tolerance
+gc_339	genus 1
+gc_341	bounded multitolerance
+gc_342	tree
+gc_343	(C_4,P_4)--free
+gc_344	chordal $\cap$ cograph
+gc_345	cograph $\cap$ interval
+gc_346	comparability graphs of arborescence orders
+gc_347	intersection graph of nested intervals
+gc_348	$p$--connected
+gc_349	unit tolerance
+gc_350	Welsh--Powell perfect
+gc_351	HHDA--free
+gc_352	wing--triangulated
+gc_353	sun--free
+gc_354	gem--free
+gc_355	(S_3,claw,net)--free
+gc_356	odd-hole--free
+gc_357	paw--free
+gc_358	co--HHD--free
+gc_359	C_5--free
+gc_360	C_4--free
+gc_361	house--free
+gc_362	K_{2,3}--free
+gc_365	(6,1)--chordal
+gc_367	(C_4,C_5)--free
+gc_368	X--conformal
+gc_369	X--chordal
+gc_370	(6,2)--chordal
+gc_371	triangle--free
+gc_372	bull--free
+gc_373	(S_3,net)--free
+gc_374	odd-sun--free
+gc_375	induced-hereditary pseudo--modular
+gc_376	S_3--free
+gc_377	comparability graphs of posets of interval dimension 2
+gc_379	chordal $\cap$ proper circular arc
+gc_380	chordal $\cap$ (claw,net)--free
+gc_381	chordal $\cap$ unit circular arc
+gc_382	C_{n+4}--free
+gc_383	thick tree
+gc_384	AC
+gc_385	(S_3,net)--free $\cap$ sun--free
+gc_386	(S_3,S_4,net)--free
+gc_388	K_{1,4}--free
+gc_389	unit disk
+gc_390	interval filament
+gc_391	fork--free
+gc_392	co--Welsh--Powell perfect
+gc_393	co--Matula perfect
+gc_394	2K_2--free
+gc_395	nK_2--free, fixed $n$
+gc_396	P_5--free
+gc_397	(bull,fork)--free
+gc_398	(bull,co-fork,fork)--free
+gc_400	(K_{2,3},P,hole)--free
+gc_401	(C_4,C_5,T_2)--free
+gc_402	(P_5,house)--free
+gc_403	(K_{2,3},P_5)--free
+gc_404	(K_{2,3},P,P_5)--free
+gc_406	P_3--free
+gc_407	(P_5,claw)--free
+gc_408	(K_{1,4},P_5)--free
+gc_409	(P_5,diamond)--free
+gc_410	(P,P_5)--free
+gc_411	(P,P_5,\co{3K_2},gem)--free
+gc_413	(K_{1,4},diamond)--free
+gc_414	disk
+gc_415	well covered
+gc_416	(0,2)-colorable
+gc_417	(1,1)-colorable
+gc_418	(p,q\le2)-colorable
+gc_419	visibility
+gc_420	(K_{1,4},P,P_5,fork)--free
+gc_421	(\co{P},butterfly,fork,gem)--free
+gc_423	co-gem--free
+gc_425	(co-diamond,diamond)--free
+gc_426	(claw,co-claw)--free
+gc_427	(P_5,cricket)--free
+gc_428	(K_{3,3}-e,P_5,X_{98})--free
+gc_429	(C_5,P_5,\co{P_2 \cup P_3})--free
+gc_430	(C_4,P_5)--free
+gc_431	(K_{3,3},P_5)--free
+gc_432	(K_{4,4},P_5)--free
+gc_433	(C_6,\co{C_6})--free
+gc_434	subtree overlap
+gc_435	(anti-hole,hole)--free
+gc_436	C_6--free
+gc_437	hole--free
+gc_438	(\co{P},fork)--free
+gc_439	(P_5,fork)--free
+gc_440	partial grid
+gc_441	diamond--free
+gc_442	bipartite chain
+gc_443	2K_2--free $\cap$ bipartite
+gc_444	bi-cograph
+gc_445	(P_7,odd-cycle,star_{1,2,3},sunlet_4)--free
+gc_446	(P_7,odd-cycle,star_{1,2,3})--free
+gc_447	bipartite $\cap$ bithreshold
+gc_448	(E,odd-cycle)--free
+gc_449	(odd-cycle,star_{1,2,3},sunlet_4)--free
+gc_450	(odd-cycle,star_{1,2,3})--free
+gc_451	(fork,odd-cycle)--free
+gc_452	bisplit
+gc_453	tripartite
+gc_454	(0,3)-colorable
+gc_455	K_4--free
+gc_456	K_2 \cup K_3--free
+gc_457	weak bisplit
+gc_458	bisplit $\cap$ triangle--free
+gc_459	$P_4$--simplicial
+gc_460	$P_4$--indifference
+gc_461	(S_3,net)--free $\cap$ extended $P_4$--sparse
+gc_462	k-polygon
+gc_463	(P_5,co-fork)--free
+gc_464	grid
+gc_465	split-perfect
+gc_466	(P_5,gem)--free
+gc_467	co--trapezoid
+gc_469	co--bounded tolerance
+gc_470	bounded treewidth
+gc_472	2-subdivision
+gc_473	(C_4,diamond)--free
+gc_474	(\co{P},fork,gem)--free
+gc_475	(bull,fork,gem)--free
+gc_476	(\co{P},fork,house)--free
+gc_477	(bull,fork,house)--free
+gc_478	(P_5,bull,house)--free
+gc_479	(P,\co{P},co-fork,fork)--free
+gc_480	(P_5,fork,house)--free
+gc_481	cliquewidth 2
+gc_482	cliquewidth 3
+gc_483	cliquewidth 4
+gc_484	(2,2)-colorable
+gc_485	(2,0)-colorable
+gc_486	co--bipartite
+gc_487	circular arc $\cap$ co--bipartite
+gc_488	(q,t)
+gc_489	(5,1)
+gc_490	(5,2)
+gc_491	(6,2)
+gc_492	(6,3)
+gc_493	(7,3)
+gc_494	(7,4)
+gc_495	(7,5)
+gc_496	(8,4)
+gc_497	(9,6)
+gc_498	(q,q-4), fixed q
+gc_499	C_5--free $\cap$ $P_4$--extendible
+gc_500	(p,q)-colorable
+gc_501	(q, q-3), fixed q\ge 7
+gc_502	(C_5,K_2 \cup K_3,K_{2,3},P,P_2 \cup P_3,P_5,\co{P},\co{P_2 \cup P_3},co-fork,fork,house)--free
+gc_503	XC_9--free
+gc_504	partner-limited
+gc_505	(A,T_2,odd-cycle)--free
+gc_506	(C_4,K_4,claw,diamond)--free
+gc_507	C_4--free $\cap$ C_6--free $\cap$ bipartite
+gc_508	(2K_2,claw)--free
+gc_509	(claw,paw)--free
+gc_510	(co-gem,gem)--free
+gc_511	(C_5,P,P_5,\co{P},house)--free
+gc_512	(C_5,P_5,\co{P},co-fork,co-gem,fork)--free
+gc_513	(C_5,P,P_5,\co{P},bull,co-gem,fork)--free
+gc_514	(co-paw,paw)--free
+gc_515	(4K_1,K_4)--free
+gc_516	(P_5,\co{P},gem)--free
+gc_517	(C_5,P_5,gem)--free
+gc_518	(C_5,co-gem,gem)--free
+gc_519	(bull,co-gem,gem)--free
+gc_520	(C_5,bull,co-gem,gem)--free
+gc_521	bipartite $\cap$ co--trapezoid
+gc_522	comparability graphs of posets of interval dimension 2, height 1
+gc_523	co--comparability graphs of posets of interval dimension 2, height 1
+gc_524	difference
+gc_525	bipartite $\cap$ claw--free
+gc_526	F_n grid
+gc_527	H_{n,q} grid
+gc_528	(C_4,C_5,C_6,C_7,C_8,claw,diamond)--free
+gc_530	(A,E,S_3,X_1,domino,hole,house,net,rising sun)--free
+gc_531	(T_2,X_2,X_3,hole,triangle)--free
+gc_532	Raspail
+gc_533	(A,P_6,clique wheel,domino,hole,house)--free
+gc_534	(P_6,X_{10},X_{11},X_{12},X_{13},X_{14},X_{15},X_5,X_6,X_7,X_8,X_9,\co{C_6},\co{P_6},antenna,hole)--free
+gc_535	co--Welsh--Powell opposition
+gc_536	spider graph
+gc_537	(C_5,C_6,P_6,X_{17},X_{18},X_5,X_{98},\co{C_6},\co{P_6},antenna,domino)--free
+gc_538	(C_5,C_6,C_7,C_8,P_8,X_{19},X_{20},X_{21},X_{22},gem,house)--free
+gc_539	(2C_4,3K_2,C_6,E,P_2 \cup P_4,P_6,X_{25},X_{26},X_{27},X_{28},X_{29},odd-cycle)--free
+gc_540	(1,2)-colorable
+gc_541	$N^*$
+gc_542	(2K_2,A,H)--free
+gc_543	probe interval
+gc_544	probe chordal
+gc_545	probe chordal $\cap$ weakly chordal
+gc_546	(6,1)-even-chordal
+gc_547	even-hole--free
+gc_548	even-hole--free $\cap$ probe chordal
+gc_549	domination perfect
+gc_550	(A,H,K_{3,3},X_{45},X_{46},X_{47},X_{48},X_{49},X_{50},X_{51},X_{52},X_{53},X_{54},X_{55},X_{56},X_{57},\co{X_{42}})--free
+gc_551	middle
+gc_552	chordal $\cap$ domination perfect
+gc_553	domination perfect $\cap$ triangle--free
+gc_554	domination perfect $\cap$ planar
+gc_555	indifference
+gc_556	co--comparability $\cap$ tolerance
+gc_557	chordal-perfect
+gc_558	split $\cap$ superperfect
+gc_559	co--chordal $\cap$ superperfect
+gc_560	irredundance perfect
+gc_561	chordal $\cap$ irredundance perfect
+gc_562	(C_{n+4},X_{59},longhorn)--free
+gc_563	(A,P_6,domino)--free
+gc_564	irredundance perfect with ir(G)\le 4
+gc_565	probe unit interval
+gc_566	(W_4,claw)--free
+gc_568	weak dominating pair
+gc_569	diametral path
+gc_571	homogeneously representable
+gc_572	(P_5,bull)--free
+gc_573	(P_5,bull)--free $\cap$ interval
+gc_574	(bull,house)--free
+gc_575	(bull,house,odd-hole)--free
+gc_576	chordal $\cap$ diametral path
+gc_577	(C_{n+4},T_2,net)--free
+gc_578	(3K_2,C_4 \cup P_2,C_5,P_2 \cup P_4,P_5,S_3,X_1,X_{46},X_{70},\co{3K_2},\co{C_4 \cup P_2},\co{P_2 \cup P_4},\co{X_1},\co{X_{46}},\co{X_{70}},co-fish,co-rising sun,fish,house,net,rising sun)--free
+gc_579	(C_4,C_5)--free $\cap$ cop--win
+gc_580	chordal $\cap$ domino
+gc_581	reflexive
+gc_582	Helly $\cap$ reflexive
+gc_583	clique--Helly $\cap$ dismantlable $\cap$ reflexive
+gc_584	pseudo--modular $\cap$ triangle--free
+gc_585	(domino,gem,house)--free
+gc_586	(domino,gem,house)--free $\cap$ pseudo--modular
+gc_587	C_6--free $\cap$ modular
+gc_588	(X_{79},X_{80})--free
+gc_589	(X_{79},X_{80})--free $\cap$ modular
+gc_590	BW_3--free
+gc_591	BW_3--free $\cap$ modular
+gc_592	domino--free
+gc_593	domino--free $\cap$ modular
+gc_594	$k$-tree, fixed $k$
+gc_595	partial $k$-tree, fixed $k$
+gc_597	(odd anti-hole,odd-hole)--free
+gc_598	K_4--free $\cap$ perfect
+gc_600	interval regular
+gc_601	interval regular of diameter 2
+gc_602	bipartite tolerance
+gc_603	diamond--free $\cap$ perfect
+gc_604	D
+gc_605	domishold
+gc_606	totally unimodular
+gc_607	2--split $\cap$ perfect
+gc_608	split-neighbourhood
+gc_609	pretty
+gc_610	odd-hole--free $\cap$ pretty
+gc_611	p-tree
+gc_612	co--forest--perfect
+gc_613	XC_{10}--free
+gc_614	XC_{10}--free $\cap$ pseudo--modular
+gc_615	(XC_1,XC_2,XC_3,XC_4,XC_5,XC_6,XC_7,XC_8)--free
+gc_616	irredundance perfect with ir(G)=2
+gc_617	(X_{30},XZ_1,XZ_4,longhorn)--free
+gc_618	(K_{2,3},X_{37},X_{38},diamond,domino,house,twin-C_5)--free
+gc_619	(X_{38},gem,house)--free
+gc_620	probe interval $\cap$ tree
+gc_621	(T_3,X_{81},cycle)--free
+gc_622	claw--free $\cap$ odd-hole--free $\cap$ tripartite
+gc_623	odd anti-hole--free
+gc_624	claw--free $\cap$ odd anti-hole--free $\cap$ tripartite
+gc_625	(W_4,W_5,butterfly)--free
+gc_626	perfect $\cap$ split-neighbourhood
+gc_627	(2K_2,K_{3,3},K_{3,3}+e,P_4,\co{2P_3})--free
+gc_628	(K_{2,3},diamond)--free
+gc_629	(K_{2,3},diamond)--free $\cap$ weakly modular
+gc_630	even anti-hole--free
+gc_631	cycle--free
+gc_632	(fork,triangle)--free
+gc_633	(cross,triangle)--free
+gc_634	(K_4,P_4)--free
+gc_635	(H,triangle)--free
+gc_636	(E,triangle)--free
+gc_637	P_5--free $\cap$ tripartite
+gc_638	P_6--free
+gc_639	P_6--free $\cap$ tripartite
+gc_640	nearly bipartite
+gc_642	convex-round
+gc_644	circular convex bipartite
+gc_645	bipartite $\cap$ convex-round
+gc_646	interval enumerable
+gc_647	(P_5,X_{82},X_{83})--free
+gc_648	(K_{3,3}-e,P_5)--free
+gc_649	k-leaf power, fixed $k$
+gc_650	4-leaf power
+gc_651	3-leaf power
+gc_652	2-leaf power
+gc_653	(C_{n+4},bull,dart,gem)--free
+gc_655	(0,2)-colorable $\cap$ chordal
+gc_656	(0,3)-colorable $\cap$ chordal
+gc_657	(1,2)-colorable $\cap$ chordal
+gc_658	(2,0)-colorable $\cap$ chordal
+gc_659	(2,2)-colorable $\cap$ chordal
+gc_660	(C_{n+4},K_4)--free
+gc_661	(2K_3,C_{n+4})--free
+gc_662	(3K_1,C_4,C_5)--free
+gc_663	(3K_3,C_{n+4})--free
+gc_664	(2K_3,2P_3,C_5,C_6,C_7,K_{2,3},K_3 \cup P_3,X_{84},\co{3K_2},\co{C_4 \cup P_2},\co{C_6},\co{P_2 \cup P_4},\co{P_6},\co{X_{18}},\co{X_5},co-antenna,co-domino,co-fish)--free
+gc_665	(1,2)-polar
+gc_666	(1,2)-polar $\cap$ chordal
+gc_667	co--bithreshold $\cap$ split
+gc_668	perfect connected-dominant
+gc_669	(C_5,P_5)--free
+gc_670	(P_5,triangle)--free
+gc_671	(K_4,P_5)--free
+gc_672	(C_4,C_5,C_6,C_7,C_8,H,X_{85},triangle)--free
+gc_673	\co{K_{1,4}}--free
+gc_674	4K_1--free
+gc_675	2-subdivision $\cap$ planar
+gc_676	charming
+gc_678	(P_5,\co{C_6})--free
+gc_679	(P_5,\co{C_6})--free $\cap$ weakly chordal
+gc_680	slim
+gc_681	probe Meyniel
+gc_682	probe Gallai
+gc_683	(P_6,X_{30},X_8)--free
+gc_684	(C_5,co-butterfly,co-diamond,triangle)--free
+gc_685	1-bounded bipartite
+gc_686	(C_5,C_6 \cup K_1,C_7,K_{3,3} \cup K_1,K_{3,3}-e \cup K_1,\co{K_5 - e},domino \cup K_1,triangle)--free
+gc_687	2-bounded bipartite
+gc_688	(K_{3,3},K_4,W_4 \cup K_1,W_5,X_{86},X_{87},X_{88},X_{89},X_{90},\co{C_7},\co{X_{38}},\co{X_{39}},\co{butterfly \cup K_1},co-diamond)--free
+gc_689	1-bounded tripartite
+gc_690	upper irredundance perfect
+gc_691	upper domination perfect
+gc_692	(C_4,X_{91},claw)--free
+gc_693	claw--free $\cap$ upper domination perfect
+gc_694	strong domination perfect
+gc_695	(A,H,K_{3,3},K_{3,3}-e,X_{45},XZ_5,domino)--free
+gc_696	(BW_3,C_5,K_{3,4},K_{3,4}-e,T_2,X_{18},X_{92},X_{93},triangle)--free
+gc_697	(A,H,K_{3,3},K_{3,3}-e,T_2,X_{18},X_{45},domino,triangle)--free
+gc_698	(C_5,K_{3,3}-e,T_2,X_{18},X_{94},domino,triangle)--free
+gc_699	clique-perfect
+gc_700	(W_4,gem)--free
+gc_701	(W_4,gem)--free $\cap$ short--chorded
+gc_702	slender
+gc_703	skeletal
+gc_704	quasi-Meyniel
+gc_705	clique-perfect $\cap$ triangle--free
+gc_706	even-cycle--free
+gc_707	line graphs of multigraphs without triangles
+gc_708	line graphs of triangle-free graphs
+gc_709	(claw,diamond)--free
+gc_710	line graphs of acyclic multigraphs
+gc_711	(W_4,claw,gem,odd-hole)--free
+gc_712	line graphs of bipartite multigraphs
+gc_713	(4-fan,K_{1,4},W_4,W_5,\co{A \cup K_1},\co{co-fork \cup K_1},\co{gem \cup K_1},\co{net \cup K_1})--free
+gc_714	line graphs of Helly hypergraphs of rank 3
+gc_715	3-mino
+gc_716	line graphs of linear hypergraphs of rank 3
+gc_717	maximum degree 4
+gc_719	linear domino
+gc_720	maximum degree 3
+gc_721	2-tree
+gc_722	2-tree $\cap$ probe interval
+gc_723	maximal outerplanar
+gc_724	rectangle visibility
+gc_725	weak rectangle visibility
+gc_726	partial rectangle visibility
+gc_727	bar visibility
+gc_728	thickness \le 2
+gc_729	biplanar
+gc_730	weak bar visibility
+gc_731	partial bar visibility
+gc_732	caterpillar arboricity \le 2
+gc_733	linear arboricity \le 2
+gc_734	partial 4--tree
+gc_735	K_2 \cup claw--free
+gc_736	gridline
+gc_737	P_7--free
+gc_738	frame hereditary dominating pair
+gc_739	grid intersection
+gc_740	bipartite $\cap$ grid intersection
+gc_741	string
+gc_742	probe interval bigraph
+gc_743	bipartite $\cap$ boxicity 2
+gc_744	co--line graphs of bipartite graphs
+gc_745	bipartite $\cup$ co--bipartite $\cup$ co--line graphs of bipartite graphs $\cup$ line graphs of bipartite graphs
+gc_746	(X_{12},X_5,X_{95},X_{96},X_{97},\co{X_{12}},\co{X_5},\co{X_{95}},\co{X_{96}},\co{X_{97}},\co{claw \cup triangle},claw \cup triangle,co-cricket,co-twin-house,cricket,odd anti-hole,odd-hole,twin-house)--free
+gc_747	hereditary clique--Helly
+gc_748	(S_3,\co{3K_2},\co{E},\co{P_2 \cup P_4})--free
+gc_749	maximal clique irreducible
+gc_750	hereditary maximal clique irreducible
+gc_751	unit bar visibility
+gc_752	co--hereditary clique--Helly
+gc_753	circular perfect
+gc_754	biclique separable
+gc_755	co--biclique separable
+gc_756	(E,P)--free
+gc_757	(P,T_2)--free
+gc_758	(P,P_8)--free
+gc_759	(K_{3,3}-e,P_5,X_{99})--free
+gc_760	chordal $\cap$ diamond--free
+gc_761	probe cograph
+gc_762	probe $P_4$--reducible
+gc_763	probe $P_4$--sparse
+gc_764	probe split
+gc_765	(C_{n+4},T_2,X_{31},XF_2^{n+1},XF_3^n)--free
+gc_766	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{35},X_{36},X_{37},X_{38},X_{39},X_{40},X_{41},XF_2^{n+1},XF_3^n,XF_4^n)--free
+gc_767	(XF_1^{2n+3},XF_5^{2n+3},XF_6^{2n+2},\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{35}},\co{X_{36}},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,odd-hole)--free
+gc_768	(C_{n+6},X_{37},claw,co-antenna,net,sun)--free
+gc_769	(C_{n+4},T_2,XF_2^{n+1})--free
+gc_770	square of tree
+gc_771	2-connected
+gc_772	(4-fan,C_{n+4},K_5 - e,S_3,\co{H},\co{K_3 \cup 2K_1})--free
+gc_773	2-connected $\cap$ (4-fan,C_{n+4},K_5 - e,S_3,\co{H},\co{K_3 \cup 2K_1})--free
+gc_774	(4-fan,C_{n+4},K_5 - e,S_3,X_{100},X_{101},X_{102},\co{H},\co{K_3 \cup 2K_1})--free
+gc_775	basic 4-leaf power
+gc_776	(C_{n+4},P_5,claw,gem)--free
+gc_777	cycle-bicolorable
+gc_778	alternately colourable
+gc_779	(BW_3,W_5,W_7,X_{103},X_{104},X_{105},X_{106},X_{107},X_{108},X_{109},X_{110},X_{111},X_{112},X_{113},X_{114},X_{115},X_{116},X_{117},X_{118},X_{119},X_{120},X_{121},X_{122},X_{123},X_{124},X_{125},X_{126},X_{53},X_{88},\co{C_6},\co{C_8},\co{T_2},\co{X_3})--free
+gc_780	Bouchet
+gc_781	quasi-threshold
+gc_782	(C_{n+4},S_3 \cup K_1,claw,net)--free
+gc_783	graceful
+gc_784	caterpillar
+gc_785	harmonious
+gc_786	probe distance--hereditary
+gc_787	probe comparability
+gc_788	probe co--comparability
+gc_789	probe permutation
+gc_790	bipartite $\cap$ probe interval
+gc_791	(T_2,cycle)--free
+gc_792	sun--free $\cap$ weakly chordal
+gc_793	chordal $\cap$ hereditary clique--Helly
+gc_794	disk-Helly
+gc_795	hereditary disk-Helly
+gc_796	(K_2 \cup K_3,X_{11},X_{127},X_{128},X_{129},X_{131},X_{133},X_{135},X_{136},X_{137},X_{138},X_{139},X_{140},X_{141},X_{142},X_{143},X_{144},X_{145},X_{146},X_{147},X_{148},X_{149},X_{150},X_{151},X_{30},X_{35},X_{46},XF_1^{2n+3},XF_6^{2n+3},\co{2P_3},\co{3K_2},\co{C_4 \cup P_2},\co{C_6},\co{P_6},\co{X_{130}},\co{X_{132}},\co{X_{134}},\co{X_{152}},\co{X_{153}},\co{X_{154}},\co{X_{155}},\co{X_{156}},\co{X_{157}},\co{X_{158}},\co{X_{18}},\co{X_{84}},antenna,co-domino,co-fish,eiffeltower,longhorn,odd-hole)--free
+gc_797	co--probe cograph
+gc_798	(2K_3 + e,C_5,C_6,P_6,X_5,\co{2P_4},\co{A},\co{C_6},\co{C_7},\co{E},\co{P_7},\co{R},\co{X_1},\co{X_{103}},\co{X_5},\co{X_{58}},\co{X_{84}},\co{X_{98}},antenna,co-domino,co-rising sun,co-twin-house,domino,parachute,parapluie,rising sun,sunlet_4)--free
+gc_799	probe threshold
+gc_800	probe trivially perfect
+gc_803	co--probe threshold
+gc_804	2K_2--free $\cap$ probe cograph
+gc_805	2K_2--free $\cap$ probe trivially perfect
+gc_806	(2K_2,C_5,S_3,X_{159},X_{160},X_{161},X_{162},X_{46},X_{70},\co{2P_3},\co{3K_2},\co{H},\co{P_2 \cup P_4},\co{X_1},co-rising sun,house,net)--free
+gc_807	probe threshold $\cap$ split
+gc_808	(C_6,K_{3,3}+e,P,P_7,X_{37},X_{41})--free
+gc_809	(K_{2,3},P,P_5,X_{163},X_{95},diamond)--free
+gc_810	subtree filament
+gc_811	(P,star_{1,2,5})--free
+gc_812	(P_5,\co{P_2 \cup P_3})--free
+gc_813	(P,P_7)--free
+gc_814	P--free
+gc_815	(C_4,P_6)--free
+gc_816	E--free
+gc_817	E--free $\cap$ bipartite
+gc_818	(P,star_{1,2,3})--free
+gc_819	(P,star_{1,2,4})--free
+gc_820	probe AT--free
+gc_821	C_{n+7}--free
+gc_823	probe HHDS--free
+gc_824	probe ptolemaic
+gc_825	5-leaf power
+gc_826	5-leaf power $\cap$ distance--hereditary
+gc_827	probe bipartite chain
+gc_828	(3K_2,C_6,P_7,X_{164},X_{165},odd-cycle,sunlet_4)--free
+gc_829	(diamond,even-cycle)--free
+gc_830	probe strongly chordal
+gc_831	probe chordal bipartite
+gc_832	CIS
+gc_833	almost CIS
+gc_834	module-composed
+gc_835	independent module-composed
+gc_836	bipartite $\cap$ module-composed
+gc_837	C_{n+6}--free
+gc_838	(XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9})--free
+gc_839	(2K_3 + e,A,C_5,C_6,E,H,K_{3,3}-e,P_6,R,S_3,X_{166},X_{167},X_{168},X_{169},X_{170},X_{171},X_{172},X_{18},X_{45},X_5,X_{58},X_{84},X_{95},X_{96},X_{98},\co{A},\co{C_6},\co{E},\co{H},\co{P_6},\co{R},\co{X_{166}},\co{X_{167}},\co{X_{168}},\co{X_{169}},\co{X_{170}},\co{X_{171}},\co{X_{172}},\co{X_{18}},\co{X_{45}},\co{X_5},\co{X_{58}},\co{X_{84}},\co{X_{95}},\co{X_{96}},\co{X_{98}},antenna,co-antenna,co-cross,co-domino,co-fish,co-twin-house,cross,domino,fish,net,twin-house)--free
+gc_840	(2K_3 + e,A,C_5,C_6,E,K_{3,3}-e,P_6,R,X_{166},X_{167},X_{169},X_{170},X_{171},X_{172},X_{18},X_{45},X_5,X_{58},X_{84},X_{95},X_{98},\co{A},\co{C_6},\co{E},\co{P_6},\co{R},\co{X_{166}},\co{X_{167}},\co{X_{169}},\co{X_{170}},\co{X_{171}},\co{X_{172}},\co{X_{18}},\co{X_{45}},\co{X_5},\co{X_{58}},\co{X_{84}},\co{X_{95}},\co{X_{98}},antenna,co-antenna,co-domino,co-fish,co-twin-house,domino,fish,twin-house)--free
+gc_842	(2K_3 + e,A,C_5,C_6,E,H,K_{3,3}-e,R,X_{168},X_{171},X_{18},X_{45},X_5,X_{58},X_{84},X_{95},\co{A},\co{C_6},\co{E},\co{H},\co{R},\co{X_{168}},\co{X_{171}},\co{X_{18}},\co{X_{45}},\co{X_5},\co{X_{58}},\co{X_{84}},\co{X_{95}},antenna,co-antenna,co-domino,co-fish,co-twin-house,domino,fish,twin-house)--free
+gc_843	(anti-hole,bull,odd-hole)--free
+gc_844	P_5--free $\cap$ weakly chordal
+gc_845	(A,C_5,C_6,P_6,domino,house)--free
+gc_846	(XC_{12},cycle)--free
+gc_847	binary tree
+gc_848	binary tree $\cap$ partial grid
+gc_849	3d grid
+gc_850	partial 3d grid
+gc_851	semicircular
+gc_852	(3K_1,P_4)--free
+gc_853	circular arc $\cap$ cograph
+gc_854	(K_{2,3},P_4,co-butterfly)--free
+gc_855	circular arc $\cap$ paw--free
+gc_856	(C_{n+4} \cup K_1,K_{2,3},T_2,\co{X_{90}},domino,paw,twin-C_5)--free
+gc_857	chordal $\cap$ circular arc $\cap$ claw--free
+gc_858	(C_{n+4},S_3 \cup K_1,\co{X_{103}},claw,eiffeltower,net \cup K_1)--free
+gc_859	circular arc $\cap$ diamond--free
+gc_860	(C_{n+4} \cup K_1,K_{2,3},T_2,\co{C_6},\co{X_{103}},\co{X_{37}},\co{X_{88}},\co{X_{90}},diamond,domino,eiffeltower,net \cup K_1,twin-C_5)--free
+gc_861	normal circular arc
+gc_862	SEG
+gc_863	k-DIR
+gc_864	2-DIR
+gc_865	1-DIR
+gc_866	PURE-k-DIR
+gc_867	PURE-2-DIR
+gc_868	PURE-3-DIR
+gc_869	planar $\cap$ triangle--free
+gc_870	1-string
+gc_871	(butterfly,gem)--free
+gc_872	semiperfectly orderable
+gc_873	Meyniel $\cap$ weakly chordal
+gc_874	(odd building,odd-hole)--free
+gc_875	2-terminal series--parallel
+gc_876	balanced 2-interval
+gc_877	unit 2-interval
+gc_878	(2,2)-interval
+gc_879	quasi-line
+gc_880	all-4-simplicial
+gc_881	(C_{n+4} \cup K_1,S_3 \cup K_1,X_{42},\co{T_2},\co{X_2},\co{X_3},\co{odd-cycle \cup K_1},even anti-hole,net)--free
+gc_882	proper interval bigraph
+gc_883	unit interval bigraph
+gc_884	co--proper interval bigraph
+gc_885	co--bipartite $\cap$ proper circular arc
+gc_886	(C_{n+4} \cup K_1,C(n,k),X_{42},\co{T_2},\co{X_2},\co{X_3},\co{odd-cycle \cup K_1},even anti-hole,net)--free
+gc_887	co--bipartite $\cap$ normal circular arc
+gc_888	co--interval bigraph
+gc_889	proper Helly circular arc
+gc_890	(C_{n+4} \cup K_1,S_3,W_4,\co{odd-cycle \cup K_1},even anti-hole,net)--free
+gc_891	interval containment bigraph
+gc_892	co--interval containment bigraph
+gc_893	bipartite $\cap$ co--comparability
+gc_894	co--circular perfect
+gc_895	strongly circular perfect
+gc_896	K_3--minor--free
+gc_897	(K_5,X_{126},X_{174},\co{3K_2})--minor--free
+gc_898	(K_{3,3},K_5)--minor--free
+gc_899	treewidth 2
+gc_900	treewidth 3
+gc_901	treewidth 4
+gc_902	treewidth 5
+gc_903	(K_{2,3},K_4)--minor--free
+gc_904	comparability graphs of posets of interval dimension d
+gc_905	co--comparability graphs of posets of interval dimension d
+gc_906	d-trapezoid
+gc_907	comparability graphs of dimension d posets
+gc_908	co--comparability graphs of dimension d posets
+gc_909	planar of maximum degree 4
+gc_911	(C_4,triangle)--free
+gc_912	(C_4,triangle)--free $\cap$ planar
+gc_913	overlap
+gc_914	(2P_3,triangle)--free
+gc_915	co-paw--free
+gc_916	nP_3--free, fixed $n$
+gc_917	(C_4,C_5,K_4,diamond)--free
+gc_918	(C_4,C_5,K_4,diamond)--free $\cap$ planar
+gc_919	(K_4,claw,diamond)--free
+gc_920	(K_{1,4},paw)--free
+gc_921	(K_{1,5},triangle)--free
+gc_922	(P_6,triangle)--free
+gc_923	(P_2 \cup P_4,triangle)--free
+gc_924	(X_{172},triangle)--free
+gc_925	(K_2 \cup claw,triangle)--free
+gc_926	(co-paw,triangle)--free
+gc_927	(2K_2,net)--free
+gc_928	(4K_1,net)--free
+gc_929	(3K_2,triangle)--free
+gc_930	P_2 \cup P_4--free
+gc_931	2P_3--free
+gc_932	locally connected
+gc_933	path orderable
+gc_934	strong asteroid free
+gc_935	3-DIR
+gc_936	3-DIR contact
+gc_937	strongly 3-colorable
+gc_938	(K_4,S_3,X_{36},\co{C_7},\co{X_{175}},\co{X_{176}},\co{X_{42}},antenna,co-claw,net,odd-hole)--free
+gc_939	(claw \cup 3K_1,odd-cycle)--free
+gc_940	(X_{177},odd-cycle)--free
+gc_941	bipartite $\cap$ maximum degree 3
+gc_942	(K_{1,4},odd-cycle)--free
+gc_943	(n+4)-pan--free
+gc_944	k-starlike
+gc_945	triangulated
+gc_946	self-clique
+gc_947	Helly circular arc $\cap$ self-clique
+gc_948	hereditary clique--Helly $\cap$ self-clique
+gc_949	co--interval filament
+gc_950	co--interval mixed
+gc_951	outer-string
+gc_952	CONV
+gc_953	co--planar
+gc_954	disk contact
+gc_955	coin
+gc_956	triangle contact
+gc_957	balanced
+gc_958	$P_4$--tidy $\cap$ balanced
+gc_959	$P_4$--tidy $\cap$ hereditary clique--Helly $\cap$ perfect
+gc_960	(C_5,S_3,\co{3K_2},\co{P_2 \cup P_4})--free
+gc_961	(C_5,S_3,\co{3K_2},\co{P_2 \cup P_4})--free $\cap$ $P_4$--tidy
+gc_962	$P_4$--tidy $\cap$ perfect
+gc_963	balanced $\cap$ paw--free
+gc_964	hereditary clique--Helly $\cap$ paw--free $\cap$ perfect
+gc_965	(\co{3K_2},odd-hole,paw)--free
+gc_966	balanced $\cap$ line
+gc_967	hereditary clique--Helly $\cap$ line $\cap$ perfect
+gc_968	(S_3,\co{3K_2},\co{E},odd-hole)--free
+gc_969	(S_3,\co{3K_2},\co{E},odd-hole)--free $\cap$ line
+gc_970	co--line
+gc_971	balanced $\cap$ co--line
+gc_972	(C_5,S_3,X_{11},\co{3K_2},\co{C_7},\co{P_2 \cup P_4},\co{X_{173}})--free
+gc_973	(C_5,S_3,X_{11},\co{3K_2},\co{C_7},\co{P_2 \cup P_4},\co{X_{173}})--free $\cap$ co--line
+gc_974	unit Helly circular arc
+gc_975	(C_{n+4} \cup K_1,C(n,k),W_4,\co{odd-cycle \cup K_1},even anti-hole,net)--free
+gc_976	(hole,odd anti-hole)--free
+gc_977	(anti-hole,odd-hole)--free
+gc_978	2-thin
+gc_979	perfectly colorable
+gc_980	Apollonian network
+gc_981	maximal planar
+gc_982	chordal $\cap$ maximal planar
+gc_983	3-tree
+gc_984	3-tree $\cap$ planar
+gc_985	chordal $\cap$ planar
+gc_986	polyhedral
+gc_987	$\beta$-perfect
+gc_988	$\beta$-perfect $\cap$ perfect
+gc_989	co--$\beta$-perfect
+gc_990	$\beta$-perfect $\cap$ co--$\beta$-perfect
+gc_991	(X_{37},diamond,even-cycle)--free
+gc_992	even-signable
+gc_993	odd-signable
+gc_994	strongly even-signable
+gc_995	strongly odd-signable
+gc_996	building--free
+gc_997	building--free $\cap$ even-signable
+gc_998	building--free $\cap$ odd-signable
+gc_999	odd-signable $\cap$ triangle--free
+gc_1001	(C_4,odd-hole)--free
+gc_1002	(3P_3,P_3 \cup P_4,P_5,X_{102},X_{180},X_{181},X_{182},X_{183},X_{184},X_{185},X_{186},X_{187},X_{188},X_{189},X_{190},X_{191},X_{192},X_{193},\co{5-pan},\co{A},\co{P_6},co-twin-C_5)--free
+gc_1003	b-perfect
+gc_1004	b-perfect $\cap$ chordal
+gc_1005	homothetic triangle contact
+gc_1006	partial 3--tree $\cap$ planar
+gc_1007	max-tolerance
+gc_1008	semi-square intersection
+gc_1009	bipartite $\cap$ tolerance
+gc_1010	tolerance $\cap$ triangle--free
+gc_1011	tolerance $\cap$ tree
+gc_1012	(T_3,cycle)--free
+gc_1013	bipartite $\cap$ bounded tolerance
+gc_1014	bipartite $\cap$ trapezoid
+gc_1015	biclique--Helly
+gc_1016	neighbourhood--Helly $\cap$ triangle--free
+gc_1017	Helly circle
+gc_1018	circle $\cap$ diamond--free
+gc_1019	unit Helly circle
+gc_1020	(C_{n+3} \cup K_1,diamond,paw)--free
+gc_1021	hereditary biclique-Helly
+gc_1022	(C_5,C_6,X_{164},X_{165},sunlet_4,triangle)--free
+gc_1023	hereditary open--neighbourhood--Helly
+gc_1024	(C_6,triangle)--free
+gc_1025	hereditary neighbourhood--Helly
+gc_1026	(C_4,C_5,C_6,S_3)--free
+gc_1027	SC $k$-tree, fixed $k$
+gc_1028	SC 2-tree
+gc_1029	SC 3-tree
+gc_1030	$k$-path graph, fixed $k$
+gc_1031	(K_4,P_5,W_5,X_{194},X_{86},X_{88},X_{89},X_{90},\co{C_7},\co{X_{195}},\co{X_{196}},\co{X_{38}},\co{X_{39}})--free
+gc_1032	(co-fork,hole)--free
+gc_1033	double-split
+gc_1034	doubled
+gc_1035	(6-fan,C_4 \cup P_2,C_5,C_6 \cup K_1,C_7,K_2 \cup K_3,K_{2,3},P_2 \cup P_4,W_4 \cup K_1,W_6,X_{132},X_{169},X_{176},X_{18},X_{197},X_{198},X_{199},X_{200},X_{201},X_{202},X_{35},X_{84},\co{C_4 \cup P_2},\co{C_6 \cup K_1},\co{C_7},\co{P_2 \cup P_4},\co{W_4 \cup K_1},\co{W_6},\co{X_{132}},\co{X_{169}},\co{X_{176}},\co{X_{18}},\co{X_{197}},\co{X_{198}},\co{X_{199}},\co{X_{200}},\co{X_{201}},\co{X_{35}},\co{X_{84}},\co{butterfly \cup K_1},butterfly \cup K_1,co-6-fan,co-fish,fish)--free
+gc_1036	almost-split
+gc_1037	(C_4 \cup P_2,C_5,C_6,K_2 \cup K_3,K_{2,3},P_6,W_4,X_{18},X_5,X_{84},\co{C_4 \cup P_2},\co{C_6},\co{P_6},\co{W_4},\co{X_{18}},\co{X_5},\co{X_{84}},antenna,co-antenna,co-domino,co-fish,domino,fish)--free
+gc_1038	basic perfect
+gc_1039	bitolerance
+gc_1040	normal Helly circular arc
+gc_1041	parallelepiped
+gc_1043	clique graphs of normal Helly circular arc
+gc_1044	circular arc $\cap$ clique--Helly
+gc_1045	strictly clique irreducible
+gc_1046	clique graphs of interval
+gc_1047	clique graphs of Helly circular arc
+gc_1048	trapezoepiped
+gc_1049	bounded bitolerance
+gc_1050	dually chordal $\cap$ tripartite
+gc_1051	K_4--free $\cap$ dually chordal $\cap$ perfect
+gc_1052	bounded cutwidth
+gc_1053	bounded degree
+gc_1054	bounded degree $\cap$ bounded treewidth
+gc_1055	bipartite $\cap$ maximum degree 3 $\cap$ planar
+gc_1056	(K_{1,4},odd-cycle)--free $\cap$ planar
+gc_1057	grid graph
+gc_1058	solid grid graph
+gc_1059	self-complementary
+gc_1060	VPG
+gc_1061	B_k-VPG
+gc_1062	B_3-VPG
+gc_1063	B_2-VPG
+gc_1064	B_1-VPG
+gc_1065	B_0-VPG
+gc_1066	B_0-VPG $\cap$ bipartite
+gc_1067	B_0-VPG $\cap$ chordal
+gc_1068	B_0-VPG $\cap$ strongly chordal
+gc_1069	bipartite $\cap$ planar
+gc_1070	B_0-VPG $\cap$ triangle--free
+gc_1071	4-colorable
+gc_1072	NLCT-width 1
+gc_1073	linear NLC-width 1
+gc_1074	(2K_2,P_4,\co{2P_3})--free
+gc_1075	(2P_3,C_4,P_4)--free
+gc_1076	(P_4,\co{2P_3})--free
+gc_1077	linear cliquewidth 2
+gc_1078	co--2-subdivision
+gc_1079	2-track
+gc_1080	3-track
+gc_1081	unit 3-track
+gc_1082	unit 2-track
+gc_1083	unit 3-interval
+gc_1084	2-circular arc
+gc_1085	unit 2-circular arc
+gc_1086	2-circular track
+gc_1087	unit 2-circular track
+gc_1088	3-circular track
+gc_1089	unit 3-circular track
+gc_1090	maximum degree 7
+gc_1091	locally connected $\cap$ maximum degree 7
+gc_1092	hamiltonian
+gc_1093	fully cycle extendable
+gc_1094	locally connected $\cap$ maximum degree 4
+gc_1095	hamiltonian $\cap$ split
+gc_1096	hamiltonian $\cap$ interval
+gc_1097	chordal $\cap$ hamiltonian $\cap$ planar
+gc_1098	chordal $\cap$ hamiltonian
+gc_1099	k-regular, fixed k\ge 3
+gc_1100	cubic
+gc_1101	4-regular
+gc_1102	cubic $\cap$ planar
+gc_1103	4-regular $\cap$ planar
+gc_1104	5-regular
+gc_1105	k-regular, fixed k\ge 6
+gc_1106	5-regular $\cap$ planar
+gc_1107	k-regular, fixed k\ge 6 $\cap$ planar
+gc_1108	(2K_3 + e,5-pan,A,C_6,E,K_{3,3}-e,P_6,R,X_{166},X_{167},X_{169},X_{170},X_{171},X_{172},X_{18},X_{37},X_{45},X_5,X_{58},X_{84},X_{95},X_{98},\co{5-pan},\co{A},\co{C_6},\co{E},\co{P_6},\co{R},\co{X_{166}},\co{X_{167}},\co{X_{169}},\co{X_{170}},\co{X_{171}},\co{X_{172}},\co{X_{18}},\co{X_{37}},\co{X_{45}},\co{X_5},\co{X_{58}},\co{X_{84}},\co{X_{95}},\co{X_{98}},antenna,co-antenna,co-domino,co-fish,co-twin-C_5,co-twin-house,domino,fish,twin-C_5,twin-house)--free
+gc_1109	claw--free $\cap$ well covered
+gc_1110	K_{1,4}--free $\cap$ well covered
+gc_1111	line $\cap$ well covered
+gc_1112	equimatchable
+gc_1113	well-dominated
+gc_1114	grid graph $\cap$ maximum degree 3
+gc_1118	triangular grid graph
+gc_1119	maximum degree 6
+gc_1124	solid triangular grid graph
+gc_1139	maximum degree 5
+gc_1141	linearly convex triangular grid graph
+gc_1142	2-connected $\cap$ linearly convex triangular grid graph
+gc_1143	locally connected $\cap$ triangular grid graph
+gc_1144	claw--free $\cap$ locally connected
+gc_1145	almost claw-free
+gc_1146	K_{1,4}--free $\cap$ almost claw-free $\cap$ locally connected
+gc_1147	Delaunay
+gc_1148	distance regular
+gc_1149	k-regular, fixed k
+gc_1150	tree convex
+gc_1151	star convex
+gc_1152	triad convex
+gc_1153	bipartite $\cap$ maximum degree 4 $\cap$ planar
+gc_1154	circle-trapezoid
+gc_1155	circular trapezoid
+gc_1156	circular strip
+gc_1157	circle-$n$-gon, fixed $n$
+gc_1158	alternation
+gc_1159	binary Hamming
+gc_1160	partial cube
+gc_1161	isometric subgraph of a hypercube
+gc_1162	Hamming
+gc_1163	complete Hamming
+gc_1164	hypercube
+gc_1165	bipartite $\cap$ quasi--median
+gc_1166	pseudo--median $\cap$ triangle--free
+gc_1167	weakly median
+gc_1168	XC_{10}--free $\cap$ weakly modular
+gc_1169	median $\cap$ planar
+gc_1170	almost median
+gc_1171	semi-median
+gc_1172	premedian
+gc_1173	unit grid intersection
+gc_1174	bipartite $\cap$ unit grid intersection
+gc_1175	P_6--free $\cap$ chordal bipartite
+gc_1176	(C_5,C_6,P_6,triangle)--free
+gc_1177	cubical
+gc_718	linear domino $\cap$ maximum degree 4
+gc_641	concave-round
+gc_567	dominating pair
+gc_529	(C_4,C_5,C_6,C_7,C_8,H,X_{85},triangle)--free $\cap$ K_{1,4}--free
+gc_412	planar of maximum degree 3
+gc_366	hereditary X--chordal
+gc_340	co--comparability graphs of posets of interval dimension 2
+gc_317	chordal $\cap$ sun--free
+gc_307	chordal $\cap$ gem--free
+gc_300	(S_3,claw,net)--free $\cap$ chordal
+gc_295	chordal $\cap$ clique--chordal
+gc_284	odd-hole--free $\cap$ planar
+gc_278	paw--free $\cap$ perfect
+gc_269	HHD--free $\cap$ co--HHD--free
+gc_258	C_5--free $\cap$ matrogenic
+gc_244	split $\cap$ threshold signed
+gc_237	C_4--free $\cap$ co--comparability
+gc_229	house--free $\cap$ weakly chordal
+gc_227	hereditary Welsh--Powell perfect
+gc_219	(C_6,\co{C_6})--free murky
+gc_217	hereditary $V$--perfect
+gc_214	hereditary $N^*$--perfect
+gc_210	K_{2,3}--free $\cap$ hereditary modular
+gc_209	hereditary median
+gc_206	hereditary Matula perfect
+gc_200	neighbourhood--Helly $\cap$ pseudo--modular $\cap$ reflexive
+gc_186	clique--Helly $\cap$ clique--chordal
+gc_184	Helly chordal
+gc_183	chordal $\cap$ dually chordal
+gc_182	Helly chordal $\cap$ clique--chordal
+gc_170	co--trivially perfect
+gc_168	co--threshold tolerance
+gc_162	co--Meyniel
+gc_157	co--interval
+gc_140	Berge $\cap$ claw--free
+gc_130	chordal $\cap$ neighbourhood perfect
+gc_127	EPT $\cap$ chordal
+gc_118	hereditary perfect elimination bipartite
+gc_117	(6,1)--chordal $\cap$ bipartite
+gc_115	X--conformal $\cap$ bipartite $\cap$ hereditary X--chordal
+gc_104	(C_4,C_5)--free $\cap$ Helly
+gc_102	Helly $\cap$ bridged
+gc_101	hereditary weakly modular
+gc_94	ptolemaic $\cap$ weakly geodetic
+gc_86	X--conformal $\cap$ bipartite
+gc_84	X--chordal $\cap$ X--conformal $\cap$ bipartite
+gc_83	X--chordal $\cap$ bipartite
+gc_78	(6,2)--chordal $\cap$ bipartite
+gc_77	bipartite $\cap$ distance--hereditary
+gc_71	perfect $\cap$ triangle--free
+gc_64	bull--free $\cap$ perfect
+gc_63	Berge $\cap$ bull--free
+gc_60	AT--free $\cap$ claw--free
+gc_58	alternately orientable $\cap$ co--comparability
+gc_53	clique--Helly $\cap$ dismantlable
+gc_47	modular $\cap$ open--neighbourhood--Helly
+gc_37	(S_3,net)--free $\cap$ split
+gc_36	chordal $\cap$ odd-sun--free
+gc_34	(S_3,net)--free $\cap$ chordal
+gc_33	isometric-hereditary pseudo--modular
+gc_31	hereditary Helly
+gc_30	C_4--free $\cap$ induced-hereditary pseudo--modular
+gc_29	S_3--free $\cap$ chordal
+gc_22	Meyniel $\cap$ co--Meyniel
+gc_16	$P_4$--extendible $\cap$ $P_4$--sparse
+gc_13	C_5--free $\cap$ $P_4$--tidy
+gc_801	probe co--trivially perfect
+gc_570	chordal $\cap$ dominating pair
+gc_334	co--interval $\cap$ cograph $\cap$ interval
+gc_331	co--trivially perfect $\cap$ trivially perfect
+gc_247	co--interval $\cup$ interval
+gc_241	co--interval $\cap$ interval
+gc_172	co--interval $\cap$ cograph
+gc_802	probe co--trivially perfect $\cap$ probe trivially perfect
+AUTO_41	\co{P_6}--free
+AUTO_3	co-fork--free
+AUTO_202	\co{P_2 \cup P_4}--free
+AUTO_92	\co{C_6}--free
+AUTO_407	co-domino--free
+AUTO_224	\co{2P_3}--free
+AUTO_497	\co{E}--free
+AUTO_4	net--free
+AUTO_2	\co{P}--free
+AUTO_77	co-diamond--free
+AUTO_79	co-claw--free
+AUTO_94	anti-hole--free
+AUTO_329	\co{P_7}--free
+AUTO_399	3K_1--free
+AUTO_526	\co{C_{n+6}}--free
+AUTO_753	(K_4,odd anti-hole,odd-hole)--free
+AUTO_817	(K_4,odd anti-hole,odd-hole)--free $\cap$ dually chordal
+AUTO_823	(XC_{11},odd-cycle)--free
+AUTO_824	(XC_{11},odd-cycle)--free $\cap$ planar
+AUTO_773	(hole,odd-cycle)--free
+AUTO_732	(C_{n+6},odd-cycle)--free
+AUTO_772	(C_{n+4},XF_1^{2n+3},XF_6^{2n+2},\co{X_{34}},\co{X_{36}},co-XF_2^{n+1},co-XF_3^n)--free
+AUTO_784	(XF_1^{2n+3},XF_5^{2n+3},XF_6^{2n+2},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{35}},\co{X_{36}},anti-hole,co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,hole)--free
+AUTO_733	(claw,odd anti-hole,odd-hole)--free
+AUTO_734	(C_5,C_6,P_6,\co{C_6},\co{P_6})--free
+AUTO_767	(K_5 - e,\co{A},\co{C_4 \cup 2K_1},\co{P_2 \cup P_3},\co{R},claw,co-twin-house,odd-hole)--free
+AUTO_736	(odd-hole,paw)--free
+AUTO_726	(C_{n+4},S_3)--free
+AUTO_737	(C_{n+4},S_3,claw,net)--free
+AUTO_765	(C_{n+4},claw)--free
+AUTO_738	(C_{n+4},gem)--free
+AUTO_739	(C_{n+4},sun)--free
+AUTO_727	(C_{n+4},S_3,net)--free
+AUTO_728	(C_{n+4},odd-sun)--free
+AUTO_762	(C_{n+4},claw,net)--free
+AUTO_759	(C_4,C_6,odd-cycle)--free
+AUTO_758	(claw,odd-cycle)--free
+AUTO_740	(C_4,C_5,C_6,C_7,C_8,H,K_{1,4},X_{85},triangle)--free
+AUTO_757	(C_{n+4},H)--free
+AUTO_756	(A,H,K_{3,3},X_{45},triangle)--free
+AUTO_755	(C_{n+4},P_5,bull)--free
+AUTO_754	(C_{n+4},claw,gem)--free
+AUTO_752	(diamond,odd-hole)--free
+AUTO_750	(claw,odd-hole)--free
+AUTO_751	(claw,odd-hole)--free $\cap$ tripartite
+AUTO_748	(claw,odd anti-hole)--free
+AUTO_749	(claw,odd anti-hole)--free $\cap$ tripartite
+AUTO_729	(bull,odd anti-hole,odd-hole)--free
+AUTO_747	(2K_3,2P_3,C_{n+4},K_3 \cup P_3)--free
+AUTO_743	(P_5,anti-hole)--free
+AUTO_741	(XC_{11},claw,diamond)--free
+AUTO_746	(C_{n+4},diamond)--free
+AUTO_731	(domino,hole,odd-cycle)--free
+AUTO_745	(anti-hole,hole,sun)--free
+AUTO_744	(2K_2,C_4,C_5,S_3,X_{159},X_{160},\co{H},co-rising sun,net)--free
+AUTO_766	(S_3,\co{3K_2},\co{E},\co{P_2 \cup P_4},odd anti-hole,odd-hole)--free
+AUTO_768	$P_4$--tidy $\cap$ (S_3,\co{3K_2},\co{E},\co{P_2 \cup P_4},odd anti-hole,odd-hole)--free
+AUTO_764	(K_5 - e,S_3,\co{3K_2},\co{A},\co{C_4 \cup 2K_1},\co{E},\co{P_2 \cup P_3},\co{R},claw,co-twin-house,odd-hole)--free
+AUTO_1075	(P_5,anti-hole,co-domino)--free
+AUTO_1545	(2K_2,C_4,C_5,sun)--free
+AUTO_1700	(2P_3,P_4)--free
+AUTO_1538	(P_5,\co{P},anti-hole)--free
+AUTO_1710	(3K_1,C_5,\co{C_6},\co{P_6})--free
+AUTO_1537	(S_3,co-claw)--free
+AUTO_1536	(2K_2,C_4,C_5,S_3,net,rising sun)--free
+AUTO_1535	(P_5,anti-hole,co-domino,co-gem)--free
+AUTO_2071	(\co{W_4},co-claw,co-gem)--free
+AUTO_1534	(P_5,anti-hole,co-gem)--free
+AUTO_1533	(C_5,P_5,\co{P},house)--free
+AUTO_1532	(co-claw,co-diamond,odd anti-hole)--free
+AUTO_1531	(P_5,\co{A},anti-hole,co-domino)--free
+AUTO_1530	(S_3,co-claw,net)--free
+AUTO_1529	(2K_2,C_5)--free
+AUTO_1528	(bull,co-fork)--free
+AUTO_1527	(K_2 \cup K_3,\co{P},anti-hole)--free
+AUTO_1526	(2K_2,C_5,\co{T_2})--free
+AUTO_1525	(K_2 \cup K_3,house)--free
+AUTO_1524	(K_2 \cup K_3,\co{P},house)--free
+AUTO_1523	(co-claw,house)--free
+AUTO_1522	(\co{K_{1,4}},house)--free
+AUTO_1521	(co-diamond,house)--free
+AUTO_1520	(\co{P},house)--free
+AUTO_1519	(3K_2,\co{P},co-gem,house)--free
+AUTO_1518	(\co{K_{1,4}},co-diamond)--free
+AUTO_1517	(\co{K_{1,4}},\co{P},co-fork,house)--free
+AUTO_1516	(P,co-butterfly,co-fork,co-gem)--free
+AUTO_1515	(co-cricket,house)--free
+AUTO_1514	(2K_3 + e,\co{X_{98}},house)--free
+AUTO_1513	(C_5,P_2 \cup P_3,house)--free
+AUTO_1512	(2K_2,house)--free
+AUTO_1511	(2K_3,house)--free
+AUTO_1510	(P,co-fork)--free
+AUTO_1509	(co-fork,house)--free
+AUTO_1508	(fork,house)--free
+AUTO_1507	(co-gem,house)--free
+AUTO_1506	(2K_2,co-diamond)--free
+AUTO_1505	(P,co-fork,co-gem)--free
+AUTO_1504	(bull,co-fork,co-gem)--free
+AUTO_1503	(P,P_5,co-fork)--free
+AUTO_1502	(P_5,bull,co-fork)--free
+AUTO_1501	(2K_2,4K_1,co-claw,co-diamond)--free
+AUTO_1500	(C_4,co-claw)--free
+AUTO_1499	(co-claw,co-paw)--free
+AUTO_1498	(C_5,P,co-fork,fork,gem,house)--free
+AUTO_1497	(C_5,P,\co{P},bull,co-fork,gem,house)--free
+AUTO_1496	(P,co-gem,house)--free
+AUTO_1495	(C_5,co-gem,house)--free
+AUTO_1494	(2K_2,C_5,\co{C_6},\co{C_7},\co{C_8},co-claw,co-diamond)--free
+AUTO_1493	(P_5,S_3,\co{A},\co{E},\co{X_1},anti-hole,co-domino,co-rising sun,net)--free
+AUTO_1492	(3K_1,\co{T_2},\co{X_2},\co{X_3},anti-hole)--free
+AUTO_1491	(C_4,\co{A},\co{H})--free
+AUTO_1490	(\co{A},\co{P_6},co-domino)--free
+AUTO_2094	(\co{W_4},co-claw)--free
+AUTO_1489	(P_5,bull,odd anti-hole)--free
+AUTO_1488	(P_5,co-domino,co-gem)--free
+AUTO_2117	(\co{W_4},co-gem)--free
+AUTO_1635	(3K_1,\co{C_6})--free
+AUTO_1636	(2K_2,C_5,\co{C_6},net)--free
+AUTO_1485	(K_2 \cup K_3,P_5,\co{X_{37}},\co{X_{38}},co-diamond,co-domino,co-twin-C_5)--free
+AUTO_1484	(P_5,\co{X_{38}},co-gem)--free
+AUTO_1483	(2K_3,2P_3,C_4,K_3 \cup P_3,P_4)--free
+AUTO_1482	(K_2 \cup K_3,co-diamond)--free
+AUTO_1481	(3K_1,co-fork)--free
+AUTO_1480	(3K_1,co-cross)--free
+AUTO_1479	(4K_1,P_4)--free
+AUTO_1478	(3K_1,\co{H})--free
+AUTO_1477	(3K_1,\co{E})--free
+AUTO_1476	(2K_3 + e,house)--free
+AUTO_1475	(2K_2,C_5,triangle)--free
+AUTO_1474	(3K_2,C_4 \cup P_2,C_5,C_6,K_2 \cup K_3,K_{3,3},K_{3,3}+e,P_2 \cup P_4,P_6,X_{18},X_5,\co{2P_3},\co{C_6},\co{C_7},\co{X_{84}},antenna,domino,fish)--free
+AUTO_1473	(C_5,house)--free
+AUTO_1472	(3K_1,house)--free
+AUTO_1471	(4K_1,house)--free
+AUTO_1611	(2K_2,odd anti-hole)--free
+AUTO_1644	(anti-hole,fork)--free
+AUTO_1470	(C_6,house)--free
+AUTO_1469	(3K_1,C_5,butterfly,diamond)--free
+AUTO_1468	(2K_3,2K_3 + e,3K_1,\co{A},\co{H},\co{T_2},\co{X_{18}},\co{X_{45}},co-domino)--free
+AUTO_1467	(co-claw,co-diamond)--free
+AUTO_2119	(\co{W_4},co-claw,co-gem,odd anti-hole)--free
+AUTO_1466	(3K_2,E,P_2 \cup P_4,net)--free
+AUTO_1465	(\co{E},\co{P})--free
+AUTO_1464	(\co{P},\co{T_2})--free
+AUTO_1463	(K_3 \cup P_3,\co{C_6},\co{P},\co{P_7},\co{X_{37}},\co{X_{41}})--free
+AUTO_1462	(P_2 \cup P_3,house)--free
+AUTO_1461	(\co{P},\co{P_7})--free
+AUTO_1460	(2K_2,\co{P_6})--free
+AUTO_1459	(\co{P},\co{star_{1,2,3}})--free
+AUTO_1457	(bull,hole,odd anti-hole)--free
+AUTO_1456	(C_5,P_5,\co{A},\co{C_6},\co{P_6},co-domino)--free
+AUTO_1455	(P_4,triangle)--free
+AUTO_1454	(K_2 \cup K_3,P_4,butterfly)--free
+AUTO_1453	(co-butterfly,co-gem)--free
+AUTO_1452	(2K_2,3K_1)--free
+AUTO_1451	(3K_1,\co{2P_3})--free
+AUTO_1450	(2K_2,4K_1,C_5,co-diamond)--free
+AUTO_1449	(4K_1,co-claw,co-diamond)--free
+AUTO_1448	(\co{K_{1,4}},co-paw)--free
+AUTO_1447	(3K_1,\co{P_6})--free
+AUTO_1446	(3K_1,\co{P_2 \cup P_4})--free
+AUTO_1445	(3K_1,\co{X_{172}})--free
+AUTO_1444	(3K_1,paw)--free
+AUTO_1443	(C_4,S_3)--free
+AUTO_1442	(K_4,S_3)--free
+AUTO_1441	(3K_1,\co{3K_2})--free
+AUTO_1563	(3K_2,C_5,P_2 \cup P_4,net)--free
+AUTO_1562	(3K_2,co-paw,odd anti-hole)--free
+AUTO_1561	(3K_2,E,net,odd anti-hole)--free
+AUTO_2087	(P_5,\co{A},\co{P_6},anti clique wheel,anti-hole,co-domino)--free
+AUTO_2088	(C_6,P_6,\co{P_6},\co{X_{10}},\co{X_{11}},\co{X_{12}},\co{X_{13}},\co{X_{14}},\co{X_{15}},\co{X_5},\co{X_6},\co{X_7},\co{X_8},\co{X_9},anti-hole,co-antenna)--free
+AUTO_2089	(C_5,C_6,P_6,\co{C_6},\co{P_6},\co{X_{17}},\co{X_{18}},\co{X_5},\co{X_{98}},co-antenna,co-domino)--free
+AUTO_2090	(C_5,P_5,\co{C_6},\co{C_7},\co{C_8},\co{P_8},\co{X_{19}},\co{X_{20}},\co{X_{21}},\co{X_{22}},co-gem)--free
+AUTO_2091	(\co{2C_4},\co{3K_2},\co{C_6},\co{E},\co{P_2 \cup P_4},\co{P_6},\co{X_{25}},\co{X_{26}},\co{X_{27}},\co{X_{28}},\co{X_{29}},odd anti-cycle)--free
+AUTO_2092	(2K_3,X_{42},\co{A},\co{H},\co{X_{45}},\co{X_{46}},\co{X_{47}},\co{X_{48}},\co{X_{49}},\co{X_{50}},\co{X_{51}},\co{X_{52}},\co{X_{53}},\co{X_{54}},\co{X_{55}},\co{X_{56}},\co{X_{57}})--free
+AUTO_2093	(\co{C_{n+4}},\co{X_{59}},co-longhorn)--free
+AUTO_2095	(S_3,\co{C_{n+4}},\co{T_2})--free
+AUTO_2096	(\co{X_{79}},\co{X_{80}})--free
+AUTO_2097	\co{BW_3}--free
+AUTO_2098	\co{XC_{10}}--free
+AUTO_2099	(XC_7,\co{XC_1},\co{XC_2},\co{XC_3},\co{XC_4},\co{XC_5},\co{XC_6},\co{XC_8})--free
+AUTO_2100	(\co{X_{30}},\co{XZ_1},\co{XZ_4},co-longhorn)--free
+AUTO_2101	(\co{T_3},\co{X_{81}},co-cycle)--free
+AUTO_2102	(\co{W_4},\co{W_5},co-butterfly)--free
+AUTO_2103	co-cycle--free
+AUTO_2104	(\co{X_{82}},\co{X_{83}},house)--free
+AUTO_2105	(\co{C_{n+4}},bull,co-dart,co-gem)--free
+AUTO_2106	(4K_1,\co{C_{n+4}})--free
+AUTO_2107	(K_{3,3},\co{C_{n+4}})--free
+AUTO_2108	(K_{3,3,3},\co{C_{n+4}})--free
+AUTO_2109	(2K_2,3K_1,C_5,\co{C_6},\co{C_7},\co{C_8},\co{H},\co{X_{85}})--free
+AUTO_2110	(\co{P_6},\co{X_{30}},\co{X_8})--free
+AUTO_2111	(3K_1,C_5,K_5 - e,\co{C_6 \cup K_1},\co{C_7},\co{K_{3,3} \cup K_1},\co{K_{3,3}-e \cup K_1},\co{domino \cup K_1})--free
+AUTO_2112	(2K_3,4K_1,C_7,X_{38},X_{39},\co{W_4 \cup K_1},\co{W_5},\co{X_{86}},\co{X_{87}},\co{X_{88}},\co{X_{89}},\co{X_{90}},butterfly \cup K_1,diamond)--free
+AUTO_2113	(2K_2,\co{X_{91}},co-claw)--free
+AUTO_2114	(2K_3,2K_3 + e,\co{A},\co{H},\co{X_{45}},\co{XZ_5},co-domino)--free
+AUTO_2115	(3K_1,C_5,K_3 \cup K_4,\co{BW_3},\co{K_{3,4}-e},\co{T_2},\co{X_{18}},\co{X_{92}},\co{X_{93}})--free
+AUTO_2116	(2K_3 + e,3K_1,C_5,\co{T_2},\co{X_{18}},\co{X_{94}},co-domino)--free
+AUTO_2070	odd anti-cycle--free
+AUTO_2118	even anti-cycle--free
+AUTO_2120	(A \cup K_1,\co{K_{1,4}},\co{W_4},\co{W_5},co-4-fan,co-fork \cup K_1,gem \cup K_1,net \cup K_1)--free
+AUTO_2121	\co{XC_{11}}--free
+AUTO_2122	\co{XC_{12}}--free
+AUTO_2123	\co{K_2 \cup claw}--free
+AUTO_2124	(\co{P},\co{P_8})--free
+AUTO_2125	(2K_3 + e,\co{X_{99}},house)--free
+AUTO_2126	(\co{C_{n+4}},\co{T_2},\co{X_{31}},co-XF_2^{n+1},co-XF_3^n)--free
+AUTO_2127	(\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{35}},\co{X_{36}},\co{X_{37}},\co{X_{38}},\co{X_{39}},\co{X_{40}},\co{X_{41}},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n)--free
+AUTO_2128	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{35},X_{36},XF_2^{n+1},XF_3^n,XF_4^n,co-XF_1^{2n+3},co-XF_5^{2n+3},co-XF_6^{2n+2},odd anti-hole)--free
+AUTO_2129	(S_3,\co{C_{n+6}},\co{X_{37}},antenna,co-claw,co-sun)--free
+AUTO_2130	(\co{C_{n+4}},\co{T_2},co-XF_2^{n+1})--free
+AUTO_2131	(H,K_3 \cup 2K_1,\co{C_{n+4}},\co{K_5 - e},co-4-fan,net)--free
+AUTO_2132	(H,K_3 \cup 2K_1,\co{C_{n+4}},\co{K_5 - e},\co{X_{100}},\co{X_{101}},\co{X_{102}},co-4-fan,net)--free
+AUTO_2133	(\co{C_{n+4}},co-claw,co-gem,house)--free
+AUTO_2134	(C_6,C_8,T_2,X_3,\co{BW_3},\co{W_5},\co{W_7},\co{X_{103}},\co{X_{105}},\co{X_{106}},\co{X_{107}},\co{X_{108}},\co{X_{109}},\co{X_{110}},\co{X_{111}},\co{X_{112}},\co{X_{113}},\co{X_{114}},\co{X_{115}},\co{X_{116}},\co{X_{117}},\co{X_{118}},\co{X_{119}},\co{X_{120}},\co{X_{121}},\co{X_{122}},\co{X_{123}},\co{X_{124}},\co{X_{125}},\co{X_{126}},\co{X_{53}},\co{X_{88}},co-X_{104})--free
+AUTO_2135	(S_3,\co{C_{n+4}},\co{S_3 \cup K_1},co-claw)--free
+AUTO_2136	(\co{T_2},co-cycle)--free
+AUTO_2137	(2P_3,3K_2,C_4 \cup P_2,C_6,K_{2,3},P_6,X_{130},X_{132},X_{134},X_{152},X_{153},X_{154},X_{155},X_{156},X_{157},X_{158},X_{18},X_{84},\co{X_{11}},\co{X_{127}},\co{X_{128}},\co{X_{129}},\co{X_{131}},\co{X_{133}},\co{X_{135}},\co{X_{136}},\co{X_{137}},\co{X_{138}},\co{X_{139}},\co{X_{140}},\co{X_{141}},\co{X_{142}},\co{X_{143}},\co{X_{144}},\co{X_{145}},\co{X_{146}},\co{X_{147}},\co{X_{148}},\co{X_{149}},\co{X_{150}},\co{X_{151}},\co{X_{30}},\co{X_{35}},\co{X_{46}},co-XF_1^{2n+3},co-XF_6^{2n+3},co-antenna,co-eiffeltower,co-longhorn,domino,fish,odd anti-hole)--free
+AUTO_2138	(2P_4,A,C_5,C_6,C_7,E,K_{3,3}-e,P_7,R,X_1,X_{103},X_5,X_{58},X_{84},X_{98},\co{C_6},\co{P_6},\co{X_5},\co{sunlet_4},co-antenna,co-domino,co-rising sun,domino,parachute,parapluie,rising sun,twin-house)--free
+AUTO_2139	(2P_3,3K_2,C_4,C_5,H,P_2 \cup P_4,P_5,S_3,X_1,X_{160},\co{X_{159}},\co{X_{161}},\co{X_{162}},\co{X_{46}},\co{X_{70}},net,rising sun)--free
+AUTO_2140	(K_2 \cup K_3,\co{P},\co{X_{163}},\co{X_{95}},co-diamond,house)--free
+AUTO_2141	(\co{P},co-star_{1,2,5})--free
+AUTO_2142	(\co{P},co-star_{1,2,4})--free
+AUTO_2143	\co{C_{n+7}}--free
+AUTO_2144	(\co{3K_2},\co{C_6},\co{P_7},\co{X_{164}},\co{X_{165}},\co{sunlet_4},odd anti-cycle)--free
+AUTO_2206	(co-diamond,even anti-cycle)--free
+AUTO_2145	(\co{XC_{12}},co-cycle)--free
+AUTO_2146	(K_2 \cup K_3,X_{90},\co{C_{n+4} \cup K_1},\co{T_2},co-domino,co-paw,co-twin-C_5)--free
+AUTO_2147	(X_{103},\co{C_{n+4}},\co{S_3 \cup K_1},\co{net \cup K_1},co-claw,co-eiffeltower)--free
+AUTO_2148	(C_6,K_2 \cup K_3,X_{103},X_{37},X_{88},X_{90},\co{C_{n+4} \cup K_1},\co{T_2},\co{net \cup K_1},co-diamond,co-domino,co-eiffeltower,co-twin-C_5)--free
+AUTO_2149	(co-odd building,odd anti-hole)--free
+AUTO_2150	(S_3,T_2,X_2,X_3,\co{C_{n+4} \cup K_1},\co{S_3 \cup K_1},\co{X_{42}},even-hole,odd-cycle \cup K_1)--free
+AUTO_2151	(S_3,T_2,X_2,X_3,\co{C_{n+4} \cup K_1},\co{C(n,k)},\co{X_{42}},even-hole,odd-cycle \cup K_1)--free
+AUTO_2152	(S_3,\co{C_{n+4} \cup K_1},\co{W_4},even-hole,net,odd-cycle \cup K_1)--free
+AUTO_2153	(3K_1,\co{K_{1,5}})--free
+AUTO_2154	(3K_1,\co{K_2 \cup claw})--free
+AUTO_2155	(4K_1,C_7,S_3,X_{175},X_{176},X_{42},\co{X_{36}},claw,co-antenna,net,odd anti-hole)--free
+AUTO_2156	(\co{claw \cup 3K_1},odd anti-cycle)--free
+AUTO_2157	(\co{X_{177}},odd anti-cycle)--free
+AUTO_2158	(\co{K_{1,4}},odd anti-cycle)--free
+AUTO_2159	\co{(n+4)-pan}--free
+AUTO_2188	(3K_2,C_5,C_7,P_2 \cup P_4,X_{173},\co{X_{11}},net)--free
+AUTO_2191	(S_3,\co{C_{n+4} \cup K_1},\co{C(n,k)},\co{W_4},even-hole,odd-cycle \cup K_1)--free
+AUTO_2207	(\co{X_{37}},co-diamond,even anti-cycle)--free
+AUTO_2208	co-building--free
+AUTO_2248	(5-pan,A,P_6,X_{186},\co{3P_3},\co{P_3 \cup P_4},\co{X_{102}},\co{X_{180}},\co{X_{181}},\co{X_{182}},\co{X_{183}},\co{X_{184}},\co{X_{185}},\co{X_{187}},\co{X_{188}},\co{X_{189}},\co{X_{190}},\co{X_{191}},\co{X_{192}},\co{X_{193}},house,twin-C_5)--free
+AUTO_2255	(\co{T_3},co-cycle)--free
+AUTO_2276	(\co{C_{n+3} \cup K_1},co-diamond,co-paw)--free
+AUTO_2277	(3K_1,C_5,\co{C_6},\co{X_{164}},\co{X_{165}},\co{sunlet_4})--free
+AUTO_2292	(4K_1,C_7,X_{195},X_{196},X_{38},X_{39},\co{W_5},\co{X_{194}},\co{X_{86}},\co{X_{88}},\co{X_{89}},\co{X_{90}},house)--free
+AUTO_2072	(P_5,anti-hole,co-bicycle,co-domino)--free
+AUTO_2069	(P_5,anti-hole,co-domino,co-sun)--free
+AUTO_2073	(A,C_4 \cup 2K_1,P_2 \cup P_3,R,\co{K_5 - e},\co{W_5},co-claw,twin-C_5,twin-house)--free
+AUTO_2074	(2K_2,P_4,co-dart)--free
+AUTO_2075	co-sun--free
+AUTO_2076	odd co-sun--free
+AUTO_2077	\co{C_{n+4}}--free
+AUTO_2078	\co{P_3}--free
+AUTO_2079	(2K_4,house)--free
+AUTO_2080	(\co{P_7},\co{star_{1,2,3}},\co{sunlet_4},odd anti-cycle)--free
+AUTO_2081	(\co{P_7},\co{star_{1,2,3}},odd anti-cycle)--free
+AUTO_2082	(\co{E},odd anti-cycle)--free
+AUTO_2083	(\co{star_{1,2,3}},\co{sunlet_4},odd anti-cycle)--free
+AUTO_2084	(\co{star_{1,2,3}},odd anti-cycle)--free
+AUTO_2085	(co-fork,odd anti-cycle)--free
+AUTO_2086	(\co{A},\co{T_2},odd anti-cycle)--free
+AUTO_2787	(2K_2,3K_1,C_5,\co{C_6},\co{C_7},\co{C_8},\co{H},\co{K_{1,4}},\co{X_{85}})--free
+AUTO_2786	(\co{C_{n+4}},net)--free
+AUTO_2785	(S_3,\co{C_{n+4}},net)--free
+AUTO_2784	(\co{C_{n+4}},odd co-sun)--free
+AUTO_2783	(anti-hole,co-domino,odd anti-cycle)--free
+AUTO_2782	(\co{C_{n+6}},odd anti-cycle)--free
+AUTO_2781	(co-claw,odd anti-hole,odd-hole)--free
+AUTO_2780	(co-paw,odd anti-hole)--free
+AUTO_2779	(S_3,\co{C_{n+4}},co-claw,net)--free
+AUTO_2778	(\co{C_{n+4}},co-gem)--free
+AUTO_2777	(\co{C_{n+4}},co-sun)--free
+AUTO_2776	(\co{XC_{11}},co-claw,co-diamond)--free
+AUTO_2775	(anti-hole,co-sun,hole)--free
+AUTO_2774	(\co{C_{n+4}},co-diamond)--free
+AUTO_2773	(K_{3,3},K_{3,3}+e,\co{2P_3},\co{C_{n+4}})--free
+AUTO_2772	(co-claw,odd-hole)--free
+AUTO_2771	(co-claw,odd anti-hole)--free
+AUTO_2770	(co-diamond,odd anti-hole)--free
+AUTO_2769	(4K_1,odd anti-hole,odd-hole)--free
+AUTO_2768	(\co{C_{n+4}},co-claw,co-gem)--free
+AUTO_2767	(\co{C_{n+4}},bull,house)--free
+AUTO_2766	(2K_3,3K_1,\co{A},\co{H},\co{X_{45}})--free
+AUTO_2765	(\co{C_{n+4}},\co{H})--free
+AUTO_2764	(co-claw,odd anti-cycle)--free
+AUTO_2763	(2K_2,\co{C_6},odd anti-cycle)--free
+AUTO_2761	(S_3,\co{C_{n+4}},co-claw)--free
+AUTO_2760	(\co{C_{n+4}},co-claw)--free
+AUTO_2839	(3K_2,E,P_2 \cup P_4,net,odd anti-hole,odd-hole)--free
+AUTO_2758	(anti-hole,odd anti-cycle)--free
+AUTO_3081	(\co{XC_{11}},odd anti-cycle)--free
+AUTO_2990	(2K_2,C_4,C_5,H,S_3,X_{160},\co{X_{159}},net,rising sun)--free
+AUTO_3050	(3K_2,A,C_4 \cup 2K_1,E,P_2 \cup P_3,R,\co{K_5 - e},co-claw,net,odd anti-hole,twin-house)--free
+AUTO_2994	(A,C_4 \cup 2K_1,P_2 \cup P_3,R,\co{K_5 - e},co-claw,odd anti-hole,twin-house)--free
+AUTO_2998	(X_{34},X_{36},XF_2^{n+1},XF_3^n,\co{C_{n+4}},co-XF_1^{2n+3},co-XF_6^{2n+2})--free
+AUTO_3069	(T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{35},X_{36},XF_2^{n+1},XF_3^n,XF_4^n,anti-hole,co-XF_1^{2n+3},co-XF_5^{2n+3},co-XF_6^{2n+2},hole)--free
+AUTO_3209	(2K_2,C_4,C_5,co-sun)--free
+AUTO_3594	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{36},XF_1^{2n+3},XF_2^{n+1},XF_3^n,XF_4^n,XF_5^{2n+3},XF_6^{2n+2},\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{36}},co-XF_1^{2n+3},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,co-XF_5^{2n+3},co-XF_6^{2n+2},odd-hole)--free
+AUTO_3585	(C_{n+6},T_2,X_2,X_3,X_{30},X_{31},X_{32},X_{33},X_{34},X_{36},XF_1^{2n+3},XF_2^{n+1},XF_3^n,XF_4^n,XF_5^{2n+3},XF_6^{2n+2},\co{C_{n+6}},\co{T_2},\co{X_2},\co{X_3},\co{X_{30}},\co{X_{31}},\co{X_{32}},\co{X_{33}},\co{X_{34}},\co{X_{36}},co-XF_1^{2n+3},co-XF_2^{n+1},co-XF_3^n,co-XF_4^n,co-XF_5^{2n+3},co-XF_6^{2n+2},odd anti-hole)--free
+AUTO_3827	(3P_3,C_{n+4},P_3 \cup P_4,P_5,X_{102},X_{180},X_{181},X_{182},X_{183},\co{A})--free
+AUTO_3602	(C_5,XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9})--free
+AUTO_3686	(C_5,S_3,XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{3K_2},\co{P_2 \cup P_4},\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9})--free
+AUTO_3683	(3K_2,C_5,P_2 \cup P_4,XZ_{11},XZ_{12},XZ_{13},XZ_{14},XZ_6,XZ_7,XZ_8,XZ_9,\co{XZ_{11}},\co{XZ_{12}},\co{XZ_{13}},\co{XZ_{14}},\co{XZ_6},\co{XZ_7},\co{XZ_8},\co{XZ_9},net)--free
+AUTO_3856	(A,\co{3P_3},\co{C_{n+4}},\co{P_3 \cup P_4},\co{X_{102}},\co{X_{180}},\co{X_{181}},\co{X_{182}},\co{X_{183}},house)--free
