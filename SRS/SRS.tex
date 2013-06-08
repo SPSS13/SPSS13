@@ -19,8 +19,8 @@
 \vspace*{5cm} 
 \begin{center}
 {\huge Software Requirements Specification}\\
-{\large Version 1.0}\\
-{\large 21. Mai 2013}\\
+{\large Version 1.2}\\
+{\large 07. Juni 2013}\\
 \end{center}
 
 \begin{center}
@@ -50,7 +50,27 @@
  \renewcommand{\contentsname}{Inhaltsverzeichnis}
  \tableofcontents % Definiert durch Sections/Subsections
  % Inhaltsverzeichnis -->|
+
+\vfill 
+ \section{Änderungsverlauf}
+
+\hspace*{-1cm}
+\begin{tabular}{|l|l|p{10.5cm}|}\hline
+ \textbf{Version}&\textbf{Datum}&\textbf{Beschreibung der \"Anderung}\\\hline
+ 1.0&21.05.2013&\textbf{Veröffentlichung}\\\hline
+ 1.1&23.05.2013& \textbf{Änderungen nach Meeting} \\\hline
+   & & Formulierungen \\\hline
+ 1.2& 07.06.2013 & \textbf{SRS den Aktuellen Mockups anpassen} \\\hline
+ & 07.06.2013 &  Einschränkungen ergänzt durch: ISGCI benötigt Internet  \\\hline
+  & 07.06.2013 &  Funktionale Anforderungen ergänzt durch:  \\\hline
+   &  &  Kontextmenü komplett überarbeitet \\\hline 
+    &  &  Selection (Menü-Bar-Parent) ergänzt \\\hline
+     &  &  Sidebar hinzugefügt (Mockup) \\\hline
  
+ 
+ 
+\end{tabular}\\
+
  \newpage
  
  
@@ -91,7 +111,9 @@
 	        \item[JGraphT] JGraphT ist eine freie Java Graphenbibliothek, welche mathematische graphentheoretische Objekte und Algorithmen unterstützt. 
 	        \item[JGraphX] JGraphX ist eine Java Swing Bibliothek von mxGraph
 	        \item[Swing] Swing ist das primäre Java GUI Widget Werkzeug, welche die Bereitstellung von grafische Benutzerschnittstellen ermöglicht.
-	        \item[Grab\&Pull] Bezeichnet eine Funktion, welche das Greifen und Ziehen von Graphelementen beinhaltet, welche den entsprechenden Graphen manipulieren können.
+	        \item[Click\&Drag] Bezeichnet eine Funktion, welche das Greifen und Ziehen von Graphelementen beinhaltet, welche den entsprechenden Graphen manipulieren können.
+	        \item[Menu-Bar-Parent] Bezeichnet einen Reiter in der oberen Navigationsbar.
+	        \item[Menu-Bar-Child] Bezeichnet ein Item unterhalb des Reiters in der Menu-Bar.
 	        \end{itemize}
 	        
   	\subsection{Verweise auf sonstige Quellen} % / References} %1.4
@@ -139,7 +161,7 @@
 \item Das System soll unklare Inklusionen markieren können. (unklare Inklusionen: Beziehungen zwischen zwei Graph-Klassen, bei denen nicht sicher ist, ob die Menge der Graphen der einen Klasse echte Teilmenge der Menge der Graphen der anderen Graphenklasse sind, oder der Menge selbst entsprechen. Keine Information bzgl. $\subset$ / $\subseteq$ in der Datenbank vorhanden.)
 \item Das System soll die Graphdatenbank und die Eigenschaften der Graphklassen anzeigen können. 
 \item Das System soll die Möglichkeit bieten, nach Relationen zwischen Graphklassen zu suchen.
-\item Das System soll die Möglichkeit bieten, zu einem Graph-Problem die entsprechenden Lauzeitklassen zu visualisieren.
+\item Das System soll die Möglichkeit bieten, zu einem Graph-Problem die entsprechenden Laufzeitklassen zu visualisieren.
 \item Das System soll die Möglichkeit bieten, Graph-Probleme im erzeugten Graphen anzuzeigen.
 \item Das System soll einen Hyper-Link zu "small graphs" besitzen.
 \item Das System soll einen Hyper-Link zur Hilfe Website von ISGCI besitzen.
@@ -150,7 +172,8 @@
 \item Das System soll die Möglichkeit bieten, im erzeugten Graphen zu zoomen.
 \item Das System soll, wenn ein Graph gezeichnet wird, die für die Zeichnung ausgewählte Graphklasse im Bild zentriert darstellen.
 \item Das System soll die Möglichkeit bieten, durch das Gedrückthalten der linken Maustaste und Ziehen den Bildausschnitt zu verschieben.
-\item Das System soll eine Funktion beinhalten, mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der gewählten Graphklasse ein-/ausblenden kann.
+\item Das System soll Funktionen beinhalten, mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der gewählten Graphklasse ein-/ausblenden kann. Dies soll auch über ein Kontextmenü möglich sein.
+
 
 \end{enumerate}
      
@@ -167,12 +190,13 @@
 	%Dementsprechend ist ausdrücklich gesagt, dass alle Beschränkungen, die für die genannte Bibliothek gelten, insbesondere für die fertige Implementation gelten. \\
 	Die Software wird nach Umsetzung auf jedem System ausführbar sein, welches die angegebenen Voraussetzungen erfüllt (Java 1.6 +).\\
 	Die Software wird als Open-Source-Project %Englisch nötig?
-gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes stattfindet, in englischer Sprache formuliert, sodass unsere Implementation zur weiteren Nutzung/Forschung beitragen kann. 
+gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes stattfindet, in englischer Sprache formuliert, sodass unsere Implementation zur weiteren Nutzung/Forschung beitragen kann. \\
+	Des weiteren wird eine Internetverbindung vorrausgesetzt um das ISGCI zu starten. Die Verwendung ist dann ober ohne Internetverbindung möglich.
 	%\{zeitliche Einschränkungen (Enddatum der Abgabe), Plattformen, Version, vorgegebene Bibliotheken, Implementationsaufwand, kundenorientiert!!!\}
 %	\subsection{Annahmen und Abhängigkeiten (nicht Realisierbares und auf spätere Versionen verschobene Eigenschaften) / Assumptions and dependencies} %2.5 
 %	\{Brain-Storming :-)\}
 	\subsection{Zuweisung der Anforderungen} %im Gesamten / Apportioning of requirements} %2.6
-	Die im nächsten Kapitel beschriebenen funktionalen Anforderungen müssen umgesetzt werden, damit das System/deren Erweiterung die entsprechende Funktionalität hat, sodass ISGCI an JGraphX gebunden werden kann und alle bisherigen und hinzukommende Funktionen (außer evtl. Widersprüche) ausgeführt werden können.
+	Die im nächsten Kapitel beschriebenen funktionalen Anforderungen müssen umgesetzt werden, damit das System bzw. deren Erweiterung die entsprechende Funktionalität hat. Das heißt, dass ISGCI an JGraphX gebunden werden kann und alle bisherigen und hinzukommende Funktionen (außer evtl. Widersprüche) ausgeführt werden können.
 \newpage
 \section{Spezifische Anforderungen} % (im Gegensatz zu 2.) / Specific requirements} %3.
 	\subsection{Funktionale Anforderungen} % (Stark abhängig von der Art des Softwareprodukts)} %3.1
@@ -181,7 +205,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 
 \vspace*{1cm}
 \hspace*{-0.8cm}
-\begin{tabular}{|c|c|p{10cm}|}
+\begin{tabular}{|c|p{5cm}|p{10cm}|}
 \hline 
  & Name & Beschreibung \\ 
 \hline 
@@ -189,35 +213,88 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline 
 2 & Zoom (Mausrad) & Durch das Scrollen mit dem Mausrad wird das Bild gezoomt, Mausrad nach oben entspricht hinein zoomen, Mausrad nach unten entspricht heraus zoomen. \\ 
 \hline 
-3 & Zoom (Menu-Bar) & Dem Menu-Item View werden die Funktionen "Hinein zoomen" und "Heraus zoomen" hinzugefügt. \\ 
+3 & Zoom (Menu-Bar) & Dem Menu-Bar-Parent View werden die Funktionen "Zoom in" und "Zoom out" hinzugefügt, diese können auch per Shortcut ausgeführt werden (alt + +, alt + -). \\ 
 \hline 
-4 & Tooltip & Verweilt die Maus auf einem Menü-Punkt, wird ein Tooltip angezeigt. \\ 
+4 & Fit in window & Der Zoom wird so angepasst, dass der komplette Graph im Canvas sichtbar ist. \\
+\hline
+5 & Tooltip Werkzeuge& Verweilt die Maus auf einem Menü-Punkt, wird ein Tooltip angezeigt. Der angezeigte Tooltip beinhaltet Informationen zur jeweiligen Funktion. \\ 
+\hline
+6 & Tooltip Knoten& Verweilt die Maus auf einem Knoten im Graphen, werden alle äquivalenten Graphklassen im Tooltip angezeigt (vgl. Rechtsklick, change name). \\ 
 \hline 
-5 & Tooltip Inhalt & Der angezeigte Tooltip beinhaltet Informationen zur jeweiligen Funktion. \\ 
+7 & Zentrierung & Wird ein neuer Graph gezeichnet ist der zum Zeichnen ausgewählte Knoten im Mittelpunkt des Bildes. \\ 
 \hline 
-6 & Zentrierung & Wird ein neuer Graph gezeichnet ist der zum Zeichnen ausgewählte Knoten im Mittelpunkt des Bildes. \\ 
+8 & Scrolling / click and drag & Klickt man in den freien Raum und hält die linke Maustaste gedrückt so kann man durch das Bewegen der Maus den angezeigten Bildausschnitt verschieben.\\ 
 \hline 
-7 & Scrolling & Klickt man in den freien Raum und hält die linke Maustaste gedrückt so kann man durch das Bewegen der Maus den angezeigten Bildausschnitt verschieben.  \\ 
+9 & Kontextmenü & Man kann Knoten mit der rechten Maustaste anklicken um ein Kontextmenü zu öffnen. \\
+\hline
+10 & Kontextmenü Show information & Beinhaltet die bereits vorhandene Funktionalität. \\
+\hline
+11 & Kontextmenü Show details & Blendet die Sidebar ein. (vgl. Sidebar Punkt 21) \\
+\hline
+12 & Kontextmenü Change name & Beinhaltet die bereits vorhandene Funktionalität. \\
+\hline
+13 & Kontextmenü Show neighbours & Kontextmenü-item um vom jeweiligen Knoten alle Nachbarknoten einzublenden. \\
+\hline
+14 & Kontextmenü Hide neighbours & Kontextmenü-item um vom jeweiligen Knoten alle Nachbarknoten auszublenden. \\
+\hline
+15 & Kontextmenü Show superclasses &  Kontextmenü-item um vom jeweiligen Knoten alle Superklassen einzublenden. \\
+\hline
+16 & Kontextmenü Hide superclasses &  Kontextmenü-item um vom jeweiligen Knoten alle Superklassen auszublenden. \\
+\hline
+17 & Kontextmenü Show subclasses & Kontextmenü-item um vom jeweiligen Knoten alle Subklassen einzublenden. \\
+\hline
+18 & Kontextmenü Hide subclasses & Kontextmenü-item um vom jeweiligen Knoten alle Subklassen auszublenden. \\
+\hline
+\end{tabular}
+\vspace*{1cm}
+\begin{tabular}{|c|p{5cm}|p{10cm}|}
 \hline 
-8 & Kontextmenü & Man kann Knoten mit der rechten Maustaste anklicken um ein Kontextmenü zu öffnen. \\ 
-\hline 
-9 & Kontextmenü Superklassen & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Superklassen ein- oder auszublenden \\ 
-\hline 
-10 & Kontextmenü Subklassen & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Subklassen ein- oder auszublenden \\ 
-\hline 
-11 & Kontextmenü Nachbarn & Das Kontextmenü enthält die Funktion, die dem Knoten zugehörigen Nachbarknoten ein- oder auszublenden.  \\ 
-\hline 
+19 & Selection (Menu-Bar-Parent) & Es soll einen neuen Reiter in der Menu-Bar geben, der alle Funktionen des Kontextmenüs, außer 12 Change Name, für einen ausgewählten Knoten zur Verfügung stellt (Funktionen 10,11,13-18). Wenn kein Knoten ausgewählt ist, werden alle Child-Items grau dargestellt und besitzten keine Funktionalität.  \\
+\hline
+20 & Details visible (Menu-Bar-Child) & Im Menu-Bar-Parent View soll ein Punkt Details visible existieren. Dieser signalisiert (mit einem Häkchen) ob, die Sidebar ein- (Häckchen) oder ausgeblendet (kein Häkchen) ist. Außerdem kann über diesen auch die Sidebar ein und ausgeblendet werden.\\ 
+\hline
+21 & Sidebar & Die Sidebar soll sich durch 3 verschiedene Wege öffnen lassen. Im Kontextmenü über Show details, im Menu-Bar-Parent Selection mit Show details und im Menu-Bar-Parent View über Details visible, falls noch nicht sichtbar. Die Sidebar soll auf der linken Seite sein und wenn nötig eine Scrollbar auf der rechten Seite haben. Die Sidebar wird in ihrer Breite anpassbar sein. Durch einen Button oben in der Sidebar lässt sie sich ausblenden. Außerdem über Details visible in View. Durch das Markieren eines anderen Knoten wird der Inhalt der Sidebar auf die ausgewählte Graphklasse angepasst und deren Informationen in dargestellt. Ist kein Knoten markiert, werden die Informationen der zuletzt ausgewählten Graphklasse angezeigt. Sollte die Sidebar ohne eine Auswahl getroffen zu haben, angezeigt werden, wird die Sidebar leer dargestellt. In der Sidebar wird es möglich sein vertikal in einer Accordion-Navigation zu navigieren. Diese besitzt drei Selektionsmöglichkeiten: Graphclasses, Inclusions, Problems. Dabei führt die Auswahl einer Selektion, zum Einklappen der anderen Selektionsmöglichkeiten. \\
+\hline
+21 & Sidebar - Selection:Graphclasses  & In der Selection:Graphclasses werden allgemeine Informationen über die ausgewählte Graphklasse angezeigt. \\
+\hline
+21 & Sidebar - Selection:Inclusions & In der Selection:Inclusions werden Informationen über die Inklusionen der ausgewählten Graphklasse angezeigt. \\
+\hline
+21 & Sidebar - Selection:Problems & In der Selection:Problems werden die Probleme der ausgewählten Graphklasse angezeigt. \\
+\hline
 \end{tabular} \newpage
-\begin{center}
-\includegraphics[width=13cm]{UseCaseModel.png}\\
+
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=13cm]{Menueoptionen.PNG}\\
+	\end{center}
+	\caption{Dieses Usecase dient der Veranschaulichung der Interaktionen eines Users mit dem System. Hauptsächlich werden in diesem Usecase alle Interaktionen mit der oberen Menü-Bar dargestellt.}
+	\label{fig:figure1}
+\end{figure}
+\newpage
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=13cm]{Graphmanipulation.PNG}\\
+	\end{center}
+	\caption{Dieses Usecase zeigt, wie ein Benutzer mit einem Graphen interagieren kann und ihn manipulieren. Dazu gehören Funktionen wie Zoom, Knoten verschieben, Bildausschnitt Verschieben und Tooltips anzeigen.}
+	\label{fig:figure1}
+\end{figure}
+
+\newpage
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=13cm]{Sidebar.PNG}	
+	\end{center}
+	\caption{Dieses Usecase veranschaulicht die möglichen Interaktionsmöglichkeiten mit der Sidebar, welche neu im ISGCI sein wird.}
+	\label{fig:figure1}
+\end{figure}
+\newpage
 \hspace*{10.7cm} Abb. 1
-\end{center}\clearpage
 
 	
 	\subsection{Nicht-funktionale Anforderungen} %3.2     
 		\begin{itemize}
 		\item Technische Grundlage des Softwareprojekts bietet die Programmiersprache Java.
-		\item Kompatibilität: Die Software ISGCI wird Java-Runtime-Umgebungen mit Java 1.6 und Nachfolger vollständig unterstützen, solange diese rückwärtskompatibel zu Java 1.6 sind. Für ältere Versionen wird die Lauffähigkeit nicht garantiert.
+		\item Kompatibilität: Die Software ISGCI wird Java-Runtime-Umgebungen mit Java 1.6 und Nachfolger vollständig unterstützen, solange diese abwärtskompatibel zu Java 1.6 sind. Für ältere Versionen wird die Lauffähigkeit nicht garantiert.
 		\item Zur Umsetzung graphischer Anwendungen wird die Grafikbibliothek JGraphX verwendet.
 		\item Das Projekt wird als OpenSource veröffentlicht.
 		\item Das Benutzerinterface soll interaktiver und userfreundlicher sein als bei der Vorgängerversion (Umsetzung: vgl. Functional Requirements).
