@@ -30,6 +30,7 @@ import java.awt.Color;
 import org.jgrapht.*;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
@@ -100,59 +101,13 @@ public class ISGCIMainFrame extends JFrame
             closeWindow();
         }
 
-        /*{
-            int sub = 0, equ = 0, incomp = 0, incompWit = 0, incompWitFin = 0;
-
-            ArrayList<ForbiddenClass> fcs = new ArrayList<ForbiddenClass>();
-            for (GraphClass gc : DataSet.getClasses())
-                if (gc instanceof ForbiddenClass)
-                    fcs.add((ForbiddenClass) gc);
-
-            for (int i = 0; i < fcs.size()-1; i++) {
-                for (int j = i+1; j < fcs.size(); j++) {
-                    boolean sub1 = fcs.get(i).subClassOf(fcs.get(j));
-                    boolean sub2 = fcs.get(j).subClassOf(fcs.get(i));
-                    if (sub1  &&  sub2)
-                        equ++;
-                    else if (!sub1  &&  !sub2) {
-                        StringBuilder why1 = new StringBuilder();
-                        StringBuilder why2 = new StringBuilder();
-                        Boolean not1 = fcs.get(j).notSubClassOf(
-                                fcs.get(i), why1);
-                        Boolean not2 = fcs.get(i).notSubClassOf(
-                                fcs.get(j), why2);
-                        if (not1  &&  not2) {
-                            if (why1.length() > 0  &&  why2.length() > 0) {
-                                if (fcs.get(i).isFinite()  &&
-                                        fcs.get(j).isFinite())
-                                    incompWitFin++;
-                                else
-                                    incompWit++;
-                            } else
-                                incomp++;
-                        }
-                    } else
-                        sub++;
-                }
-            }
-            System.out.println("Total: "+ fcs.size() +
-                    " sub: "+ sub +
-                    " equ: "+ equ +
-                    " incomparable: "+ incomp +
-                    " incomparable with finite witness: "+ incompWitFin +
-                    " incomparable with witness: "+ incompWit);
-        }*/
-
-        /*
-        writeGraphML();
-        closeWindow();
-        */
+        
 
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
         registerListeners();
         setLocation(20, 20);
-        pack();
+        this.setSize(500, 400);
         setVisible(true);
     }
 
@@ -303,7 +258,10 @@ public class ISGCIMainFrame extends JFrame
         drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
         drawingPane.getVerticalScrollBar().setUnitIncrement(100);
-        
+        drawingPane.setBounds(0, 0, 500, 400);
+        drawingPane.getViewport().setOpaque(false);
+        drawingPane.setOpaque(true);
+        drawingPane.setBackground(Color.white);
         return drawingPane;
     }
 
@@ -428,6 +386,11 @@ public class ISGCIMainFrame extends JFrame
             graphCanvas.setDrawUnproper(
                     ((JCheckBoxMenuItem) object).getState());
         }
+    }
+    
+    public void clear(){
+        System.out.println("#####################################removing");
+        //drawingPane.removeAll();
     }
 }
 
