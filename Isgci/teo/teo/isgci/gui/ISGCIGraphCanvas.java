@@ -18,6 +18,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import javax.swing.*;
+
 import java.util.Collection;
 import java.util.Set;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import org.jgrapht.VertexFactory;
 import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 
@@ -49,6 +51,8 @@ public class ISGCIGraphCanvas extends
     protected EdgePopup edgePopup;
     protected Problem problem;
     protected Algo.NamePref namingPref;
+    ISGCIMainFrame parent;
+    mxGraph graph;
 
     /** Colours for different complexities */
     public static final Color COLOR_LIN = Color.green;
@@ -58,9 +62,11 @@ public class ISGCIGraphCanvas extends
     public static final Color COLOR_UNKNOWN = Color.white;
 
 
-    public ISGCIGraphCanvas(ISGCIMainFrame parent) {
+    public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
         super(parent, parent.latex, new ISGCIVertexFactory(), null);
+        this.parent = parent;
         problem = null;
+        this.graph = graph;
         namingPref = Algo.NamePref.BASIC;
         setWidthFunc(new NodeWidthFunc());
         nodePopup = new NodePopup(parent);
@@ -88,32 +94,47 @@ public class ISGCIGraphCanvas extends
      * Create a hierarchy subgraph of the given classes and draw it.
      */
     public void drawHierarchy(Collection<GraphClass> nodes) {
-//        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> graph =
-//            Algo.createHierarchySubgraph(nodes);
+    	
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph =
+            Algo.createHierarchySubgraph(nodes);
 //        //System.err.println(graph);
 //        List<SimpleDirectedGraph<Set<GraphClass>,DefaultEdge>> list =
 //                GAlg.split(graph, DefaultEdge.class);
 //        //System.err.println(list);
-//        drawGraphs(list);
-    	mxGraph graph = new mxGraph();
+//    	drawGraphs(list);
+    	
 		Object parent = graph.getDefaultParent();
-
+		
 		graph.getModel().beginUpdate();
 		try
 		{
-			Object v1 = graph.insertVertex(parent, null, "Hello", 20, 20, 80,
-					30);
-			Object v2 = graph.insertVertex(parent, null, "World!", 240, 150,
-					80, 30);
-			graph.insertEdge(parent, null, "Edge", v1, v2);
+//			Object v1 = graph.insertVertex(parent, null, "Hello", 20, 20, 80,
+//					30);
+//			Object v2 = graph.insertVertex(parent, null, "World!", 240, 150,
+//					80, 30);
+//			graph.insertEdge(parent, null, "Edge", v1, v2);
+			
+			for(GraphClass g:nodes){
+				graph.insertVertex(parent, g.getID(), g.toString(), 20, 20, 80, 30);
+			}
+			for(DefaultEdge e:edgegraph.edgeSet()){
+				graph.insertEdge(parent, null, null, edgegraph.getEdgeSource(e).iterator().next(), edgegraph.getEdgeTarget(e).iterator().next());
+			}
+			
 		}
 		finally
 		{
 			graph.getModel().endUpdate();
 		}
-
-		mxGraphComponent graphComponent = new mxGraphComponent(graph);
-		getRootPane().add(graphComponent);
+		mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
+		
+        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        layout.execute(graphComponent);      
+        this.parent.drawingPane = graphComponent;
+        
+       System.out.println(getRootPane());
+        
+		
     }
     
     

@@ -29,6 +29,10 @@ import teo.isgci.gc.GraphClass;
 import java.awt.Color;
 import org.jgrapht.*;
 import org.jgrapht.graph.SimpleDirectedGraph;
+
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxGraph;
+
 import teo.isgci.grapht.*;
 import teo.isgci.xml.GraphMLWriter;
 
@@ -292,11 +296,11 @@ public class ISGCIMainFrame extends JFrame
      * @return the panel
      */
     protected JComponent createCanvasPanel() {
-        graphCanvas = new ISGCIGraphCanvas(this);
-        drawingPane = new JScrollPane(graphCanvas,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        
+    	mxGraph graph = new mxGraph();
+    	graph.setAllowDanglingEdges(false);
+    	mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        graphCanvas = new ISGCIGraphCanvas(this,graph);
+        drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
         drawingPane.getVerticalScrollBar().setUnitIncrement(100);
         

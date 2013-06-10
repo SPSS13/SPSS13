@@ -66,13 +66,11 @@
 <!-- classpaths -->
 <property name="jarlib.dir" location="../lib"/>
 <property name="jgrapht.jar" location="${jarlib.dir}/jgrapht.jar"/>
-<property name="jgraphx.jar" location="${jarlib.dir}/jgraphx.jar"/>
 
 <path id="compile.classpath">
    <pathelement location="${jarlib.dir}/getopt.jar"/>
    <pathelement location="${jarlib.dir}/mouse.jar"/>
    <pathelement location="${jgrapht.jar}"/>
-   <pathelement location="${jgraphx.jar}"/>	
 </path>
 
 <path id="run.classpath">
@@ -211,10 +209,10 @@
       <manifest>
 	 <attribute name="Main-Class" value="teo.Loader"/>
 	 <attribute name="Class-Path" value="jgrapht.jar"/>
-     <attribute name="Class-Path" value="jgraphx.jar"/>
       </manifest>
       <fileset dir="${build.classes.dir}">
 	 <include name="teo/**"/>
+     <include name="com/**"/>
 	 <exclude name="teo/isg/FindISG.class"/>
 	 <exclude name="teo/isg/Permutation*.class"/>
 	 <exclude name="teo/isgci/xml/SmallGraphWriter.class"/>
@@ -292,9 +290,9 @@
    description="smallgraphs, with full dependency handling">
 
    <outofdate>
-      <sourcefiles>
+    <sourcefiles>
 	 <pathelement path="${smallgraphs.xml.in}"/>
-      </sourcefiles>
+      </sourcefiles> 
       <targetfiles>
 	 <pathelement path="${smallgraphs.xml.out}"/> 
       </targetfiles>
