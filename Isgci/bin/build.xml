@@ -66,11 +66,13 @@
 <!-- classpaths -->
 <property name="jarlib.dir" location="../lib"/>
 <property name="jgrapht.jar" location="${jarlib.dir}/jgrapht.jar"/>
+<property name="jgraphx.jar" location="${jarlib.dir}/jgraphx.jar"/>
 
 <path id="compile.classpath">
    <pathelement location="${jarlib.dir}/getopt.jar"/>
    <pathelement location="${jarlib.dir}/mouse.jar"/>
    <pathelement location="${jgrapht.jar}"/>
+   <pathelement location="${jgraphx.jar}"/>	
 </path>
 
 <path id="run.classpath">
@@ -203,12 +205,13 @@
 <target name="jar"
    description="Create a jar file containing the ISGCI application">
 
-   <delete file="${isgci.jar}"/>
+   <!--<delete file="${isgci.jar}"/>-->
    <jar destfile="${isgci.jar}"
 	 index="false"> <!-- otherwise Class-Path doesn't work -->
       <manifest>
 	 <attribute name="Main-Class" value="teo.Loader"/>
 	 <attribute name="Class-Path" value="jgrapht.jar"/>
+     <attribute name="Class-Path" value="jgraphx.jar"/>
       </manifest>
       <fileset dir="${build.classes.dir}">
 	 <include name="teo/**"/>
@@ -234,7 +237,7 @@
 	 <include name="images/*.gif"/>
       </fileset>
    </jar>
-   <signjar alias="isgci"
+  <!-- <signjar alias="isgci"
 	 jar="${isgci.jar}"
 	 keystore="${data.dir}/keystore"
 	 storepass="graphclasses.org"/>
@@ -243,7 +246,7 @@
 	 signedjar="${web.dir}/jgrapht.jar"
 	 keystore="${data.dir}/keystore"
 	 storepass="graphclasses.org"/>
-   <!-- <signjar alias="isgci"
+   <! <signjar alias="isgci"
 	 jar="${isgci.jar}"
 	 keystore="${data.dir}/keystore"
 	 storepass="isgciteo"/> -->

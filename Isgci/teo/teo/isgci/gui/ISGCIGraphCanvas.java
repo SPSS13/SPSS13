@@ -26,6 +26,10 @@ import org.xml.sax.SAXException;
 import org.jgrapht.VertexFactory;
 import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxGraph;
+
 import teo.isgci.db.*;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
@@ -84,13 +88,32 @@ public class ISGCIGraphCanvas extends
      * Create a hierarchy subgraph of the given classes and draw it.
      */
     public void drawHierarchy(Collection<GraphClass> nodes) {
-        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> graph =
-            Algo.createHierarchySubgraph(nodes);
-        //System.err.println(graph);
-        List<SimpleDirectedGraph<Set<GraphClass>,DefaultEdge>> list =
-                GAlg.split(graph, DefaultEdge.class);
-        //System.err.println(list);
-        drawGraphs(list);
+//        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> graph =
+//            Algo.createHierarchySubgraph(nodes);
+//        //System.err.println(graph);
+//        List<SimpleDirectedGraph<Set<GraphClass>,DefaultEdge>> list =
+//                GAlg.split(graph, DefaultEdge.class);
+//        //System.err.println(list);
+//        drawGraphs(list);
+    	mxGraph graph = new mxGraph();
+		Object parent = graph.getDefaultParent();
+
+		graph.getModel().beginUpdate();
+		try
+		{
+			Object v1 = graph.insertVertex(parent, null, "Hello", 20, 20, 80,
+					30);
+			Object v2 = graph.insertVertex(parent, null, "World!", 240, 150,
+					80, 30);
+			graph.insertEdge(parent, null, "Edge", v1, v2);
+		}
+		finally
+		{
+			graph.getModel().endUpdate();
+		}
+
+		mxGraphComponent graphComponent = new mxGraphComponent(graph);
+		getRootPane().add(graphComponent);
     }
     
     

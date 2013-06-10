@@ -8,5 +8,8 @@
 	<classpathentry kind="lib" path="lib/saxon.jar"/>
 	<classpathentry kind="lib" path="lib/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/xml-writer.jar"/>
+	<classpathentry kind="lib" path="/jgraphx/lib/jgraphx.jar"/>
+	<classpathentry kind="lib" path="lib/jgraphx.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jgraphx"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
