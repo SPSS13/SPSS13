@@ -20,6 +20,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,25 +113,23 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge> 
 			// 80, 30);
 			// graph.insertEdge(parent, null, "Edge", v1, v2);
 
-			List<mxICell> list = new ArrayList<mxICell>();
+			HashMap<Set<GraphClass>,Object> map = new HashMap<Set<GraphClass>,Object>();
 			for (DefaultEdge edge : edgegraph.edgeSet()) {
 				Set<GraphClass> source = edgegraph.getEdgeSource(edge);
+				String sourceid = source.iterator().next().getID();
 				System.out.println(source);
 				Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
+				String targetid = target.iterator().next().getID();
 				System.out.println(target);
 				//##########################
+				if(!map.containsKey(source)){			
+					map.put(source, graph.insertVertex(parent, sourceid, source.iterator().next(), 20, 20, 80, 30));
+				}
+				if(!map.containsKey(target)){
+					map.put(target, graph.insertVertex(parent, targetid, target.iterator().next(), 20, 20, 80, 30));				
+				}				
 				
-				
-				
-				graph.insertEdge(
-						parent,
-						edge.toString(),
-						null,
-						graph.insertVertex(parent, source.iterator().next()
-								.getID(), source.iterator().next(), 20, 20, 80, 30),
-						graph.insertVertex(parent, target.iterator().next()
-								.getID(), target.iterator().next(), 20, 20, 80, 30));
-
+				graph.insertEdge(parent, null, null, map.get(source), map.get(target));
 				
 				//###########################
 				mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
@@ -143,10 +143,6 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge> 
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
 
 		this.parent.drawingPane = graphComponent;
-	}
-	
-	private void insertEdge(){
-		
 	}
 
 	/**
