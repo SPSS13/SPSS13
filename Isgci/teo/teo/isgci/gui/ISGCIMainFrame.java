@@ -106,7 +106,7 @@ public class ISGCIMainFrame extends JFrame
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
         registerListeners();
-        setLocation(20, 20);
+        setLocation(100, 20);
         this.setSize(500, 400);
         setVisible(true);
     }
@@ -252,6 +252,7 @@ public class ISGCIMainFrame extends JFrame
      */
     protected JComponent createCanvasPanel() {
     	mxGraph graph = new mxGraph();
+    	graph = setGraphSwitches(graph);
     	graph.setAllowDanglingEdges(false);
     	mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphCanvas = new ISGCIGraphCanvas(this,graph);
@@ -266,6 +267,22 @@ public class ISGCIMainFrame extends JFrame
     }
 
 
+    private mxGraph setGraphSwitches(mxGraph graph) {
+        graph.setCellsEditable(false);
+        graph.setCellsDisconnectable(false);
+        
+
+        graph.setEdgeLabelsMovable(false);
+        graph.setVertexLabelsMovable(false);
+        graph.setSplitEnabled(false);
+        graph.setResetEdgesOnMove(true);
+        graph.setHtmlLabels(true);
+        graph.setAllowDanglingEdges(false);
+        graph.setConnectableEdges(false);
+        graph.setDisconnectOnMove(false);
+        //((mxGraphComponent)drawingPane).setConnectable(false);
+        return graph;
+    }
     /**
      * Center the canvas on the given point.
      */

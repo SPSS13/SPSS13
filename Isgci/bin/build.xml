@@ -203,7 +203,7 @@
 <target name="jar"
    description="Create a jar file containing the ISGCI application">
 
-   <!--<delete file="${isgci.jar}"/>-->
+   <delete file="${isgci.jar}"/>
    <jar destfile="${isgci.jar}"
 	 index="false"> <!-- otherwise Class-Path doesn't work -->
       <manifest>
@@ -212,7 +212,6 @@
       </manifest>
       <fileset dir="${build.classes.dir}">
 	 <include name="teo/**"/>
-     <include name="com/**"/>
 	 <exclude name="teo/isg/FindISG.class"/>
 	 <exclude name="teo/isg/Permutation*.class"/>
 	 <exclude name="teo/isgci/xml/SmallGraphWriter.class"/>
@@ -235,7 +234,7 @@
 	 <include name="images/*.gif"/>
       </fileset>
    </jar>
-  <!-- <signjar alias="isgci"
+   <signjar alias="isgci"
 	 jar="${isgci.jar}"
 	 keystore="${data.dir}/keystore"
 	 storepass="graphclasses.org"/>
@@ -244,7 +243,7 @@
 	 signedjar="${web.dir}/jgrapht.jar"
 	 keystore="${data.dir}/keystore"
 	 storepass="graphclasses.org"/>
-   <! <signjar alias="isgci"
+   <!-- <signjar alias="isgci"
 	 jar="${isgci.jar}"
 	 keystore="${data.dir}/keystore"
 	 storepass="isgciteo"/> -->
@@ -290,9 +289,9 @@
    description="smallgraphs, with full dependency handling">
 
    <outofdate>
-    <sourcefiles>
+      <sourcefiles>
 	 <pathelement path="${smallgraphs.xml.in}"/>
-      </sourcefiles> 
+      </sourcefiles>
       <targetfiles>
 	 <pathelement path="${smallgraphs.xml.out}"/> 
       </targetfiles>

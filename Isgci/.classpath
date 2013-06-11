@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="teo"/>
-	<classpathentry excluding="teo/|jgraphx/|com/|src/" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/getopt.jar"/>
 	<classpathentry kind="lib" path="lib/jgrapht.jar"/>
@@ -9,5 +8,7 @@
 	<classpathentry kind="lib" path="lib/saxon.jar"/>
 	<classpathentry kind="lib" path="lib/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/xml-writer.jar"/>
+	<classpathentry kind="lib" path="lib/jgraphx.jar"/>
+	<classpathentry kind="src" path="/JgraphX"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

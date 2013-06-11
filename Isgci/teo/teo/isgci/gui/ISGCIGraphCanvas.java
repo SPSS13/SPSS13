@@ -22,6 +22,7 @@ import java.util.Set;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
+import teo.XsltUtil;
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
@@ -105,11 +106,15 @@ public class ISGCIGraphCanvas extends
 
         graph.getModel().beginUpdate();
         try {
+            graph.setCellsResizable(true);
             // Add vertices
             for (Set<GraphClass> gc : edgegraph.vertexSet()) {
-                map.put(gc,
-                        graph.insertVertex(parent, gc.toString(),
-                                Algo.getName(gc, namingPref), 20, 20, 80, 30));
+                Object vertex = graph.insertVertex(parent, gc.toString(),
+                        XsltUtil.latex(Algo.getName(gc, namingPref)), 20, 20,
+                        80, 30, "shape=ellipse");
+                map.put(gc, vertex);
+                graph.updateCellSize(vertex);
+                ((mxCell)vertex).setConnectable(false);
             }
             // add edges
             for (DefaultEdge edge : edgegraph.edgeSet()) {
@@ -125,6 +130,7 @@ public class ISGCIGraphCanvas extends
             layout.execute(parent);
         } finally {
             graph.getModel().endUpdate();
+            graph.setCellsResizable(false);
         }
         if (problem != null) {
             setComplexityColors();
