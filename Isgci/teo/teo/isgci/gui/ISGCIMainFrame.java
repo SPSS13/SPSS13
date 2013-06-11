@@ -259,7 +259,7 @@ public class ISGCIMainFrame extends JFrame
         drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
         drawingPane.getVerticalScrollBar().setUnitIncrement(100);
-        drawingPane.setBounds(0, 0, 500, 400);
+        drawingPane.setBounds(20, 20, 500, 400);
         drawingPane.getViewport().setOpaque(false);
         drawingPane.setOpaque(true);
         drawingPane.setBackground(Color.white);
@@ -270,8 +270,8 @@ public class ISGCIMainFrame extends JFrame
     private mxGraph setGraphSwitches(mxGraph graph) {
         graph.setCellsEditable(false);
         graph.setCellsDisconnectable(false);
-        
-
+        graph.setAutoSizeCells(true);
+        graph.setBorder(10);
         graph.setEdgeLabelsMovable(false);
         graph.setVertexLabelsMovable(false);
         graph.setSplitEnabled(false);

@@ -60,6 +60,7 @@ public class ISGCIGraphCanvas extends
     public static final Color COLOR_INTERMEDIATE = SColor.brighter(Color.red);
     public static final Color COLOR_UNKNOWN = Color.white;
     private HashMap<Set<GraphClass>, Object> map;
+    private mxHierarchicalLayout layout; 
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
         super(parent, parent.latex, new ISGCIVertexFactory(), null);
@@ -73,6 +74,7 @@ public class ISGCIGraphCanvas extends
         edgePopup = new EdgePopup(parent);
         add(nodePopup);
         add(edgePopup);
+        layout = new mxHierarchicalLayout(graph);
         // make default cells white
 
     }
@@ -111,7 +113,7 @@ public class ISGCIGraphCanvas extends
             for (Set<GraphClass> gc : edgegraph.vertexSet()) {
                 Object vertex = graph.insertVertex(parent, gc.toString(),
                         XsltUtil.latex(Algo.getName(gc, namingPref)), 20, 20,
-                        80, 30, "shape=ellipse");
+                        80, 30, "shape=roundtangle");
                 map.put(gc, vertex);
                 graph.updateCellSize(vertex);
                 ((mxCell)vertex).setConnectable(false);
@@ -125,8 +127,6 @@ public class ISGCIGraphCanvas extends
                 graph.insertEdge(parent, null, null, map.get(source),
                         map.get(target));
             }
-
-            mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
             layout.execute(parent);
         } finally {
             graph.getModel().endUpdate();
@@ -176,11 +176,30 @@ public class ISGCIGraphCanvas extends
 
     /**
      * Set all nodes to their prefered names.
+     * 
+     * @author leo
+     * @date 11.06., 14:00
+     * @annotation Auf mxGraph angepasst
      */
     public void setPreferedNames() {
-        for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs)
-            for (NodeView<Set<GraphClass>, DefaultEdge> v : gv.getNodeViews())
-                v.setNameAndLabel(Algo.getName(v.getNode(), namingPref));
+        // graph.setCellsResizable(true);
+        graph.getModel().beginUpdate();
+        try {
+            for (Set<GraphClass> gc : map.keySet()) {
+                // ((mxCell)map.get(gc)).setValue(XsltUtil.latex(Algo.getName(gc,
+                // namingPref)));
+                Object cell = map.get(gc);
+                graph.getModel().setValue(cell,
+                        XsltUtil.latex(Algo.getName(gc, namingPref)));
+                graph.updateCellSize(cell);
+            }
+            layout.run(graph.getChildCells(graph.getDefaultParent()));
+        } finally {
+            
+            graph.getModel().endUpdate();
+            
+            // graph.setCellsResizable(false);
+        }
     }
 
     /**
