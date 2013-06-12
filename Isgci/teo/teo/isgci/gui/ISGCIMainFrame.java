@@ -29,6 +29,11 @@ import teo.isgci.gc.GraphClass;
 import java.awt.Color;
 import org.jgrapht.*;
 import org.jgrapht.graph.SimpleDirectedGraph;
+
+import com.mxgraph.model.mxGraphModel;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxGraph;
+
 import teo.isgci.grapht.*;
 import teo.isgci.xml.GraphMLWriter;
 
@@ -62,6 +67,7 @@ public class ISGCIMainFrame extends JFrame
     
 
     // This is where the drawing goes.
+    //rework
     protected JScrollPane drawingPane;
     public ISGCIGraphCanvas graphCanvas;
 
@@ -96,59 +102,13 @@ public class ISGCIMainFrame extends JFrame
             closeWindow();
         }
 
-        /*{
-            int sub = 0, equ = 0, incomp = 0, incompWit = 0, incompWitFin = 0;
-
-            ArrayList<ForbiddenClass> fcs = new ArrayList<ForbiddenClass>();
-            for (GraphClass gc : DataSet.getClasses())
-                if (gc instanceof ForbiddenClass)
-                    fcs.add((ForbiddenClass) gc);
-
-            for (int i = 0; i < fcs.size()-1; i++) {
-                for (int j = i+1; j < fcs.size(); j++) {
-                    boolean sub1 = fcs.get(i).subClassOf(fcs.get(j));
-                    boolean sub2 = fcs.get(j).subClassOf(fcs.get(i));
-                    if (sub1  &&  sub2)
-                        equ++;
-                    else if (!sub1  &&  !sub2) {
-                        StringBuilder why1 = new StringBuilder();
-                        StringBuilder why2 = new StringBuilder();
-                        Boolean not1 = fcs.get(j).notSubClassOf(
-                                fcs.get(i), why1);
-                        Boolean not2 = fcs.get(i).notSubClassOf(
-                                fcs.get(j), why2);
-                        if (not1  &&  not2) {
-                            if (why1.length() > 0  &&  why2.length() > 0) {
-                                if (fcs.get(i).isFinite()  &&
-                                        fcs.get(j).isFinite())
-                                    incompWitFin++;
-                                else
-                                    incompWit++;
-                            } else
-                                incomp++;
-                        }
-                    } else
-                        sub++;
-                }
-            }
-            System.out.println("Total: "+ fcs.size() +
-                    " sub: "+ sub +
-                    " equ: "+ equ +
-                    " incomparable: "+ incomp +
-                    " incomparable with finite witness: "+ incompWitFin +
-                    " incomparable with witness: "+ incompWit);
-        }*/
-
-        /*
-        writeGraphML();
-        closeWindow();
-        */
+        
 
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
         registerListeners();
-        setLocation(20, 20);
-        pack();
+        setLocation(100, 20);
+        this.setSize(500, 400);
         setVisible(true);
     }
 
@@ -208,6 +168,9 @@ public class ISGCIMainFrame extends JFrame
         miSmallgraphs.addActionListener(this);
         miHelp.addActionListener(this);
         miAbout.addActionListener(this);
+        
+        //
+        graphCanvas.registerMouseListener((mxGraphComponent) drawingPane);
     }
 
 
@@ -292,18 +255,38 @@ public class ISGCIMainFrame extends JFrame
      * @return the panel
      */
     protected JComponent createCanvasPanel() {
-        graphCanvas = new ISGCIGraphCanvas(this);
-        drawingPane = new JScrollPane(graphCanvas,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        
+    	mxGraph graph = new mxGraph();
+    	graph = setGraphSwitches(graph);
+    	graph.setAllowDanglingEdges(false);
+    	mxGraphComponent graphComponent = new mxGraphComponent(graph);
+        graphCanvas = new ISGCIGraphCanvas(this,graph);
+        drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
         drawingPane.getVerticalScrollBar().setUnitIncrement(100);
-        
+        drawingPane.setBounds(20, 20, 500, 400);
+        drawingPane.getViewport().setOpaque(false);
+        drawingPane.setOpaque(true);
+        drawingPane.setBackground(Color.white);
         return drawingPane;
     }
 
 
+    private mxGraph setGraphSwitches(mxGraph graph) {
+        graph.setCellsEditable(false);
+        graph.setCellsDisconnectable(false);
+        graph.setAutoSizeCells(true);
+        graph.setBorder(10);
+        graph.setEdgeLabelsMovable(false);
+        graph.setVertexLabelsMovable(false);
+        graph.setSplitEnabled(false);
+        graph.setResetEdgesOnMove(true);
+        graph.setHtmlLabels(true);
+        graph.setAllowDanglingEdges(false);
+        graph.setConnectableEdges(false);
+        graph.setDisconnectOnMove(false);
+        //((mxGraphComponent)drawingPane).setConnectable(false);
+        return graph;
+    }
     /**
      * Center the canvas on the given point.
      */
@@ -424,6 +407,11 @@ public class ISGCIMainFrame extends JFrame
             graphCanvas.setDrawUnproper(
                     ((JCheckBoxMenuItem) object).getState());
         }
+    }
+    
+    public void clear(){
+        System.out.println("#####################################removing");
+        //drawingPane.removeAll();
     }
 }
 
