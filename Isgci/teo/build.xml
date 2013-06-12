@@ -70,7 +70,9 @@
 <path id="compile.classpath">
    <pathelement location="${jarlib.dir}/getopt.jar"/>
    <pathelement location="${jarlib.dir}/mouse.jar"/>
+   <pathelement location="${jarlib.dir}/jgraphx.jar"/>
    <pathelement location="${jgrapht.jar}"/>
+   
 </path>
 
 <path id="run.classpath">
@@ -208,7 +210,7 @@ includeantruntime="false">
 index="false"> <!-- otherwise Class-Path doesn't work -->
       <manifest>
 <attribute name="Main-Class" value="teo.Loader"/>
-<attribute name="Class-Path" value="jgrapht.jar"/>
+<attribute name="Class-Path" value="jgrapht.jar jgraphx.jar"/>
       </manifest>
       <fileset dir="${build.classes.dir}">
 <include name="teo/**"/>

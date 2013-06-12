@@ -67,6 +67,7 @@ public class ISGCIMainFrame extends JFrame
     
 
     // This is where the drawing goes.
+    //rework
     protected JScrollPane drawingPane;
     public ISGCIGraphCanvas graphCanvas;
 
@@ -167,6 +168,9 @@ public class ISGCIMainFrame extends JFrame
         miSmallgraphs.addActionListener(this);
         miHelp.addActionListener(this);
         miAbout.addActionListener(this);
+        
+        //
+        graphCanvas.registerMouseListener((mxGraphComponent) drawingPane);
     }
 
 

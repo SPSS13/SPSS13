@@ -9,6 +9,5 @@
 	<classpathentry kind="lib" path="lib/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/xml-writer.jar"/>
 	<classpathentry kind="lib" path="lib/jgraphx.jar"/>
-	<classpathentry kind="src" path="/JgraphX"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
