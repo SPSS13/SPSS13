@@ -46,6 +46,10 @@ import com.mxgraph.view.mxGraph;
  */
 public class ISGCIGraphCanvas extends
         GraphCanvas<Set<GraphClass>, DefaultEdge> {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     protected NodePopup nodePopup;
     protected EdgePopup edgePopup;
     protected Problem problem;
@@ -60,10 +64,10 @@ public class ISGCIGraphCanvas extends
     public static final Color COLOR_INTERMEDIATE = SColor.brighter(Color.red);
     public static final Color COLOR_UNKNOWN = Color.white;
     private HashMap<Set<GraphClass>, Object> map;
-    private mxHierarchicalLayout layout; 
+    private mxHierarchicalLayout layout;
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
-        super(parent, parent.latex, new ISGCIVertexFactory(), null);
+        super(parent, ISGCIMainFrame.latex, new ISGCIVertexFactory(), null);
         this.parent = parent;
         problem = null;
         this.map = new HashMap<Set<GraphClass>, Object>();
@@ -94,6 +98,11 @@ public class ISGCIGraphCanvas extends
 
     /**
      * Create a hierarchy subgraph of the given classes and draw it.
+     * 
+     * @author leo
+     * @date 12.06 9:30
+     * @annotation rewritten so that it uses GraphClassSet to print the label
+     *             automatically and still be able to retrieve the set
      */
     public void drawHierarchy(Collection<GraphClass> nodes) {
         map.clear();
@@ -111,9 +120,10 @@ public class ISGCIGraphCanvas extends
             graph.setCellsResizable(true);
             // Add vertices
             for (Set<GraphClass> gc : edgegraph.vertexSet()) {
+                GraphClassSet<GraphClass> graphClasses = new GraphClassSet<GraphClass>(
+                        gc, this);
                 Object vertex = graph.insertVertex(parent, gc.toString(),
-                        XsltUtil.latex(Algo.getName(gc, namingPref)), 20, 20,
-                        80, 30, "shape=roundtangle");
+                        graphClasses, 20, 20, 80, 30, "shape=roundtangle");
                 map.put(gc, vertex);
                 graph.updateCellSize(vertex);
                 ((mxCell)vertex).setConnectable(false);
@@ -128,6 +138,9 @@ public class ISGCIGraphCanvas extends
                         map.get(target));
             }
             layout.execute(parent);
+            if(drawUnproper){
+                setProperness();
+            }
         } finally {
             graph.getModel().endUpdate();
             graph.setCellsResizable(false);
@@ -148,15 +161,22 @@ public class ISGCIGraphCanvas extends
         ((mxGraphComponent)this.parent.drawingPane).refresh();
     }
 
+    private Object setUnproper(Object cell) {
+
+        return cell;
+    }
+
     /**
-     * Returns all classes on the canvas (unsorted).
+     * Returns all classes on the canvas (unsorted). * @author leo
+     * 
+     * @date 11.06.
+     * @annitation debgging, first approach
      */
     public List<GraphClass> getClasses() {
         List<GraphClass> result = new ArrayList<GraphClass>();
-        for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
-            for (NodeView<Set<GraphClass>, DefaultEdge> nv : gv.getNodeViews())
-                for (GraphClass gc : nv.getNode())
-                    result.add(gc);
+        for (Collection<GraphClass> gc : map.keySet()) {
+            for (GraphClass c : gc)
+                result.add(c);
         }
         return result;
     }
@@ -195,9 +215,9 @@ public class ISGCIGraphCanvas extends
             }
             layout.run(graph.getChildCells(graph.getDefaultParent()));
         } finally {
-            
+
             graph.getModel().endUpdate();
-            
+
             // graph.setCellsResizable(false);
         }
     }
@@ -217,16 +237,37 @@ public class ISGCIGraphCanvas extends
     /**
      * Bit of a hack to get all ISGCI stuff in one place: Set the appropriate
      * properness of the given edgeview.
+     * @author leo
+     * @date 12.06 10:45
+     * @annotation edited completly
      */
-    protected void setProperness(EdgeView<Set<GraphClass>, DefaultEdge> view) {
-        List<Inclusion> path = GAlg.getPath(DataSet.inclGraph, view.getFrom()
-                .iterator().next(), view.getTo().iterator().next());
-        view.setProper(Algo.isPathProper(path)
-                || Algo.isPathProper(Algo.makePathProper(path)));
+    protected void setProperness() {
+        for (Object cell : graph.getAllEdges(new Object[]{graph.getDefaultParent()})) {
+            if (((mxCell) cell).isEdge()) {
+                @SuppressWarnings("unchecked")
+                GraphClassSet<GraphClass> source = (GraphClassSet<GraphClass>)((mxCell) cell).getSource().getValue();
+                @SuppressWarnings("unchecked")
+                GraphClassSet<GraphClass> target = (GraphClassSet<GraphClass>)((mxCell) cell).getTarget().getValue();
+                List<Inclusion> path = GAlg.getPath(DataSet.inclGraph, source.getSet().iterator()
+                        .next(), target.getSet().iterator()
+                        .next());
+                if(Algo.isPathProper(path)
+                        || Algo.isPathProper(Algo.makePathProper(path))){
+                    ((mxCell)cell).setStyle("startArrow=open");
+                }
+            }
+        }
+//        List<Inclusion> path = GAlg.getPath(DataSet.inclGraph, view.getFrom()
+//                .iterator().next(), view.getTo().iterator().next());
+//        view.setProper(Algo.isPathProper(path)
+//                || Algo.isPathProper(Algo.makePathProper(path)));
     }
 
     /**
-     * Set coloring for p and repaint.
+     * Set coloring for p and repaint. * @author leo
+     * 
+     * @date 10.06.
+     * @annitation works fine
      */
     public void setProblem(Problem p) {
         if (problem != p) {
@@ -243,6 +284,10 @@ public class ISGCIGraphCanvas extends
     /**
      * Return the color for node considering its complexity for the active
      * problem.
+     * 
+     * @author leo
+     * @date 10.06.
+     * @annitation works fine
      */
     protected Color complexityColor(Set<GraphClass> node) {
         if (problem == null)
@@ -263,10 +308,12 @@ public class ISGCIGraphCanvas extends
 
     /**
      * Set all nodes to the proper complexity color.
+     * 
+     * @author leo
+     * @date 10.06.
+     * @annitation works fine
      */
     public void setComplexityColors() {
-        System.out
-                .println("+#################################################Coloring nothing");
         for (Set<GraphClass> gc : map.keySet()) {
             mxCell cell = (mxCell)map.get(gc);
             graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,

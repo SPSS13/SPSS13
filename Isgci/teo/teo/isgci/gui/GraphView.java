@@ -136,34 +136,34 @@ public class GraphView<V,E> {
     }
 
 
-    public void layout() {
-        layouter.layoutGraph();
-        eViews = new ArrayList<View<V,E> >();
-
-        // Create the EdgeViews
-        for (E e : graph.edgeSet()) {
-            if (!isVirtual(graph.getEdgeSource(e))) {
-                EdgeView<V,E> v = new EdgeView<V,E>(this, e);
-                if (parent instanceof GraphCanvas)
-                    ((GraphCanvas) parent).setProperness(v);
-                eViews.add(v);
-            }
-        }
-
-        // Move the NodeViews to the proper position
-        for (V n : graph.vertexSet()) {
-            GraphDrawInfo gdi = layouter.getGDI(n);
-            NodeView v = null;
-            if (gdi.virt) {
-                v = new VirtualNodeView<V,E>(this, n);
-                eViews.add(v);
-            } else
-                v = getView(n);
-            v.setCenter(gdi.xCoord, gdi.yCoord);
-        }
-
-        updateBounds();
-    }
+//    public void layout() {
+//        layouter.layoutGraph();
+//        eViews = new ArrayList<View<V,E> >();
+//
+//        // Create the EdgeViews
+//        for (E e : graph.edgeSet()) {
+//            if (!isVirtual(graph.getEdgeSource(e))) {
+//                EdgeView<V,E> v = new EdgeView<V,E>(this, e);
+//                if (parent instanceof GraphCanvas)
+//                    ((GraphCanvas) parent).setProperness(v);
+//                eViews.add(v);
+//            }
+//        }
+//
+//        // Move the NodeViews to the proper position
+//        for (V n : graph.vertexSet()) {
+//            GraphDrawInfo gdi = layouter.getGDI(n);
+//            NodeView v = null;
+//            if (gdi.virt) {
+//                v = new VirtualNodeView<V,E>(this, n);
+//                eViews.add(v);
+//            } else
+//                v = getView(n);
+//            v.setCenter(gdi.xCoord, gdi.yCoord);
+//        }
+//
+//        updateBounds();
+//    }
 
 
     public void paint(Graphics g) {
