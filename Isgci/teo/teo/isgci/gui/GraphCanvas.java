@@ -101,80 +101,33 @@ public class GraphCanvas<V,E> extends JPanel
     /**
      * Return the NodeView for the given node.
      */
-    public NodeView<V,E> getView(V node) {
-        for (GraphView<V,E> gv : graphs) {
-            NodeView<V,E> view = gv.getView(node);
-            if (view != null)
-                return view;
-        }
-        return null;
-    }
-
-
-    /**
-     * Clear the canvas and draw the given graphs.
-     */
-    public void drawGraphs(Collection<SimpleDirectedGraph<V,E> > graphs) {
-        try {
-            /*long t, s = System.currentTimeMillis();*/
-            clearGraphs();
-            /*s = t;
-            t = System.currentTimeMillis();
-            System.out.println("split "+(t-s));*/
-            for (SimpleDirectedGraph<V,E> g : graphs)
-                addGraph(g);
-            /*s = t;
-            t = System.currentTimeMillis();
-            System.out.println("add "+(t-s));*/
-            calcLayout();
-            /*s = t;
-            t = System.currentTimeMillis();
-            System.out.println("layout "+(t-s));*/
-            repaint();
-        } catch (Error e) {
-            //e.printStackTrace();
-            if (e instanceof OutOfMemoryError ||
-                    e instanceof StackOverflowError) {
-                clearGraphs();
-                MessageDialog.error(parent,
-                        "Not enough memory to draw this many graph classes");
-            } else
-                throw(e);
-        }
-    }
-
-
-    /**
-     * Layout the graphs vertically.
-     */
-    public void calcLayout() {
-        int x = LEFTMARGIN, y = TOPMARGIN;
-        for (GraphView<V,E> gv : graphs) {
-            gv.layout();
-            gv.setLocation(x, y);
-            y += gv.getPreferredSize().height + INTMARGIN;
-        }
-        updateBounds();
-    }
+//    public NodeView<V,E> getView(V node) {
+//        for (GraphView<V,E> gv : graphs) {
+//            NodeView<V,E> view = gv.getView(node);
+//            if (view != null)
+//                return view;
+//        }
+//        return null;
+//    }
 
 
     public void setDrawUnproper(boolean b) {
-        drawUnproper = b;
-        for (GraphView<V,E> gv : graphs)
-            gv.setDrawUnproper(b);
-        repaint();
-    }
+//        drawUnproper = b;
+//        for (GraphView<V,E> gv : graphs)
+//            gv.setDrawUnproper(b);
+//        repaint();
+   }
 
     public boolean getDrawUnproper() {
         return drawUnproper;
     }
 
-    /**
-     * Bit of a hack to get all ISGCI stuff in one place:
-     * Set the appropriate properness of the given edgeview.
-     */
-    protected void setProperness(EdgeView<V,E> view) {
-    }
+//    /**
+//     * Bit of a hack to get all ISGCI stuff in one place:
+//     * Set the appropriate properness of the given edgeview.
+//     */
+//    protected void setProperness(EdgeView<V,E> view) {
+//    }
 
 
     public LatexGraphics getLatexGraphics() {

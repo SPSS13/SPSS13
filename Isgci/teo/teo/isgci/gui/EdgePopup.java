@@ -28,7 +28,7 @@ import teo.isgci.gc.GraphClass;
 public class EdgePopup extends JPopupMenu implements ActionListener {
     ISGCIMainFrame parent;
     JMenuItem deleteItem, infoItem;
-    EdgeView<Set<GraphClass>,DefaultEdge> view;
+//    EdgeView<Set<GraphClass>,DefaultEdge> view;
     
     //rework
     mxCell cell;

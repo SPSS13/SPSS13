@@ -145,6 +145,9 @@ public class IQDialog extends JDialog
 
     /**
      * Select the given node.
+     * @author leo
+     * @date 14.06
+     * @annotation uses setNodeName now
      */
     public void select(GraphClass node) {
         classesList.setSelectedValue(node, true);
@@ -159,12 +162,7 @@ public class IQDialog extends JDialog
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             parent.graphCanvas.drawHierarchy(getNodes());
             
-            for (Object o : classesList.getSelectedValues()) {
-                GraphClass gc = (GraphClass) o;
-                NodeView v = parent.graphCanvas.findNode(gc);
-                if (v != null)
-                    v.setNameAndLabel(gc.toString());
-            }
+            parent.graphCanvas.setNodeName(classesList);
             parent.graphCanvas.updateBounds();
             
             setCursor(oldcursor);

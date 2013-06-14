@@ -17,28 +17,28 @@ import teo.isgci.grapht.Annotation;
 import teo.isgci.grapht.WalkerInfo;
 import teo.isgci.grapht.GraphWalker;
 
-public class LLWalker<V,E> extends TreeDFSWalker<V,E> {
-
-    int offset;
-    
-    public LLWalker(
-            DirectedGraph<V,E> graph,
-            V start,
-            Annotation<V,E,WalkerInfo<V,E> > mark,
-            GraphWalker.InitCode initCode,
-            int off) {
-        super(graph, start, mark, initCode);
-        offset = off;
-    }
-    
-    public void finish(V v) {
-        super.finish(v);
-        GraphDrawInfo wi = (GraphDrawInfo) getDataNode(v);
-        
-        wi.low = wi.discover+offset;
-        wi.lim = wi.finish+offset;
-        wi.treeParent = wi.parent;
-    }
-}
+//public class LLWalker<V,E> extends TreeDFSWalker<V,E> {
+//
+//    int offset;
+//    
+//    public LLWalker(
+//            DirectedGraph<V,E> graph,
+//            V start,
+//            Annotation<V,E,WalkerInfo<V,E> > mark,
+//            GraphWalker.InitCode initCode,
+//            int off) {
+//        super(graph, start, mark, initCode);
+//        offset = off;
+//    }
+//    
+//    public void finish(V v) {
+//        super.finish(v);
+//        GraphDrawInfo wi = (GraphDrawInfo) getDataNode(v);
+//        
+//        wi.low = wi.discover+offset;
+//        wi.lim = wi.finish+offset;
+//        wi.treeParent = wi.parent;
+//    }
+//}
 
 /* EOF */

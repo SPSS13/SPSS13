@@ -11,16 +11,27 @@
 package teo.isgci.gui;
 
 import java.awt.Container;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.*;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collections;
-import javax.swing.*;
-import teo.isgci.db.*;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+
+import teo.isgci.db.Algo;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.util.LessLatex;
+
+import com.mxgraph.model.mxCell;
 
 public class SearchDialog extends JDialog implements ActionListener {
     protected ISGCIMainFrame parent;
@@ -88,15 +99,20 @@ public class SearchDialog extends JDialog implements ActionListener {
         dispose();
     }
 
+    /**
+     * @author leo
+     * @date 14.06
+     * @annotation reworked to work with thee mxcanvas
+     */
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
         if (source == cancelButton) {
             closeDialog();
         } else if (source == searchButton) {
-            NodeView view = parent.graphCanvas.findNode(
-                            classesList.getSelectedNode());
-            parent.graphCanvas.markOnly(view);
-            parent.graphCanvas.centerNode(view);
+            mxCell cell = (mxCell) parent.graphCanvas.findNode(
+                    classesList.getSelectedNode(), true);
+            parent.graphCanvas.markOnly(cell);
+            parent.graphCanvas.centerNode(cell);
             closeDialog();
         }
     }
