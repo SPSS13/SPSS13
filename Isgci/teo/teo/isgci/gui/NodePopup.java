@@ -27,6 +27,10 @@ import teo.isgci.gc.GraphClass;
 import teo.isgci.util.Utility;
 
 public class NodePopup extends JPopupMenu implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2260105093000618855L;
 	ISGCIMainFrame parent;
 	JMenuItem deleteItem, infoItem;
 	JMenu nameItem;
@@ -64,11 +68,15 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 			String fullname = event.getActionCommand().substring(
 					CHANGENAME.length());
 			graph.getModel().beginUpdate();
-			@SuppressWarnings("unchecked")
-			GraphClassSet<GraphClass> graphClassSet = (GraphClassSet<GraphClass>) cell.getValue();
-			graphClassSet.setLabel(fullname);
-			graph.updateCellSize(cell);
-			graph.getModel().endUpdate();
+			try {
+				@SuppressWarnings("unchecked")
+				GraphClassSet<GraphClass> graphClassSet = (GraphClassSet<GraphClass>) cell
+						.getValue();
+				graphClassSet.setLabel(fullname);
+				graph.updateCellSize(cell);
+			} finally {
+				graph.getModel().endUpdate();
+			}
 		}
 	}
 
@@ -83,8 +91,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 		JMenuItem[] mItem = new JMenuItem[gcs.size()];
 		// FIXME sort and render latex properly
 		for (GraphClass gc : gcs) {
-			nameItem.add(mItem[i] = new JMenuItem((Utility.getShortName(XsltUtil.latex(gc
-					.toString())))));
+			nameItem.add(mItem[i] = new JMenuItem((Utility
+					.getShortName(XsltUtil.latex(gc.toString())))));
 			mItem[i].setActionCommand(CHANGENAME + gc.toString());
 			mItem[i].addActionListener(this);
 			i++;
@@ -115,7 +123,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 			int start = 1;
 			for (int i = 1; i < id.length(); i++) {
 				if (id.charAt(i) == ',') {
-					if (XsltUtil.latex(id.substring(start, i)).equals(c.getValue().toString())) {
+					if (XsltUtil.latex(id.substring(start, i)).equals(
+							c.getValue().toString())) {
 						return DataSet.getClass(id.substring(start, i));
 					}
 					start = i + 2;

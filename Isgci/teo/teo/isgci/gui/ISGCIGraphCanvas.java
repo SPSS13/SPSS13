@@ -49,10 +49,11 @@ import com.mxgraph.view.mxGraph;
  */
 public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 		implements MouseWheelListener {
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5317514150138896189L;
+	private static final long serialVersionUID = 8803653758744069010L;
 	protected NodePopup nodePopup;
 	protected EdgePopup edgePopup;
 	protected Problem problem;
@@ -70,7 +71,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	private mxHierarchicalLayout layout;
 
 	public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
-		super(parent, parent.latex, new ISGCIVertexFactory(), null);
+		super(parent, ISGCIMainFrame.latex, new ISGCIVertexFactory(), null);
 		this.parent = parent;
 		problem = null;
 		this.map = new HashMap<Set<GraphClass>, Object>();
@@ -108,14 +109,16 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	 *             automatically and still be able to retrieve the set
 	 */
 	public void drawHierarchy(Collection<GraphClass> nodes) {
+		long time = System.currentTimeMillis();
 		map.clear();
 		graph.getModel().beginUpdate();
 		((mxGraphModel) graph.getModel()).clear();
 		graph.getModel().endUpdate();
-
+		System.out.println("zeit vergangen (clearing):"
+				+ -(time - System.currentTimeMillis()) / 1000);
 		SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
 				.createHierarchySubgraph(nodes);
-
+		System.out.println("zeit vergangen (simpleDirectedGraph):" + -(time - System.currentTimeMillis())/1000);
 		Object parent = graph.getDefaultParent();
 
 		graph.getModel().beginUpdate();
@@ -132,6 +135,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 				graph.updateCellSize(vertex);
 				((mxCell) vertex).setConnectable(false);
 			}
+			System.out.println("zeit vergangen(vertexes):" + -(time - System.currentTimeMillis())/1000);
 			// add edges
 			for (DefaultEdge edge : edgegraph.edgeSet()) {
 				Set<GraphClass> source = edgegraph.getEdgeSource(edge);
@@ -141,28 +145,38 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 				graph.insertEdge(parent, null, null, map.get(source),
 						map.get(target));
 			}
+			System.out.println("zeit vergangen(edges):" + -(time - System.currentTimeMillis())/1000);
+			//make Layout
 			layout.execute(parent);
+			System.out.println("zeit vergangen (layout):" + -(time - System.currentTimeMillis())/1000);
+			//make edges look nice
 			if (drawUnproper) {
 				setProperness();
 			}
+			System.out.println("zeit vergangen(proper):" + -(time - System.currentTimeMillis())/1000);
+			//make nodes colorful
+			if (problem != null) {
+				setComplexityColors();
+				
+			} else {
+				// make all cells white
+				graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
+				// the color white understandable for mxGraph
+						mxHtmlColor.getHexColorString(COLOR_UNKNOWN),
+						// get all cells
+						graph.getChildCells(parent));
+			}
+			System.out.println("zeit vergangen(color):" + -(time - System.currentTimeMillis())/1000);
 		} finally {
 			graph.getModel().endUpdate();
 			graph.setCellsResizable(false);
+			System.out.println("zeit vergangen(drawing done):" + -(time - System.currentTimeMillis())/1000);
 		}
-		if (problem != null) {
-			setComplexityColors();
-		} else {
-			// make all cells white
-			graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
-			// the color white understandable for mxGraph
-					mxHtmlColor.getHexColorString(COLOR_UNKNOWN),
-					// get all cells
-					graph.getChildCells(parent));
-		}
-		mxGraphComponent graphComponent = new mxGraphComponent(graph);
-
-		this.parent.drawingPane = graphComponent;
-		((mxGraphComponent) this.parent.drawingPane).refresh();
+//unnecessary
+//		mxGraphComponent graphComponent = new mxGraphComponent(graph);
+//
+//		this.parent.drawingPane = graphComponent;
+//		((mxGraphComponent) this.parent.drawingPane).refresh();
 	}
 
 	/**
@@ -227,15 +241,15 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 						.getValue());
 				if (gcs.getLabel() != null) {
 					gcs.setLabel(null);
-					//graph.getModel().setValue(cell, gcs);
+					// graph.getModel().setValue(cell, gcs);
 
 				}
 				graph.updateCellSize(cell, true);
 			}
 
 		} finally {
-			//graph.refresh();
-			
+			// graph.refresh();
+
 			layout.run(graph.getChildCells(graph.getDefaultParent()));
 			graph.getModel().endUpdate();
 			graph.setCellsResizable(false);
@@ -288,8 +302,8 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 		try {
 			setProperness();
 		} finally {
-			graph.getModel().endUpdate();
 			((mxGraphComponent) parent.drawingPane).refresh();
+			graph.getModel().endUpdate();
 		}
 	}
 
@@ -443,12 +457,17 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 
 	}
 
+	/**
+	 * reworked
+	 * @author leo
+	 * @param cell
+	 */
 	public void markOnly(mxCell cell) {
 		graph.getSelectionModel().setCell(cell);
 	}
 
 	/**
-	 * like in the mxGraphComponent
+	 * like in the mxGraphComponent does not work :/
 	 * 
 	 * @param cell
 	 * @author leo

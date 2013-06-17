@@ -34,7 +34,13 @@ import teo.isgci.util.IntFunction;
 public class GraphCanvas<V,E> extends JPanel
         implements MouseListener, MouseMotionListener {
 
-    public static final int CANVASWIDTH = 400,          // Initial canvas size
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5191757112503118639L;
+
+	public static final int CANVASWIDTH = 400,          // Initial canvas size
                             CANVASHEIGHT = 300;
 
     protected Component parent;
