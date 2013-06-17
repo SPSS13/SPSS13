@@ -26,8 +26,8 @@
 \vspace*{5cm} 
 \begin{center}
 {\huge Software Requirements Specification}\\
-{\large Version 1.2}\\
-{\large 07. Juni 2013}\\
+{\large Version 1.3}\\
+{\large 17. Juni 2013}\\
 \end{center}
 
 \begin{center}
@@ -73,6 +73,7 @@
    &  &  Kontextmenü komplett überarbeitet \\\hline 
     &  &  Selection (Menü-Bar-Parent) ergänzt \\\hline
      &  &  Sidebar hinzugefügt (Mockup) \\\hline
+ 1.3& 17.06.2013 & Spezifische Anforderungen: Kanten-Highlighting, Style  \\\hline
  
  
  
@@ -122,7 +123,7 @@
 	        \item[Menu-Bar-Parent] Bezeichnet einen Reiter in der oberen Navigationsbar.
 	        \item[Menu-Bar-Child] Bezeichnet ein Item unterhalb des Reiters in der Menu-Bar.
 	        \end{itemize}
-	        
+	        \newpage
   	\subsection{Verweise auf sonstige Quellen} % / References} %1.4
   	{
           
@@ -170,7 +171,7 @@
 \item Das System soll die Möglichkeit bieten, nach Relationen zwischen Graphklassen zu suchen.
 \item Das System soll die Möglichkeit bieten, zu einem Graph-Problem die entsprechenden Laufzeitklassen zu visualisieren.
 \item Das System soll die Möglichkeit bieten, Graph-Probleme im erzeugten Graphen anzuzeigen.
-\item Das System soll einen Hyper-Link zu "small graphs" besitzen.
+\item Das System soll einen Hyper-Link zu "`small graphs"' besitzen.
 \item Das System soll einen Hyper-Link zur Hilfe Website von ISGCI besitzen.
 \item Das System soll eine About Funktion besitzen, welche Versions-, Entwickler- und Software-Informationen enthält.
 \item Das System soll die Möglichkeit bieten, einen Knoten im erzeugten Graphen zu markieren.
@@ -178,10 +179,9 @@
 \item Das System soll die Möglichkeit bieten, über ein Kontextmenü zu einer Graphklasse im erzeugten Graphen weitere Informationen zu dieser zu erhalten.
 \item Das System soll die Möglichkeit bieten, im erzeugten Graphen zu zoomen.
 \item Das System soll, wenn ein Graph gezeichnet wird, die für die Zeichnung ausgewählte Graphklasse im Bild zentriert darstellen.
-\item Das System soll die Möglichkeit bieten, durch das Gedrückthalten der linken Maustaste und Ziehen den Bildausschnitt zu verschieben.
+\item Das System soll die Möglichkeit bieten, durch das Gedrückt-halten der linken Maustaste und Ziehen den Bildausschnitt zu verschieben.
 \item Das System soll Funktionen beinhalten, mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der gewählten Graphklasse ein-/ausblenden kann. Dies soll auch über ein Kontextmenü möglich sein.
-
-
+\item Das System soll die bei Selektion eines Knoten alle abgehenden Kanten hervorheben können (indem die Breite der Linien erhöht wird).
 \end{enumerate}
      
     \subsection{Benutzermerkmale} % (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics} %2.3
@@ -198,7 +198,7 @@
 	Die Software wird nach Umsetzung auf jedem System ausführbar sein, welches die angegebenen Voraussetzungen erfüllt (Java 1.6 +).\\
 	Die Software wird als Open-Source-Project %Englisch nötig?
 gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes stattfindet, in englischer Sprache formuliert, sodass unsere Implementation zur weiteren Nutzung/Forschung beitragen kann. \\
-	Des weiteren wird eine Internetverbindung vorrausgesetzt um das ISGCI zu starten. Die Verwendung ist dann ober ohne Internetverbindung möglich.
+	Des weiteren wird eine Internetverbindung vorausgesetzt um das ISGCI zu starten. Die Verwendung ist dann ober ohne Internetverbindung möglich.
 	%\{zeitliche Einschränkungen (Enddatum der Abgabe), Plattformen, Version, vorgegebene Bibliotheken, Implementationsaufwand, kundenorientiert!!!\}
 %	\subsection{Annahmen und Abhängigkeiten (nicht Realisierbares und auf spätere Versionen verschobene Eigenschaften) / Assumptions and dependencies} %2.5 
 %	\{Brain-Storming :-)\}
@@ -212,7 +212,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 
 \vspace*{1cm}
 \hspace*{-0.8cm}
-\begin{tabular}{|c|p{5cm}|p{10cm}|}
+\begin{tabular}{|c|p{5cm}|p{8cm}|}
 \hline 
  & Name & Beschreibung \\ 
 \hline 
@@ -254,7 +254,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline
 \end{tabular}
 \vspace*{1cm}
-\begin{tabular}{|c|p{5cm}|p{10cm}|}
+\begin{tabular}{|c|p{5cm}|p{8cm}|}
 \hline 
 19 & Selection (Menu-Bar-Parent) & Es soll einen neuen Reiter in der Menu-Bar geben, der alle Funktionen des Kontextmenüs, außer 12 Change Name, für einen ausgewählten Knoten zur Verfügung stellt (Funktionen 10,11,13-18). Wenn kein Knoten ausgewählt ist, werden alle Child-Items grau dargestellt und besitzten keine Funktionalität.  \\
 \hline
@@ -267,6 +267,10 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 21 & Sidebar - Selection:Inclusions & In der Selection:Inclusions werden Informationen über die Inklusionen der ausgewählten Graphklasse angezeigt. \\
 \hline
 21 & Sidebar - Selection:Problems & In der Selection:Problems werden die Probleme der ausgewählten Graphklasse angezeigt. \\
+\hline
+22 & Style & Die Graph-Klassen sollen im neuen ISGCI als Rechtecke mit abgerundeten Ecken dargestellt werden, anstatt wie bisher als Ellipsen. Knotenrahmen, sowie die Textfarbe ist Schwarz.\\
+\hline
+23 & Kanten-Highlighting & Um in großen Graphen besser die Zusammenhänge erkennen zu können werden bei Überfahren eines Knotens mit der Maus alle, in Relation stehenden Kanten fett hervorgehoben. Dazu wird die Kantenstärke erhöht.\\
 \hline
 \end{tabular} \newpage
 
@@ -295,7 +299,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 	\label{fig:figure1}
 \end{figure}
 \newpage
-\hspace*{10.7cm} Abb. 1
+%\hspace*{10.7cm} Abb. 1
 
 	
 	\subsection{Nicht-funktionale Anforderungen} %3.2     
