@@ -19,7 +19,11 @@ import javax.swing.*;
 import teo.isgci.db.Algo;
 
 public class NamingDialog extends JDialog implements ActionListener {
-    protected ISGCIMainFrame parent;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 60610861816667767L;
+	protected ISGCIMainFrame parent;
     protected ButtonGroup group;
     protected JRadioButton basicBox, derivedBox, forbiddenBox;
     protected JButton okButton, cancelButton;
