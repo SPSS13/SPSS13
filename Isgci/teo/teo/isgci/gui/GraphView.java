@@ -10,26 +10,22 @@
 
 package teo.isgci.gui;
 
-import java.awt.Component;
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.*;
-import javax.swing.*;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import org.xml.sax.SAXException;
-import org.jgrapht.graph.SimpleDirectedGraph;
+
 import org.jgrapht.VertexFactory;
-import teo.isgci.db.DataSet;
-import teo.isgci.db.Algo;
-import teo.isgci.layout.*;
-import teo.isgci.xml.GraphMLWriter;
+import org.jgrapht.graph.SimpleDirectedGraph;
+import org.xml.sax.SAXException;
+
 import teo.isgci.util.IntFunction;
+import teo.isgci.xml.GraphMLWriter;
 
 /**
  * Display a graph in a GraphCanvas.
@@ -38,7 +34,7 @@ public class GraphView<V,E> {
     /** The containing component (only GraphCanvas tested) */
     protected Component parent;
     protected SimpleDirectedGraph<V,E> graph;
-    protected HierarchyLayout<V,E> layouter;
+    //protected HierarchyLayout<V,E> layouter;
     protected LatexGraphics latexgraphics;
     protected boolean drawUnproper;
     /** NodeViews */
@@ -67,7 +63,7 @@ public class GraphView<V,E> {
         markedView = null;
 
         graph = g;
-        layouter = new HierarchyLayout<V,E>(g, vertexFactory, widthFunc);
+//        layouter = new HierarchyLayout<V,E>(g, vertexFactory, widthFunc);
 
         // Create the NodeViews; EdgeView are created when laying out.
         views = new ArrayList<NodeView<V,E> >();
@@ -109,9 +105,9 @@ public class GraphView<V,E> {
     /**
      * Return true if the given node is virtual.
      */
-    public boolean isVirtual(V node) {
-        return layouter.getGDI(node).virt;
-    }
+//    public boolean isVirtual(V node) {
+//        return layouter.getGDI(node).virt;
+//    }
 
 
     /**
@@ -125,45 +121,45 @@ public class GraphView<V,E> {
     /**
      * Return the view for the given node.
      */
-    public NodeView<V,E> getView(V node) {
-        for (NodeView v : views)
-            if (v.getNode() == node)
-                return v;
-        for (View v : eViews)
-            if (v instanceof NodeView  &&  ((NodeView) v).getNode() == node)
-                return (NodeView<V,E>) v;
-        return null;
-    }
+//    public NodeView<V,E> getView(V node) {
+//        for (NodeView v : views)
+//            if (v.getNode() == node)
+//                return v;
+//        for (View v : eViews)
+//            if (v instanceof NodeView  &&  ((NodeView) v).getNode() == node)
+//                return (NodeView<V,E>) v;
+//        return null;
+//    }
 
 
-    public void layout() {
-        layouter.layoutGraph();
-        eViews = new ArrayList<View<V,E> >();
-
-        // Create the EdgeViews
-        for (E e : graph.edgeSet()) {
-            if (!isVirtual(graph.getEdgeSource(e))) {
-                EdgeView<V,E> v = new EdgeView<V,E>(this, e);
-                if (parent instanceof GraphCanvas)
-                    ((GraphCanvas) parent).setProperness(v);
-                eViews.add(v);
-            }
-        }
-
-        // Move the NodeViews to the proper position
-        for (V n : graph.vertexSet()) {
-            GraphDrawInfo gdi = layouter.getGDI(n);
-            NodeView v = null;
-            if (gdi.virt) {
-                v = new VirtualNodeView<V,E>(this, n);
-                eViews.add(v);
-            } else
-                v = getView(n);
-            v.setCenter(gdi.xCoord, gdi.yCoord);
-        }
-
-        updateBounds();
-    }
+//    public void layout() {
+//        layouter.layoutGraph();
+//        eViews = new ArrayList<View<V,E> >();
+//
+//        // Create the EdgeViews
+//        for (E e : graph.edgeSet()) {
+//            if (!isVirtual(graph.getEdgeSource(e))) {
+//                EdgeView<V,E> v = new EdgeView<V,E>(this, e);
+//                if (parent instanceof GraphCanvas)
+//                    ((GraphCanvas) parent).setProperness(v);
+//                eViews.add(v);
+//            }
+//        }
+//
+//        // Move the NodeViews to the proper position
+//        for (V n : graph.vertexSet()) {
+//            GraphDrawInfo gdi = layouter.getGDI(n);
+//            NodeView v = null;
+//            if (gdi.virt) {
+//                v = new VirtualNodeView<V,E>(this, n);
+//                eViews.add(v);
+//            } else
+//                v = getView(n);
+//            v.setCenter(gdi.xCoord, gdi.yCoord);
+//        }
+//
+//        updateBounds();
+//    }
 
 
     public void paint(Graphics g) {
@@ -396,15 +392,16 @@ public class GraphView<V,E> {
 
     /**
      * Writes this to w.
+     * this does not work any more
      */
     public void write(GraphMLWriter w) throws SAXException {
-        int i;
-
-        for (View v : views)
-            v.write(w);
-        for (View v : eViews)
-            if (v instanceof EdgeView)
-                v.write(w);
+//        int i;
+//
+//        for (View v : views)
+//            v.write(w);
+//        for (View v : eViews)
+//            if (v instanceof EdgeView)
+//                v.write(w);
     }
 }
 

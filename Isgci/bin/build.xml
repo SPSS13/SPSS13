@@ -100,7 +100,7 @@
    <mkdir dir="${web.keys.dir}"/>
    <mkdir dir="${web.images.dir}"/>
    <mkdir dir="${web.maps.dir}"/>
-   <exec executable="rm">
+   <!--<exec executable="rm">
       <arg value="-f"/>
       <arg value="${web.classes.dir}/images"/>
    </exec>
@@ -108,7 +108,7 @@
       <arg value="-s"/>
       <arg value="../images"/>
       <arg value="${web.classes.dir}/images"/>
-   </exec>
+   </exec>-->
 </target>
 
 

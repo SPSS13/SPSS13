@@ -22,6 +22,9 @@ import java.awt.Insets;
 import java.awt.Container;
 import java.awt.event.*;
 import javax.swing.*;
+
+import com.mxgraph.model.mxCell;
+
 import java.util.HashSet;
 import java.util.Collection;
 
@@ -135,6 +138,9 @@ public class GraphClassSelectionDialog extends JDialog
 
     /**
      * Select the given node.
+     * @author leo
+     * @date 14.06
+     * @annotation make it print the label of den drawn node as if the naming preference does not apply, made new method setNodeName() for better access
      */
     public void select(GraphClass node) {
         classesList.setSelectedValue(node, true);
@@ -148,14 +154,9 @@ public class GraphClassSelectionDialog extends JDialog
             Cursor oldcursor = parent.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             parent.graphCanvas.drawHierarchy(getNodes());
-            
-            for (Object o : classesList.getSelectedValues()) {
-                GraphClass gc = (GraphClass) o;
-                NodeView v = parent.graphCanvas.findNode(gc);
-                if (v != null)
-                    v.setNameAndLabel(gc.toString());
-            }
-            parent.graphCanvas.updateBounds();
+            //new method needs testing
+            parent.graphCanvas.setNodeName(classesList);
+            //parent.graphCanvas.updateBounds();
             
             setCursor(oldcursor);
             closeDialog();
