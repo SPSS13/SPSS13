@@ -68,13 +68,14 @@
  1.1&23.05.2013& \textbf{Änderungen nach Meeting} \\\hline
    & & Formulierungen \\\hline
  1.2& 07.06.2013 & \textbf{SRS den Aktuellen Mockups anpassen} \\\hline
- & 07.06.2013 &  Einschränkungen ergänzt durch: ISGCI benötigt Internet  \\\hline
-  & 07.06.2013 &  Funktionale Anforderungen ergänzt durch:  \\\hline
+ &  &  Einschränkungen ergänzt durch: ISGCI benötigt Internet  \\\hline
+  &  &  Funktionale Anforderungen ergänzt durch:  \\\hline
    &  &  Kontextmenü komplett überarbeitet \\\hline 
     &  &  Selection (Menü-Bar-Parent) ergänzt \\\hline
      &  &  Sidebar hinzugefügt (Mockup) \\\hline
  1.3& 17.06.2013 & Spezifische Anforderungen: Kanten-Highlighting, Style  \\\hline
- 
+ & 21.06.2013 & Produktfunkion 21: Knoten-Namen bzgl. Benutzerinteraktion \\\hline
+ &  & Use-Case Diagramme Update \\\hline
  
  
 \end{tabular}\\
@@ -122,6 +123,7 @@
 	        \item[Click\&Drag] Bezeichnet eine Funktion, welche das Greifen und Ziehen von Graphelementen beinhaltet, welche den entsprechenden Graphen manipulieren können.
 	        \item[Menu-Bar-Parent] Bezeichnet einen Reiter in der oberen Navigationsbar.
 	        \item[Menu-Bar-Child] Bezeichnet ein Item unterhalb des Reiters in der Menu-Bar.
+	        \item[Naming Preference] Jeder Knoten besitzt eine geordnete Liste von äquivalenten Namen der jeweiligen Graph-Klasse.
 	        \end{itemize}
 	        \newpage
   	\subsection{Verweise auf sonstige Quellen} % / References} %1.4
@@ -182,6 +184,7 @@
 \item Das System soll die Möglichkeit bieten, durch das Gedrückt-halten der linken Maustaste und Ziehen den Bildausschnitt zu verschieben.
 \item Das System soll Funktionen beinhalten, mithilfe derer man Nachbarknoten beziehungsweise Super- und Subklassen der gewählten Graphklasse ein-/ausblenden kann. Dies soll auch über ein Kontextmenü möglich sein.
 \item Das System soll die bei Selektion eines Knoten alle abgehenden Kanten hervorheben können (indem die Breite der Linien erhöht wird).
+\item Lässt sich ein Benutzer einen Knoten (ggf. mit Super-/Subklassen etc.) zeichnen, so soll dieser auch mit dem, vom Benutzer ausgewählten Namen gezeichnet werden, und nicht wie sonst üblich nach der \textit{Naming-Preference}.
 \end{enumerate}
      
     \subsection{Benutzermerkmale} % (Informationen zu erwarteten Nutzern, z.B. Bildung, Erfahrung, Sachkenntnis) / User characteristics} %2.3
@@ -278,7 +281,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 	\begin{center}
 		\includegraphics[width=13cm]{Menueoptionen.PNG}\\
 	\end{center}
-	\caption{Dieses Usecase dient der Veranschaulichung der Interaktionen eines Users mit dem System. Hauptsächlich werden in diesem Usecase alle Interaktionen mit der oberen Menü-Bar dargestellt.}
+	\caption{Dieses Usecase dient der Veranschaulichung der Interaktionen eines Users mit dem System. Hauptsächlich werden in diesem Usecase alle neuen Interaktions-Möglichkeiten mit der oberen Menü-Bar dargestellt.}
 	\label{fig:figure1}
 \end{figure}
 \newpage
@@ -286,7 +289,7 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 	\begin{center}
 		\includegraphics[width=13cm]{Graphmanipulation.PNG}\\
 	\end{center}
-	\caption{Dieses Usecase zeigt, wie ein Benutzer mit einem Graphen interagieren kann und ihn manipulieren. Dazu gehören Funktionen wie Zoom, Knoten verschieben, Bildausschnitt Verschieben und Tooltips anzeigen.}
+	\caption{Dieses Usecase zeigt, wie ein Benutzer mit einem Graphen interagieren, und ihn manipuliere kann. Dazu gehören Funktionen wie Zoom, Knoten verschieben, Bildausschnitt Verschieben und Tooltips anzeigen.}
 	\label{fig:figure1}
 \end{figure}
 
