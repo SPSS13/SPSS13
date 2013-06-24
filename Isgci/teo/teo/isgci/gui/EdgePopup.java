@@ -57,31 +57,13 @@ public class EdgePopup extends JPopupMenu implements ActionListener {
         Object source = event.getSource();
         if (source == infoItem) {
             JDialog d = InclusionResultDialog.newInstance(parent,
-                searchName((mxCell) cell.getSource()),
-                searchName((mxCell) cell.getTarget()));
+                NodePopup.searchName((mxCell) cell.getSource()),
+                NodePopup.searchName((mxCell) cell.getTarget()));
             d.setLocation(50, 50);
             d.pack();
             d.setVisible(true);
         } 
     }
-    
-    //Workaround... Hard to explain
-    private GraphClass searchName(mxCell c){
-		String id = c.getId();
-		if(XsltUtil.latex(id).contains(c.getValue().toString())){
-			for (int i = 1; i < id.length(); i++) {
-				if (id.charAt(i)==',') {
-					if(DataSet.getClass(id.substring(1,i))!=null){
-						return DataSet.getClass(id.substring(1,i));
-					}
-				}
-			}
-			return DataSet.getClass(id.substring(1,id.length()-1));
-		}
-	
-    	return null;
-    }
-    
 }
 
 /* EOF */

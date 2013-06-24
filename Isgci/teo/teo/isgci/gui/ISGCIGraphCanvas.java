@@ -12,12 +12,14 @@ package teo.isgci.gui;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,11 +30,14 @@ import teo.XsltUtil;
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.BFSWalker;
 import teo.isgci.grapht.GAlg;
 import teo.isgci.grapht.ISGCIVertexFactory;
 import teo.isgci.grapht.Inclusion;
+import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
+import teo.isgci.grapht.*;
 
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
@@ -49,7 +54,7 @@ import com.mxgraph.view.mxGraph;
  */
 public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 		implements MouseWheelListener {
-	
+
 	/**
 	 * 
 	 */
@@ -60,6 +65,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	protected Algo.NamePref namingPref;
 	private ISGCIMainFrame parent;
 	private mxGraph graph;
+	private mxCell lastSelected;
 
 	/** Colours for different complexities */
 	public static final Color COLOR_LIN = Color.green;
@@ -69,6 +75,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	public static final Color COLOR_UNKNOWN = Color.white;
 	private HashMap<Set<GraphClass>, Object> map;
 	private mxHierarchicalLayout layout;
+	private Point start;
 
 	public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
 		super(parent, ISGCIMainFrame.latex, new ISGCIVertexFactory(), null);
@@ -118,7 +125,8 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 				+ -(time - System.currentTimeMillis()) / 1000);
 		SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
 				.createHierarchySubgraph(nodes);
-		System.out.println("zeit vergangen (simpleDirectedGraph):" + -(time - System.currentTimeMillis())/1000);
+		System.out.println("zeit vergangen (simpleDirectedGraph):"
+				+ -(time - System.currentTimeMillis()) / 1000);
 		Object parent = graph.getDefaultParent();
 
 		graph.getModel().beginUpdate();
@@ -135,7 +143,8 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 				graph.updateCellSize(vertex);
 				((mxCell) vertex).setConnectable(false);
 			}
-			System.out.println("zeit vergangen(vertexes):" + -(time - System.currentTimeMillis())/1000);
+			System.out.println("zeit vergangen(vertexes):"
+					+ -(time - System.currentTimeMillis()) / 1000);
 			// add edges
 			for (DefaultEdge edge : edgegraph.edgeSet()) {
 				Set<GraphClass> source = edgegraph.getEdgeSource(edge);
@@ -145,19 +154,22 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 				graph.insertEdge(parent, null, null, map.get(source),
 						map.get(target));
 			}
-			System.out.println("zeit vergangen(edges):" + -(time - System.currentTimeMillis())/1000);
-			//make Layout
+			System.out.println("zeit vergangen(edges):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+			// make Layout
 			layout.execute(parent);
-			System.out.println("zeit vergangen (layout):" + -(time - System.currentTimeMillis())/1000);
-			//make edges look nice
+			System.out.println("zeit vergangen (layout):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+			// make edges look nice
 			if (drawUnproper) {
 				setProperness();
 			}
-			System.out.println("zeit vergangen(proper):" + -(time - System.currentTimeMillis())/1000);
-			//make nodes colorful
+			System.out.println("zeit vergangen(proper):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+			// make nodes colorful
 			if (problem != null) {
 				setComplexityColors();
-				
+
 			} else {
 				// make all cells white
 				graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
@@ -166,17 +178,227 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 						// get all cells
 						graph.getChildCells(parent));
 			}
-			System.out.println("zeit vergangen(color):" + -(time - System.currentTimeMillis())/1000);
+			System.out.println("zeit vergangen(color):"
+					+ -(time - System.currentTimeMillis()) / 1000);
 		} finally {
 			graph.getModel().endUpdate();
 			graph.setCellsResizable(false);
-			System.out.println("zeit vergangen(drawing done):" + -(time - System.currentTimeMillis())/1000);
+			System.out.println("zeit vergangen(drawing done):"
+					+ -(time - System.currentTimeMillis()) / 1000);
 		}
-//unnecessary
-//		mxGraphComponent graphComponent = new mxGraphComponent(graph);
-//
-//		this.parent.drawingPane = graphComponent;
-//		((mxGraphComponent) this.parent.drawingPane).refresh();
+		// unnecessary
+		// mxGraphComponent graphComponent = new mxGraphComponent(graph);
+		//
+		// this.parent.drawingPane = graphComponent;
+		// ((mxGraphComponent) this.parent.drawingPane).refresh();
+	}
+
+	/**
+	 * Create a hierarchy subgraph of the given classes and draw it. and Add Sub
+	 * / Superclasses of selected node.
+	 * 
+	 * @author philipp
+	 * @date 22.06 9:30
+	 * @annotation redraw the graph and add subgraph/superclass of the given
+	 *             class
+	 * 
+	 */
+
+	public void drawSuperSub(Collection<GraphClass> nodes) {
+		long time = System.currentTimeMillis();
+
+		SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+				.createHierarchySubgraph(nodes);
+		Object parent = graph.getDefaultParent();
+
+		graph.getModel().beginUpdate();
+		try {
+			graph.setCellsResizable(true);
+			// Add vertices
+			for (Set<GraphClass> gc : edgegraph.vertexSet()) {
+				if (((mxGraphModel) graph.getModel()).getCell(gc.toString()) == null) {
+					GraphClassSet<GraphClass> graphClasses = new GraphClassSet<GraphClass>(
+							gc, this);
+					Object vertex = graph.insertVertex(parent, gc.toString(),
+							graphClasses, 20, 20, 80, 30,
+							"shape=rectangle;fontColor=black");
+					map.put(gc, vertex);
+					graph.updateCellSize(vertex);
+					((mxCell) vertex).setConnectable(false);
+				}
+			}
+			// add edges
+			for (DefaultEdge edge : edgegraph.edgeSet()) {
+				if (((mxGraphModel) graph.getModel()).getCell(edge.toString()) == null) {
+					Set<GraphClass> source = edgegraph.getEdgeSource(edge);
+					// System.out.println(source);
+					Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
+					// System.out.println(target);
+					graph.insertEdge(parent, edge.toString(), null,
+							map.get(source), map.get(target));
+				}
+			}
+			// make Layout
+			layout.execute(parent);
+			// make edges look nice
+			if (drawUnproper) {
+				setProperness();
+			}
+			System.out.println("zeit vergangen(proper):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+			// make nodes colorful
+			if (problem != null) {
+				setComplexityColors();
+
+			} else {
+				// make all cells white
+				graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
+				// the color white understandable for mxGraph
+						mxHtmlColor.getHexColorString(COLOR_UNKNOWN),
+						// get all cells
+						graph.getChildCells(parent));
+			}
+			System.out.println("zeit vergangen(color):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+		} finally {
+			graph.getModel().endUpdate();
+			graph.setCellsResizable(false);
+			System.out.println("zeit vergangen(drawing done):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+		}
+
+	}
+
+	/**
+	 * Create a hierarchy subgraph of the given classes and draw it. and remove
+	 * Sub / Superclasses of selected node.
+	 * 
+	 * @author philipp
+	 * @date 22.06 9:30
+	 * @annotation redraw the graph and remove subgraph/superclass of the given
+	 *             class
+	 * 
+	 */
+
+	public void deleteSuperSub(Collection<GraphClass> nodes) {
+		long time = System.currentTimeMillis();
+
+		SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+				.createHierarchySubgraph(nodes);
+		Object parent = graph.getDefaultParent();
+
+		graph.getModel().beginUpdate();
+		try {
+			graph.setCellsResizable(true);
+			// Delete vertices...
+			ArrayList<Object> toDelete = new ArrayList();
+			for (Set<GraphClass> gc : edgegraph.vertexSet()) {
+				if (((mxGraphModel) graph.getModel()).getCell(gc.toString()) != null
+						&& getSelectedCell() != ((mxGraphModel) graph
+								.getModel()).getCell(gc.toString())) {
+					GraphClassSet<GraphClass> graphClasses = new GraphClassSet<GraphClass>(
+							gc, this);
+					// Object vertex = graph.insertVertex(parent, gc.toString(),
+					// graphClasses, 20, 20, 80, 30,
+					// "shape=rectangle;fontColor=black");
+					Object cell = ((mxGraphModel) graph.getModel()).getCell(gc
+							.toString());
+					toDelete.add(cell);
+					// graph.updateCellSize(vertex);
+					// ((mxCell) vertex).setConnectable(false);
+
+				}
+			}
+			// remove Edges..
+			for (DefaultEdge edge : edgegraph.edgeSet()) {
+				if (((mxGraphModel) graph.getModel()).getCell(edge.toString()) != null
+						&& getSelectedCell() != ((mxGraphModel) graph
+								.getModel()).getCell(edge.toString())) {
+					// Set<GraphClass> source = edgegraph.getEdgeSource(edge);
+					// System.out.println(source);
+					// Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
+					// System.out.println(target);
+					Object cell = ((mxGraphModel) graph.getModel())
+							.getCell(edge.toString());
+					toDelete.add(cell);
+				}
+			}
+			Object[] cells = toDelete.toArray(new Object[0]);
+			graph.removeCells(cells);
+			// make Layout
+			layout.execute(parent);
+			// make edges look nice
+			if (drawUnproper) {
+				setProperness();
+			}
+			System.out.println("zeit vergangen(proper):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+			// make nodes colorful
+			if (problem != null) {
+				setComplexityColors();
+
+			} else {
+				// make all cells white
+				graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
+				// the color white understandable for mxGraph
+						mxHtmlColor.getHexColorString(COLOR_UNKNOWN),
+						// get all cells
+						graph.getChildCells(parent));
+			}
+			System.out.println("zeit vergangen(color):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+		} finally {
+			graph.getModel().endUpdate();
+			graph.setCellsResizable(false);
+			System.out.println("zeit vergangen(drawing done):"
+					+ -(time - System.currentTimeMillis()) / 1000);
+		}
+	}
+
+	/**
+	 * Get the nodes for deleting and adding SuperNodes
+	 * 
+	 * @author philipp
+	 * @date 22.06 9:30
+	 * @annotation includes parts of getNodes from
+	 *             GraphClassSelectionDialog.java (bottom)
+	 * 
+	 */
+
+	protected Collection<GraphClass> getSuperNodes() {
+		final HashSet<GraphClass> result = new HashSet<GraphClass>();
+		GraphClass gc = NodePopup.searchName(getSelectedCell());
+		new RevBFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc, null,
+				GraphWalker.InitCode.DYNAMIC) {
+			public void visit(GraphClass v) {
+				result.add(v);
+				super.visit(v);
+			}
+		}.run();
+		return result;
+	}
+
+	/**
+	 * Get the nodes for adding and Deleting SubNodes
+	 * 
+	 * @author philipp
+	 * @date 22.06 9:30
+	 * @annotation includes parts of getNodes from
+	 *             GraphClassSelectionDialog.java (bottom)
+	 * 
+	 */
+
+	protected Collection<GraphClass> getSubNodes() {
+		final HashSet<GraphClass> result = new HashSet<GraphClass>();
+		GraphClass gc = NodePopup.searchName(getSelectedCell());
+		new BFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc, null,
+				GraphWalker.InitCode.DYNAMIC) {
+			public void visit(GraphClass v) {
+				result.add(v);
+				super.visit(v);
+			}
+		}.run();
+		return result;
 	}
 
 	/**
@@ -459,6 +681,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 
 	/**
 	 * reworked
+	 * 
 	 * @author leo
 	 * @param cell
 	 */
@@ -497,6 +720,64 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	public void registerMouseListener(mxGraphComponent pane) {
 		pane.getGraphControl().addMouseListener(this);
 		pane.getGraphControl().addMouseWheelListener(this);
+		pane.getGraphControl().addMouseMotionListener(this);
+	}
+
+	/**
+	 * few Methods needed for "Show Information" and other Functionality
+	 * 
+	 * @param cell
+	 *            and parent
+	 * @author philipp
+	 * @date 21.06
+	 */
+
+	public void setSelectedCell(mxCell cell) {
+		this.lastSelected = cell;
+	}
+
+	public mxCell getSelectedCell() {
+		return lastSelected;
+	}
+
+	public void setParent(ISGCIMainFrame parent) {
+		this.parent = parent;
+	}
+
+	public ISGCIMainFrame getParent() {
+		return parent;
+	}
+
+	public void mousePressed(MouseEvent event) {
+		start = event.getPoint();
+	}
+
+	public void mouseDragged(MouseEvent event) {
+		if (markIsEmpty()) {
+
+			if (!event.isConsumed() && start != null) {
+				int dx = event.getX() - start.x;
+				int dy = event.getY() - start.y;
+
+				Rectangle r = parent.drawingPane.getViewport().getViewRect();
+
+				int right = r.x + ((dx > 0) ? 0 : r.width) - dx;
+				int bottom = r.y + ((dy > 0) ? 0 : r.height) - dy;
+
+				((mxGraphComponent) parent.drawingPane)
+						.getGraphControl()
+						.scrollRectToVisible(new Rectangle(right, bottom, 0, 0));
+
+				event.consume();
+			}
+
+		}
+		if (!dragInProcess) {
+			markSetShadow(true);
+			dragInProcess = true;
+		}
+		markSetShadowAnchorLocation(event.getPoint());
+		super.repaint();
 	}
 
 	/**
@@ -504,7 +785,24 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	 */
 	protected boolean mousePopup(MouseEvent event) {
 		if (!event.isPopupTrigger()) {
+			event.consume();
+			Object cell = ((mxGraphComponent) parent.drawingPane).getCellAt(
+					event.getX(), event.getY());
+			if (cell != null) {
+				mxCell c = (mxCell) cell;
+				if (!c.isEdge()) {
+					setSelectedCell(c);
+					setParent(parent);
+					System.out
+							.println("Save parent and cell somewhere useful for GraphClassInformation");
+				}
+			}
 			return false;
+
+			/**
+			 * Method for showing a popup menu if a node or an edge is
+			 * rightclicked
+			 */
 		} else {
 			event.consume();
 			Object cell = ((mxGraphComponent) parent.drawingPane).getCellAt(
@@ -553,27 +851,43 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 	// }
 	// }
 
+	/**
+	 * @date 21.06.2013
+	 * @author Matthias
+	 * @annotation Zooming Function by setting values after computing relative
+	 *             to the mouse position for the Scrollbars ==> WORKS!!!
+	 */
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		e.consume();
-		Point p = e.getPoint();
-		Point current = graph.getView().getTranslate().getPoint();
-		System.out.println(current);
-		graph.getView().revalidate();
-		if (e.getWheelRotation() < 0) {
-			graph.getView().scaleAndTranslate(graph.getView().getScale() * 1.1,
-					current.x - Math.abs(p.x) / 10,
-					-Math.abs(current.y + Math.abs(p.y) / 10));
-			System.out.println(graph.getView().getTranslate());
-		} else {
-			// ((mxGraphComponent) parent.drawingPane).zoom(0.9);
-			// graph.getView().setTranslate(new mxPoint((-p.x)/10, (-p.y)/10));
-			graph.getView().scaleAndTranslate(graph.getView().getScale() * 0.9,
-					current.x + Math.abs(p.x) / 10,
-					-Math.abs(current.y + Math.abs(p.y) / 10));
-			System.out.println(graph.getView().getTranslate());
-		}
+		double zoom = ((mxGraphComponent) parent.getContentPane().getComponent(
+				0)).getZoomFactor();
+		int x = e.getX();
+		int y = e.getY();
 
+		Point view = ((mxGraphComponent) parent.getContentPane()
+				.getComponent(0)).getViewport().getViewPosition();
+		int width = parent.drawingPane.getViewport().getWidth();
+		int height = parent.drawingPane.getViewport().getHeight();
+		view = new Point(view.x + width / 2, view.y + height / 2);
+		int dx = view.x - x;
+		int dy = view.y - y;
+
+		if (e.getWheelRotation() < 0) {
+			((mxGraphComponent) parent.getContentPane().getComponent(0))
+					.zoomIn();
+			x = Math.round((float) (zoom * x + dx));
+			y = Math.round((float) (zoom * y + dy));
+			Point p = new Point(x, y);
+			parent.centerCanvas(p);
+		} else {
+			((mxGraphComponent) parent.getContentPane().getComponent(0))
+					.zoomOut();
+			x = Math.round((float) (x / zoom + dx));
+			y = Math.round((float) (y / zoom + dy));
+			Point p = new Point(x, y);
+			parent.centerCanvas(p);
+		}
 	}
 
 }

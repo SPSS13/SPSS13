@@ -13,6 +13,7 @@ package teo.isgci.gui;
 import java.awt.Component;
 import java.awt.event.*;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import javax.swing.*;
 
@@ -32,7 +33,11 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 	 */
 	private static final long serialVersionUID = 2260105093000618855L;
 	ISGCIMainFrame parent;
-	JMenuItem deleteItem, infoItem;
+	private JMenuItem deleteItem, infoItem;
+	private JMenuItem miShowSuperclasses;
+	private JMenuItem miHideSuperclasses;
+	private JMenuItem miShowSubclasses;
+	private JMenuItem miHideSubclasses;
 	JMenu nameItem;
 	// rework
 	mxCell cell;
@@ -47,6 +52,16 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 		// deleteItem = new JMenuItem("Delete");
 		add(infoItem = new JMenuItem("Information"));
 		add(nameItem = new JMenu("Change name"));
+		addSeparator();
+		add(miShowSuperclasses = new JMenuItem("Show superclasses"));
+		add(miHideSuperclasses = new JMenuItem("Hide superclasses"));
+		addSeparator();
+		add(miShowSubclasses = new JMenuItem("Show subclasses"));
+		add(miHideSubclasses = new JMenuItem("Hide sublcasses"));
+		miHideSubclasses.addActionListener(this);
+		miHideSuperclasses.addActionListener(this);
+		miShowSubclasses.addActionListener(this);
+		miShowSuperclasses.addActionListener(this);
 		infoItem.addActionListener(this);
 	}
 
@@ -57,7 +72,6 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		Object source = event.getSource();
 		if (source == infoItem) {
-			System.out.println(searchName(cell));
 			JDialog d = new GraphClassInformationDialog(parent,
 					searchName(cell));
 			d.setLocation(50, 50);
@@ -69,14 +83,23 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 					CHANGENAME.length());
 			graph.getModel().beginUpdate();
 			try {
-				@SuppressWarnings("unchecked")
 				GraphClassSet<GraphClass> graphClassSet = (GraphClassSet<GraphClass>) cell
 						.getValue();
+				Set<GraphClass> sg = graphClassSet.getSet();
 				graphClassSet.setLabel(fullname);
 				graph.updateCellSize(cell);
 			} finally {
 				graph.getModel().endUpdate();
 			}
+		} else if (source == miShowSuperclasses) {
+			parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSuperNodes());
+		} else if (source == miHideSuperclasses) {
+			parent.graphCanvas.deleteSuperSub(parent.graphCanvas
+					.getSuperNodes());
+		} else if (source == miShowSubclasses) {
+			parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSubNodes());
+		} else if (source == miHideSubclasses) {
+			parent.graphCanvas.deleteSuperSub(parent.graphCanvas.getSubNodes());
 		}
 	}
 
@@ -101,39 +124,55 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 		super.show(orig, x, y);
 	}
 
+	
+	/**
+	 * A method for getting all GraphClasses a mxCell contains of.
+	 * @param c the mxCell whose GraphClasses should be returned
+	 * @return A Set of all GraphClasses contained in a mxCell
+	 * @author Fabian Vollmer
+	 * @date 24.06.2013
+	 */
 	private Set<GraphClass> getAllClasses(mxCell c) {
 		Set<GraphClass> result = new HashSet<GraphClass>();
-		int start = 1;
-		String id = c.getId();
-		for (int i = 1; i < id.length(); i++) {
-			if (id.charAt(i) == ',') {
-				if (DataSet.getClass(id.substring(start, i)) != null) {
-					result.add(DataSet.getClass(id.substring(start, i)));
-					start = i + 2;
-				}
-			}
-		}
+		result = ((GraphClassSet) c.getValue()).getSet();
 		return result;
 	}
 
-	// Workaround... Hard to explain
-	private GraphClass searchName(mxCell c) {
-		String id = c.getId();
-		if (XsltUtil.latex(id).contains(c.getValue().toString())) {
-			int start = 1;
-			for (int i = 1; i < id.length(); i++) {
-				if (id.charAt(i) == ',') {
-					if (XsltUtil.latex(id.substring(start, i)).equals(
-							c.getValue().toString())) {
-						return DataSet.getClass(id.substring(start, i));
+	/**
+	 * Searches for the GraphClass represented by the name of a mxCell which is
+	 * a Latex String
+	 * 
+	 * @param c
+	 *            the mxCell that includes the name of the GraphClass that
+	 *            should be searched
+	 * @return the GraphClass represented by the Name
+	 * 
+	 * @author Fabian Vollmer
+	 * @date 24.06.2013
+	 */
+	public static GraphClass searchName(mxCell c) {
+
+		GraphClass result = null;
+		int start = 1;
+		for (int i = 1; i < c.getId().length(); i++) {
+			if (c.getId().charAt(i) == ',' || c.getId().charAt(i) == ']') {
+				if (DataSet.getClass(c.getId().substring(start, i)) != null) {
+					if (XsltUtil.latex(c.getId().substring(start, i)).equals(
+							((GraphClassSet) c.getValue()).getLabel())) {
+						result = DataSet
+								.getClass(c.getId().substring(start, i));
 					}
 					start = i + 2;
 				}
 			}
-			return DataSet.getClass(id.substring(1, id.length() - 1));
 		}
-
-		return null;
+		// Take the first GraphClass of the set because if theres just 1 class
+		// in it the label is null
+		if (((GraphClassSet) c.getValue()).getSet().size() < 2) {
+			result = (GraphClass) ((GraphClassSet) c.getValue()).getSet()
+					.iterator().next();
+		}
+		return result;
 	}
 }
 

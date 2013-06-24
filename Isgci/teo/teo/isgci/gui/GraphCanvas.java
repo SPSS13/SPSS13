@@ -409,9 +409,9 @@ public class GraphCanvas<V,E> extends JPanel
     //-------------------- MouseMotionListener stuff ------------------------
 
     public void mouseDragged(MouseEvent event) {
-        if (markIsEmpty())
+        if (markIsEmpty()){
             return;
-
+        }
         if (!dragInProcess) {
             markSetShadow(true);
             dragInProcess = true;
