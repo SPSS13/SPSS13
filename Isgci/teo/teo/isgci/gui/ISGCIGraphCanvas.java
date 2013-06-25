@@ -137,7 +137,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 GraphClassSet graphClasses = new GraphClassSet(gc, this);
                 Object vertex = graph.insertVertex(parent, gc.toString(),
                         graphClasses, 20, 20, 80, 30,
-                        "shape=rectangle;fontColor=black");
+                        "shape=rectangle;fontColor=black;strokeColor=black");
                 map.put(gc, vertex);
                 graph.updateCellSize(vertex);
                 ((mxCell)vertex).setConnectable(false);
@@ -149,7 +149,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 Set<GraphClass> source = edgegraph.getEdgeSource(edge);
                 Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
                 graph.insertEdge(parent, null, null, map.get(source),
-                        map.get(target));
+                        map.get(target),"strokeColor=black");
             }
             System.out.println("zeit vergangen(edges):"
                     + -(time - System.currentTimeMillis()) / 1000);
@@ -247,7 +247,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                         Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
                         // System.out.println(target);
                         graph.insertEdge(parent, edge.toString(), null,
-                                map.get(source), map.get(target));
+                                map.get(source), map.get(target), "strokeColor=black");
 
                     }
                 }
@@ -311,7 +311,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                     GraphClassSet graphClasses = new GraphClassSet(gc, this);
                     Object vertex = graph.insertVertex(parent, gc.toString(),
                             graphClasses, 20, 20, 80, 30,
-                            "shape=rectangle;fontColor=black");
+                            "shape=rectangle;fontColor=black;strokeColor=black");
                     map.put(gc, vertex);
                     graph.updateCellSize(vertex);
                     ((mxCell)vertex).setConnectable(false);
@@ -325,7 +325,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                     Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
                     // System.out.println(target);
                     graph.insertEdge(parent, edge.toString(), null,
-                            map.get(source), map.get(target));
+                            map.get(source), map.get(target), "strokeColor=black");
                 }
             }
             // make Layout
@@ -668,10 +668,11 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                                     .iterator().next());
                     if (!(Algo.isPathProper(path) || Algo.isPathProper(Algo
                             .makePathProper(path)))) {
-                        ((mxCell)cell).setStyle("startArrow=open");
+                    	//uses color gray for drawing improper inclusions
+                    	graph.setCellStyles("startArrow", "improper", new Object[]{cell});
                     }
                 } else {
-                    ((mxCell)cell).setStyle("startArrow=none");
+                	graph.setCellStyles("startArrow", "none", new Object[]{cell});
                 }
             }
         }
