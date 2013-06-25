@@ -387,13 +387,13 @@ public class ISGCIMainFrame extends JFrame
             export.pack();
             export.setVisible(true);
         } else if (object == miNaming) {
-        	System.out.println("naming");
+//        	System.out.println("naming");
             JDialog d = new NamingDialog(this);
             d.setLocation(50,50);
             d.pack();
             d.setVisible(true);
         } else if (object == miSearching) {
-        	System.out.println("test");
+//        	System.out.println("test");
             JDialog search = new SearchDialog(this);
             search.setLocation(50,50);
             search.setVisible(true);

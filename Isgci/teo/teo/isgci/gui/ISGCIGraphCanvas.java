@@ -469,8 +469,8 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 
     /**
      * Find the NodeView for the given graph class or null if not found shortcut
-     * method to work with NodeViews, should be replaced
-     * i dont know what this is needed for but the lanfmatk wants it
+     * method to work with NodeViews, should be replaced i dont know what this
+     * is needed for but the lanfmatk wants it
      */
     @SuppressWarnings("unchecked")
     // the cast is save
@@ -479,19 +479,51 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     }
 
     /**
-     * Find the cell for the given graph class or null if not found
+     * Find the cell for the given graph class or null if not found assumes that
+     * you search with an HTML label
      * 
      * @author leo
-     * @date 14.06
-     * @annotation should work now
+     * @date 14.06; 25.06.13
+     * @annotation is a shortcut now
      */
     public Object findNode(GraphClass gc, boolean mxCellOrNodeView) {
+        return findNode(gc, mxCellOrNodeView, false);
+    }
+
+    /**
+     * Find the cell for the given graph class or null if not found, true ==
+     * latex label, false == HTML label for comparison
+     * 
+     * @author leo
+     * @date 25.06.13
+     * @annotation should work now
+     */
+    public Object findNode(GraphClass gc, boolean mxCellOrNodeView,
+            boolean latexOrHTML) {
         if (mxCellOrNodeView) {
-            for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
-                Set<GraphClass> set = ((GraphClassSet)((mxCell)cell).getValue())
-                        .getSet();
-                if (set.contains(gc)) {
-                    return (mxCell)cell;
+            if (latexOrHTML) {
+                for (Object cell : graph.getChildVertices(graph
+                        .getDefaultParent())) {
+                    Set<GraphClass> set = ((GraphClassSet)((mxCell)cell)
+                            .getValue()).getSet();
+                    if (set.contains(gc)) {
+                        System.out
+                                .println(((mxCell)cell).getValue().toString());
+                        return (mxCell)cell;
+
+                    }
+                }
+            } else {
+                for (Object cell : graph.getChildVertices(graph
+                        .getDefaultParent())) {
+                    Set<GraphClass> set = ((GraphClassSet)((mxCell)cell)
+                            .getValue()).getSet();
+                    if (set.contains(gc)) {
+                        System.out
+                                .println(((mxCell)cell).getValue().toString());
+                        return (mxCell)cell;
+
+                    }
                 }
             }
         } else {
