@@ -31,20 +31,19 @@ import teo.isgci.util.IntFunction;
 /**
  * A canvas that can display a graph.
  */
-public class GraphCanvas<V,E> extends JPanel
-        implements MouseListener, MouseMotionListener {
+public class GraphCanvas<V, E> extends JPanel implements MouseListener,
+        MouseMotionListener {
 
-
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -5191757112503118639L;
+    private static final long serialVersionUID = -5191757112503118639L;
 
-	public static final int CANVASWIDTH = 400,          // Initial canvas size
-                            CANVASHEIGHT = 300;
+    public static final int CANVASWIDTH = 400, // Initial canvas size
+            CANVASHEIGHT = 300;
 
     protected Component parent;
-    protected List<GraphView<V,E> > graphs;
+    protected List<GraphView<V, E>> graphs;
     protected Rectangle bounds;
     protected View markedView;
     protected boolean dragInProcess;
@@ -52,25 +51,22 @@ public class GraphCanvas<V,E> extends JPanel
     protected LatexGraphics latexgraphics;
     protected VertexFactory<V> vertexFactory;
     protected IntFunction<V> widthFunc;
-    
+
     /** Margins around drawing */
     protected static final int LEFTMARGIN = 20;
     protected static final int RIGHTMARGIN = 20;
     protected static final int TOPMARGIN = 20;
     protected static final int BOTTOMMARGIN = 20;
-    protected static final int INTMARGIN = 40;          // Internal
+    protected static final int INTMARGIN = 40; // Internal
 
-
-    public GraphCanvas(Component parent,
-            LatexGraphics latexgraphics,
-            VertexFactory<V> vertexFactory,
-            IntFunction<V> widthFunc) {
+    public GraphCanvas(Component parent, LatexGraphics latexgraphics,
+            VertexFactory<V> vertexFactory, IntFunction<V> widthFunc) {
         super();
         this.parent = parent;
         this.latexgraphics = latexgraphics;
         this.vertexFactory = vertexFactory;
         this.widthFunc = widthFunc;
-        graphs = new ArrayList<GraphView<V,E> >();
+        graphs = new ArrayList<GraphView<V, E>>();
         bounds = new Rectangle();
         markedView = null;
         dragInProcess = false;
@@ -82,7 +78,6 @@ public class GraphCanvas<V,E> extends JPanel
         addMouseMotionListener(this);
     }
 
-
     /**
      * Remove all graphs from the canvas.
      */
@@ -90,60 +85,16 @@ public class GraphCanvas<V,E> extends JPanel
         graphs.clear();
     }
 
-
-    /**
-     * Add the given graph to this canvas.
-     */
-    protected GraphView<V,E> addGraph(SimpleDirectedGraph<V,E> g) {
-        GraphView<V,E> gv = new GraphView<V,E>(this, g,
-                vertexFactory, widthFunc);
-        gv.setLatexGraphics(latexgraphics);
-        gv.setDrawUnproper(drawUnproper);
-        graphs.add(gv);
-        return gv;
-    }
-    
-    
-    /**
-     * Return the NodeView for the given node.
-     */
-//    public NodeView<V,E> getView(V node) {
-//        for (GraphView<V,E> gv : graphs) {
-//            NodeView<V,E> view = gv.getView(node);
-//            if (view != null)
-//                return view;
-//        }
-//        return null;
-//    }
-
-
     public void setDrawUnproper(boolean b) {
-//        drawUnproper = b;
-//        for (GraphView<V,E> gv : graphs)
-//            gv.setDrawUnproper(b);
-//        repaint();
-   }
+        // drawUnproper = b;
+        // for (GraphView<V,E> gv : graphs)
+        // gv.setDrawUnproper(b);
+        // repaint();
+    }
 
     public boolean getDrawUnproper() {
         return drawUnproper;
     }
-
-//    /**
-//     * Bit of a hack to get all ISGCI stuff in one place:
-//     * Set the appropriate properness of the given edgeview.
-//     */
-//    protected void setProperness(EdgeView<V,E> view) {
-//    }
-
-
-    public LatexGraphics getLatexGraphics() {
-        return latexgraphics;
-    }
-
-    public void setWidthFunc(IntFunction<V> widthFunc) {
-        this.widthFunc = widthFunc;
-    }
-
 
     /**
      * Write this to w.
@@ -152,7 +103,6 @@ public class GraphCanvas<V,E> extends JPanel
         for (GraphView gv : graphs)
             gv.write(w);
     }
-
 
     /**
      * Update the bounds of the canvas.
@@ -172,12 +122,11 @@ public class GraphCanvas<V,E> extends JPanel
         getParent().validate();
     }
 
-
     /**
      * Return the preferred size. For sensible results, call layout() first.
      */
     public Dimension getPreferredSize() {
-        Dimension d =  new Dimension(bounds.width + LEFTMARGIN + RIGHTMARGIN,
+        Dimension d = new Dimension(bounds.width + LEFTMARGIN + RIGHTMARGIN,
                 bounds.height + TOPMARGIN + BOTTOMMARGIN);
         if (d.width < CANVASWIDTH)
             d.width = CANVASWIDTH;
@@ -187,12 +136,11 @@ public class GraphCanvas<V,E> extends JPanel
         return d;
     }
 
-    
     /**
      * Return the view containing the given point (mouseclick).
      */
     public View getViewAt(Point p) {
-        for (GraphView<V,E> gv : graphs) {
+        for (GraphView<V, E> gv : graphs) {
             if (gv.getBounds().contains(p)) {
                 Point t = gv.getLocation();
                 t.x = p.x - t.x;
@@ -204,63 +152,60 @@ public class GraphCanvas<V,E> extends JPanel
         }
         return null;
     }
-    
-    
 
-    //--------------------------- Paint stuff ----------------------------
-
+    // --------------------------- Paint stuff ----------------------------
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        /*System.err.println("paint: bounds() "+getBounds());
-        System.err.println("paint: bounds' "+bounds);
-        System.err.println("paint: clip "+g.getClipBounds());
-        parent.printPort();
-        System.err.println("");*/
+        /*
+         * System.err.println("paint: bounds() "+getBounds());
+         * System.err.println("paint: bounds' "+bounds);
+         * System.err.println("paint: clip "+g.getClipBounds());
+         * parent.printPort(); System.err.println("");
+         */
 
-        Rectangle clip = g.getClipBounds();
-        /*g.setColor(Color.RED);
-        g.drawRect(clip.x, clip.y, clip.width-1, clip.height-1);
-        g.setColor(Color.BLACK);*/
+        //Rectangle clip = g.getClipBounds();
+        /*
+         * g.setColor(Color.RED); g.drawRect(clip.x, clip.y, clip.width-1,
+         * clip.height-1); g.setColor(Color.BLACK);
+         */
 
-        dopaint(g);
-        paintShadow(g);
+        //dopaint(g);
+        ///paintShadow(g);
     }
-
 
     /**
      * Paint this entire drawing to g.
      */
     public void forcePaint(Graphics g) {
         g.setClip(bounds);
-        //g.setColor(getForeground());          // Done by ...View.paint
+        // g.setColor(getForeground()); // Done by ...View.paint
         g.setFont(latexgraphics.getFont());
         dopaint(g);
     }
-
 
     /**
      * Do the actual painting in a prepared graphics context.
      */
     protected void dopaint(Graphics g) {
-        for (GraphView<V,E> gv : graphs) {
+        for (GraphView<V, E> gv : graphs) {
             Graphics gg = g.create();
-            /*System.err.print("dopaint translate: ");
-            System.err.print(i);
-            System.err.println(graphs[i].getLocation());*/
+            /*
+             * System.err.print("dopaint translate: "); System.err.print(i);
+             * System.err.println(graphs[i].getLocation());
+             */
             gg.translate(gv.getLocation().x, gv.getLocation().y);
             gv.paint(gg);
             gg.dispose();
         }
     }
 
-
     /**
      * Paint the shadows.
      */
     public void paintShadow(Graphics g) {
         g.setColor(teo.isgci.gui.SColor.brighter(Color.black));
-        for (GraphView<V,E> gv : graphs) {
+        for (GraphView<V, E> gv : graphs) {
             Graphics gg = g.create();
             gg.translate(gv.getLocation().x, gv.getLocation().y);
             gv.paintShadow(gg);
@@ -268,41 +213,43 @@ public class GraphCanvas<V,E> extends JPanel
         }
     }
 
-
-
-    //------------------------- Marked items --------------------------------
-
+    // ------------------------- Marked items --------------------------------
 
     /**
+     * not used any more
+     * 
      * Return true iff no objects are marked.
      */
     public boolean markIsEmpty() {
-        for (GraphView<V,E> gv : graphs)
+        for (GraphView<V, E> gv : graphs)
             if (!gv.markIsEmpty())
                 return false;
         return true;
     }
 
-
     /**
+     * not used any more
+     * 
      * Unmark all objects and update the display.
      */
     public void unmarkAll() {
-        for (GraphView<V,E> gv : graphs)
+        for (GraphView<V, E> gv : graphs)
             gv.unmarkAll();
     }
 
-
     /**
+     * not used any more
+     * 
      * Mark the given object and update the display.
      */
     public void mark(View v) {
-        for (GraphView<V,E> gv : graphs)
+        for (GraphView<V, E> gv : graphs)
             gv.mark(v);
     }
 
-
     /**
+     * not used any more
+     * 
      * Make the given object the only selected one and update the display
      */
     public void markOnly(View v) {
@@ -310,21 +257,24 @@ public class GraphCanvas<V,E> extends JPanel
         mark(v);
     }
 
-
     /**
+     *  not used any more
+     * 
      * Gives all marked objects a shadow.
      */
     public void markSetShadow(boolean b) {
-        for (GraphView<V,E> gv : graphs)
+        for (GraphView<V, E> gv : graphs)
             gv.markSetShadow(b);
     }
 
-
     /**
+     *  
+     * not used any more
+     * 
      * Set the anchor for all marked object at the given point.
      */
     public void markSetShadowAnchor(Point p) {
-        for (GraphView<V,E> gv : graphs) {
+        for (GraphView<V, E> gv : graphs) {
             Point t = gv.getLocation();
             t.x = p.x - t.x;
             t.y = p.y - t.y;
@@ -332,12 +282,14 @@ public class GraphCanvas<V,E> extends JPanel
         }
     }
 
-
     /**
+     * 
+     * not used any more
+     * 
      * Move the shadows of the marked objects to the given point
      */
     public void markSetShadowAnchorLocation(Point p) {
-        for (GraphView<V,E> gv : graphs) {
+        for (GraphView<V, E> gv : graphs) {
             Point t = gv.getLocation();
             t.x = p.x - t.x;
             t.y = p.y - t.y;
@@ -345,46 +297,58 @@ public class GraphCanvas<V,E> extends JPanel
         }
     }
 
-
     /**
+     * 
+     * not used any more
+     * 
      * Move the marked objects to the location of their shadow.
      */
     public void markMoveToShadow() {
-        for (GraphView<V,E> gv : graphs)
+        for (GraphView<V, E> gv : graphs)
             gv.markMoveToShadow();
     }
 
-
+    /**
+     * not used any more
+     */
     public Rectangle getShadowBounds() {
         if (graphs.isEmpty())
             return null;
 
         Rectangle bounds = new Rectangle(0, 0, -1, -1);
-        for (GraphView<V,E> gv : graphs)
+        for (GraphView<V, E> gv : graphs)
             bounds = bounds.union(gv.getBounds());
 
         return bounds;
     }
 
-    //----------------------- MouseListener stuff --------------------------
+    // ----------------------- MouseListener stuff --------------------------
 
     /**
-     * Overload this to react to popups. Return true iff the event is handled.
+     * not used any more 
+     * Overload this to react to popups. Return true iff the
+     * event is handled.
      */
     protected boolean mousePopup(MouseEvent event) {
         return false;
     }
 
+    /**
+     * not used any more
+     */
     public void mouseClicked(MouseEvent event) {
         mousePopup(event);
     }
 
+    /**
+     * not used any more
+     */
     public void mousePressed(MouseEvent event) {
         if (mousePopup(event))
             return;
 
         View v = getViewAt(event.getPoint());
-        if (v != null  &&  v instanceof NodeView) {
+        if (v != null && v instanceof NodeView) {
             markOnly(v);
             markSetShadowAnchor(event.getPoint());
         } else {
@@ -392,6 +356,9 @@ public class GraphCanvas<V,E> extends JPanel
         }
     }
 
+    /**
+     * not used any more
+     */
     public void mouseReleased(MouseEvent event) {
         if (mousePopup(event))
             return;
@@ -403,13 +370,24 @@ public class GraphCanvas<V,E> extends JPanel
         }
     }
 
-    public void mouseEntered(MouseEvent event) {}
-    public void mouseExited(MouseEvent event) {}
+    /**
+     * not used any more
+     */
+    public void mouseEntered(MouseEvent event) {
+    }
 
-    //-------------------- MouseMotionListener stuff ------------------------
+    /**
+     * not used any more
+     */
+    public void mouseExited(MouseEvent event) {
+    }
 
+    // -------------------- MouseMotionListener stuff ------------------------
+    /**
+     * not used any more
+     */
     public void mouseDragged(MouseEvent event) {
-        if (markIsEmpty()){
+        if (markIsEmpty()) {
             return;
         }
         if (!dragInProcess) {
@@ -420,7 +398,11 @@ public class GraphCanvas<V,E> extends JPanel
         super.repaint();
     }
 
-    public void mouseMoved(MouseEvent e) {}
+    /**
+     * not used any more
+     */
+    public void mouseMoved(MouseEvent e) {
+    }
 
 }
 

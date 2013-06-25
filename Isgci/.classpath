@@ -8,13 +8,14 @@
 	<classpathentry kind="lib" path="lib/saxon.jar"/>
 	<classpathentry kind="lib" path="lib/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/xml-writer.jar"/>
-	<classpathentry kind="lib" path="lib/jgraphx.jar"/>
+	<classpathentry kind="lib" path="lib/jgraphx.jar" sourcepath="/JgraphX"/>
+	<classpathentry kind="lib" path="lib/accordion.jar"/>
+	<classpathentry kind="lib" path="lib/accordiondepen.jar"/>
+	<classpathentry kind="lib" path="lib/accordiondoc.jar"/>
+	<classpathentry kind="lib" path="lib/ant-contrib.jar"/>
+	<classpathentry kind="lib" path="lib/framework.jar"/>
+	<classpathentry kind="lib" path="lib/jsoup.jar"/>
+	<classpathentry kind="lib" path="lib/timingframework.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="D:/Isgci/lib/accordion.jar"/>
-	<classpathentry kind="lib" path="D:/Isgci/lib/accordiondepen.jar"/>
-	<classpathentry kind="lib" path="D:/Isgci/lib/accordiondoc.jar"/>
-	<classpathentry kind="lib" path="D:/Isgci/lib/framework.jar"/>
-	<classpathentry kind="lib" path="D:/Isgci/lib/jsoup.jar"/>
-	<classpathentry kind="lib" path="D:/Isgci/lib/timingframework.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

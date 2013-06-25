@@ -10,40 +10,38 @@
 
 package teo.isgci.gui;
 
-import java.awt.event.*;
-import java.util.HashSet;
-import java.util.Set;
-import javax.swing.*;
-import org.jgrapht.graph.DefaultEdge;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JDialog;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxICell;
-
-import teo.XsltUtil;
-import teo.isgci.db.Algo;
-import teo.isgci.db.DataSet;
-import teo.isgci.gc.GraphClass;
-
 
 public class EdgePopup extends JPopupMenu implements ActionListener {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1056253319637812792L;
     ISGCIMainFrame parent;
     JMenuItem deleteItem, infoItem;
-//    EdgeView<Set<GraphClass>,DefaultEdge> view;
-    
-    //rework
+    // EdgeView<Set<GraphClass>,DefaultEdge> view;
+
+    // rework
     mxCell cell;
 
     public EdgePopup(ISGCIMainFrame parent) {
         super();
         this.parent = parent;
-        //deleteItem = new JMenuItem("Delete");
+        // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
         infoItem.addActionListener(this);
     }
 
-    
     /**
      * reworked for accepting mxICell edges
+     * 
      * @param n
      */
     public void setEdge(mxCell cell) {
@@ -51,18 +49,23 @@ public class EdgePopup extends JPopupMenu implements ActionListener {
     }
 
     /**
-     * reworked for working with mxICells
+     * reworked for working with mxICells FIXME geht nicht auf allen klassen
+     * bsp: 0,3 colorable und claw-free \cup odd anti-hole-free \cup tripartite
      */
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
         if (source == infoItem) {
+            GraphClassSet edgesource = ((GraphClassSet)((mxCell)cell
+                    .getTarget()).getValue());
+            GraphClassSet edgetarget = ((GraphClassSet)((mxCell)cell
+                    .getSource()).getValue());
             JDialog d = InclusionResultDialog.newInstance(parent,
-                NodePopup.searchName((mxCell) cell.getSource()),
-                NodePopup.searchName((mxCell) cell.getTarget()));
+                    edgesource.getLabel(), edgetarget.getLabel());
+
             d.setLocation(50, 50);
             d.pack();
             d.setVisible(true);
-        } 
+        }
     }
 }
 
