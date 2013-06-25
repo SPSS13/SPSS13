@@ -41,6 +41,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private JMenuItem miShowSubclasses;
     private JMenuItem miHideSubclasses;
     private JMenuItem miShowDetails;
+    private JMenuItem miShowNeighbours;
+    
     JMenu nameItem;
     // rework
     mxCell cell;
@@ -63,10 +65,13 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         addSeparator();
         add(miShowSubclasses = new JMenuItem("Show subclasses"));
         add(miHideSubclasses = new JMenuItem("Hide sublcasses"));
+        addSeparator();
+        add(miShowNeighbours = new JMenuItem("Show Neighbours"));
         miHideSubclasses.addActionListener(this);
         miHideSuperclasses.addActionListener(this);
         miShowSubclasses.addActionListener(this);
         miShowSuperclasses.addActionListener(this);
+        miShowNeighbours.addActionListener(this);
         miShowDetails.addActionListener(this);
         infoItem.addActionListener(this);
     }
@@ -118,6 +123,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
             parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSubNodes());
         } else if (source == miHideSubclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas.getSubNodes());
+        } else if (source == miShowNeighbours) {
+        	parent.graphCanvas.drawNeighbours();
         }
     }
 

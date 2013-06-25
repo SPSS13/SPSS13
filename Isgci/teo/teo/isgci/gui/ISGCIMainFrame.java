@@ -34,9 +34,17 @@ import java.awt.Color;
 import org.jgrapht.*;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
+import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
+import com.mxgraph.model.mxCell;
+
+import com.mxgraph.util.mxPoint;
+import com.mxgraph.util.mxUtils;
+import com.mxgraph.shape.mxIMarker;
+import com.mxgraph.shape.mxMarkerRegistry;
 
 import teo.isgci.grapht.*;
 import teo.isgci.xml.GraphMLWriter;
@@ -48,7 +56,7 @@ import java.util.ArrayList;*/
 /** The main frame of the application.
  */
 public class ISGCIMainFrame extends JFrame
-        implements WindowListener, ActionListener, ItemListener {
+        implements WindowListener, ActionListener, ItemListener, MenuListener {
 
     public static final String APPLICATIONNAME = "ISGCI";
 
@@ -75,6 +83,7 @@ public class ISGCIMainFrame extends JFrame
     protected JMenuItem miHideSuperclasses;
     protected JMenuItem miShowSubclasses;
     protected JMenuItem miHideSubclasses;
+    protected JMenu selectionMenu;
     
 
     // This is where the drawing goes.
@@ -113,7 +122,10 @@ public class ISGCIMainFrame extends JFrame
             closeWindow();
         }
 
-
+        // set Color for improper Inclusions
+        addImproperInclColor();
+        
+        
         sidebar = new Accordion();
         sidebar.setVisible(false);
         setJMenuBar(createMenus());
@@ -125,7 +137,9 @@ public class ISGCIMainFrame extends JFrame
         setVisible(true);   
     }
 
-
+    
+    
+    
     /**
      * Write the entire database in GraphML to isgcifull.graphml.
      */
@@ -189,6 +203,8 @@ public class ISGCIMainFrame extends JFrame
         miSmallgraphs.addActionListener(this);
         miHelp.addActionListener(this);
         miAbout.addActionListener(this);
+        //Bind MenuListener for disabling
+        selectionMenu.addMenuListener(this);
         
         
         //
@@ -207,7 +223,7 @@ public class ISGCIMainFrame extends JFrame
      */
     protected JMenuBar createMenus() {
         JMenuBar mainMenuBar = new JMenuBar();
-        JMenu fileMenu, editMenu, viewMenu,  graphMenu, helpMenu, problemsMenu, selectionMenu;
+        JMenu fileMenu, editMenu, viewMenu,  graphMenu, helpMenu, problemsMenu;
         JMenuItem menu;
 
         fileMenu = new JMenu("File");
@@ -282,6 +298,68 @@ public class ISGCIMainFrame extends JFrame
         mainMenuBar.add(helpMenu);
 
         return mainMenuBar;
+    }
+    
+    
+    // Menu handling to disable some menu points if more than one or zero cells
+    // are selected.
+
+    @Override
+    public void menuSelected(MenuEvent e) {
+     if(e.getSource()==selectionMenu){
+      //System.out.println(((mxGraphComponent)drawingPane).getGraph().getSelectionCount());
+      if(((mxGraphComponent)drawingPane).getGraph().getSelectionCount()!=1){
+       //disable all features
+       System.out.println("in");
+       miHideNeighbours.setEnabled(false);
+       miShowInformation.setEnabled(false);
+       miShowDetails.setEnabled(false);
+       miShowNeighbours.setEnabled(false);
+       miHideNeighbours.setEnabled(false);
+       miShowSuperclasses.setEnabled(false);
+       miHideSuperclasses.setEnabled(false);
+       miShowSubclasses.setEnabled(false);
+       miHideSubclasses.setEnabled(false);
+      }else{
+       //Test if the selection is a vertex or an edge
+    	if(((mxCell)((mxGraphComponent)drawingPane).getGraph().getSelectionCell()).isEdge()){
+        //Cell is edge, show only miShowDetails
+        miHideNeighbours.setEnabled(false);
+        miShowInformation.setEnabled(true);
+        miShowDetails.setEnabled(false);
+        miShowNeighbours.setEnabled(false);
+        miHideNeighbours.setEnabled(false);
+        miShowSuperclasses.setEnabled(false);
+        miHideSuperclasses.setEnabled(false);
+        miShowSubclasses.setEnabled(false);
+        miHideSubclasses.setEnabled(false);
+       }else{
+        //Cell is vertex, show all items
+        miHideNeighbours.setEnabled(true);
+        miShowInformation.setEnabled(true);
+        miShowDetails.setEnabled(true);
+        miShowNeighbours.setEnabled(true);
+        miHideNeighbours.setEnabled(true);
+        miShowSuperclasses.setEnabled(true);
+        miHideSuperclasses.setEnabled(true);
+        miShowSubclasses.setEnabled(true);
+        miHideSubclasses.setEnabled(true);
+       }
+      }
+     }
+
+    }
+
+    @Override
+    public void menuDeselected(MenuEvent e) {
+     // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void menuCanceled(MenuEvent e) {
+     // TODO Auto-generated method stub
+
     }
 
 
@@ -492,7 +570,49 @@ public class ISGCIMainFrame extends JFrame
         System.out.println("#####################################removing");
         //drawingPane.removeAll();
     }
-}
 
+    /**
+    * @author Matthias Miller
+    * @date 25.06.2013
+    * @annotation sets the color (grey) for improper inclusion while using mxIMarker of the Library JGraphX
+    */
+
+public void addImproperInclColor(){
+    mxIMarker tmp = new mxIMarker()
+ {
+  public mxPoint paintMarker(mxGraphics2DCanvas canvas,
+    mxCellState state, String type, mxPoint pe, double nx,
+    double ny, double size, boolean source)
+  {
+   Polygon poly = new Polygon();
+   poly.addPoint((int) Math.round(pe.getX()),
+     (int) Math.round(pe.getY()));
+   poly.addPoint((int) Math.round(pe.getX() - nx - ny / 2),
+     (int) Math.round(pe.getY() - ny + nx / 2));
+
+   if (type.equals("improper"))
+   {
+    poly.addPoint((int) Math.round(pe.getX() - nx * 3 / 4),
+      (int) Math.round(pe.getY() - ny * 3 / 4));
+   }
+
+   poly.addPoint((int) Math.round(pe.getX() + ny / 2 - nx),
+     (int) Math.round(pe.getY() - ny - nx / 2));
+
+   if (mxUtils.isTrue(state.getStyle(), (source) ? "startFill" : "endFill", true))
+   {
+    canvas.fillShape(poly);
+   }
+   
+   canvas.getGraphics().setPaint(Color.LIGHT_GRAY);
+   canvas.fillShape(poly);
+   canvas.getGraphics().draw(poly);
+
+   return new mxPoint(-nx, -ny);
+  }
+ };
+       mxMarkerRegistry.registerMarker("improper", tmp);
+   }
+}
 
 /* EOF */
