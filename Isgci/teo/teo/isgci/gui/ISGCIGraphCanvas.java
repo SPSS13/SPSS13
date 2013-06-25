@@ -147,9 +147,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
             // add edges
             for (DefaultEdge edge : edgegraph.edgeSet()) {
                 Set<GraphClass> source = edgegraph.getEdgeSource(edge);
-                // System.out.println(source);
                 Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
-                // System.out.println(target);
                 graph.insertEdge(parent, null, null, map.get(source),
                         map.get(target));
             }
@@ -472,6 +470,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     /**
      * Find the NodeView for the given graph class or null if not found shortcut
      * method to work with NodeViews, should be replaced
+     * i dont know what this is needed for but the lanfmatk wants it
      */
     @SuppressWarnings("unchecked")
     // the cast is save
@@ -489,8 +488,6 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     public Object findNode(GraphClass gc, boolean mxCellOrNodeView) {
         if (mxCellOrNodeView) {
             for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
-                @SuppressWarnings("unchecked")
-                // the cast should be safe
                 Set<GraphClass> set = ((GraphClassSet)((mxCell)cell).getValue())
                         .getSet();
                 if (set.contains(gc)) {
@@ -535,7 +532,6 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
             // safety check
             if (((mxCell)cell).isEdge()) {
                 if (drawUnproper) {
-                    @SuppressWarnings("unchecked")
                     GraphClassSet source = (GraphClassSet)((mxCell)cell)
                             .getSource().getValue();
 

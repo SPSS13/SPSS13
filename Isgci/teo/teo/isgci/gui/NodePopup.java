@@ -97,6 +97,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
                 }
                 //set the label
                 graphClassSet.setLabel(label);
+                //FIXME Layout machen
                 graph.updateCellSize(cell);
             } finally {
                 graph.getModel().endUpdate();
