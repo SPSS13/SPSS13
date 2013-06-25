@@ -8,34 +8,39 @@
  * Email: isgci@graphclasses.org
  */
 
-
 package teo.isgci.gui;
 
-import teo.isgci.gc.GraphClass;
-import teo.isgci.db.DataSet;
-import teo.isgci.grapht.*;
-import java.io.IOException;
-import java.awt.Cursor;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Container;
-import java.awt.event.*;
-import javax.swing.*;
-
-import com.mxgraph.model.mxCell;
-
-import java.util.HashSet;
+import java.awt.Cursor;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
+import java.util.HashSet;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import teo.isgci.db.DataSet;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.BFSWalker;
+import teo.isgci.grapht.GraphWalker;
+import teo.isgci.grapht.Inclusion;
+import teo.isgci.grapht.RevBFSWalker;
 
 /**
  * Display a list of graphclasses and change the drawing according to the
  * selection.
  */
-public class GraphClassSelectionDialog extends JDialog
-        implements ActionListener {
-    
+public class GraphClassSelectionDialog extends JDialog implements
+        ActionListener {
+
     protected ISGCIMainFrame parent;
     protected NodeList classesList;
     protected JCheckBox superCheck, subCheck;
@@ -72,7 +77,7 @@ public class GraphClassSelectionDialog extends JDialog
         c.fill = GridBagConstraints.BOTH;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(5,5,0,5);
+        c.insets = new Insets(5, 5, 0, 5);
         gridbag.setConstraints(search, c);
         contents.add(search);
 
@@ -108,8 +113,8 @@ public class GraphClassSelectionDialog extends JDialog
         removeButton = new JButton("Remove from drawing");
         cancelButton = new JButton("Cancel");
         buttonPanel.add(newButton);
-        //buttonPanel.add(addButton);
-        //buttonPanel.add(removeButton);
+        // buttonPanel.add(addButton);
+        // buttonPanel.add(removeButton);
         buttonPanel.add(cancelButton);
         c.insets = new Insets(5, 0, 5, 0);
         c.fill = GridBagConstraints.BOTH;
@@ -122,7 +127,6 @@ public class GraphClassSelectionDialog extends JDialog
         pack();
         setSize(500, 400);
     }
-
 
     protected void addListeners() {
         newButton.addActionListener(this);
@@ -138,9 +142,12 @@ public class GraphClassSelectionDialog extends JDialog
 
     /**
      * Select the given node.
+     * 
      * @author leo
      * @date 14.06
-     * @annotation make it print the label of den drawn node as if the naming preference does not apply, made new method setNodeName() for better access
+     * @annotation make it print the label of den drawn node as if the naming
+     *             preference does not apply, made new method setNodeName() for
+     *             better access
      */
     public void select(GraphClass node) {
         classesList.setSelectedValue(node, true);
@@ -154,10 +161,10 @@ public class GraphClassSelectionDialog extends JDialog
             Cursor oldcursor = parent.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             parent.graphCanvas.drawHierarchy(getNodes());
-            //new method needs testing
+            // new method needs testing
             parent.graphCanvas.setNodeName(classesList);
-            //parent.graphCanvas.updateBounds();
-            
+            // parent.graphCanvas.updateBounds();
+
             setCursor(oldcursor);
             closeDialog();
         } else if (source == search) {
@@ -165,23 +172,22 @@ public class GraphClassSelectionDialog extends JDialog
         }
 
     }
-    
-    
+
     /**
      * Returns a Collection with the classes (in DataSet.inclGraph) that are
      * selected by the current settings.
      */
     protected Collection<GraphClass> getNodes() {
         final HashSet<GraphClass> result = new HashSet<GraphClass>();
-        boolean doSuper = superCheck.isSelected(),
-                doSub = subCheck.isSelected();
-       
+        boolean doSuper = superCheck.isSelected(), doSub = subCheck
+                .isSelected();
+        // FIXME
         for (Object o : classesList.getSelectedValues()) {
-            GraphClass gc = (GraphClass) o;
+            GraphClass gc = (GraphClass)o;
             result.add(gc);
             if (doSuper) {
-                new RevBFSWalker<GraphClass,Inclusion>( DataSet.inclGraph,
-                        gc, null, GraphWalker.InitCode.DYNAMIC) {
+                new RevBFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc,
+                        null, GraphWalker.InitCode.DYNAMIC) {
                     public void visit(GraphClass v) {
                         result.add(v);
                         super.visit(v);
@@ -189,8 +195,8 @@ public class GraphClassSelectionDialog extends JDialog
                 }.run();
             }
             if (doSub) {
-                new BFSWalker<GraphClass,Inclusion>(DataSet.inclGraph,
-                        gc, null, GraphWalker.InitCode.DYNAMIC) {
+                new BFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc,
+                        null, GraphWalker.InitCode.DYNAMIC) {
                     public void visit(GraphClass v) {
                         result.add(v);
                         super.visit(v);
@@ -200,9 +206,8 @@ public class GraphClassSelectionDialog extends JDialog
         }
 
         return result;
-    }    
+    }
 }
-
 
 /* EOF */
 

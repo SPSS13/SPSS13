@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.net.*;
@@ -62,8 +63,15 @@ public class ISGCIMainFrame extends JFrame
     protected JMenuItem miCut, miCopy, miPaste, miDelete, miSelectAll;
     protected JMenu miOpenProblem, miColourProblem;
     protected JMenuItem miSmallgraphs, miHelp, miAbout;
-    //Selected MenuItems
-    protected JMenuItem miToggleNeighbours;
+  //Selection MenuItems
+    protected JMenuItem miShowInformation;
+    protected JMenuItem miShowDetails;
+    protected JMenuItem miShowNeighbours;
+    protected JMenuItem miHideNeighbours;
+    protected JMenuItem miShowSuperclasses;
+    protected JMenuItem miHideSuperclasses;
+    protected JMenuItem miShowSubclasses;
+    protected JMenuItem miHideSubclasses;
     
 
     // This is where the drawing goes.
@@ -151,7 +159,7 @@ public class ISGCIMainFrame extends JFrame
      * Creates and attaches the necessary eventlisteners.
      */
     protected void registerListeners() {
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(this);
         miNew.addActionListener(this);
         miExport.addActionListener(this);
@@ -162,6 +170,11 @@ public class ISGCIMainFrame extends JFrame
         miSelectGraphClasses.addActionListener(this);
         miCheckInclusion.addActionListener(this);
         miGraphClassInformation.addActionListener(this);
+        miShowSuperclasses.addActionListener(this);
+        miHideSuperclasses.addActionListener(this);
+        miHideSubclasses.addActionListener(this);
+        miShowSubclasses.addActionListener(this);
+        miHideSubclasses.addActionListener(this);
         //miDelete.addActionListener(this);
         //miSelectAll.addActionListener(this);
         //miOpenProblem.addActionListener(this);
@@ -169,6 +182,11 @@ public class ISGCIMainFrame extends JFrame
         miHelp.addActionListener(this);
         miAbout.addActionListener(this);
         
+        
+        //
+        
+        miShowInformation.addActionListener(this);
+        miShowDetails.addActionListener(this);
         //
         graphCanvas.registerMouseListener((mxGraphComponent) drawingPane);
     }
@@ -181,7 +199,7 @@ public class ISGCIMainFrame extends JFrame
      */
     protected JMenuBar createMenus() {
         JMenuBar mainMenuBar = new JMenuBar();
-        JMenu fileMenu, editMenu, viewMenu,  graphMenu, helpMenu, problemsMenu, selectedMenu;
+        JMenu fileMenu, editMenu, viewMenu,  graphMenu, helpMenu, problemsMenu, selectionMenu;
         JMenuItem menu;
 
         fileMenu = new JMenu("File");
@@ -206,10 +224,20 @@ public class ISGCIMainFrame extends JFrame
         mainMenuBar.add(viewMenu);
         
         //Create new Menu to add to the TopMenuBar named Selected
-        selectedMenu = new JMenu("Selected");
+        selectionMenu = new JMenu("Selection");
         // Add MenuItems
-        selectedMenu.add(miToggleNeighbours = new JMenuItem("Toggle Neighbours"));
-        mainMenuBar.add(selectedMenu);
+        selectionMenu.add(miShowInformation = new JMenuItem("Show Information"));
+        selectionMenu.add(miShowDetails = new JMenuItem("Show details"));
+        selectionMenu.addSeparator();
+        selectionMenu.add(miShowNeighbours = new JMenuItem("Show neighbours"));
+        selectionMenu.add(miHideNeighbours = new JMenuItem("Hide neighbours"));
+        selectionMenu.addSeparator();
+        selectionMenu.add(miShowSuperclasses = new JMenuItem("Show superclasses"));
+        selectionMenu.add(miHideSuperclasses = new JMenuItem("Hide superclasses"));
+        selectionMenu.addSeparator();
+        selectionMenu.add(miShowSubclasses = new JMenuItem("Show subclasses"));
+        selectionMenu.add(miHideSubclasses = new JMenuItem("Hide sublcasses"));
+        mainMenuBar.add(selectionMenu);
 
         graphMenu = new JMenu("Graph classes");
         miGraphClassInformation = new JMenuItem("Browse Database");
@@ -233,7 +261,6 @@ public class ISGCIMainFrame extends JFrame
         miColourProblem = new ProblemsMenu(this, "Colour for problem");
         problemsMenu.add(miColourProblem);
         mainMenuBar.add(problemsMenu);
-
 
         helpMenu = new JMenu("Help");
         miSmallgraphs = new JMenuItem("Small graphs");
@@ -267,6 +294,8 @@ public class ISGCIMainFrame extends JFrame
         drawingPane.getViewport().setOpaque(false);
         drawingPane.setOpaque(true);
         drawingPane.setBackground(Color.white);
+        ((mxGraphComponent) drawingPane).setPanning(true);
+        ((mxGraphComponent) drawingPane).setDragEnabled(false);
         return drawingPane;
     }
 
@@ -358,11 +387,13 @@ public class ISGCIMainFrame extends JFrame
             export.pack();
             export.setVisible(true);
         } else if (object == miNaming) {
+//        	System.out.println("naming");
             JDialog d = new NamingDialog(this);
             d.setLocation(50,50);
             d.pack();
             d.setVisible(true);
         } else if (object == miSearching) {
+//        	System.out.println("test");
             JDialog search = new SearchDialog(this);
             search.setLocation(50,50);
             search.setVisible(true);
@@ -384,6 +415,34 @@ public class ISGCIMainFrame extends JFrame
             select.pack();
             select.setSize(500, 400);
             select.setVisible(true);
+        } else if (object == miAbout) {
+            JDialog select = new AboutDialog(this);
+            select.setLocation(50, 50);
+            select.setVisible(true);
+        } else if (object == miHelp) {
+            loader.showDocument("help.html");
+        } else if (object == miSmallgraphs) {
+            loader.showDocument("smallgraphs.html");
+        } else if (event.getActionCommand() == "miOpenProblem") {
+            JDialog open=new OpenProblemDialog(this,
+                    ((JMenuItem) event.getSource()).getText());
+            open.setLocation(50, 50);
+            open.setVisible(true);
+        } else if (object == miShowDetails){
+        	
+        } else if (object == miShowNeighbours){
+        	
+        } else if (object == miHideNeighbours){
+        	
+        	//new
+        } else if (object == miShowSuperclasses){
+            graphCanvas.drawSuperSub(graphCanvas.getSuperNodes());            
+        } else if (object == miHideSuperclasses){
+        	graphCanvas.deleteSuperSub(graphCanvas.getSuperNodes());
+        } else if (object == miShowSubclasses){
+        	graphCanvas.drawSuperSub(graphCanvas.getSubNodes());
+        } else if (object == miHideSubclasses){
+        	graphCanvas.deleteSuperSub(graphCanvas.getSubNodes());
         } else if (object == miAbout) {
             JDialog select = new AboutDialog(this);
             select.setLocation(50, 50);

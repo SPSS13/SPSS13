@@ -71,6 +71,12 @@
    <pathelement location="${jarlib.dir}/getopt.jar"/>
    <pathelement location="${jarlib.dir}/mouse.jar"/>
    <pathelement location="${jarlib.dir}/jgraphx.jar"/>
+   <pathelement location="${jarlib.dir}/jsoup.jar"/>
+   <pathelement location="${jarlib.dir}/accordion.jar"/>
+   <pathelement location="${jarlib.dir}/accordiondepen.jar"/>
+   <pathelement location="${jarlib.dir}/accordiondoc.jar"/>
+   <pathelement location="${jarlib.dir}/framework.jar"/>
+   <pathelement location="${jarlib.dir}/timingframework.jar"/>
    <pathelement location="${jgrapht.jar}"/>
    
 </path>
