@@ -525,6 +525,13 @@ public class ISGCIMainFrame extends JFrame
                     ((JMenuItem) event.getSource()).getText());
             open.setLocation(50, 50);
             open.setVisible(true);
+        } else if (object == miShowInformation){
+        	JDialog d = new GraphClassInformationDialog(graphCanvas.getParent(), 
+        			graphCanvas.nodePopup.searchName(graphCanvas.getSelectedCell()));
+			d.setLocation(50, 50);
+			d.pack();
+			d.setSize(800, 600);
+			d.setVisible(true);
         } else if (object == miShowDetails){
             sidebar.setVisible(true);
             graphCanvas.setSidebarConent();
