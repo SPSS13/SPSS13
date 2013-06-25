@@ -709,29 +709,38 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     }
 
     /**
-     * like in the mxGraphComponent does not work :/
+     * like in the mxGraphComponent does not work :/ ==> Update: WORKS
      * 
      * @param cell
      * @author leo
      * @date 14.06
+     * 
+     * @author Matthias
+     * @date 22.06
+     * 
+     *       Customized for centering the selected Cell, by centering resp. to
+     *       the center of the selected node by calling the centerCanvas()
+     *       Method of the ISGCIMainFrame ==> WORKS, true centering only
+     *       possible, if the Cells are approxmiated to the size of the Window
+     *       in the middle of the Window ==> not really centering if the cells
+     *       are next to the border of the window, but after calling this
+     *       Method, the cell is definitly visible in the window as far as
+     *       possible in the middle of the window
      */
+    
     public void centerNode(mxCell cell) {
+    			mxCellState state = graph.getView().getState(cell);
 
-        // mxCellState state = graph.getView().getState(cell);
-        //
-        // if (state != null) {
-        // mxRectangle bounds = state;
-        //
-        // bounds = (mxRectangle)bounds.clone();
-        //
-        // bounds.setX(bounds.getCenterX() - getWidth() / 2);
-        // bounds.setWidth(getWidth());
-        // bounds.setY(bounds.getCenterY() - getHeight() / 2);
-        // bounds.setHeight(getHeight());
-        //
-        // scrollRectToVisible(bounds.getRectangle());
-        // System.out.println(bounds.getRectangle().toString());
-        // }
+    		  if (state != null) {
+    		   mxRectangle bounds = state;
+
+    		   // bounds = (mxRectangle) bounds.clone();
+
+    		   Point p = new Point((int) bounds.getCenterX(),
+    		     (int) bounds.getCenterY());
+    		   ((ISGCIMainFrame) parent).centerCanvas(p);
+    		}
+    		  setSelectedCell(cell);
     }
 
     // ----------------------- MouseListener stuff --------------------------
@@ -765,6 +774,10 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
      */
 
     public void setSelectedCell(mxCell cell) {
+    	if(lastSelected != null && cell != lastSelected){
+    		   graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1", new Object[]{lastSelected});
+    		  }
+    		     graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3", new Object[]{cell});
         this.lastSelected = cell;
     }
 
