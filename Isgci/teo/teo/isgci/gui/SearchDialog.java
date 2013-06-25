@@ -102,7 +102,7 @@ public class SearchDialog extends JDialog implements ActionListener {
     /**
      * @author leo
      * @date 14.06
-     * @annotation reworked to work with thee mxcanvas
+     * @annotation reworked to work with the mxcanvas
      */
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
@@ -110,7 +110,9 @@ public class SearchDialog extends JDialog implements ActionListener {
             closeDialog();
         } else if (source == searchButton) {
             mxCell cell = (mxCell) parent.graphCanvas.findNode(
-                    classesList.getSelectedNode(), true);
+                    classesList.getSelectedNode(), true, true);
+            System.out.println(cell.getValue().toString());
+            System.out.println(classesList.getSelectedNode());
             parent.graphCanvas.markOnly(cell);
             parent.graphCanvas.centerNode(cell);
             closeDialog();

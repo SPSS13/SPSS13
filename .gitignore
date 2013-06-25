@@ -15,7 +15,7 @@
 *.dmg
 *.gz
 *.iso
-*.jar
+#*.jar
 *.rar
 *.tar
 *.zip
@@ -77,14 +77,14 @@ Thumbs.db
 ######################
 
 # Directories #
-/build/
+#/build/
 /bin/
 target/
 # OS Files #
 .DS_Store
 *.class
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
 *.db
@@ -131,3 +131,7 @@ local.properties
 .cproject
 # PDT-specific
 .buildpath
+
+# jgraph* #
+/JgraphX/
+/JgraphT/

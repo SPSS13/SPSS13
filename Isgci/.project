@@ -3,6 +3,8 @@
 	<name>Isgci</name>
 	<comment></comment>
 	<projects>
+		<project>JgraphT</project>
+		<project>JgraphX</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
