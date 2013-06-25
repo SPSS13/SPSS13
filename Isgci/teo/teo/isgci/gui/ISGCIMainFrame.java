@@ -16,6 +16,9 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -37,7 +40,7 @@ import com.mxgraph.view.mxGraph;
 
 import teo.isgci.grapht.*;
 import teo.isgci.xml.GraphMLWriter;
-
+import com.javaswingcomponents.accordion.JSCAccordion;
 /*import teo.isgci.gc.GraphClass;
 import java.util.ArrayList;*/
 
@@ -57,7 +60,7 @@ public class ISGCIMainFrame extends JFrame
 
     // The menu
     protected JMenuItem miNew, miExport, miExit;
-    protected JMenuItem miNaming, miSearching, miDrawUnproper;
+    protected JMenuItem miSidebar, miNaming, miSearching, miDrawUnproper;
     protected JMenuItem miSelectGraphClasses, miCheckInclusion;
     protected JMenuItem miGraphClassInformation;
     protected JMenuItem miCut, miCopy, miPaste, miDelete, miSelectAll;
@@ -78,7 +81,7 @@ public class ISGCIMainFrame extends JFrame
     //rework
     protected JScrollPane drawingPane;
     public ISGCIGraphCanvas graphCanvas;
-
+    protected final Accordion sidebar;
 
     /** Creates the frame.
      * @param locationURL The path/URL to the applet/application.
@@ -110,14 +113,16 @@ public class ISGCIMainFrame extends JFrame
             closeWindow();
         }
 
-        
 
+        sidebar = new Accordion();
+        sidebar.setVisible(false);
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
+        getContentPane().add("West", sidebar);
         registerListeners();
         setLocation(100, 20);
         this.setSize(500, 400);
-        setVisible(true);
+        setVisible(true);   
     }
 
 
@@ -165,6 +170,7 @@ public class ISGCIMainFrame extends JFrame
         miExport.addActionListener(this);
         miExit.addActionListener(this);
         miNaming.addActionListener(this);
+        miSidebar.addActionListener(this);
         miSearching.addActionListener(this);
         miDrawUnproper.addItemListener(this);
         miSelectGraphClasses.addActionListener(this);
@@ -175,6 +181,8 @@ public class ISGCIMainFrame extends JFrame
         miHideSubclasses.addActionListener(this);
         miShowSubclasses.addActionListener(this);
         miHideSubclasses.addActionListener(this);
+        miShowNeighbours.addActionListener(this);
+       // miHideNeighbours.addActionListener(this);
         //miDelete.addActionListener(this);
         //miSelectAll.addActionListener(this);
         //miOpenProblem.addActionListener(this);
@@ -214,6 +222,7 @@ public class ISGCIMainFrame extends JFrame
         mainMenuBar.add(editMenu);*/
 
         viewMenu = new JMenu("View");
+        viewMenu.add(miSidebar = new JMenuItem("Details visible"));
         viewMenu.add(miSearching = new JMenuItem("Search in drawing..."));
         viewMenu.add(miNaming = new JMenuItem("Naming preference..."));
         viewMenu.add(miDrawUnproper =
@@ -298,6 +307,13 @@ public class ISGCIMainFrame extends JFrame
         ((mxGraphComponent) drawingPane).setDragEnabled(false);
         return drawingPane;
     }
+    
+//    protected JComponent createSidebar() {
+//                final Accordion obj = new Accordion();
+//                obj.setVisible(false);
+//               // obj.setContent("http://www.graphclasses.org/classes/gc_230.html");
+//                return obj;
+//    }
 
 
     private mxGraph setGraphSwitches(mxGraph graph) {
@@ -387,16 +403,19 @@ public class ISGCIMainFrame extends JFrame
             export.pack();
             export.setVisible(true);
         } else if (object == miNaming) {
-//        	System.out.println("naming");
+        	System.out.println("naming");
             JDialog d = new NamingDialog(this);
             d.setLocation(50,50);
             d.pack();
             d.setVisible(true);
         } else if (object == miSearching) {
-//        	System.out.println("test");
+        	System.out.println("test");
             JDialog search = new SearchDialog(this);
             search.setLocation(50,50);
             search.setVisible(true);
+        } else if (object == miSidebar) {
+            sidebar.toggleVisibility();
+            graphCanvas.setSidebarConent();
         } else if (object == miGraphClassInformation) {
             JDialog info = new GraphClassInformationDialog(this);
             info.setLocation(50, 50);
@@ -429,9 +448,10 @@ public class ISGCIMainFrame extends JFrame
             open.setLocation(50, 50);
             open.setVisible(true);
         } else if (object == miShowDetails){
-        	
+            sidebar.setVisible(true);
+            graphCanvas.setSidebarConent();
         } else if (object == miShowNeighbours){
-        	
+        	graphCanvas.drawNeighbours();
         } else if (object == miHideNeighbours){
         	
         	//new

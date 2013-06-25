@@ -190,6 +190,94 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         // ((mxGraphComponent) this.parent.drawingPane).refresh();
     }
 
+    
+    /**
+     * Create the neighbours of the given classes and draw it. and Add Sub
+     * / Superclasses of selected node.
+     * 
+     * @author Rebecca
+     * @date 25.06 17:30
+     * @annotation redraw the graph and add subgraph/superclass of the given
+     *             class, all nodes that are currently on canvas are added to ensure all edges are drawn correctly
+     *             
+     * 
+     */   
+    public void drawNeighbours(){
+        Set<GraphClass> selected = NodePopup.getAllClasses(getSelectedCell());
+        Collection<GraphClass>nodes=getSuperNodes();
+        nodes.addAll(getSubNodes());
+        long time = System.currentTimeMillis();
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+                .createHierarchySubgraph(nodes);
+        Object parent = graph.getDefaultParent();
+
+        graph.getModel().beginUpdate();
+        try {
+            graph.setCellsResizable(true);
+            // Add vertices
+            
+            // add edges
+            for (DefaultEdge edge : edgegraph.edgeSet()) {
+                if (((mxGraphModel)graph.getModel()).getCell(edge.toString()) == null) {      
+                    for (Set<GraphClass> gc : edgegraph.vertexSet()) {
+                        if (((mxGraphModel)graph.getModel()).getCell(gc.toString()) == null) {
+                            if((edgegraph.getEdgeSource(edge) == gc && edgegraph.getEdgeTarget(edge)== selected) || (edgegraph.getEdgeSource(edge) == selected && edgegraph.getEdgeTarget(edge)== gc) ){
+                            GraphClassSet graphClasses = new GraphClassSet(gc, this);
+                            Object vertex = graph.insertVertex(parent, gc.toString(),
+                                    graphClasses, 20, 20, 80, 30,
+                                    "shape=rectangle;fontColor=black");
+                            map.put(gc, vertex);
+                            graph.updateCellSize(vertex);
+                            ((mxCell)vertex).setConnectable(false);
+                            }
+                            
+                        }
+                    }
+                    if(edgegraph.getEdgeSource(edge) == selected || edgegraph.getEdgeTarget(edge) == selected){
+                        
+                        Set<GraphClass> source = edgegraph.getEdgeSource(edge);
+                        // System.out.println(source);
+                        Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
+                        // System.out.println(target);
+                        graph.insertEdge(parent, edge.toString(), null,
+                                map.get(source), map.get(target));
+                    
+                    }
+                }
+   
+            }
+            // make Layout
+            layout.execute(parent);
+            // make edges look nice
+            if (drawUnproper) {
+                setProperness();
+            }
+            System.out.println("zeit vergangen(proper):"
+                    + -(time - System.currentTimeMillis()) / 1000);
+            // make nodes colorful
+            if (problem != null) {
+                setComplexityColors();
+
+            } else {
+                // make all cells white
+                graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
+                // the color white understandable for mxGraph
+                        mxHtmlColor.getHexColorString(COLOR_UNKNOWN),
+                        // get all cells
+                        graph.getChildCells(parent));
+            }
+            System.out.println("zeit vergangen(color):"
+                    + -(time - System.currentTimeMillis()) / 1000);
+        } finally {
+            graph.getModel().endUpdate();
+            graph.setCellsResizable(false);
+            System.out.println("zeit vergangen(drawing done):"
+                    + -(time - System.currentTimeMillis()) / 1000);
+        }
+
+    }
+    
+    
     /**
      * Create a hierarchy subgraph of the given classes and draw it. and Add Sub
      * / Superclasses of selected node.
@@ -203,7 +291,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 
     public void drawSuperSub(Collection<GraphClass> nodes) {
         long time = System.currentTimeMillis();
-
+        nodes.addAll(getClasses());
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
                 .createHierarchySubgraph(nodes);
         Object parent = graph.getDefaultParent();
@@ -278,7 +366,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 
     public void deleteSuperSub(Collection<GraphClass> nodes) {
         long time = System.currentTimeMillis();
-
+        nodes.addAll(getClasses());
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
                 .createHierarchySubgraph(nodes);
         Object parent = graph.getDefaultParent();
@@ -779,10 +867,22 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     		  }
     		     graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3", new Object[]{cell});
         this.lastSelected = cell;
+        setSidebarConent();
     }
 
     public mxCell getSelectedCell() {
         return lastSelected;
+        
+    }
+    
+    public void setSidebarConent() {
+        if(parent.sidebar.isVisible()){
+            if(getSelectedCell() != null){
+                if(parent.sidebar.getContent() != NodePopup.searchName(getSelectedCell()).getID()){
+                    parent.sidebar.setContent(NodePopup.searchName(getSelectedCell()).getID());
+                }
+            }
+        }
     }
 
     public void setParent(ISGCIMainFrame parent) {

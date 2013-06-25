@@ -35,8 +35,12 @@ public class Accordion extends JPanel{
 	JEditorPane thePane2 = new JEditorPane("text/html", " "); 
     JEditorPane thePane3 = new JEditorPane("text/html", " ");                
 
+    HyperlinkListener listener;
+//    HyperlinkListener listener2;
+//    HyperlinkListener listener3;
 
-
+    
+    String actualContent;
 	
 
 	public static void main(String[] args) {
@@ -70,8 +74,21 @@ public class Accordion extends JPanel{
 
 	}
 	
+	public void toggleVisibility(){
+	    if(this.isVisible()){
+	        this.setVisible(false);
+	    }
+	    else{this.setVisible(true);}
+	}
 
-	public void setContent(String url){
+	public String getContent(){
+	    return actualContent;
+	}
+	
+	
+	public void setContent(String u){
+	    String url = "http://www.graphclasses.org/classes/"+u;
+	    actualContent = u;
 		try {
 			String[] text = fetchurl(url);
 			
@@ -90,62 +107,77 @@ public class Accordion extends JPanel{
 	        thePane3.setOpaque(false);
 	        thePane3.setEditable(false);
 //	        thePane3.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
+	       
 	        
 	        
-	        thePane1.addHyperlinkListener(new HyperlinkListener() {
-	            public void hyperlinkUpdate(HyperlinkEvent e) {
-	                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+	        thePane1.removeHyperlinkListener(listener);
+            thePane2.removeHyperlinkListener(listener);
+            thePane3.removeHyperlinkListener(listener);
+//           
+	        
+            listener = new HyperlinkListener() {
+                public void hyperlinkUpdate(HyperlinkEvent e) {
+                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                         System.out.println(e.getURL());
-	                    if (Desktop.isDesktopSupported()) {
-	                        try {
-	                            Desktop.getDesktop().browse(e.getURL().toURI());
-	                        } catch (IOException e1) {
-	                            // TODO Auto-generated catch block
-	                            e1.printStackTrace();
-	                        } catch (URISyntaxException e1) {
-	                            // TODO Auto-generated catch block
-	                            e1.printStackTrace();
-	                        }
-	                    }
-	                }
-	            }
-	        });
-	        thePane2.addHyperlinkListener(new HyperlinkListener() {
-	            public void hyperlinkUpdate(HyperlinkEvent e) {
-	                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                        System.out.println(e.getURL());
-	                    if (Desktop.isDesktopSupported()) {
-	                        try {
-	                            Desktop.getDesktop().browse(e.getURL().toURI());
-	                        } catch (IOException e1) {
-	                            // TODO Auto-generated catch block
-	                            e1.printStackTrace();
-	                        } catch (URISyntaxException e1) {
-	                            // TODO Auto-generated catch block
-	                            e1.printStackTrace();
-	                        }
-	                    }
-	                }
-	            }
-	        });
-	        thePane3.addHyperlinkListener(new HyperlinkListener() {
-	            public void hyperlinkUpdate(HyperlinkEvent e) {
-	                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                        System.out.println(e.getURL());
-	                    if (Desktop.isDesktopSupported()) {
-	                        try {
-	                            Desktop.getDesktop().browse(e.getURL().toURI());
-	                        } catch (IOException e1) {
-	                            // TODO Auto-generated catch block
-	                            e1.printStackTrace();
-	                        } catch (URISyntaxException e1) {
-	                            // TODO Auto-generated catch block
-	                            e1.printStackTrace();
-	                        }
-	                    }
-	                }
-	            }
-	        });
+                        if (Desktop.isDesktopSupported()) {
+                            try {
+                                Desktop.getDesktop().browse(e.getURL().toURI());
+                            } catch (IOException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                            } catch (URISyntaxException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                    
+                }
+            };
+            
+//            listener2 = new HyperlinkListener() {
+//                public void hyperlinkUpdate(HyperlinkEvent e) {
+//                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+//                        System.out.println(e.getURL());
+//                        if (Desktop.isDesktopSupported()) {
+//                            try {
+//                                Desktop.getDesktop().browse(e.getURL().toURI());
+//                            } catch (IOException e1) {
+//                                // TODO Auto-generated catch block
+//                                e1.printStackTrace();
+//                            } catch (URISyntaxException e1) {
+//                                // TODO Auto-generated catch block
+//                                e1.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//            };
+            
+//            listener3 = new HyperlinkListener() {
+//                public void hyperlinkUpdate(HyperlinkEvent e) {
+//                    if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+//                        System.out.println(e.getURL());
+//                        if (Desktop.isDesktopSupported()) {
+//                            try {
+//                                Desktop.getDesktop().browse(e.getURL().toURI());
+//                            } catch (IOException e1) {
+//                                // TODO Auto-generated catch block
+//                                e1.printStackTrace();
+//                            } catch (URISyntaxException e1) {
+//                                // TODO Auto-generated catch block
+//                                e1.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//            };
+            
+           
+            
+            thePane1.addHyperlinkListener(listener);
+            thePane2.addHyperlinkListener(listener);
+            thePane3.addHyperlinkListener(listener);
 			
 			
 			//Achtung Name des Graphen text[0] fehlt noch!!!

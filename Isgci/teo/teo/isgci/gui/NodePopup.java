@@ -40,6 +40,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private JMenuItem miHideSuperclasses;
     private JMenuItem miShowSubclasses;
     private JMenuItem miHideSubclasses;
+    private JMenuItem miShowDetails;
     JMenu nameItem;
     // rework
     mxCell cell;
@@ -53,6 +54,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         this.graph = graph;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
+        add(miShowDetails= new JMenuItem("Show Details"));
+        addSeparator();
         add(nameItem = new JMenu("Change name"));
         addSeparator();
         add(miShowSuperclasses = new JMenuItem("Show superclasses"));
@@ -64,6 +67,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         miHideSuperclasses.addActionListener(this);
         miShowSubclasses.addActionListener(this);
         miShowSuperclasses.addActionListener(this);
+        miShowDetails.addActionListener(this);
         infoItem.addActionListener(this);
     }
 
@@ -102,7 +106,10 @@ public class NodePopup extends JPopupMenu implements ActionListener {
             } finally {
                 graph.getModel().endUpdate();
             }
-        } else if (source == miShowSuperclasses) {
+        }  else if (source == miShowDetails) {
+            parent.sidebar.setVisible(true);
+            parent.graphCanvas.setSidebarConent();  
+        }else if (source == miShowSuperclasses) {
             parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSuperNodes());
         } else if (source == miHideSuperclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas
@@ -144,7 +151,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @author Fabian Vollmer
      * @date 24.06.2013
      */
-    private Set<GraphClass> getAllClasses(mxCell c) {
+    public static Set<GraphClass> getAllClasses(mxCell c) {
         Set<GraphClass> result = new HashSet<GraphClass>();
         result = ((GraphClassSet)c.getValue()).getSet();
         return result;
