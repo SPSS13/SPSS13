@@ -164,14 +164,14 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
          * parent.printPort(); System.err.println("");
          */
 
-        //Rectangle clip = g.getClipBounds();
+        // Rectangle clip = g.getClipBounds();
         /*
          * g.setColor(Color.RED); g.drawRect(clip.x, clip.y, clip.width-1,
          * clip.height-1); g.setColor(Color.BLACK);
          */
 
-        //dopaint(g);
-        ///paintShadow(g);
+        // dopaint(g);
+        // /paintShadow(g);
     }
 
     /**
@@ -258,7 +258,7 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
     }
 
     /**
-     *  not used any more
+     * not used any more
      * 
      * Gives all marked objects a shadow.
      */
@@ -268,7 +268,7 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
     }
 
     /**
-     *  
+     * 
      * not used any more
      * 
      * Set the anchor for all marked object at the given point.
@@ -325,8 +325,7 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
     // ----------------------- MouseListener stuff --------------------------
 
     /**
-     * not used any more 
-     * Overload this to react to popups. Return true iff the
+     * not used any more Overload this to react to popups. Return true iff the
      * event is handled.
      */
     protected boolean mousePopup(MouseEvent event) {

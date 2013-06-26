@@ -29,7 +29,7 @@ import teo.isgci.xml.GraphMLWriter;
 public class ExportDialog extends JDialog implements ActionListener {
 
     /** The card titles (and ids) */
-    protected static final String CARD_FORMAT ="Please choose the file format";
+    protected static final String CARD_FORMAT = "Please choose the file format";
     protected static final String CARD_PS = "Postscript options";
     protected static final String CARD_GML = "GraphML options";
     protected static final String CARD_FILE = "Destination file";
@@ -51,7 +51,7 @@ public class ExportDialog extends JDialog implements ActionListener {
     protected JComboBox papersize;
 
     /* GraphML items */
-    protected JRadioButton gmlPlain, gmlYed, gmlHtml, gmlLatex; 
+    protected JRadioButton gmlPlain, gmlYed, gmlHtml, gmlLatex;
 
     /* Save location items */
     protected JFileChooser file;
@@ -65,9 +65,9 @@ public class ExportDialog extends JDialog implements ActionListener {
         Box buttonBox = new Box(BoxLayout.X_AXIS);
 
         cardPanel = new JPanel();
-        cardPanel.setBorder(new EmptyBorder(new Insets(5, 10, 5, 10))); 
+        cardPanel.setBorder(new EmptyBorder(new Insets(5, 10, 5, 10)));
 
-        cardLayout = new CardLayout(); 
+        cardLayout = new CardLayout();
         cardPanel.setLayout(cardLayout);
 
         backButton = new JButton("< Back");
@@ -81,7 +81,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         buttonPanel.setLayout(new BorderLayout());
         buttonPanel.add(new JSeparator(), BorderLayout.NORTH);
 
-        buttonBox.setBorder(new EmptyBorder(new Insets(5, 10, 5, 10))); 
+        buttonBox.setBorder(new EmptyBorder(new Insets(5, 10, 5, 10)));
         buttonBox.add(backButton);
         buttonBox.add(Box.createHorizontalStrut(10));
         buttonBox.add(nextButton);
@@ -91,12 +91,12 @@ public class ExportDialog extends JDialog implements ActionListener {
 
         title = new JLabel("");
         Font f = title.getFont();
-        title.setFont(f.deriveFont((float) (f.getSize() * 1.2)));
+        title.setFont(f.deriveFont((float)(f.getSize() * 1.2)));
         title.setOpaque(true);
         title.setBackground(Color.darkGray);
         title.setForeground(Color.white);
-        title.setBorder(new EmptyBorder(new Insets(10,10,10,10)));
-        cardPanel.setBorder(new EmptyBorder(new Insets(5,40,5,40)));
+        title.setBorder(new EmptyBorder(new Insets(10, 10, 10, 10)));
+        cardPanel.setBorder(new EmptyBorder(new Insets(5, 40, 5, 40)));
         content.add(title, BorderLayout.NORTH);
         content.add(buttonPanel, BorderLayout.SOUTH);
         content.add(cardPanel, BorderLayout.CENTER);
@@ -109,16 +109,15 @@ public class ExportDialog extends JDialog implements ActionListener {
         showCard(CARD_FORMAT);
     }
 
-
     /**
      * Show the given card and adjust button settings etc. for it.
      */
     protected void showCard(String card) {
         title.setText(card);
         current = card;
-        cardLayout.show(cardPanel,card);
+        cardLayout.show(cardPanel, card);
         backButton.setEnabled(card != CARD_FORMAT);
-        //nextButton.setText(card == CARD_FILE ? "Export" : "Next >");
+        // nextButton.setText(card == CARD_FILE ? "Export" : "Next >");
 
         // Use the JFileChooser buttons instead, to prevent errors when the
         // user clicks Next, but didn't press Return after typing a file name.
@@ -138,29 +137,26 @@ public class ExportDialog extends JDialog implements ActionListener {
         radioPS.setAlignmentX(Component.LEFT_ALIGNMENT);
         formats.add(radioPS);
         box.add(radioPS);
-        box.add(explText(
-            "A Postscript file can be included immediately in e.g. LaTeX\n"+
-            "documents, but it cannot easily be edited."));
+        box.add(explText("A Postscript file can be included immediately in e.g. LaTeX\n"
+                + "documents, but it cannot easily be edited."));
 
         radioSVG = new JRadioButton("Structured Vector Graphics ( .svg)");
         radioSVG.setAlignmentX(Component.LEFT_ALIGNMENT);
         formats.add(radioSVG);
         box.add(radioSVG);
-        box.add(explText(
-            "An SVG file is suitable for editing the diagram, e.g. with\n"+
-            "inkscape (http://www.inkscape.org), but cannot be included\n"+
-            "directly in LaTeX."));
+        box.add(explText("An SVG file is suitable for editing the diagram, e.g. with\n"
+                + "inkscape (http://www.inkscape.org), but cannot be included\n"
+                + "directly in LaTeX."));
 
         radioGML = new JRadioButton("GraphML ( .graphml)");
         radioGML.setAlignmentX(Component.LEFT_ALIGNMENT);
         formats.add(radioGML);
         box.add(radioGML);
-        box.add(explText(
-            "A graphml file contains the structure of the graph and is\n"+
-            "suitable for processing by many graph tools, but does not\n"+
-            "contain layout information and cannot be included directly\n"+
-            "in LaTeX. Editing and laying out can be done with e.g. yEd.\n"+
-            "(http://www.yworks.com)"));
+        box.add(explText("A graphml file contains the structure of the graph and is\n"
+                + "suitable for processing by many graph tools, but does not\n"
+                + "contain layout information and cannot be included directly\n"
+                + "in LaTeX. Editing and laying out can be done with e.g. yEd.\n"
+                + "(http://www.yworks.com)"));
 
         radioPS.setSelected(true);
 
@@ -168,7 +164,6 @@ public class ExportDialog extends JDialog implements ActionListener {
         p.add(box, BorderLayout.CENTER);
         return p;
     }
-
 
     /**
      * Return the card where the user can set Postscript options
@@ -191,7 +186,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         Box box2 = new Box(BoxLayout.X_AXIS);
 
         JLabel label = new JLabel("Paper size:", JLabel.LEFT);
-        label.setBorder(new EmptyBorder(new Insets(0,0,0,10)));
+        label.setBorder(new EmptyBorder(new Insets(0, 0, 0, 10)));
         box2.add(label);
 
         papersize = new JComboBox();
@@ -209,37 +204,34 @@ public class ExportDialog extends JDialog implements ActionListener {
         return p;
     }
 
-
     /**
      * Return the card where the user can set GraphML options
      */
     private Component cardGML() {
         ButtonGroup b;
         Box box = new Box(BoxLayout.Y_AXIS);
-        
+
         b = new ButtonGroup();
 
         gmlPlain = new JRadioButton("Plain graphml");
         gmlPlain.addActionListener(this);
         b.add(gmlPlain);
         box.add(gmlPlain);
-        box.add(explText(
-            "This contains the class names in Latex format as comments\n"+
-            "and the relations between the classes."));
+        box.add(explText("This contains the class names in Latex format as comments\n"
+                + "and the relations between the classes."));
 
         gmlYed = new JRadioButton("Graphml for yEd");
         gmlYed.setSelected(true);
         gmlYed.addActionListener(this);
         b.add(gmlYed);
         box.add(gmlYed);
-        box.add(explText(
-            "This contains class names as labels of the nodes, styled\n"+
-            "arrows for (un)proper inclusions and colourings for\n"+
-            "algorithmic complexity. Note that for yEd the file must have\n"+
-            "extension .graphml."));
-        
+        box.add(explText("This contains class names as labels of the nodes, styled\n"
+                + "arrows for (un)proper inclusions and colourings for\n"
+                + "algorithmic complexity. Note that for yEd the file must have\n"
+                + "extension .graphml."));
+
         b = new ButtonGroup();
-        box.add(Box.createRigidArea(new Dimension(0,20)));
+        box.add(Box.createRigidArea(new Dimension(0, 20)));
 
         gmlHtml = new JRadioButton("Html labels");
         gmlHtml.setSelected(true);
@@ -257,7 +249,6 @@ public class ExportDialog extends JDialog implements ActionListener {
         return p;
     }
 
-
     /**
      * Return the card where the user can select the destination file.
      */
@@ -265,7 +256,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         file = new JFileChooser();
         file.setApproveButtonText("Export");
         file.addActionListener(this);
-        //file.setControlButtonsAreShown(false); doesn't work - see showCard()
+        // file.setControlButtonsAreShown(false); doesn't work - see showCard()
         return file;
     }
 
@@ -274,12 +265,12 @@ public class ExportDialog extends JDialog implements ActionListener {
      */
     private Component explText(String text) {
         JTextArea t = new JTextArea(text);
-        //t.setLineWrap(true);
-        //t.setWrapStyleWord(true);
+        // t.setLineWrap(true);
+        // t.setWrapStyleWord(true);
         t.setEditable(false);
         t.setAlignmentX(Component.LEFT_ALIGNMENT);
         t.setOpaque(false);
-        t.setBorder(new EmptyBorder(new Insets(0,20,0,0)));
+        t.setBorder(new EmptyBorder(new Insets(0, 20, 0, 0)));
         return t;
     }
 
@@ -303,7 +294,7 @@ public class ExportDialog extends JDialog implements ActionListener {
             } else
                 showCard(CARD_FILE);
         } else if (source == backButton) {
-            if (current == CARD_PS  ||  current == CARD_GML)
+            if (current == CARD_PS || current == CARD_GML)
                 showCard(CARD_FORMAT);
             else if (radioPS.isSelected())
                 showCard(CARD_PS);
@@ -320,7 +311,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         } else if (e.getActionCommand() == JFileChooser.APPROVE_SELECTION) {
             if (export())
                 closeDialog();
-        } else if (e.getActionCommand()== JFileChooser.CANCEL_SELECTION)
+        } else if (e.getActionCommand() == JFileChooser.CANCEL_SELECTION)
             closeDialog();
     }
 
@@ -334,8 +325,8 @@ public class ExportDialog extends JDialog implements ActionListener {
             f = new FileOutputStream(file.getSelectedFile());
         } catch (Exception e) {
             e.printStackTrace();
-            MessageDialog.error(parent, "Cannot open file for writing:\n"+
-                file.getSelectedFile().getPath());
+            MessageDialog.error(parent, "Cannot open file for writing:\n"
+                    + file.getSelectedFile().getPath());
             return false;
         }
 
@@ -349,12 +340,11 @@ public class ExportDialog extends JDialog implements ActionListener {
         } catch (Exception e) {
             res = false;
             e.printStackTrace();
-            MessageDialog.error(parent, "Error while exporting:\n"+
-                e.toString());
+            MessageDialog.error(parent,
+                    "Error while exporting:\n" + e.toString());
         }
         return res;
     }
-
 
     /**
      * Export to Postscript.
@@ -363,10 +353,10 @@ public class ExportDialog extends JDialog implements ActionListener {
         Exception res = null;
         String outstr;
         DataOutputStream out = null;
-        
+
         try {
             out = new DataOutputStream(f);
-            PSGraphics g = new PSGraphics((String) papersize.getSelectedItem(),
+            PSGraphics g = new PSGraphics((String)papersize.getSelectedItem(),
                     fittopage.isSelected(), keepsideratio.isSelected(),
                     rotate.isSelected(), color.isSelected());
 
@@ -374,12 +364,12 @@ public class ExportDialog extends JDialog implements ActionListener {
             outstr = g.getContent();
             g.dispose();
             out.writeBytes(outstr);
-        } catch (IOException ex)  {
+        } catch (IOException ex) {
             res = ex;
         } finally {
             out.close();
         }
-        
+
         if (res != null)
             throw res;
     }
@@ -391,28 +381,26 @@ public class ExportDialog extends JDialog implements ActionListener {
         Exception res = null;
         String outstr;
         Writer out = null;
-        
+
         try {
             out = new OutputStreamWriter(f, "UTF-8");
             GraphMLWriter w = new GraphMLWriter(out,
-                    gmlYed.isSelected() ?
-                        GraphMLWriter.MODE_YED : GraphMLWriter.MODE_PLAIN,
-                    parent.graphCanvas.getDrawUnproper(),
-                    gmlHtml.isSelected());
+                    gmlYed.isSelected() ? GraphMLWriter.MODE_YED
+                            : GraphMLWriter.MODE_PLAIN,
+                    parent.graphCanvas.getDrawUnproper(), gmlHtml.isSelected());
 
             w.startDocument();
             parent.graphCanvas.write(w);
             w.endDocument();
-        } catch (IOException ex)  {
+        } catch (IOException ex) {
             res = ex;
         } finally {
             out.close();
         }
-        
+
         if (res != null)
             throw res;
     }
-
 
     /**
      * Export to SVG.
@@ -421,7 +409,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         Exception res = null;
         String outstr;
         Writer out = null;
-        
+
         try {
             out = new OutputStreamWriter(f, "UTF-8");
             SVGGraphics g = new SVGGraphics();
@@ -429,12 +417,12 @@ public class ExportDialog extends JDialog implements ActionListener {
             outstr = g.getContent();
             g.dispose();
             out.write(outstr, 0, outstr.length());
-        } catch (IOException ex)  {
+        } catch (IOException ex) {
             res = ex;
         } finally {
             out.close();
         }
-        
+
         if (res != null)
             throw res;
     }

@@ -42,7 +42,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private JMenuItem miHideSubclasses;
     private JMenuItem miShowDetails;
     private JMenuItem miShowNeighbours;
-    
+
     JMenu nameItem;
     // rework
     mxCell cell;
@@ -56,7 +56,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         this.graph = graph;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
-        add(miShowDetails= new JMenuItem("Show Details"));
+        add(miShowDetails = new JMenuItem("Show Details"));
         addSeparator();
         add(nameItem = new JMenu("Change name"));
         addSeparator();
@@ -94,27 +94,26 @@ public class NodePopup extends JPopupMenu implements ActionListener {
                     CHANGENAME.length());
             graph.getModel().beginUpdate();
             try {
-                GraphClassSet graphClassSet = (GraphClassSet)cell
-                        .getValue();
-                //search the label matching the selection
+                GraphClassSet graphClassSet = (GraphClassSet)cell.getValue();
+                // search the label matching the selection
                 GraphClass label = null;
-                for(GraphClass gc : getAllClasses(cell)){
+                for (GraphClass gc : getAllClasses(cell)) {
 
-                    if(gc.toString().equals(fullname)){
+                    if (gc.toString().equals(fullname)) {
                         label = gc;
                     }
                 }
-                //set the label
+                // set the label
                 graphClassSet.setLabel(label);
-                //FIXME Layout machen
+                // FIXME Layout machen
                 graph.updateCellSize(cell);
             } finally {
                 graph.getModel().endUpdate();
             }
-        }  else if (source == miShowDetails) {
+        } else if (source == miShowDetails) {
             parent.sidebar.setVisible(true);
-            parent.graphCanvas.setSidebarConent();  
-        }else if (source == miShowSuperclasses) {
+            parent.graphCanvas.setSidebarConent();
+        } else if (source == miShowSuperclasses) {
             parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSuperNodes());
         } else if (source == miHideSuperclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas
@@ -124,7 +123,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         } else if (source == miHideSubclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas.getSubNodes());
         } else if (source == miShowNeighbours) {
-        	parent.graphCanvas.drawNeighbours();
+            parent.graphCanvas.drawNeighbours();
         }
     }
 
@@ -177,7 +176,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @date 24.06.2013
      */
     public static GraphClass searchName(mxCell c) {
-       return ((GraphClassSet)c.getValue()).getLabel();
+        return ((GraphClassSet)c.getValue()).getLabel();
     }
 }
 

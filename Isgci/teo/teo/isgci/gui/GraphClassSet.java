@@ -12,7 +12,8 @@ import teo.isgci.gc.GraphClass;
  * 
  * @author leo
  * @date 12.06. 9:30; 25.06.
- * @annotation reworked, now the label holds the representing GraphClass, if you really really need a string use toString ;)
+ * @annotation reworked, now the label holds the representing GraphClass, if you
+ *             really really need a string use toString ;)
  * @param <V>
  */
 public class GraphClassSet {
@@ -57,8 +58,8 @@ public class GraphClassSet {
     public void setLabel(GraphClass label) {
         if (label == null) {
             for (GraphClass gc : set) {
-//                System.out.println(gc.toString());
-//                System.out.println(Algo.getName(set, parent.namingPref));
+                // System.out.println(gc.toString());
+                // System.out.println(Algo.getName(set, parent.namingPref));
                 if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
                     label = gc;
                 }

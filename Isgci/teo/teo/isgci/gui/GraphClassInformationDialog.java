@@ -33,13 +33,12 @@ import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.util.LessLatex;
 
-
 /**
  * Display a list of graphclasses and for the selected class also its super-,
  * sub- and equivalent classes.
  */
-public class GraphClassInformationDialog extends JDialog
-        implements ActionListener, ListSelectionListener {
+public class GraphClassInformationDialog extends JDialog implements
+        ActionListener, ListSelectionListener {
 
     protected ISGCIMainFrame parent;
     protected NodeList classesList;
@@ -55,8 +54,7 @@ public class GraphClassInformationDialog extends JDialog
         this(parent, null);
     }
 
-    public GraphClassInformationDialog(ISGCIMainFrame parent,
-            GraphClass target) {
+    public GraphClassInformationDialog(ISGCIMainFrame parent, GraphClass target) {
         super(parent, "Graph Class Information", false);
         this.parent = parent;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -73,7 +71,7 @@ public class GraphClassInformationDialog extends JDialog
         c.weighty = 0.0;
         c.fill = GridBagConstraints.BOTH;
 
-        //---- Graph class ----
+        // ---- Graph class ----
         c.weightx = 0.0;
         c.weighty = 0.0;
         c.fill = GridBagConstraints.NONE;
@@ -84,7 +82,7 @@ public class GraphClassInformationDialog extends JDialog
         gridbag.setConstraints(label, c);
         contents.add(label);
 
-        //---- Filter ----
+        // ---- Filter ----
         label = new JLabel("Filter: ", JLabel.RIGHT);
         c.anchor = GridBagConstraints.EAST;
         c.gridwidth = 1;
@@ -97,11 +95,11 @@ public class GraphClassInformationDialog extends JDialog
         c.fill = GridBagConstraints.BOTH;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(5,5,0,5);
+        c.insets = new Insets(5, 5, 0, 5);
         gridbag.setConstraints(search, c);
         contents.add(search);
 
-        //---- Graph Class list ----
+        // ---- Graph Class list ----
         c.insets = new Insets(5, 5, 5, 5);
         c.weightx = 1.0;
         c.weighty = 1.0;
@@ -115,21 +113,21 @@ public class GraphClassInformationDialog extends JDialog
         gridbag.setConstraints(scroller, c);
         contents.add(scroller);
 
-        //---- Complexity ----
+        // ---- Complexity ----
         p = new JPanel(new BorderLayout());
         problems = new JTable(new ProblemsModel());
         p.add(problems.getTableHeader(), BorderLayout.NORTH);
         p.add(problems, BorderLayout.SOUTH);
         problems.setShowVerticalLines(false);
         problems.getTableHeader().setFont(label.getFont());
-        problems.setBorder(
-                BorderFactory.createMatteBorder(0,1,0,1,Color.black));
+        problems.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1,
+                Color.black));
         c.gridwidth = 4;
         c.weighty = 0.0;
         c.insets = new Insets(5, 5, 10, 5);
         gridbag.setConstraints(p, c);
         contents.add(p);
-        
+
         // Fold line
         p = new JPanel();
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -137,7 +135,7 @@ public class GraphClassInformationDialog extends JDialog
         gridbag.setConstraints(p, c);
         contents.add(p);
 
-        //---- Sub/super/equ classes ----
+        // ---- Sub/super/equ classes ----
         c.gridwidth = 2;
         c.insets = new Insets(0, 5, 0, 0);
         c.weighty = 0.0;
@@ -184,18 +182,18 @@ public class GraphClassInformationDialog extends JDialog
         lists.add(supClassesList);
         lists.add(equClassesList);
 
-        //---- Buttons ----
+        // ---- Buttons ----
         JPanel okPanel = new JPanel();
         classButton = new JButton("Class details");
         okPanel.add(classButton);
         inclButton = new JButton("Inclusion info");
         okPanel.add(inclButton);
-        drawButton = new JButton ("Draw");
+        drawButton = new JButton("Draw");
         okPanel.add(drawButton);
         okButton = new JButton("Close");
         okPanel.add(okButton);
         c.weighty = 0.0;
-        c.insets = new Insets(5,0,0,0);
+        c.insets = new Insets(5, 0, 0, 0);
         c.gridwidth = GridBagConstraints.REMAINDER;
         gridbag.setConstraints(okPanel, c);
         contents.add(okPanel);
@@ -205,7 +203,7 @@ public class GraphClassInformationDialog extends JDialog
         mouseAdapter = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    NodeList list = (NodeList) e.getSource();
+                    NodeList list = (NodeList)e.getSource();
                     showNode(list.getSelectedNode());
                 }
             }
@@ -225,7 +223,6 @@ public class GraphClassInformationDialog extends JDialog
             showNode();
     }
 
-
     /**
      * Show the information about the given class.
      */
@@ -241,23 +238,23 @@ public class GraphClassInformationDialog extends JDialog
     private void showNode() {
         GraphClass node = null;
         if (classesList.getElementCount() > 0)
-            node = (GraphClass) classesList.getModel().getElementAt(0);
+            node = (GraphClass)classesList.getModel().getElementAt(0);
         showNode(node);
         repaint();
     }
-
 
     /**
      * Update the information in the complexity label.
      */
     private void updateComplexity(GraphClass target) {
-        ((ProblemsModel) problems.getModel()).setNode(target);
+        ((ProblemsModel)problems.getModel()).setNode(target);
     }
-
 
     /**
      * Update the information displayed in the super/sub/equiv lists.
-     * @param name graph classe of which to display the information
+     * 
+     * @param name
+     *            graph classe of which to display the information
      */
     private synchronized void updateLists(GraphClass target) {
         if (target == null) {
@@ -284,38 +281,36 @@ public class GraphClassInformationDialog extends JDialog
         equClassesList.setListData(equ);
     }
 
-
     protected void closeDialog() {
         setVisible(false);
         dispose();
     }
 
-
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting())
             return;
-        if (e.getSource() == classesList);
-            showNode(classesList.getSelectedNode());
+        if (e.getSource() == classesList)
+            ;
+        showNode(classesList.getSelectedNode());
     }
-
 
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
         if (source == okButton) {
             closeDialog();
         } else if (source == classButton) {
-            parent.loader.showDocument("classes/"+
-                classesList.getSelectedNode().getID() +".html");
+            parent.loader.showDocument("classes/"
+                    + classesList.getSelectedNode().getID() + ".html");
         } else if (source == inclButton) {
             GraphClass c1 = classesList.getSelectedNode();
             GraphClass c2 = lists.getSelectedNode();
             if (c1 != null && c2 != null) {
-                JDialog dia = InclusionResultDialog.newInstance(parent, c1,c2);
+                JDialog dia = InclusionResultDialog.newInstance(parent, c1, c2);
                 dia.setVisible(true);
             }
         } else if (source == drawButton) {
-            GraphClassSelectionDialog draw = 
-                new GraphClassSelectionDialog(parent);
+            GraphClassSelectionDialog draw = new GraphClassSelectionDialog(
+                    parent);
             draw.select(classesList.getSelectedNode());
             draw.setVisible(true);
         } else if (source == search) {
@@ -330,14 +325,13 @@ public class GraphClassInformationDialog extends JDialog
  * The model for the problem - complexity table in the dialogue.
  */
 class ProblemsModel extends AbstractTableModel {
-    private static String[] colNames = {"Problem", "Complexity"};
+    private static String[] colNames = { "Problem", "Complexity" };
     private GraphClass gc;
 
     public ProblemsModel() {
         super();
         gc = null;
     }
-
 
     public int getColumnCount() {
         return 2;
@@ -352,9 +346,8 @@ class ProblemsModel extends AbstractTableModel {
     }
 
     public Object getValueAt(int row, int col) {
-        if (row < 0  ||  row >= DataSet.problems.size()  ||
-                col < 0  ||  col > 1 ||
-                gc == null)
+        if (row < 0 || row >= DataSet.problems.size() || col < 0 || col > 1
+                || gc == null)
             return "???";
 
         Problem p = DataSet.problems.elementAt(row);

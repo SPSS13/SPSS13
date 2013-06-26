@@ -24,20 +24,23 @@ import java.util.*;
 import java.util.Vector;
 
 /**
- * The dialog the checks for an inclusion between two graphclasses.
- * It contains two lists in single selection mode.
+ * The dialog the checks for an inclusion between two graphclasses. It contains
+ * two lists in single selection mode.
  */
-public class CheckInclusionDialog extends JDialog
-        implements ActionListener, ListSelectionListener {
-    
+public class CheckInclusionDialog extends JDialog implements ActionListener,
+        ListSelectionListener {
+
     protected ISGCIMainFrame parent;
     protected NodeList firstList, secondList;
     protected JButton cancelButton;
     protected JButton inclusionCheckButton;
     protected WebSearch firstSearch, secondSearch;
-    
-    /** Create and display the dialog
-     * @param parent the parent of the dialog
+
+    /**
+     * Create and display the dialog
+     * 
+     * @param parent
+     *            the parent of the dialog
      */
     public CheckInclusionDialog(ISGCIMainFrame parent) {
         super(parent, "Find Relation", false);
@@ -70,7 +73,7 @@ public class CheckInclusionDialog extends JDialog
         c.fill = GridBagConstraints.BOTH;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(5,5,0,5);
+        c.insets = new Insets(5, 5, 0, 5);
         gridbag.setConstraints(firstSearch, c);
         content.add(firstSearch);
 
@@ -105,7 +108,7 @@ public class CheckInclusionDialog extends JDialog
         c.fill = GridBagConstraints.BOTH;
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.anchor = GridBagConstraints.CENTER;
-        c.insets = new Insets(5,5,0,5);
+        c.insets = new Insets(5, 5, 0, 5);
         gridbag.setConstraints(secondSearch, c);
         content.add(secondSearch);
 
@@ -116,7 +119,7 @@ public class CheckInclusionDialog extends JDialog
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.fill = GridBagConstraints.BOTH;
-        c.insets = new Insets(5,5,5,5);
+        c.insets = new Insets(5, 5, 5, 5);
         gridbag.setConstraints(scroller, c);
         content.add(scroller);
         JPanel drawPanel = new JPanel();
@@ -142,21 +145,20 @@ public class CheckInclusionDialog extends JDialog
         secondList.addListSelectionListener(this);
     }
 
-
-    /** Enables/disables the buttons depending on whether any items are
-     * selected
+    /**
+     * Enables/disables the buttons depending on whether any items are selected
      */
     public void handleButtons() {
-        if (firstList.getSelectedValue() == null ||
-                secondList.getSelectedValue() == null) {
+        if (firstList.getSelectedValue() == null
+                || secondList.getSelectedValue() == null) {
             inclusionCheckButton.setEnabled(false);
         } else {
             inclusionCheckButton.setEnabled(true);
         }
     }
 
-    
-    /** Eventhandlers for the buttonclicks.
+    /**
+     * Eventhandlers for the buttonclicks.
      */
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting())
@@ -178,21 +180,19 @@ public class CheckInclusionDialog extends JDialog
         }
     }
 
-
     /** Close the dialog and release resources */
     public void closeDialog() {
         setVisible(false);
         dispose();
     }
 
-    
-    /** Checks whether the selected classes are related and displays the
-     * result of this check in a new dialog.
+    /**
+     * Checks whether the selected classes are related and displays the result
+     * of this check in a new dialog.
      */
     public void inclusionCheck() {
-        InclusionResultDialog.newInstance(parent,
-                firstList.getSelectedNode(), secondList.getSelectedNode()
-        ).setVisible(true);
+        InclusionResultDialog.newInstance(parent, firstList.getSelectedNode(),
+                secondList.getSelectedNode()).setVisible(true);
     }
 
 }
