@@ -22,7 +22,7 @@ import teo.isgci.gc.GraphClass;
 /**
  * A JList filled with ISGCINodes, that are displayed with formatted html.
  */
-public class NodeList extends JList {
+public class NodeList<GraphClass> extends JList<GraphClass> {
     LatexGraphics latex;
 
 

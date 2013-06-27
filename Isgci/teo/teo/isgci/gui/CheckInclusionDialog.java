@@ -12,6 +12,8 @@ package teo.isgci.gui;
 
 import teo.isgci.db.DataSet;
 import teo.isgci.db.Algo;
+import teo.isgci.gc.GraphClass;
+
 import java.io.IOException;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -21,7 +23,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.*;
-import java.util.Vector;
 
 /**
  * The dialog the checks for an inclusion between two graphclasses.
@@ -31,7 +32,7 @@ public class CheckInclusionDialog extends JDialog
         implements ActionListener, ListSelectionListener {
     
     protected ISGCIMainFrame parent;
-    protected NodeList firstList, secondList;
+    protected NodeList<GraphClass> firstList, secondList;
     protected JButton cancelButton;
     protected JButton inclusionCheckButton;
     protected WebSearch firstSearch, secondSearch;
@@ -77,7 +78,7 @@ public class CheckInclusionDialog extends JDialog
         c.insets = new Insets(5, 5, 5, 5);
         c.weightx = 1.0;
         c.weighty = 1.0;
-        firstList = new NodeList(parent.latex);
+        firstList = new NodeList<GraphClass>(parent.latex);
         firstList.setListData(DataSet.getClasses());
         firstList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scroller = new JScrollPane(firstList);

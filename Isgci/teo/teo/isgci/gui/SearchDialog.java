@@ -27,25 +27,27 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import teo.isgci.db.Algo;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.util.LessLatex;
 
 import com.mxgraph.model.mxCell;
 
 public class SearchDialog extends JDialog implements ActionListener {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 840964204742364690L;
     protected ISGCIMainFrame parent;
     protected ButtonGroup group;
     protected JCheckBox basicBox, derivedBox, forbiddenBox;
     protected JButton searchButton, cancelButton;
-    protected NodeList classesList;
+    protected NodeList<GraphClass> classesList;
 
 
     public SearchDialog(ISGCIMainFrame parent) {
         super(parent, "Search for a graphclass", true);
         this.parent = parent;
         group = new ButtonGroup();
-        Algo.NamePref mode = parent.graphCanvas.getNamingPref();
         Container content = getContentPane();
 
         GridBagLayout gridbag = new GridBagLayout();
@@ -57,7 +59,7 @@ public class SearchDialog extends JDialog implements ActionListener {
         c.weighty = 1.0;
         c.weightx = 1.0;
         c.fill = GridBagConstraints.BOTH;
-        classesList = new NodeList(parent.latex);
+        classesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         classesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scroller = new JScrollPane(classesList);
         gridbag.setConstraints(scroller, c);
@@ -111,8 +113,6 @@ public class SearchDialog extends JDialog implements ActionListener {
         } else if (source == searchButton) {
             mxCell cell = (mxCell) parent.graphCanvas.findNode(
                     classesList.getSelectedNode(), true);
-//            System.out.println(cell.getValue().toString());
-//            System.out.println(classesList.getSelectedNode());
             parent.graphCanvas.markOnly(cell);
             parent.graphCanvas.centerNode(cell);
             closeDialog();

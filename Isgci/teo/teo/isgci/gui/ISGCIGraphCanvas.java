@@ -15,6 +15,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.JList;
 
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
@@ -33,7 +37,6 @@ import teo.isgci.gc.GraphClass;
 import teo.isgci.grapht.BFSWalker;
 import teo.isgci.grapht.GAlg;
 import teo.isgci.grapht.GraphWalker;
-import teo.isgci.grapht.ISGCIVertexFactory;
 import teo.isgci.grapht.Inclusion;
 import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
@@ -52,8 +55,9 @@ import com.mxgraph.view.mxGraph;
 /**
  * A canvas that can display an inclusion graph.
  */
-public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
-        implements MouseWheelListener {
+public class ISGCIGraphCanvas extends mxGraphComponent
+        implements MouseListener,
+        MouseMotionListener, MouseWheelListener {
 
     /**
 	 * 
@@ -67,6 +71,26 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     private final mxGraph graph;
     private mxCell lastSelected;
 
+    public static final int CANVASWIDTH = 400, // Initial canvas size
+            CANVASHEIGHT = 300;
+
+
+
+    protected Rectangle bounds;
+    protected View markedView;
+    protected boolean dragInProcess;
+    protected boolean drawUnproper;
+    protected LatexGraphics latexgraphics;
+
+
+    /** Margins around drawing */
+    protected static final int LEFTMARGIN = 20;
+    protected static final int RIGHTMARGIN = 20;
+    protected static final int TOPMARGIN = 20;
+    protected static final int BOTTOMMARGIN = 20;
+    protected static final int INTMARGIN = 40; // Internal
+    
+    
     /** Colours for different complexities */
     public static final Color COLOR_LIN = Color.green;
     public static final Color COLOR_P = Color.green.darker();
@@ -81,8 +105,11 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     private String edgeStyle = "strokeColor=black";
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
-        super(parent, ISGCIMainFrame.latex, new ISGCIVertexFactory(), null);
+        super(graph);
         this.parent = parent;
+        this.latexgraphics = ISGCIMainFrame.latex;
+        this.parent = parent;
+        drawUnproper = true;
         problem = null;
         this.map = new HashMap<Set<GraphClass>, Object>();
         this.graph = graph;
@@ -525,16 +552,6 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         }
     }
 
-    /**
-     * Find the NodeView for the given graph class or null if not found shortcut
-     * method to work with NodeViews, should be replaced i dont know what this
-     * is needed for but the lanfmatk wants it
-     */
-    @SuppressWarnings("unchecked")
-    // the cast is save
-    public NodeView<Set<GraphClass>, DefaultEdge> findNode(GraphClass gc) {
-        return (NodeView<Set<GraphClass>, DefaultEdge>)findNode(gc, false);
-    }
 
     /**
      * Find the cell for the given graph class or null if not found assumes that
@@ -557,17 +574,16 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 }
             }
         } else {
-            for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
-                for (NodeView<Set<GraphClass>, DefaultEdge> v : gv
-                        .getNodeViews())
-                    if (v.getNode().contains(gc))
-                        return v;
-            }
+//            for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
+//                for (NodeView<Set<GraphClass>, DefaultEdge> v : gv
+//                        .getNodeViews())
+//                    if (v.getNode().contains(gc))
+//                        return v;
+//            }
         }
         return null;
     }
 
-    @Override
     public void setDrawUnproper(boolean b) {
         drawUnproper = b;
         graph.getModel().beginUpdate();
@@ -687,37 +703,24 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         return namingPref;
     }
 
-    /**
-     * Center the canvas on the given NodeView.
-     */
-    public void centerNode(NodeView<Set<GraphClass>, DefaultEdge> v) {
-        Point p = null;
-
-        for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
-            if ((p = gv.getNodeCenter(v)) != null) {
-                ((ISGCIMainFrame)parent).centerCanvas(p);
-                return;
-            }
-        }
-    }
 
     /**
      * @author leo
      * @param classesList
-     * @date 14.06
+     * @date 14.06, 28.06. reworked to work with lists
      * @annotation sets the name of the node to the name that was selected for
      *             drawing it, despite the naming preference
      */
-    public void setNodeName(NodeList classesList) {
+    public void setNodeName(List<GraphClass> classesList) {
         // made getSelectedValues() to getSelectedValuesList()
         graph.getModel().beginUpdate();
         try {
-            for (Object o : classesList.getSelectedValuesList()) {
-                GraphClass gc = (GraphClass)o;
+            for (GraphClass gc : classesList) {
                 mxCell cell = (mxCell)findNode(gc, true);
                 if (cell != null) {
                     GraphClassSet graphClassSet = (GraphClassSet)cell
                             .getValue();
+                    System.out.println("updated label of: " + graphClassSet.toString() + " to: " + gc.toString());
                     graphClassSet.setLabel(gc);
                     graph.updateCellSize(cell);
                 }

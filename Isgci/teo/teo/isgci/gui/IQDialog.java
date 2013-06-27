@@ -11,20 +11,25 @@
 
 package teo.isgci.gui;
 
-import teo.isgci.gc.GraphClass;
-import teo.isgci.db.DataSet;
-import teo.isgci.grapht.*;
-import teo.isgci.util.LatexGlyph;
-import java.io.IOException;
-import java.awt.Cursor;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Container;
-import java.awt.event.*;
-import javax.swing.*;
-import java.util.HashSet;
+import java.awt.Cursor;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
+import java.util.HashSet;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import teo.isgci.db.DataSet;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.util.LatexGlyph;
 
 
 /**
@@ -34,8 +39,12 @@ import java.util.Collection;
 public class IQDialog extends JDialog
         implements ActionListener {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2286149952599849580L;
     protected ISGCIMainFrame parent;
-    protected NodeList classesList;
+    protected NodeList<GraphClass> classesList;
     protected JButton newButton, cancelButton;
     protected JButton leButton, ltButton, eqButton, gtButton, geButton;
     protected WebSearch search;
@@ -81,7 +90,7 @@ public class IQDialog extends JDialog
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.fill = GridBagConstraints.BOTH;
-        classesList = new NodeList(parent.latex);
+        classesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         JScrollPane scroller = new JScrollPane(classesList);
         gridbag.setConstraints(scroller, c);
         contents.add(scroller);
@@ -162,8 +171,9 @@ public class IQDialog extends JDialog
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             parent.graphCanvas.drawHierarchy(getNodes());
             
-            parent.graphCanvas.setNodeName(classesList);
-            parent.graphCanvas.updateBounds();
+            parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
+            //TODO make this work again
+            //parent.graphCanvas.updateBounds();
             
             setCursor(oldcursor);
             closeDialog();

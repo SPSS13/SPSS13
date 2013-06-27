@@ -23,6 +23,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.AbstractTableModel;
+
 import java.util.Vector;
 import java.util.Iterator;
 import java.util.Collections;
@@ -42,8 +43,8 @@ public class GraphClassInformationDialog extends JDialog
         implements ActionListener, ListSelectionListener {
 
     protected ISGCIMainFrame parent;
-    protected NodeList classesList;
-    protected NodeList subClassesList, supClassesList, equClassesList;
+    protected NodeList<GraphClass> classesList;
+    protected NodeList<GraphClass> subClassesList, supClassesList, equClassesList;
     protected ListGroup lists;
     protected JLabel complexity;
     protected JTable problems;
@@ -205,7 +206,7 @@ public class GraphClassInformationDialog extends JDialog
         mouseAdapter = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    NodeList list = (NodeList) e.getSource();
+                    NodeList<GraphClass> list = (NodeList<GraphClass>) e.getSource();
                     showNode(list.getSelectedNode());
                 }
             }

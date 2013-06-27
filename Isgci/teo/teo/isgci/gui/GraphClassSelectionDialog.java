@@ -27,8 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.mxgraph.model.mxCell;
-
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.grapht.BFSWalker;
@@ -43,8 +41,12 @@ import teo.isgci.grapht.RevBFSWalker;
 public class GraphClassSelectionDialog extends JDialog implements
         ActionListener {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4184439808141768526L;
     protected ISGCIMainFrame parent;
-    protected NodeList classesList;
+    protected NodeList<GraphClass> classesList;
     protected JCheckBox superCheck, subCheck;
     protected JButton addButton, removeButton, newButton, cancelButton;
     protected WebSearch search;
@@ -87,7 +89,7 @@ public class GraphClassSelectionDialog extends JDialog implements
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.fill = GridBagConstraints.BOTH;
-        classesList = new NodeList(parent.latex);
+        classesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         JScrollPane scroller = new JScrollPane(classesList);
         gridbag.setConstraints(scroller, c);
         contents.add(scroller);
@@ -164,10 +166,10 @@ public class GraphClassSelectionDialog extends JDialog implements
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             parent.graphCanvas.drawHierarchy(getNodes());
             // new method needs testing
-            parent.graphCanvas.setNodeName(classesList);
+            parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
             // parent.graphCanvas.updateBounds();
 //TODO Center on Node
-
+            
             setCursor(oldcursor);
             closeDialog();
         } else if (source == search) {
@@ -185,7 +187,7 @@ public class GraphClassSelectionDialog extends JDialog implements
         boolean doSuper = superCheck.isSelected(), doSub = subCheck
                 .isSelected();
         // FIXME
-        for (Object o : classesList.getSelectedValues()) {
+        for (Object o : classesList.getSelectedValuesList()) {
             GraphClass gc = (GraphClass)o;
             result.add(gc);
             if (doSuper) {

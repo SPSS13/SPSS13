@@ -22,9 +22,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.util.Hashtable;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
@@ -38,28 +35,19 @@ import javax.swing.JViewport;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import org.jgrapht.Graphs;
-import org.jgrapht.graph.SimpleDirectedGraph;
-
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.ForbiddenClass;
-import teo.isgci.gc.GraphClass;
-import teo.isgci.grapht.GAlg;
-import teo.isgci.grapht.Inclusion;
 import teo.isgci.problem.Problem;
-import teo.isgci.xml.GraphMLWriter;
 
 import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.shape.mxIMarker;
 import com.mxgraph.shape.mxMarkerRegistry;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
-import com.mxgraph.view.mxStylesheet;
 
 /*import teo.isgci.gc.GraphClass;
  import java.util.ArrayList;*/
@@ -69,6 +57,11 @@ import com.mxgraph.view.mxStylesheet;
  */
 public class ISGCIMainFrame extends JFrame implements WindowListener,
         ActionListener, ItemListener, MenuListener {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6245759418166375376L;
 
     public static final String APPLICATIONNAME = "ISGCI";
 
@@ -155,33 +148,35 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     /**
      * Write the entire database in GraphML to isgcifull.graphml.
      */
-    private void writeGraphML() {
-        OutputStreamWriter out = null;
-
-        SimpleDirectedGraph<GraphClass, Inclusion> g = new SimpleDirectedGraph<GraphClass, Inclusion>(
-                Inclusion.class);
-        Graphs.addGraph(g, DataSet.inclGraph);
-        GAlg.transitiveReductionBruteForce(g);
-
-        try {
-            out = new OutputStreamWriter(new FileOutputStream(
-                    "isgcifull.graphml"), "UTF-8");
-            GraphMLWriter w = new GraphMLWriter(out, GraphMLWriter.MODE_PLAIN,
-                    true, false);
-            w.startDocument();
-            for (GraphClass gc : g.vertexSet()) {
-                w.writeNode(gc.getID(), gc.toString(), Color.WHITE);
-            }
-            for (Inclusion e : g.edgeSet()) {
-                w.writeEdge(e.getSuper().getID(), e.getSub().getID(),
-                        e.isProper());
-            }
-            w.endDocument();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    // private void writeGraphML() {
+    // TODO
+    // OutputStreamWriter out = null;
+    //
+    // SimpleDirectedGraph<GraphClass, Inclusion> g = new
+    // SimpleDirectedGraph<GraphClass, Inclusion>(
+    // Inclusion.class);
+    // Graphs.addGraph(g, DataSet.inclGraph);
+    // GAlg.transitiveReductionBruteForce(g);
+    //
+    // try {
+    // out = new OutputStreamWriter(new FileOutputStream(
+    // "isgcifull.graphml"), "UTF-8");
+    // GraphMLWriter w = new GraphMLWriter(out, GraphMLWriter.MODE_PLAIN,
+    // true, false);
+    // w.startDocument();
+    // for (GraphClass gc : g.vertexSet()) {
+    // w.writeNode(gc.getID(), gc.toString(), Color.WHITE);
+    // }
+    // for (Inclusion e : g.edgeSet()) {
+    // w.writeEdge(e.getSuper().getID(), e.getSub().getID(),
+    // e.isProper());
+    // }
+    // w.endDocument();
+    // out.close();
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
 
     /**
      * Creates and attaches the necessary eventlisteners.
@@ -231,7 +226,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
      */
     protected JMenuBar createMenus() {
         JMenuBar mainMenuBar = new JMenuBar();
-        JMenu fileMenu, editMenu, viewMenu, graphMenu, helpMenu, problemsMenu;
+        JMenu fileMenu, viewMenu, graphMenu, helpMenu, problemsMenu;
         JMenuItem menu;
 
         fileMenu = new JMenu("File");
@@ -413,7 +408,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setAllowDanglingEdges(false);
         graph.setConnectableEdges(false);
         graph.setDisconnectOnMove(false);
-        //does not seem to have any effect
+        // does not seem to have any effect
         graph.setMultigraph(false);
     }
 
@@ -493,10 +488,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         } else if (object == miNew) {
             new ISGCIMainFrame(loader);
         } else if (object == miExport) {
-            JDialog export = new ExportDialog(this);
-            export.setLocation(50, 50);
-            export.pack();
-            export.setVisible(true);
+            // JDialog export = new ExportDialog(this);
+            // export.setLocation(50, 50);
+            // export.pack();
+            // export.setVisible(true);
         } else if (object == miNaming) {
             System.out.println("naming");
             JDialog d = new NamingDialog(this);
@@ -544,9 +539,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             open.setVisible(true);
         } else if (object == miShowInformation) {
             JDialog d = new GraphClassInformationDialog(
-                    graphCanvas.getParent(),
-                    graphCanvas.nodePopup.searchName(graphCanvas
-                            .getSelectedCell()));
+                    graphCanvas.getParent(), ((GraphClassSet)graphCanvas
+                            .getSelectedCell().getValue()).getLabel());
             d.setLocation(50, 50);
             d.pack();
             d.setSize(800, 600);

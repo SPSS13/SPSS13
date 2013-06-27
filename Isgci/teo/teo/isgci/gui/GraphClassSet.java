@@ -51,14 +51,12 @@ public class GraphClassSet {
 
     /**
      * @author leo
-     * @param label
+     * @param label, the GraphClass representing the Node
      * @annotation
      */
     public void setLabel(GraphClass label) {
         if (label == null) {
             for (GraphClass gc : set) {
-//                System.out.println(gc.toString());
-//                System.out.println(Algo.getName(set, parent.namingPref));
                 if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
                     label = gc;
                 }

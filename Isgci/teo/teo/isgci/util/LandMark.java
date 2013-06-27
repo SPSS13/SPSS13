@@ -67,34 +67,35 @@ public class LandMark {
      * Export the map for gc_x as gc_x.png.
      */
     public void createMap(GraphClass n) {
-        Dimension dim;
-        BufferedImage image;
-
-        landmarks.set(0, n);
-
-        //---- Create the map
-        parent.graphCanvas.drawHierarchy(landmarks);
-        // reverse order so n is last in case it is one of the landmarks
-        for (int i = landmarks.size()-1; i >= 0; i--) {
-            GraphClass gc = landmarks.get(i);
-            NodeView v = parent.graphCanvas.findNode(gc);
-            v.setNameAndLabel(gc.toString());
-            v.setMark(i == 0);
-        }
-        parent.graphCanvas.updateBounds();
-
-
-        //---- Export it as png
-        dim = parent.graphCanvas.getPreferredSize();
-        image = new BufferedImage(dim.width, dim.height,
-                BufferedImage.TYPE_INT_ARGB);
-        parent.graphCanvas.forcePaint(image.getGraphics());
-        try {
-            ImageIO.write(image, "png",
-                    new File(path +"/"+ n.getID() +".png"));
-        } catch (IOException e) {
-            System.err.println(e);
-        }
+        //TODO Make Landmarks work again
+//        Dimension dim;
+//        BufferedImage image;
+//
+//        landmarks.set(0, n);
+//
+//        //---- Create the map
+//        parent.graphCanvas.drawHierarchy(landmarks);
+//        // reverse order so n is last in case it is one of the landmarks
+//        for (int i = landmarks.size()-1; i >= 0; i--) {
+//            GraphClass gc = landmarks.get(i);
+//            NodeView v = parent.graphCanvas.findNode(gc);
+//            v.setNameAndLabel(gc.toString());
+//            v.setMark(i == 0);
+//        }
+//        parent.graphCanvas.updateBounds();
+//
+//
+//        //---- Export it as png
+//        dim = parent.graphCanvas.getPreferredSize();
+//        image = new BufferedImage(dim.width, dim.height,
+//                BufferedImage.TYPE_INT_ARGB);
+//        parent.graphCanvas.forcePaint(image.getGraphics());
+//        try {
+//            ImageIO.write(image, "png",
+//                    new File(path +"/"+ n.getID() +".png"));
+//        } catch (IOException e) {
+//            System.err.println(e);
+//        }
     }
 
 
