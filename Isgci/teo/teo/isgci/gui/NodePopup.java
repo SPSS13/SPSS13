@@ -40,6 +40,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private JMenuItem miShowSubclasses;
     private JMenuItem miHideSubclasses;
     private JMenuItem miShowDetails;
+    private JMenuItem miAddSuperclasses;
+    private JMenuItem miAddSubclasses;
     private JMenuItem miShowNeighbours;
     
     JMenu nameItem;
@@ -55,7 +57,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         this.graph = graph;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
-        add(miShowDetails= new JMenuItem("Show Details"));
+        add(miShowDetails= new JMenuItem("Show sidebar"));
         addSeparator();
         add(nameItem = new JMenu("Change name"));
         addSeparator();
@@ -63,15 +65,20 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         add(miHideSuperclasses = new JMenuItem("Hide superclasses"));
         addSeparator();
         add(miShowSubclasses = new JMenuItem("Show subclasses"));
-        add(miHideSubclasses = new JMenuItem("Hide sublcasses"));
+        add(miHideSubclasses = new JMenuItem("Hide subclasses"));
         addSeparator();
-        add(miShowNeighbours = new JMenuItem("Show Neighbours"));
+        add(miAddSuperclasses = new JMenuItem("Add superclasses"));
+        add(miAddSubclasses = new JMenuItem("Add subclasses"));
+        add(miShowNeighbours = new JMenuItem("Add neighbours"));
+        addSeparator();
         miHideSubclasses.addActionListener(this);
         miHideSuperclasses.addActionListener(this);
         miShowSubclasses.addActionListener(this);
         miShowSuperclasses.addActionListener(this);
         miShowNeighbours.addActionListener(this);
         miShowDetails.addActionListener(this);
+        miAddSubclasses.addActionListener(this);
+        miAddSuperclasses.addActionListener(this);
         infoItem.addActionListener(this);
     }
 
@@ -123,7 +130,11 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         } else if (source == miHideSubclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas.getSubNodes());
         } else if (source == miShowNeighbours) {
-        	parent.graphCanvas.drawNeighbours();
+            parent.graphCanvas.drawNeighbours();
+        }else if (source == miAddSubclasses) {
+            parent.graphCanvas.addSubclasses();
+        }else if (source == miAddSuperclasses) {
+            parent.graphCanvas.addSuperclasses();
         }
     }
 

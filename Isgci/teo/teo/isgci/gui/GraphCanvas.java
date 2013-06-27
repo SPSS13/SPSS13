@@ -80,11 +80,22 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     /**
      * Remove all graphs from the canvas.
+     * 
+
+     * 
+     * not used any more
+     * 
      */
     public void clearGraphs() {
         graphs.clear();
     }
 
+    /**
+     * Write this to w.
+     * 
+     * not used any more
+     * 
+     */
     public void setDrawUnproper(boolean b) {
         // drawUnproper = b;
         // for (GraphView<V,E> gv : graphs)
@@ -92,12 +103,21 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
         // repaint();
     }
 
+    /**
+
+     * 
+     * not used any more
+     * 
+     */
     public boolean getDrawUnproper() {
         return drawUnproper;
     }
 
     /**
      * Write this to w.
+     * 
+     * not used any more
+     * 
      */
     public void write(GraphMLWriter w) throws SAXException {
         for (GraphView gv : graphs)
@@ -106,6 +126,10 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     /**
      * Update the bounds of the canvas.
+     * 
+     *  
+     * not used any more
+     * 
      */
     public void updateBounds() {
         if (graphs.isEmpty()) {
@@ -124,6 +148,8 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     /**
      * Return the preferred size. For sensible results, call layout() first.
+     * 
+     * used heavily
      */
     public Dimension getPreferredSize() {
         Dimension d = new Dimension(bounds.width + LEFTMARGIN + RIGHTMARGIN,
@@ -138,6 +164,9 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     /**
      * Return the view containing the given point (mouseclick).
+     *      
+     * not used any more
+     * 
      */
     public View getViewAt(Point p) {
         for (GraphView<V, E> gv : graphs) {
@@ -155,6 +184,9 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     // --------------------------- Paint stuff ----------------------------
 
+    /**
+     * not used any more
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         /*
@@ -164,18 +196,19 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
          * parent.printPort(); System.err.println("");
          */
 
-        //Rectangle clip = g.getClipBounds();
+        // Rectangle clip = g.getClipBounds();
         /*
          * g.setColor(Color.RED); g.drawRect(clip.x, clip.y, clip.width-1,
          * clip.height-1); g.setColor(Color.BLACK);
          */
 
-        //dopaint(g);
-        ///paintShadow(g);
+        // dopaint(g);
+        // /paintShadow(g);
     }
 
     /**
-     * Paint this entire drawing to g.
+     * Paint this entire drawing to g. * not used any more
+     * 
      */
     public void forcePaint(Graphics g) {
         g.setClip(bounds);
@@ -186,6 +219,9 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     /**
      * Do the actual painting in a prepared graphics context.
+     * 
+     * * not used any more only landmark
+     * 
      */
     protected void dopaint(Graphics g) {
         for (GraphView<V, E> gv : graphs) {
@@ -202,6 +238,9 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
 
     /**
      * Paint the shadows.
+     * 
+     * not used any more
+     * 
      */
     public void paintShadow(Graphics g) {
         g.setColor(teo.isgci.gui.SColor.brighter(Color.black));
@@ -258,7 +297,7 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
     }
 
     /**
-     *  not used any more
+     * not used any more
      * 
      * Gives all marked objects a shadow.
      */
@@ -268,7 +307,7 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
     }
 
     /**
-     *  
+     * 
      * not used any more
      * 
      * Set the anchor for all marked object at the given point.
@@ -325,8 +364,7 @@ public class GraphCanvas<V, E> extends JPanel implements MouseListener,
     // ----------------------- MouseListener stuff --------------------------
 
     /**
-     * not used any more 
-     * Overload this to react to popups. Return true iff the
+     * not used any more Overload this to react to popups. Return true iff the
      * event is handled.
      */
     protected boolean mousePopup(MouseEvent event) {

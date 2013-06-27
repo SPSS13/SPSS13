@@ -401,6 +401,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     private void setGraphSwitches(mxGraph graph) {
         graph.setCellsEditable(false);
         graph.setCellsDisconnectable(false);
+        graph.setCellsDeletable(false);
+        graph.setCellsCloneable(false);
         graph.setAutoSizeCells(true);
         graph.setBorder(10);
         graph.setEdgeLabelsMovable(false);
@@ -413,13 +415,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setDisconnectOnMove(false);
         //does not seem to have any effect
         graph.setMultigraph(false);
-//        //add ROUNDED style
-//        mxStylesheet stylesheet = graph.getStylesheet();
-//        Hashtable<String, Object> style = new Hashtable<String, Object>();
-//        style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
-//        style.put(mxConstants.STYLE_OPACITY, 50);
-//        style.put(mxConstants.STYLE_FONTCOLOR, "#774400");
-//        stylesheet.putCellStyle("ROUNDED", style);
     }
 
     /**

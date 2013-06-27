@@ -11,6 +11,7 @@
 package teo.isgci.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -63,7 +64,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     protected Problem problem;
     protected Algo.NamePref namingPref;
     private ISGCIMainFrame parent;
-    private mxGraph graph;
+    private final mxGraph graph;
     private mxCell lastSelected;
 
     /** Colours for different complexities */
@@ -72,11 +73,11 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
     public static final Color COLOR_NPC = Color.red;
     public static final Color COLOR_INTERMEDIATE = SColor.brighter(Color.red);
     public static final Color COLOR_UNKNOWN = Color.white;
-    private HashMap<Set<GraphClass>, Object> map;
-    private mxHierarchicalLayout layout;
+    private final HashMap<Set<GraphClass>, Object> map;
+    private final mxHierarchicalLayout layout;
     private Point start;
 
-    private String vertexStyle = "shape=rectangle;fontColor=black;strokeColor=black";
+    private String vertexStyle = "shape=rectangle;fontColor=black;strokeColor=black;spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
     private String edgeStyle = "strokeColor=black";
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
@@ -92,22 +93,8 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         add(nodePopup);
         add(edgePopup);
         layout = new mxHierarchicalLayout(graph);
-        // make default cells white
 
     }
-
-    // /**
-    // * Add the given graph to this canvas.
-    // */
-    // protected GraphView<Set<GraphClass>, DefaultEdge> addGraph(
-    // SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> g) {
-    // GraphView<Set<GraphClass>, DefaultEdge> gv = super.addGraph(g);
-    // for (NodeView<Set<GraphClass>, DefaultEdge> nv : gv.getNodeViews()) {
-    // nv.setColor(complexityColor(nv.getNode()));
-    // nv.setNameAndLabel(Algo.getName(nv.getNode(), namingPref));
-    // }
-    // return gv;
-    // }
 
     /**
      * Create a new hierarchy subgraph of the given classes and draw it.
@@ -142,7 +129,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
      */
     private void makeGraph(
             SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph) {
-        Object parent = graph.getDefaultParent();
+        Object defaultParent = graph.getDefaultParent();
 
         graph.getModel().beginUpdate();
         try {
@@ -153,8 +140,9 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 if (map.get(gc) == null) {
                     // add the node
                     GraphClassSet graphClasses = new GraphClassSet(gc, this);
-                    Object vertex = graph.insertVertex(parent, gc.toString(),
-                            graphClasses, 20, 20, 80, 30, vertexStyle);
+                    Object vertex = graph.insertVertex(defaultParent,
+                            gc.toString(), graphClasses, 20, 20, 80, 30,
+                            vertexStyle);
                     // add the node to the map
                     map.put(gc, vertex);
                     // update the size of the node to match the text
@@ -169,14 +157,13 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
                 // check if the edge is already present
                 if (graph.getEdgesBetween(map.get(source), map.get(target)).length == 0)
-                    graph.insertEdge(parent, null, null, map.get(source),
-                            map.get(target), edgeStyle);
+                    graph.insertEdge(defaultParent, null, null,
+                            map.get(source), map.get(target), edgeStyle);
 
             }
             ((mxGraphComponent)this.parent.drawingPane).validate();
             // make Layout
-            layout.execute(parent);
-
+            layout.execute(defaultParent);
             // make edges look nice
             if (drawUnproper) {
                 setProperness();
@@ -192,23 +179,23 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 // the color white understandable for mxGraph
                         mxHtmlColor.getHexColorString(COLOR_UNKNOWN),
                         // get all cells
-                        graph.getChildCells(parent));
+                        graph.getChildCells(defaultParent));
             }
-
         } finally {
             graph.getModel().endUpdate();
             graph.setCellsResizable(false);
 
         }
+        fitInWondow();
     }
 
     /**
-     * Create the neighbors of the given classes and draw it. and add direct Sub
-     * and superclasses of selected node.
+     * Add direct sub and superclasses of the selected node to the Graph and
+     * draw them
      * 
      * @author leo
      * @date 26.06 3:00
-     * @annotation2 reworked to make it work with makeGraph()
+     * @annotation
      * 
      * 
      */
@@ -247,9 +234,108 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
 
             }
         }
+        result = findMissingEdges(result);
         // add the new subgraph to the mxGraph
         makeGraph(result);
-        centerNode((mxCell)map.get(selected));
+        centerNode(getSelectedCell());
+    }
+
+    /**
+     * 
+     */
+    public void addSuperclasses() {
+        Set<GraphClass> selected = ((GraphClassSet)getSelectedCell().getValue())
+                .getSet();
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> result = new SimpleDirectedGraph<Set<GraphClass>, DefaultEdge>(
+                DefaultEdge.class);
+        Collection<GraphClass> nodes = new HashSet<GraphClass>();
+        // get all possible inclusions
+        for (GraphClass gc : selected) {
+            if (!DataSet.inclGraph.edgesOf(gc).isEmpty()) {
+                for (Inclusion inc : DataSet.inclGraph.edgesOf(gc)) {
+                    nodes.add(inc.getSuper());
+                    nodes.add(inc.getSub());
+                }
+            }
+        }
+        // reduce the graph
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+                .createHierarchySubgraph(nodes);
+        // add selected node to the result graph
+        result.addVertex(selected);
+        // move all vertexes with edges directly connected to the selected node
+        // to a result graph
+        if (edgegraph.incomingEdgesOf(selected) != null) {
+            for (DefaultEdge edge : edgegraph.incomingEdgesOf(selected)) {
+                result.addVertex(edgegraph.getEdgeSource(edge));
+            }
+        }
+        result = findMissingEdges(result);
+        // add the new subgraph to the mxGraph
+        makeGraph(result);
+        // center the graph
+        centerNode(getSelectedCell());
+    }
+
+    /**
+     * 
+     */
+    public void addSubclasses() {
+        Set<GraphClass> selected = ((GraphClassSet)getSelectedCell().getValue())
+                .getSet();
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> result = new SimpleDirectedGraph<Set<GraphClass>, DefaultEdge>(
+                DefaultEdge.class);
+        final Collection<GraphClass> nodes = new HashSet<GraphClass>();
+        // get all possible inclusions
+        for (GraphClass gc : selected) {
+            if (!DataSet.inclGraph.edgesOf(gc).isEmpty()) {
+                for (Inclusion inc : DataSet.inclGraph.edgesOf(gc)) {
+                    nodes.add(inc.getSuper());
+                    nodes.add(inc.getSub());
+                }
+            }
+        }
+        // reduce the graph,
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+                .createHierarchySubgraph(nodes);
+        // add selected node to the result graph
+        result.addVertex(selected);
+        // move all vertexes with edges directly connected to the selected node
+        // to a result graph
+        if (edgegraph.outgoingEdgesOf(selected) != null) {
+            for (DefaultEdge edge : edgegraph.outgoingEdgesOf(selected)) {
+                result.addVertex(edgegraph.getEdgeTarget(edge));
+            }
+        }
+        result = findMissingEdges(result);
+        // add the new subgraph to the mxGraph
+        makeGraph(result);
+        centerNode(getSelectedCell());
+    }
+
+    /**
+     * this method adds all inclusions to the present graph
+     * 
+     * @param result
+     *            , the graphclasses which should be added to the Graph
+     * @author leo
+     * @date 27.06.2013
+     * @annotation works
+     */
+    private SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> findMissingEdges(
+            SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> result) {
+        // add all graphclasses that should be present in the new graph
+        Collection<GraphClass> allNeededClasses = new HashSet<GraphClass>();
+        for (Set<GraphClass> gc : result.vertexSet()) {
+            allNeededClasses.addAll(gc);
+        }
+        Object[] allVertexes = graph.getChildVertices(graph.getDefaultParent());
+        for (Object gc : allVertexes) {
+            Set<GraphClass> value = ((GraphClassSet)((mxCell)gc).getValue())
+                    .getSet();
+            allNeededClasses.addAll(value);
+        }
+        return Algo.createHierarchySubgraph(allNeededClasses);
     }
 
     /**
@@ -317,18 +403,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
             }
             // remove the gathered cells
             Object[] cells = toDelete.toArray(new Object[0]);
-            graph.removeCells(cells);
-            // make Layout
-            // layout.execute(parent);
-            /*
-             * not needed // make edges look nice // if (drawUnproper) { //
-             * setProperness(); // } // // make nodes colorful // if (problem !=
-             * null) { // setComplexityColors(); // // } else { // // make all
-             * cells white // graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
-             * // // the color white understandable for mxGraph //
-             * mxHtmlColor.getHexColorString(COLOR_UNKNOWN), // // get all cells
-             * // graph.getChildCells(parent)); // }
-             */
+            graph.toggleCells(false, cells);
         } finally {
             graph.getModel().endUpdate();
             graph.setCellsResizable(false);
@@ -469,44 +544,16 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
      * @date 14.06; 25.06.13
      * @annotation is a shortcut now
      */
+
     public Object findNode(GraphClass gc, boolean mxCellOrNodeView) {
-        return findNode(gc, mxCellOrNodeView, false);
-    }
-
-    /**
-     * Find the cell for the given graph class or null if not found, true ==
-     * latex label, false == HTML label for comparison
-     * 
-     * @author leo
-     * @date 25.06.13
-     * @annotation should work now
-     */
-    public Object findNode(GraphClass gc, boolean mxCellOrNodeView,
-            boolean latexOrHTML) {
         if (mxCellOrNodeView) {
-            if (latexOrHTML) {
-                for (Object cell : graph.getChildVertices(graph
-                        .getDefaultParent())) {
-                    Set<GraphClass> set = ((GraphClassSet)((mxCell)cell)
-                            .getValue()).getSet();
-                    if (set.contains(gc)) {
-                        System.out
-                                .println(((mxCell)cell).getValue().toString());
-                        return (mxCell)cell;
+            for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
+                Set<GraphClass> set = ((GraphClassSet)((mxCell)cell).getValue())
+                        .getSet();
+                if (set.contains(gc)) {
 
-                    }
-                }
-            } else {
-                for (Object cell : graph.getChildVertices(graph
-                        .getDefaultParent())) {
-                    Set<GraphClass> set = ((GraphClassSet)((mxCell)cell)
-                            .getValue()).getSet();
-                    if (set.contains(gc)) {
-                        System.out
-                                .println(((mxCell)cell).getValue().toString());
-                        return (mxCell)cell;
+                    return (mxCell)cell;
 
-                    }
                 }
             }
         } else {
@@ -613,8 +660,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
      * @annotation reworked
      */
     public void setComplexityColors() {
-        System.out
-                .println("+#################################################Coloring");
+
         graph.getModel().beginUpdate();
         try {
             for (Set<GraphClass> gc : map.keySet()) {
@@ -841,8 +887,6 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
                 if (!c.isEdge()) {
                     setSelectedCell(c);
                     setParent(parent);
-                    System.out
-                            .println("Save parent and cell somewhere useful for GraphClassInformation");
                 }
             }
             return false;
@@ -942,6 +986,27 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         }
     }
 
+    
+    public void fitInWondow() {
+
+        double newScale = 1;
+        mxGraphComponent graphComponent = ((mxGraphComponent)parent.getContentPane().getComponent(0));
+        Dimension graphSize = graphComponent.getGraphControl().getSize();
+        Dimension viewPortSize = graphComponent.getViewport().getSize();
+
+        int gw = (int) graphSize.getWidth();
+        int gh = (int) graphSize.getHeight();
+
+        if (gw > 0 && gh > 0) {
+            int w = (int) viewPortSize.getWidth();
+            int h = (int) viewPortSize.getHeight();
+
+            newScale = Math.min((double) w / gw, (double) h / gh);
+        }
+
+        graphComponent.zoom(newScale);
+
+    }
 }
 
 /* EOF */
