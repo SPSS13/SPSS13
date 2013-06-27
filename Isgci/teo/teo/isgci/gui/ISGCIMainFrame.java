@@ -371,7 +371,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
      */
     protected JComponent createCanvasPanel() {
         mxGraph graph = new mxGraph();
-        graph = setGraphSwitches(graph);
+        setGraphSwitches(graph);
         graph.setAllowDanglingEdges(false);
         mxGraphComponent graphComponent = new mxGraphComponent(graph);
         graphCanvas = new ISGCIGraphCanvas(this, graph);
@@ -387,14 +387,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         return drawingPane;
     }
 
-    // protected JComponent createSidebar() {
-    // final Accordion obj = new Accordion();
-    // obj.setVisible(false);
-    // // obj.setContent("http://www.graphclasses.org/classes/gc_230.html");
-    // return obj;
-    // }
-
-    private mxGraph setGraphSwitches(mxGraph graph) {
+    private void setGraphSwitches(mxGraph graph) {
         graph.setCellsEditable(false);
         graph.setCellsDisconnectable(false);
         graph.setAutoSizeCells(true);
@@ -407,8 +400,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setAllowDanglingEdges(false);
         graph.setConnectableEdges(false);
         graph.setDisconnectOnMove(false);
-        // ((mxGraphComponent)drawingPane).setConnectable(false);
-        return graph;
+        //does not seem to have any effect
+        graph.setMultigraph(false);
     }
 
     /**

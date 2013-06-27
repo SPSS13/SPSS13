@@ -22,7 +22,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import teo.XsltUtil;
-import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.util.Utility;
 
@@ -129,7 +128,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 
     public void show(Component orig, int x, int y) {
         // reworked
-        LatexGraphics latex = ISGCIMainFrame.latex;
+//        LatexGraphics latex = ISGCIMainFrame.latex;
         Set<GraphClass> gcs = getAllClasses(cell);
         int i = 0;
 
@@ -157,7 +156,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @author Fabian Vollmer
      * @date 24.06.2013
      */
-    public static Set<GraphClass> getAllClasses(mxCell c) {
+    public Set<GraphClass> getAllClasses(mxCell c) {
         Set<GraphClass> result = new HashSet<GraphClass>();
         result = ((GraphClassSet)c.getValue()).getSet();
         return result;
