@@ -10,45 +10,56 @@
 
 package teo.isgci.gui;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.event.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Hashtable;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import java.net.*;
-import java.io.*;
-import teo.isgci.db.DataSet;
-import teo.isgci.db.Ref;
-import teo.isgci.problem.*;
-import teo.isgci.gc.ForbiddenClass;
-import teo.isgci.gc.GraphClass;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
-import java.awt.Color;
-import org.jgrapht.*;
+import org.jgrapht.Graphs;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
-import com.mxgraph.canvas.mxGraphics2DCanvas;
-import com.mxgraph.model.mxGraphModel;
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.view.mxCellState;
-import com.mxgraph.view.mxGraph;
-import com.mxgraph.model.mxCell;
+import teo.isgci.db.DataSet;
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.Inclusion;
+import teo.isgci.problem.Problem;
+import teo.isgci.xml.GraphMLWriter;
 
-import com.mxgraph.util.mxPoint;
-import com.mxgraph.util.mxUtils;
+import com.mxgraph.canvas.mxGraphics2DCanvas;
+import com.mxgraph.model.mxCell;
 import com.mxgraph.shape.mxIMarker;
 import com.mxgraph.shape.mxMarkerRegistry;
-
-import teo.isgci.grapht.*;
-import teo.isgci.xml.GraphMLWriter;
-import com.javaswingcomponents.accordion.JSCAccordion;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxPoint;
+import com.mxgraph.util.mxUtils;
+import com.mxgraph.view.mxCellState;
+import com.mxgraph.view.mxGraph;
+import com.mxgraph.view.mxStylesheet;
 
 /*import teo.isgci.gc.GraphClass;
  import java.util.ArrayList;*/
@@ -402,6 +413,13 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setDisconnectOnMove(false);
         //does not seem to have any effect
         graph.setMultigraph(false);
+//        //add ROUNDED style
+//        mxStylesheet stylesheet = graph.getStylesheet();
+//        Hashtable<String, Object> style = new Hashtable<String, Object>();
+//        style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
+//        style.put(mxConstants.STYLE_OPACITY, 50);
+//        style.put(mxConstants.STYLE_FONTCOLOR, "#774400");
+//        stylesheet.putCellStyle("ROUNDED", style);
     }
 
     /**

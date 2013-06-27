@@ -249,6 +249,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         }
         // add the new subgraph to the mxGraph
         makeGraph(result);
+        centerNode((mxCell)map.get(selected));
     }
 
     /**
@@ -269,6 +270,7 @@ public class ISGCIGraphCanvas extends GraphCanvas<Set<GraphClass>, DefaultEdge>
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
                 .createHierarchySubgraph(nodes);
         makeGraph(edgegraph);
+        centerNode(getSelectedCell());
     }
 
     /**

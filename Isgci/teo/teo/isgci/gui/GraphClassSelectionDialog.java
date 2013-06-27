@@ -27,6 +27,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.mxgraph.model.mxCell;
+
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.grapht.BFSWalker;
@@ -164,6 +166,7 @@ public class GraphClassSelectionDialog extends JDialog implements
             // new method needs testing
             parent.graphCanvas.setNodeName(classesList);
             // parent.graphCanvas.updateBounds();
+//TODO Center on Node
 
             setCursor(oldcursor);
             closeDialog();
