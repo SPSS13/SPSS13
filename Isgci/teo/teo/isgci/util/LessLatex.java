@@ -15,7 +15,7 @@ import java.util.Comparator;
 /**
  * Compares two latex strings.
  */
-public class LessLatex implements BinaryPredicate, Comparator {
+public class LessLatex implements BinaryPredicate, Comparator<Object> {
 
     public boolean equals(Object first, Object second) {
         return compare(first, second) == 0;

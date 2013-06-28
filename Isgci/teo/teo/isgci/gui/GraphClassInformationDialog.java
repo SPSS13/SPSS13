@@ -10,28 +10,38 @@
 
 package teo.isgci.gui;
 
-import java.io.IOException;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.Color;
 import java.awt.Container;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-import java.util.Vector;
-import java.util.Iterator;
-import java.util.Collections;
-import java.util.ArrayList;
-import teo.isgci.problem.*;
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
+import teo.isgci.problem.Problem;
 import teo.isgci.util.LessLatex;
 
 
@@ -42,6 +52,10 @@ import teo.isgci.util.LessLatex;
 public class GraphClassInformationDialog extends JDialog
         implements ActionListener, ListSelectionListener {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -688174399373395103L;
     protected ISGCIMainFrame parent;
     protected NodeList<GraphClass> classesList;
     protected NodeList<GraphClass> subClassesList, supClassesList, equClassesList;
@@ -108,7 +122,7 @@ public class GraphClassInformationDialog extends JDialog
         c.weighty = 1.0;
         c.fill = GridBagConstraints.BOTH;
         c.gridwidth = GridBagConstraints.REMAINDER;
-        classesList = new NodeList(parent.latex);
+        classesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         classesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scroller = new JScrollPane(classesList);
         scroller.setPreferredSize(listdim);
@@ -158,14 +172,14 @@ public class GraphClassInformationDialog extends JDialog
         c.insets = new Insets(0, 5, 5, 5);
         c.gridwidth = 2;
         c.weighty = 1.0;
-        supClassesList = new NodeList(parent.latex);
+        supClassesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         scroller = new JScrollPane(supClassesList);
         scroller.setPreferredSize(listdim);
         scroller.setMinimumSize(listdim);
         gridbag.setConstraints(scroller, c);
         contents.add(scroller);
 
-        equClassesList = new NodeList(parent.latex);
+        equClassesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         scroller = new JScrollPane(equClassesList);
         scroller.setPreferredSize(listdim);
         scroller.setMinimumSize(listdim);
@@ -173,7 +187,7 @@ public class GraphClassInformationDialog extends JDialog
         contents.add(scroller);
 
         c.gridwidth = GridBagConstraints.REMAINDER;
-        subClassesList = new NodeList(parent.latex);
+        subClassesList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         scroller = new JScrollPane(subClassesList);
         scroller.setPreferredSize(listdim);
         scroller.setMinimumSize(listdim);
@@ -262,15 +276,12 @@ public class GraphClassInformationDialog extends JDialog
      */
     private synchronized void updateLists(GraphClass target) {
         if (target == null) {
-            Vector empty = new Vector();
+            Vector<GraphClass> empty = new Vector<GraphClass>();
             subClassesList.setListData(empty);
             supClassesList.setListData(empty);
             equClassesList.setListData(empty);
             return;
         }
-
-        Iterator iter;
-        int i;
         ArrayList<GraphClass> sup = Algo.superNodes(target);
         ArrayList<GraphClass> sub = Algo.subNodes(target);
         ArrayList<GraphClass> equ = Algo.equNodes(target);
@@ -331,6 +342,10 @@ public class GraphClassInformationDialog extends JDialog
  * The model for the problem - complexity table in the dialogue.
  */
 class ProblemsModel extends AbstractTableModel {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -2486119492448458734L;
     private static String[] colNames = {"Problem", "Complexity"};
     private GraphClass gc;
 

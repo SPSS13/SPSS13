@@ -41,7 +41,7 @@ public class OpenProblemDialog extends JDialog
         implements ItemListener, ActionListener, ListSelectionListener {
     protected ISGCIMainFrame parent;
     protected JCheckBox fullBoundary;
-    protected NodeList npList, openList, pList;
+    protected NodeList<GraphClass> npList, openList, pList;
     protected ListGroup lists;
     protected Problem problem;
     protected JButton closeButton, showButton, drawButton;
@@ -101,7 +101,7 @@ public class OpenProblemDialog extends JDialog
         c.gridwidth = 1;
         c.weightx = 1.0;
         c.weighty = 1.0;
-        npList = new NodeList(ISGCIMainFrame.latex);
+        npList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         scroller = new JScrollPane(npList);
         scroller.setPreferredSize(listdim);
         lists.add(npList);
@@ -109,7 +109,7 @@ public class OpenProblemDialog extends JDialog
         gridbag.setConstraints(scroller, c);
         contents.add(scroller);
 
-        openList = new NodeList(ISGCIMainFrame.latex);
+        openList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         scroller = new JScrollPane(openList);
         scroller.setPreferredSize(listdim);
         lists.add(openList);
@@ -118,7 +118,7 @@ public class OpenProblemDialog extends JDialog
         contents.add(scroller);
 
         c.gridwidth = GridBagConstraints.REMAINDER;
-        pList = new NodeList(ISGCIMainFrame.latex);
+        pList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         scroller = new JScrollPane(pList);
         scroller.setPreferredSize(listdim);
         lists.add(pList);
@@ -161,7 +161,7 @@ public class OpenProblemDialog extends JDialog
      * Set the contents of the open list.
      */
     private void initListOpen() {
-        Vector v = new Vector();
+        Vector<GraphClass> v = new Vector<GraphClass>();
         for (GraphClass gc : DataSet.getClasses()) {
             Complexity c = problem.getComplexity(gc);
             if (c.isUnknown())

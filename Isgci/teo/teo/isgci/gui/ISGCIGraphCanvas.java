@@ -26,8 +26,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JList;
-
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
@@ -77,7 +75,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent
 
 
     protected Rectangle bounds;
-    protected View markedView;
     protected boolean dragInProcess;
     protected boolean drawUnproper;
     protected LatexGraphics latexgraphics;

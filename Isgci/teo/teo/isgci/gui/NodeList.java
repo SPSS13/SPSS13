@@ -10,26 +10,32 @@
 
 package teo.isgci.gui;
 
-import java.util.Vector;
-import java.util.Iterator;
-import java.util.Collection;
 import java.awt.Component;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Vector;
+
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+
 import teo.isgci.gc.GraphClass;
 
 
 /**
  * A JList filled with ISGCINodes, that are displayed with formatted html.
  */
-public class NodeList<GraphClass> extends JList<GraphClass> {
+public class NodeList<V> extends JList<V> {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8851203581820743547L;
     LatexGraphics latex;
 
 
     /**
      * Create a new list with the given nodes in it.
      */
-    public NodeList(LatexGraphics latex, Vector nodes) {
+    public NodeList(LatexGraphics latex, Vector<V> nodes) {
         super(nodes);
         init(latex);
     }
@@ -89,9 +95,9 @@ public class NodeList<GraphClass> extends JList<GraphClass> {
     /**
      * The renderer for nodes: We use a label with html code in it.
      */
-    protected class NodeListCellRenderer implements ListCellRenderer {
+    protected class NodeListCellRenderer implements ListCellRenderer<Object> {
         public Component getListCellRendererComponent(
-                JList list, Object value, int index,
+                JList<?> list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             LatexLabel label =
                     latex.newLabel(((GraphClass) value).toString());

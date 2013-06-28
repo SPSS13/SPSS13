@@ -11,19 +11,27 @@
 
 package teo.isgci.gui;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-//import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import teo.isgci.db.*;
-import teo.isgci.gui.ISGCIMainFrame;
-import teo.isgci.gui.MessageDialog;
-import teo.isgci.gui.NodeList;
-import teo.isgci.util.BinaryPredicate;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import teo.isgci.db.DataSet;
+import teo.isgci.gc.GraphClass;
 import teo.isgci.util.LessLatex;
-import teo.isgci.util.Utility;
 
 
 /**
@@ -31,10 +39,14 @@ import teo.isgci.util.Utility;
  * 
  */
 public class WebSearch extends JTextField implements Iterator {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7307237767491425666L;
     /** die URL, auf der das Script liegt */
     protected static final String wwwurl=
             "http://www.graphclasses.org/search.cgi";
-    protected static Comparator cmpor = new LessLatex();
+    protected static Comparator<Object> cmpor = new LessLatex();
     protected List<String> ergebnis;
     /** Next element to be given out by nextElement() */
     protected int count;
@@ -67,7 +79,7 @@ public class WebSearch extends JTextField implements Iterator {
                 }});
         frame.getContentPane().add(w);
         frame.setSize(200,50);
-        frame.show();
+        frame.setVisible(true);
     }
              
         
@@ -104,7 +116,7 @@ public class WebSearch extends JTextField implements Iterator {
      * If the search fails an errorbox is displayed and false is returned.
      * Otherwise true is returned.
      */
-    public boolean setListData(ISGCIMainFrame parent, NodeList list) {
+    public boolean setListData(ISGCIMainFrame parent, NodeList<GraphClass> list) {
         String text = getText();
         if (text.length() == 0) {
             list.setListData(DataSet.getClasses());

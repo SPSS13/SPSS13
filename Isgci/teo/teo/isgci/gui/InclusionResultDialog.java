@@ -361,7 +361,7 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
             JComponent p = new JPanel();
             p.setAlignmentX(JComponent.LEFT_ALIGNMENT);
             p.add(new JLabel("by disjointness of"));
-            p.add(new LatexLabel(parent.latex, rel.get1() + " and "
+            p.add(new LatexLabel(ISGCIMainFrame.latex, rel.get1() + " and "
                     + rel.get2()));
             res.add(p);
             refs = p;
@@ -401,8 +401,8 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
             JComponent p = new JPanel();
             p.setAlignmentX(JComponent.LEFT_ALIGNMENT);
             p.add(new JLabel("witnesses:"));
-            p.add(new LatexLabel(parent.latex, why1.toString()));
-            p.add(new LatexLabel(parent.latex, why2.toString()));
+            p.add(new LatexLabel(ISGCIMainFrame.latex, why1.toString()));
+            p.add(new LatexLabel(ISGCIMainFrame.latex, why2.toString()));
             res.add(p);
         } else {
             JPanel p = new JPanel();
@@ -446,7 +446,7 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
                 JComponent p = new JPanel();
                 p.setAlignmentX(JComponent.LEFT_ALIGNMENT);
                 p.add(new JLabel("witness:"));
-                p.add(new LatexLabel(parent.latex, why.toString()));
+                p.add(new LatexLabel(ISGCIMainFrame.latex, why.toString()));
                 res.add(p);
                 return res;
             }
@@ -475,7 +475,7 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
         c.anchor = GridBagConstraints.NORTHWEST;
 
         for (GraphClass gc : classes) {
-            label = new LatexLabel(parent.latex, gc.toString());
+            label = new LatexLabel(ISGCIMainFrame.latex, gc.toString());
             gridbag.setConstraints(label, c);
             panel.add(label);
         }
@@ -504,7 +504,7 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.WEST;
 
         for (int i = path.size() - 1; i >= 0; i--) {
-            LatexLabel l = new LatexLabel(parent.latex, path.get(i).getSub()
+            LatexLabel l = new LatexLabel(ISGCIMainFrame.latex, path.get(i).getSub()
                     .toString());
             constraints.gridwidth = 1;
             gridbag.setConstraints(l, constraints);
@@ -520,11 +520,11 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
 
             LatexLabel subset;
             if (details && DataSet.getEquivalentClasses(sup).contains(sub))
-                subset = new LatexLabel(parent.latex, "   $\\equiv$");
+                subset = new LatexLabel(ISGCIMainFrame.latex, "   $\\equiv$");
             else if (details && e.isProper())
-                subset = new LatexLabel(parent.latex, "   $\\subset$");
+                subset = new LatexLabel(ISGCIMainFrame.latex, "   $\\subset$");
             else
-                subset = new LatexLabel(parent.latex, "   $\\subseteq$");
+                subset = new LatexLabel(ISGCIMainFrame.latex, "   $\\subseteq$");
             constraints.gridwidth = 1;
             gridbag.setConstraints(subset, constraints);
             compo.add(subset);
@@ -538,7 +538,7 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
             compo.add(label1);
         }
 
-        LatexLabel l = new LatexLabel(parent.latex, path.get(0).getSuper()
+        LatexLabel l = new LatexLabel(ISGCIMainFrame.latex, path.get(0).getSuper()
                 .toString());
         constraints.gridwidth = 1;
         gridbag.setConstraints(l, constraints);
@@ -557,6 +557,11 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
         dispose();
     }
 
+    /**
+     * @author leo
+     * @date 28.06
+     * @annotation reworked to work with mxCells
+     */
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
         if (source == okButton) {
