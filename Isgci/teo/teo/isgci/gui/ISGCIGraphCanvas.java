@@ -53,9 +53,8 @@ import com.mxgraph.view.mxGraph;
 /**
  * A canvas that can display an inclusion graph.
  */
-public class ISGCIGraphCanvas extends mxGraphComponent
-        implements MouseListener,
-        MouseMotionListener, MouseWheelListener {
+public class ISGCIGraphCanvas extends mxGraphComponent implements
+        MouseListener, MouseMotionListener, MouseWheelListener {
 
     /**
 	 * 
@@ -72,13 +71,10 @@ public class ISGCIGraphCanvas extends mxGraphComponent
     public static final int CANVASWIDTH = 400, // Initial canvas size
             CANVASHEIGHT = 300;
 
-
-
     protected Rectangle bounds;
     protected boolean dragInProcess;
     protected boolean drawUnproper;
     protected LatexGraphics latexgraphics;
-
 
     /** Margins around drawing */
     protected static final int LEFTMARGIN = 20;
@@ -86,8 +82,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent
     protected static final int TOPMARGIN = 20;
     protected static final int BOTTOMMARGIN = 20;
     protected static final int INTMARGIN = 40; // Internal
-    
-    
+
     /** Colours for different complexities */
     public static final Color COLOR_LIN = Color.green;
     public static final Color COLOR_P = Color.green.darker();
@@ -549,7 +544,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent
         }
     }
 
-
     /**
      * Find the cell for the given graph class or null if not found assumes that
      * you search with an HTML label
@@ -571,12 +565,12 @@ public class ISGCIGraphCanvas extends mxGraphComponent
                 }
             }
         } else {
-//            for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
-//                for (NodeView<Set<GraphClass>, DefaultEdge> v : gv
-//                        .getNodeViews())
-//                    if (v.getNode().contains(gc))
-//                        return v;
-//            }
+            // for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
+            // for (NodeView<Set<GraphClass>, DefaultEdge> v : gv
+            // .getNodeViews())
+            // if (v.getNode().contains(gc))
+            // return v;
+            // }
         }
         return null;
     }
@@ -700,7 +694,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent
         return namingPref;
     }
 
-
     /**
      * @author leo
      * @param classesList
@@ -717,11 +710,11 @@ public class ISGCIGraphCanvas extends mxGraphComponent
                 if (cell != null) {
                     GraphClassSet graphClassSet = (GraphClassSet)cell
                             .getValue();
-                    System.out.println("updated label of: " + graphClassSet.toString() + " to: " + gc.toString());
                     graphClassSet.setLabel(gc);
                     graph.updateCellSize(cell);
                 }
             }
+            layout.execute(graph.getDefaultParent());
         } finally {
             graph.getModel().endUpdate();
             ((mxGraphComponent)parent.drawingPane).refresh();
@@ -986,22 +979,22 @@ public class ISGCIGraphCanvas extends mxGraphComponent
         }
     }
 
-    
     public void fitInWondow() {
 
         double newScale = 1;
-        mxGraphComponent graphComponent = ((mxGraphComponent)parent.getContentPane().getComponent(0));
+        mxGraphComponent graphComponent = ((mxGraphComponent)parent
+                .getContentPane().getComponent(0));
         Dimension graphSize = graphComponent.getGraphControl().getSize();
         Dimension viewPortSize = graphComponent.getViewport().getSize();
 
-        int gw = (int) graphSize.getWidth();
-        int gh = (int) graphSize.getHeight();
+        int gw = (int)graphSize.getWidth();
+        int gh = (int)graphSize.getHeight();
 
         if (gw > 0 && gh > 0) {
-            int w = (int) viewPortSize.getWidth();
-            int h = (int) viewPortSize.getHeight();
+            int w = (int)viewPortSize.getWidth();
+            int h = (int)viewPortSize.getHeight();
 
-            newScale = Math.min((double) w / gw, (double) h / gh);
+            newScale = Math.min((double)w / gw, (double)h / gh);
         }
 
         graphComponent.zoom(newScale);
