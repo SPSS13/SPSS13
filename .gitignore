@@ -7,6 +7,7 @@
 *.o
 *.so
 
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -135,3 +136,4 @@ local.properties
 # jgraph* #
 /JgraphX/
 /JgraphT/
+/Isgci/teo/docs/
