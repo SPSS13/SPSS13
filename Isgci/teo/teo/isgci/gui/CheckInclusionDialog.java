@@ -78,7 +78,7 @@ public class CheckInclusionDialog extends JDialog
         c.insets = new Insets(5, 5, 5, 5);
         c.weightx = 1.0;
         c.weighty = 1.0;
-        firstList = new NodeList<GraphClass>(parent.latex);
+        firstList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         firstList.setListData(DataSet.getClasses());
         firstList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scroller = new JScrollPane(firstList);

@@ -171,7 +171,7 @@ public class IQDialog extends JDialog
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             parent.graphCanvas.drawHierarchy(getNodes());
             
-            parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
+            parent.graphCanvas.setNodeName(((NodeList<GraphClass>)classesList).getSelectedValuesList());
             //TODO make this work again
             //parent.graphCanvas.updateBounds();
             

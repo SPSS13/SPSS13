@@ -40,7 +40,6 @@ import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
 
-import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
@@ -69,6 +68,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private final mxGraph graph;
     private mxCell lastSelected;
     private Object[] highlitedEdges;
+    private Object[] highlitedCells;
 
     public static final int CANVASWIDTH = 400, // Initial canvas size
             CANVASHEIGHT = 300;
@@ -85,7 +85,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     protected static final int BOTTOMMARGIN = 20;
     protected static final int INTMARGIN = 40; // Internal
 
-    /** Colours for different complexities */
+    /** Colors for different complexities */
     public static final Color COLOR_LIN = Color.green;
     public static final Color COLOR_P = Color.green.darker();
     public static final Color COLOR_NPC = Color.red;
@@ -95,9 +95,14 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private final mxHierarchicalLayout layout;
     private Point start;
 
-    private String vertexStyle = "shape=rectangle;perimeter=rectanglePerimeter;rounded=true;fontColor=black;strokeColor=black;spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
-    private String edgeStyle = "strokeColor=black;rounded=true";
-    private String highlitedEdgeStyle = "strokeColor=blue";
+    private final String EDGE_COLOR = "black";
+    private final String CELL_COLOR = "black";
+    private final String ALTERNATE_EDGE_COLOR = "red";
+    private final String ALTERNATE_CELL_COLOR= "red";
+    
+    private final String vertexStyle = "shape=rectangle;perimeter=rectanglePerimeter;rounded=true;fontColor="+ CELL_COLOR +";strokeColor="+ CELL_COLOR +";spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
+    private final String edgeStyle = "strokeColor="+ EDGE_COLOR + ";rounded=true";
+    
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
         super(graph);
@@ -560,25 +565,23 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * @annotation is a shortcut now
      */
 
-    public Object findNode(GraphClass gc, boolean mxCellOrNodeView) {
-        if (mxCellOrNodeView) {
-            for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
-                Set<GraphClass> set = ((GraphClassSet)((mxCell)cell).getValue())
-                        .getSet();
-                if (set.contains(gc)) {
-
-                    return (mxCell)cell;
-
-                }
+    public Object findNode(GraphClass gc) {
+        // search for the cell
+        for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
+            Set<GraphClass> set = ((GraphClassSet)((mxCell)cell).getValue())
+                    .getSet();
+            if (set.contains(gc)) {
+                return (mxCell)cell;
             }
-        } else {
-            // for (GraphView<Set<GraphClass>, DefaultEdge> gv : graphs) {
-            // for (NodeView<Set<GraphClass>, DefaultEdge> v : gv
-            // .getNodeViews())
-            // if (v.getNode().contains(gc))
-            // return v;
-            // }
         }
+        // TODO use the code below, and test it
+        // for (Set<GraphClass> set : map.keySet()) {
+        //
+        // if (set.contains(gc)) {
+        // return map.get(set);
+        // }
+        // }
+        // not found
         return null;
     }
 
@@ -713,7 +716,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         graph.getModel().beginUpdate();
         try {
             for (GraphClass gc : classesList) {
-                mxCell cell = (mxCell)findNode(gc, true);
+                mxCell cell = (mxCell)findNode(gc);
                 if (cell != null) {
                     GraphClassSet graphClassSet = (GraphClassSet)cell
                             .getValue();
@@ -729,15 +732,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 
     }
 
-    /**
-     * reworked
-     * 
-     * @author leo
-     * @param cell
-     */
-    public void markOnly(mxCell cell) {
-        setSelectedCell(cell);
-    }
 
     /**
      * like in the mxGraphComponent does not work :/ ==> Update: WORKS
@@ -761,14 +755,12 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 
     public void centerNode(mxCell cell) {
         mxCellState state = graph.getView().getState(cell);
-
         if (state != null) {
             mxRectangle bounds = state;
-
-            // bounds = (mxRectangle) bounds.clone();
-
+            //get the middle of the selected cell
             Point p = new Point((int)bounds.getCenterX(),
                     (int)bounds.getCenterY());
+            //center the canvas
             ((ISGCIMainFrame)parent).centerCanvas(p);
         }
         setSelectedCell(cell);
@@ -815,14 +807,38 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                     new Object[] { cell });
             this.lastSelected = cell;
             setSidebarConent();
+            
+            
             // reset the old edges
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, "black" , highlitedEdges);
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, EDGE_COLOR,
+                    highlitedEdges);
             setProperness(highlitedEdges);
-            // switch the selected cells
+            // switch the selected edges
             highlitedEdges = graph.getEdges(cell);
             // color the new edges
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, "blue" , highlitedEdges);
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, ALTERNATE_EDGE_COLOR,
+                    highlitedEdges);
             setProperness(highlitedEdges);
+            
+            //reset the style of the old highlighted nodes
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, CELL_COLOR,
+                    highlitedCells);
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
+                    highlitedCells);
+            // get and switch the associated cells
+            Set<Object> temp = new HashSet<Object>();
+            for (Object edge : graph.getIncomingEdges(cell)) {
+                temp.add(((mxCell)edge).getSource());
+            }
+            for (Object edge : graph.getOutgoingEdges(cell)) {
+                temp.add(((mxCell)edge).getTarget());
+            }
+            highlitedCells = temp.toArray();
+            // highlight the cells of the new highlighted nodes
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, ALTERNATE_CELL_COLOR,
+                    highlitedCells);
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
+                    highlitedCells);
 
         } finally {
             graph.getModel().endUpdate();

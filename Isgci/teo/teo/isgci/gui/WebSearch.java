@@ -33,24 +33,21 @@ import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.util.LessLatex;
 
-
 /**
  * Sucht in der DB nach dem Suchbegriff, der im Konstruktor angegeben wird
  * 
  */
-public class WebSearch extends JTextField implements Iterator {
+public class WebSearch extends JTextField implements Iterator<Object> {
     /**
      * 
      */
     private static final long serialVersionUID = 7307237767491425666L;
     /** die URL, auf der das Script liegt */
-    protected static final String wwwurl=
-            "http://www.graphclasses.org/search.cgi";
+    protected static final String wwwurl = "http://www.graphclasses.org/search.cgi";
     protected static Comparator<Object> cmpor = new LessLatex();
     protected List<String> ergebnis;
     /** Next element to be given out by nextElement() */
     protected int count;
-
 
     /**
      * initialisiert Suche nach "graph"
@@ -59,62 +56,60 @@ public class WebSearch extends JTextField implements Iterator {
     public static void main(String[] args) {
         // baut testfenster mit eingabefeld auf
         // und schreibt ergebnisse auf die Konsole
-        JFrame frame=new JFrame("testwindow");
+        JFrame frame = new JFrame("testwindow");
         WebSearch w = new WebSearch();
-        w.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e) {
-                    // Source ermitteln
-                    WebSearch source = (WebSearch)e.getSource();
-                    // Suche ausloesen
-                    try {
-                        source.search(e.getActionCommand(),false);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                    // DEBUG: nach Suche Elemente auf Konsole ausgeben
-                    for (Object o : source.ergebnis)
-                        System.out.println(o);
-                    // Text loeschen
-                    source.setText("");
-                }});
+        w.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Source ermitteln
+                WebSearch source = (WebSearch)e.getSource();
+                // Suche ausloesen
+                try {
+                    source.search(e.getActionCommand(), false);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                // DEBUG: nach Suche Elemente auf Konsole ausgeben
+                for (Object o : source.ergebnis)
+                    System.out.println(o);
+                // Text loeschen
+                source.setText("");
+            }
+        });
         frame.getContentPane().add(w);
-        frame.setSize(200,50);
+        frame.setSize(200, 50);
         frame.setVisible(true);
     }
-             
-        
-    public WebSearch(){
+
+    public WebSearch() {
         super();
         ergebnis = new ArrayList<String>();
         count = 0;
     }
-     
 
     public void search(String search, boolean ignoreCase) throws IOException {
         count = 0;
         ergebnis.clear();
 
         String line;
-        String ic=ignoreCase?"yes":"no";
-        String param="?ignorecase="+ic+"&search="+
-                URLEncoder.encode(search, "UTF-8");
-        URLConnection h = new URL(wwwurl+param).openConnection();
-        BufferedReader in= new BufferedReader(
-                new InputStreamReader(h.getInputStream()));
+        String ic = ignoreCase ? "yes" : "no";
+        String param = "?ignorecase=" + ic + "&search="
+                + URLEncoder.encode(search, "UTF-8");
+        URLConnection h = new URL(wwwurl + param).openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                h.getInputStream()));
         while ((line = in.readLine()) != null) {
             ergebnis.add(line);
-            //System.err.print(ergebnis.size());
-            //System.err.println(ergebnis.lastElement());
+            // System.err.print(ergebnis.size());
+            // System.err.println(ergebnis.lastElement());
         }
         if (ergebnis.size() > 1)
             Collections.sort(ergebnis, cmpor);
     }
 
-
     /**
-     * Set the listdata of the given list using the search results.
-     * If the search fails an errorbox is displayed and false is returned.
-     * Otherwise true is returned.
+     * Set the listdata of the given list using the search results. If the
+     * search fails an errorbox is displayed and false is returned. Otherwise
+     * true is returned.
      */
     public boolean setListData(ISGCIMainFrame parent, NodeList<GraphClass> list) {
         String text = getText();
@@ -136,7 +131,6 @@ public class WebSearch extends JTextField implements Iterator {
         }
         return true;
     }
-    
 
     public boolean hasNext() {
         return count < ergebnis.size();

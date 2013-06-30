@@ -18,8 +18,6 @@ import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import teo.isgci.gc.GraphClass;
-
 
 /**
  * A JList filled with ISGCINodes, that are displayed with formatted html.
@@ -67,8 +65,8 @@ public class NodeList<V> extends JList<V> {
     /**
      * Replace all nodes in this list by the given data.
      */
-    public void setListData(Iterator data) {
-        Vector v = new Vector();
+    public void setListData(Iterator<?> data) {
+        Vector<Object> v = new Vector<Object>();
         while (data.hasNext())
             v.add(data.next());
         setListData(v);
@@ -78,7 +76,7 @@ public class NodeList<V> extends JList<V> {
     /**
      * Replace all nodes in this list by the given data.
      */
-    public void setListData(Collection data) {
+    public void setListData(Collection<?> data) {
         Vector v = new Vector(data);
         setListData(v);
     }
@@ -87,8 +85,8 @@ public class NodeList<V> extends JList<V> {
     /**
      * Return the smallest selected node.
      */
-    public GraphClass getSelectedNode() {
-        return (GraphClass) getSelectedValue();
+    public V getSelectedNode() {
+        return  getSelectedValue();
     }
 
 
@@ -100,7 +98,7 @@ public class NodeList<V> extends JList<V> {
                 JList<?> list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             LatexLabel label =
-                    latex.newLabel(((GraphClass) value).toString());
+                    latex.newLabel(value.toString());
             if (isSelected) {
                 label.setBackground(list.getSelectionBackground());
                 label.setForeground(list.getSelectionForeground());
