@@ -40,6 +40,7 @@ import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
 
+import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
@@ -67,6 +68,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private ISGCIMainFrame parent;
     private final mxGraph graph;
     private mxCell lastSelected;
+    private Object[] highlitedEdges;
 
     public static final int CANVASWIDTH = 400, // Initial canvas size
             CANVASHEIGHT = 300;
@@ -93,8 +95,9 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private final mxHierarchicalLayout layout;
     private Point start;
 
-    private String vertexStyle = "shape=rectangle;fontColor=black;strokeColor=black;spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
-    private String edgeStyle = "strokeColor=black";
+    private String vertexStyle = "shape=rectangle;perimeter=rectanglePerimeter;rounded=true;fontColor=black;strokeColor=black;spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
+    private String edgeStyle = "strokeColor=black;rounded=true";
+    private String highlitedEdgeStyle = "strokeColor=blue";
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
         super(graph);
@@ -155,8 +158,10 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             graph.setCellsResizable(true);
             // Add vertices
             for (Set<GraphClass> gc : edgegraph.vertexSet()) {
-                // check if node is already present
-                if (map.get(gc) == null) {
+                mxCell cell = (mxCell)map.get(gc);
+
+                // check if node is already present, or invisible
+                if (cell == null) {
                     // add the node
                     GraphClassSet graphClasses = new GraphClassSet(gc, this);
                     Object vertex = graph.insertVertex(defaultParent,
@@ -167,25 +172,33 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                     // update the size of the node to match the text
                     graph.updateCellSize(vertex);
                     ((mxCell)vertex).setConnectable(false);
+                } else {
+
+                    // check if node is invisible
+                    if (!cell.isVisible()) {
+                        cell.setVisible(true);
+                        graph.toggleCells(true, graph.getEdges(cell));
+                    }
                 }
             }
-
             // add edges
             for (DefaultEdge edge : edgegraph.edgeSet()) {
                 Set<GraphClass> source = edgegraph.getEdgeSource(edge);
                 Set<GraphClass> target = edgegraph.getEdgeTarget(edge);
                 // check if the edge is already present
-                if (graph.getEdgesBetween(map.get(source), map.get(target)).length == 0)
+                if (graph.getEdgesBetween(map.get(source), map.get(target)).length == 0) {
                     graph.insertEdge(defaultParent, null, null,
                             map.get(source), map.get(target), edgeStyle);
-
+                }
             }
             ((mxGraphComponent)this.parent.drawingPane).validate();
             // make Layout
             layout.execute(defaultParent);
             // make edges look nice
             if (drawUnproper) {
-                setProperness();
+                // set properness for all possible cells
+                setProperness(graph.getAllEdges(new Object[] { graph
+                        .getDefaultParent() }));
             }
 
             // make nodes colorful
@@ -200,6 +213,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                         // get all cells
                         graph.getChildCells(defaultParent));
             }
+            graph.refresh();
         } finally {
             graph.getModel().endUpdate();
             graph.setCellsResizable(false);
@@ -369,9 +383,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      */
 
     public void drawSuperSub(Collection<GraphClass> nodes) {
-        // add all present nodes to the collection
-        nodes.addAll(getClasses());
-        // reduce the graph
+        // reduce the graph th Sets og aquivalent Graphclasses
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
                 .createHierarchySubgraph(nodes);
         makeGraph(edgegraph);
@@ -397,18 +409,11 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         try {
             graph.setCellsResizable(true);
 
-            ArrayList<Object> toDelete = new ArrayList<Object>();
+            ArrayList<Object> toHide = new ArrayList<Object>();
             // add nodes to an array to delete them
             for (Set<GraphClass> gc : edgegraph.vertexSet()) {
-                if (((mxGraphModel)graph.getModel()).getCell(gc.toString()) != null
-                        && getSelectedCell() != ((mxGraphModel)graph.getModel())
-                                .getCell(gc.toString())) {
-                    Object cell = ((mxGraphModel)graph.getModel()).getCell(gc
-                            .toString());
-                    toDelete.add(cell);
-                    // delete from map
-                    map.remove(gc);
-                }
+                Object cell = map.get(gc);
+                toHide.add(cell);
             }
             // add Edges to an array to delete them
             for (DefaultEdge edge : edgegraph.edgeSet()) {
@@ -417,11 +422,11 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                                 .getCell(edge.toString())) {
                     Object cell = ((mxGraphModel)graph.getModel()).getCell(edge
                             .toString());
-                    toDelete.add(cell);
+                    toHide.add(cell);
                 }
             }
             // remove the gathered cells
-            Object[] cells = toDelete.toArray(new Object[0]);
+            Object[] cells = toHide.toArray(new Object[0]);
             graph.toggleCells(false, cells);
         } finally {
             graph.getModel().endUpdate();
@@ -449,11 +454,14 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 super.visit(v);
             }
         }.run();
+        // retain just the classes, that are already in the Graph
+        result.retainAll(getClasses());
+        result.removeAll(((GraphClassSet)getSelectedCell().getValue()).getSet());
         return result;
     }
 
     /**
-     * Get the nodes for adding and Deleting SubNodes
+     * Get the nodes for adding and deleting subnodes
      * 
      * @author philipp
      * @date 22.06 9:30
@@ -472,6 +480,9 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 super.visit(v);
             }
         }.run();
+        // retain just the classes, that are already in the Graph
+        result.retainAll(getClasses());
+        result.removeAll(((GraphClassSet)getSelectedCell().getValue()).getSet());
         return result;
     }
 
@@ -484,13 +495,9 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      */
     public List<GraphClass> getClasses() {
         List<GraphClass> result = new ArrayList<GraphClass>();
-        for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
-            GraphClassSet graphClassSet = (GraphClassSet)((mxCell)cell)
-                    .getValue();
-            if (graphClassSet != null) {
-                for (GraphClass gc : graphClassSet.getSet()) {
-                    result.add(gc);
-                }
+        for (Set<GraphClass> gcs : map.keySet()) {
+            for (GraphClass gc : gcs) {
+                result.add(gc);
             }
         }
         return result;
@@ -579,7 +586,8 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         drawUnproper = b;
         graph.getModel().beginUpdate();
         try {
-            setProperness();
+            setProperness(graph.getAllEdges(new Object[] { graph
+                    .getDefaultParent() }));
         } finally {
             ((mxGraphComponent)parent.drawingPane).refresh();
             graph.getModel().endUpdate();
@@ -595,29 +603,30 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * @annotation edited completely, works just fine, you need to call
      *             model.beginupdate and model.end update in calling methode
      */
-    protected void setProperness() {
-        for (Object cell : graph.getAllEdges(new Object[] { graph
-                .getDefaultParent() })) {
-            // safety check
-            if (((mxCell)cell).isEdge()) {
-                if (drawUnproper) {
-                    GraphClassSet source = (GraphClassSet)((mxCell)cell)
-                            .getSource().getValue();
+    protected void setProperness(Object[] edges) {
+        if (edges != null && edges.length > 0) {
+            for (Object cell : edges) {
+                // safety check
+                if (cell != null && ((mxCell)cell).isEdge()) {
+                    if (drawUnproper) {
+                        GraphClassSet source = (GraphClassSet)((mxCell)cell)
+                                .getSource().getValue();
 
-                    GraphClassSet target = (GraphClassSet)((mxCell)cell)
-                            .getTarget().getValue();
-                    List<Inclusion> path = GAlg.getPath(DataSet.inclGraph,
-                            source.getSet().iterator().next(), target.getSet()
-                                    .iterator().next());
-                    if (!(Algo.isPathProper(path) || Algo.isPathProper(Algo
-                            .makePathProper(path)))) {
-                        // uses color gray for drawing improper inclusions
-                        graph.setCellStyles("startArrow", "improper",
+                        GraphClassSet target = (GraphClassSet)((mxCell)cell)
+                                .getTarget().getValue();
+                        List<Inclusion> path = GAlg.getPath(DataSet.inclGraph,
+                                source.getSet().iterator().next(), target
+                                        .getSet().iterator().next());
+                        if (!(Algo.isPathProper(path) || Algo.isPathProper(Algo
+                                .makePathProper(path)))) {
+                            // uses color gray for drawing improper inclusions
+                            graph.setCellStyles("startArrow", "improper",
+                                    new Object[] { cell });
+                        }
+                    } else {
+                        graph.setCellStyles("startArrow", "none",
                                 new Object[] { cell });
                     }
-                } else {
-                    graph.setCellStyles("startArrow", "none",
-                            new Object[] { cell });
                 }
             }
         }
@@ -627,10 +636,10 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * Set coloring for p and repaint.
      */
     public void setProblem(Problem p) {
+        // repaint only on a change
         if (problem != p) {
             problem = p;
             setComplexityColors();
-            // repaint();
         }
     }
 
@@ -667,7 +676,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * @annotation reworked
      */
     public void setComplexityColors() {
-
         graph.getModel().beginUpdate();
         try {
             for (Set<GraphClass> gc : map.keySet()) {
@@ -675,7 +683,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 graph.setCellStyles(mxConstants.STYLE_FILLCOLOR,
                         mxHtmlColor.getHexColorString(complexityColor(gc)),
                         new Object[] { cell });
-
             }
         } finally {
             ((mxGraphComponent)parent.drawingPane).refresh();
@@ -729,7 +736,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * @param cell
      */
     public void markOnly(mxCell cell) {
-        graph.getSelectionModel().setCell(cell);
+        setSelectedCell(cell);
     }
 
     /**
@@ -792,20 +799,35 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * few Methods needed for "Show Information" and other Functionality
      * 
      * @param cell
-     *            and parent
-     * @author philipp
-     * @date 21.06
+     * @author philipp, leo
+     * @date 21.06, 30.06.
+     * @annotation now changes teh e
      */
 
     public void setSelectedCell(mxCell cell) {
-        if (lastSelected != null && cell != lastSelected) {
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
-                    new Object[] { lastSelected });
+        graph.getModel().beginUpdate();
+        try {
+            if (lastSelected != null && cell != lastSelected) {
+                graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
+                        new Object[] { lastSelected });
+            }
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+                    new Object[] { cell });
+            this.lastSelected = cell;
+            setSidebarConent();
+            // reset the old edges
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, "black" , highlitedEdges);
+            setProperness(highlitedEdges);
+            // switch the selected cells
+            highlitedEdges = graph.getEdges(cell);
+            // color the new edges
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, "blue" , highlitedEdges);
+            setProperness(highlitedEdges);
+
+        } finally {
+            graph.getModel().endUpdate();
         }
-        graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
-                new Object[] { cell });
-        this.lastSelected = cell;
-        setSidebarConent();
+        // FIXME hides improper information
     }
 
     public mxCell getSelectedCell() {
@@ -858,12 +880,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 
             event.consume();
         }
-
-        // if (!dragInProcess) {
-        // markSetShadow(true);
-        // dragInProcess = true;
-        // }
-        // markSetShadowAnchorLocation(event.getPoint());
         super.repaint();
     }
 

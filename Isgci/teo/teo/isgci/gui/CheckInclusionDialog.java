@@ -110,7 +110,7 @@ public class CheckInclusionDialog extends JDialog
         gridbag.setConstraints(secondSearch, c);
         content.add(secondSearch);
 
-        secondList = new NodeList(parent.latex);
+        secondList = new NodeList<GraphClass>(ISGCIMainFrame.latex);
         secondList.setListData(DataSet.getClasses());
         secondList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scroller = new JScrollPane(secondList);
