@@ -22,7 +22,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -44,8 +47,14 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.shape.mxIMarker;
 import com.mxgraph.shape.mxMarkerRegistry;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxEvent;
+import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxPoint;
+import com.mxgraph.util.mxUndoManager;
+import com.mxgraph.util.mxUndoableEdit;
 import com.mxgraph.util.mxUtils;
+import com.mxgraph.util.mxEventSource.mxIEventListener;
+import com.mxgraph.util.mxUndoableEdit.mxUndoableChange;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
 
@@ -73,7 +82,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
 
     // The menu
     protected JMenuItem miNew, miExport, miExit;
-    protected JMenuItem miSidebar, miNaming, miSearching, miDrawUnproper;
+    protected JMenuItem miSidebar, miNaming, miSearching, miFitInWindow,
+            miDrawUnproper, miAnimation, miUndo, miRedo, miLayout;
     protected JMenuItem miSelectGraphClasses, miCheckInclusion;
     protected JMenuItem miGraphClassInformation;
     protected JMenuItem miCut, miCopy, miPaste, miDelete, miSelectAll;
@@ -89,6 +99,18 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     protected JMenuItem miShowSubclasses;
     protected JMenuItem miHideSubclasses;
     protected JMenu selectionMenu;
+    protected JMenu editMenu;
+    protected mxUndoManager undoManager;
+
+    /**
+     * Needed to add undoManager to the Mainframe
+     */
+    protected mxIEventListener undoHandler = new mxIEventListener() {
+        public void invoke(Object source, mxEventObject evt) {
+            undoManager.undoableEditHappened((mxUndoableEdit)evt
+                    .getProperty("edit"));
+        }
+    };
 
     // This is where the drawing goes.
     // rework
@@ -134,49 +156,55 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         // set Color for improper Inclusions
         addImproperInclColor();
 
+        undoManager = new mxUndoManager();
+
         sidebar = new Accordion();
         sidebar.setVisible(false);
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
         getContentPane().add("West", sidebar);
         registerListeners();
+
+        /*
+         * Add undomanager and undohandler to the mainframe by registrating to
+         * the graph in the mxGraphComponent
+         */
+        ((mxGraphComponent)drawingPane).getGraph().getModel()
+                .addListener(mxEvent.UNDO, undoHandler);
+        ((mxGraphComponent)drawingPane).getGraph().getView()
+                .addListener(mxEvent.UNDO, undoHandler);
+        mxIEventListener undoHandler = new mxIEventListener() {
+            public void invoke(Object source, mxEventObject evt) {
+                List<mxUndoableChange> changes = ((mxUndoableEdit)evt
+                        .getProperty("edit")).getChanges();
+                ((mxGraphComponent)drawingPane).getGraph().setSelectionCells(
+                        ((mxGraphComponent)drawingPane).getGraph()
+                                .getSelectionCellsForChanges(changes));
+            }
+        };
+        // add Listeners to the undomanager
+        undoManager.addListener(mxEvent.UNDO, undoHandler);
+        undoManager.addListener(mxEvent.REDO, undoHandler);
+
         setLocation(100, 20);
         this.setSize(500, 400);
         setVisible(true);
+
     }
 
-    /**
-     * Write the entire database in GraphML to isgcifull.graphml.
-     */
-    // private void writeGraphML() {
-    // TODO
-    // OutputStreamWriter out = null;
-    //
-    // SimpleDirectedGraph<GraphClass, Inclusion> g = new
-    // SimpleDirectedGraph<GraphClass, Inclusion>(
-    // Inclusion.class);
-    // Graphs.addGraph(g, DataSet.inclGraph);
-    // GAlg.transitiveReductionBruteForce(g);
-    //
-    // try {
-    // out = new OutputStreamWriter(new FileOutputStream(
-    // "isgcifull.graphml"), "UTF-8");
-    // GraphMLWriter w = new GraphMLWriter(out, GraphMLWriter.MODE_PLAIN,
-    // true, false);
-    // w.startDocument();
-    // for (GraphClass gc : g.vertexSet()) {
-    // w.writeNode(gc.getID(), gc.toString(), Color.WHITE);
-    // }
-    // for (Inclusion e : g.edgeSet()) {
-    // w.writeEdge(e.getSuper().getID(), e.getSub().getID(),
-    // e.isProper());
-    // }
-    // w.endDocument();
-    // out.close();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
+    public Action bind(String name, final Action action) {
+        AbstractAction newAction = new AbstractAction(name, null) {
+            public void actionPerformed(ActionEvent e) {
+                action.actionPerformed(new ActionEvent(getContentPane()
+                        .getComponent(0), e.getID(), e.getActionCommand()));
+            }
+        };
+
+        newAction.putValue(Action.SHORT_DESCRIPTION,
+                action.getValue(Action.SHORT_DESCRIPTION));
+
+        return newAction;
+    }
 
     /**
      * Creates and attaches the necessary eventlisteners.
@@ -190,7 +218,12 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         miNaming.addActionListener(this);
         miSidebar.addActionListener(this);
         miSearching.addActionListener(this);
+        miFitInWindow.addActionListener(this);
         miDrawUnproper.addItemListener(this);
+        miAnimation.addActionListener(this);
+        miUndo.addActionListener(this);
+        miRedo.addActionListener(this);
+        miLayout.addActionListener(this);
         miSelectGraphClasses.addActionListener(this);
         miCheckInclusion.addActionListener(this);
         miGraphClassInformation.addActionListener(this);
@@ -209,6 +242,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         miAbout.addActionListener(this);
         // Bind MenuListener for disabling
         selectionMenu.addMenuListener(this);
+        editMenu.addMenuListener(this);
 
         //
 
@@ -242,15 +276,30 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
          */
 
         viewMenu = new JMenu("View");
-        viewMenu.add(miSidebar = new JMenuItem("Details visible"));
+        // viewMenu.add(bind(mxResources.get("undo"), new HistoryAction(true)));
+        // viewMenu.add(bind(mxResources.get("redo"), new
+        // HistoryAction(false)));
+
+        viewMenu.add(miFitInWindow = new JMenuItem("Fit in window"));
         viewMenu.add(miSearching = new JMenuItem("Search in drawing..."));
         viewMenu.add(miNaming = new JMenuItem("Naming preference..."));
+        viewMenu.add(miSidebar = new JCheckBoxMenuItem("Details visible"));
         viewMenu.add(miDrawUnproper = new JCheckBoxMenuItem(
                 "Mark unproper inclusions", true));
         /*
          * menu = new ScaleMenu(); menu.setEnabled(false); viewMenu.add(menu);
          */
         mainMenuBar.add(viewMenu);
+
+        // Create new Menu to add Editing Options -> Redo, Undo
+        editMenu = new JMenu("Editing");
+
+        editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", true));
+        editMenu.add(miUndo = new JMenuItem("Undo"));
+        editMenu.add(miRedo = new JMenuItem("Redo"));
+        editMenu.add(miLayout = new JMenuItem("Vertical Hierarchical Layout"));
+
+        mainMenuBar.add(editMenu);
 
         // Create new Menu to add to the TopMenuBar named Selected
         selectionMenu = new JMenu("Selection");
@@ -503,6 +552,25 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             JDialog search = new SearchDialog(this);
             search.setLocation(50, 50);
             search.setVisible(true);
+        } else if (object == miFitInWindow) {
+            graphCanvas.fitInWindow();
+        } else if (object == miAnimation) {
+            if (graphCanvas.getAnimation()) {
+                graphCanvas.setAnimation(false);
+            } else {
+                graphCanvas.setAnimation(true);
+            }
+
+        } else if (object == miUndo) {
+            // undo last change in the drawingPane
+            undoManager.undo();
+            ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
+        } else if (object == miRedo) {
+            // redo change in the drawingPane
+            undoManager.redo();
+            ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
+        } else if (object == miLayout) {
+            graphCanvas.graphLayout();
         } else if (object == miSidebar) {
             sidebar.toggleVisibility();
             graphCanvas.setSidebarConent();
