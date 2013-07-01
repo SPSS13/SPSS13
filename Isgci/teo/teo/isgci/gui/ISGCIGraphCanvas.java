@@ -175,9 +175,11 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private void makeGraph(
             SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph) {
         Object defaultParent = graph.getDefaultParent();
-        //experimental code, do not delete
-        //graph.insertVertex(graph.getDefaultParent(), "defaultParent", "dontshowme" , 0, 0, getWidth(), getHeight(), "fontColor=white;strokeColor=white;fillColor=white");
-       
+        // experimental code, do not delete
+        // graph.insertVertex(graph.getDefaultParent(), "defaultParent",
+        // "dontshowme" , 0, 0, getWidth(), getHeight(),
+        // "fontColor=white;strokeColor=white;fillColor=white");
+
         graph.getModel().beginUpdate();
         try {
             graph.setCellsResizable(true);
@@ -261,7 +263,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 graph.setCellsResizable(false);
 
             } finally {
-				getGraphControl().setTranslate(new Point(20,20));
+                getGraphControl().setTranslate(new Point(20, 20));
                 graph.getModel().endUpdate();
             }
         }
@@ -995,7 +997,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                             event.getYOnScreen() - parent.getY());
                 }
             }
-//			parent.getUndoM().
+            // parent.getUndoM().
             return true;
         }
     }
@@ -1042,9 +1044,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             graph.getModel().endUpdate();
         }
     }
-
-	
-	
 
     /**
      * Zoom to Fit in Window: when calling this method and the graphbounds are
@@ -1163,7 +1162,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     /**
      * Return whether Animation is activated
      * 
-	 * @return boolean value whether animation is activated or not
+     * @return boolean value whether animation is activated or not
      */
     public boolean getAnimation() {
         return animationActivated;

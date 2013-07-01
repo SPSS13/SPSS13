@@ -284,9 +284,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         editMenu = new JMenu("Editing");
 
         editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", true));
-		editMenu.add(miUndo = new JMenuItem("Undo..."));
-		editMenu.add(miRedo = new JMenuItem("Redo..."));
-		editMenu.add(miLayout = new JMenuItem("Relayout"));
+        editMenu.add(miUndo = new JMenuItem("Undo..."));
+        editMenu.add(miRedo = new JMenuItem("Redo..."));
+        editMenu.add(miLayout = new JMenuItem("Relayout"));
 
         mainMenuBar.add(editMenu);
 
@@ -417,7 +417,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         mxGraph graph = new mxGraph();
         setGraphSwitches(graph);
         graph.setAllowDanglingEdges(false);
-		CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
+        CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
         graphCanvas = new ISGCIGraphCanvas(this, graph);
         drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
@@ -428,11 +428,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         drawingPane.setBackground(Color.white);
         ((mxGraphComponent)drawingPane).setPanning(true);
         ((mxGraphComponent)drawingPane).setDragEnabled(false);
-		((mxGraphComponent) drawingPane).setToolTips(true);
+        ((mxGraphComponent)drawingPane).setToolTips(true);
         return drawingPane;
     }
-
-	
 
     private void setGraphSwitches(mxGraph graph) {
         graph.setCellsEditable(false);
@@ -451,8 +449,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setDisconnectOnMove(false);
         // does not seem to have any effect
         graph.setMultigraph(false);
-        
-        
+
     }
 
     /**
@@ -547,10 +544,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             search.setLocation(50, 50);
             search.setVisible(true);
         } else if (object == miFitInWindow) {
-			// fits current shown graph into the window (nearly complete)
+            // fits current shown graph into the window (nearly complete)
             graphCanvas.fitInWindow();
         } else if (object == miAnimation) {
-			// sets animation activated or not
+            // sets animation activated or not
             if (graphCanvas.getAnimation()) {
                 graphCanvas.setAnimation(false);
             } else {
@@ -567,10 +564,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
         } else if (object == miLayout) {
 
-			graphCanvas.graphLayout();
-			if (!graphCanvas.getAnimation()) {
-				((mxGraphComponent) drawingPane).refresh();
-			}
+            graphCanvas.animateGraph();;
+            if (!graphCanvas.getAnimation()) {
+                ((mxGraphComponent)drawingPane).refresh();
+            }
         } else if (object == miSidebar) {
             sidebar.toggleVisibility();
             graphCanvas.setSidebarConent();
@@ -607,33 +604,32 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             open.setVisible(true);
         } else if (object == miShowInformation) {
 
-			if (((mxCell) ((mxGraphComponent) drawingPane).getGraph()
-					.getSelectionCell()).isEdge()) {
-				GraphClassSet edgesource = (GraphClassSet) ((mxCell) ((mxCell) ((mxGraphComponent) graphCanvas)
-						.getGraph().getSelectionCell()).getSource()).getValue();
-				GraphClassSet edgetarget = (GraphClassSet) ((mxCell) ((mxCell) ((mxGraphComponent) graphCanvas)
-						.getGraph().getSelectionCell()).getTarget()).getValue();
-				JDialog d = InclusionResultDialog.newInstance(
-						graphCanvas.getParent(), edgesource.getLabel(),
-						edgetarget.getLabel());
-				d.setLocation(50, 50);
-				d.pack();
-				d.setVisible(true);
-			} else {
-            JDialog d = new GraphClassInformationDialog(
-                    graphCanvas.getParent(), ((GraphClassSet)graphCanvas
-                            .getSelectedCell().getValue()).getLabel());
-            d.setLocation(50, 50);
-            d.pack();
-            d.setSize(800, 600);
-            d.setVisible(true);
-			}
+            if (((mxCell)((mxGraphComponent)drawingPane).getGraph()
+                    .getSelectionCell()).isEdge()) {
+                GraphClassSet edgesource = (GraphClassSet)((mxCell)((mxCell)((mxGraphComponent)graphCanvas)
+                        .getGraph().getSelectionCell()).getSource()).getValue();
+                GraphClassSet edgetarget = (GraphClassSet)((mxCell)((mxCell)((mxGraphComponent)graphCanvas)
+                        .getGraph().getSelectionCell()).getTarget()).getValue();
+                JDialog d = InclusionResultDialog.newInstance(
+                        graphCanvas.getParent(), edgesource.getLabel(),
+                        edgetarget.getLabel());
+                d.setLocation(50, 50);
+                d.pack();
+                d.setVisible(true);
+            } else {
+                JDialog d = new GraphClassInformationDialog(
+                        graphCanvas.getParent(), ((GraphClassSet)graphCanvas
+                                .getSelectedCell().getValue()).getLabel());
+                d.setLocation(50, 50);
+                d.pack();
+                d.setSize(800, 600);
+                d.setVisible(true);
+            }
         } else if (object == miShowDetails) {
             sidebar.setVisible(true);
             graphCanvas.setSidebarConent();
         } else if (object == miShowNeighbours) {
-            graphCanvas.drawNeighbours(graphCanvas
-                    .getSelectedCell());
+            graphCanvas.drawNeighbours(graphCanvas.getSelectedCell());
         } else if (object == miHideNeighbours) {
 
             // new
@@ -669,8 +665,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         Object object = event.getSource();
 
         if (object == miDrawUnproper) {
-			graphCanvas
-					.setDrawUnproper(((JCheckBoxMenuItem) object).getState());
+            graphCanvas.setDrawUnproper(((JCheckBoxMenuItem)object).getState());
         }
     }
 
@@ -680,9 +675,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     }
 
     /**
-	 * sets the color (grey) for improper inclusions while using mxIMarker of
-	 * the Library JGraphX
-	 * 
+     * sets the color (grey) for improper inclusions while using mxIMarker of
+     * the Library JGraphX
+     * 
      * @author Matthias Miller
      * @date 25.06.2013
      * @annotation sets the color (grey) for improper inclusion while using
@@ -723,9 +718,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         mxMarkerRegistry.registerMarker("improper", tmp);
     }
 
-	public mxUndoManager getUndoM() {
-		return undoManager;
-}
+    public mxUndoManager getUndoM() {
+        return undoManager;
+    }
 }
 
 /* EOF */
