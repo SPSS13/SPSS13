@@ -13,19 +13,21 @@ package teo.isgci.gui;
 //import.java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import java.util.Vector;
 import teo.isgci.db.*;
 import teo.isgci.problem.*;
 
 public class ProblemsMenu extends JMenu implements ActionListener {
-    protected Vector items;
+
+    protected Vector<JRadioButtonMenuItem> items;
     protected ISGCIMainFrame parent;
     protected ButtonGroup group;
 
     public ProblemsMenu(ISGCIMainFrame parent, String label) {
         super(label);
         this.parent = parent;
-        items = new Vector();
+        items = new Vector<JRadioButtonMenuItem>();
         group = new ButtonGroup();
 
         addRadio("None", true);

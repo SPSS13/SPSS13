@@ -50,6 +50,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxPoint;
+import com.mxgraph.util.mxRectangle;
 import com.mxgraph.util.mxUndoManager;
 import com.mxgraph.util.mxUndoableEdit;
 import com.mxgraph.util.mxUtils;
@@ -433,7 +434,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
         drawingPane.getVerticalScrollBar().setUnitIncrement(100);
-        drawingPane.setBounds(20, 20, 500, 400);
+        drawingPane.setLocation(100, 100);
         drawingPane.getViewport().setOpaque(false);
         drawingPane.setOpaque(true);
         drawingPane.setBackground(Color.white);
@@ -459,6 +460,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setDisconnectOnMove(false);
         // does not seem to have any effect
         graph.setMultigraph(false);
+        
+        
     }
 
     /**
@@ -570,7 +573,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             undoManager.redo();
             ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
         } else if (object == miLayout) {
-            graphCanvas.graphLayout();
+            graphCanvas.animateGraph();
         } else if (object == miSidebar) {
             sidebar.toggleVisibility();
             graphCanvas.setSidebarConent();
@@ -617,18 +620,23 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             sidebar.setVisible(true);
             graphCanvas.setSidebarConent();
         } else if (object == miShowNeighbours) {
-            graphCanvas.drawNeighbours();
+            graphCanvas.drawNeighbours(graphCanvas
+                    .getSelectedCell());
         } else if (object == miHideNeighbours) {
 
             // new
         } else if (object == miShowSuperclasses) {
-            graphCanvas.drawSuperSub(graphCanvas.getSuperNodes());
+            graphCanvas.drawSuperSub(graphCanvas.getSuperNodes(graphCanvas
+                    .getSelectedCell()));
         } else if (object == miHideSuperclasses) {
-            graphCanvas.deleteSuperSub(graphCanvas.getSuperNodes());
+            graphCanvas.deleteSuperSub(graphCanvas.getSuperNodes(graphCanvas
+                    .getSelectedCell()));
         } else if (object == miShowSubclasses) {
-            graphCanvas.drawSuperSub(graphCanvas.getSubNodes());
+            graphCanvas.drawSuperSub(graphCanvas.getSubNodes(graphCanvas
+                    .getSelectedCell()));
         } else if (object == miHideSubclasses) {
-            graphCanvas.deleteSuperSub(graphCanvas.getSubNodes());
+            graphCanvas.deleteSuperSub(graphCanvas.getSubNodes(graphCanvas
+                    .getSelectedCell()));
         } else if (object == miAbout) {
             JDialog select = new AboutDialog(this);
             select.setLocation(50, 50);

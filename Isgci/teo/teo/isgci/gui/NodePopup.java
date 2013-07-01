@@ -43,7 +43,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private JMenuItem miAddSuperclasses;
     private JMenuItem miAddSubclasses;
     private JMenuItem miShowNeighbours;
-    
+
     JMenu nameItem;
     // rework
     mxCell cell;
@@ -57,7 +57,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         this.graph = graph;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
-        add(miShowDetails= new JMenuItem("Show sidebar"));
+        add(miShowDetails = new JMenuItem("Show sidebar"));
         addSeparator();
         add(nameItem = new JMenu("Change name"));
         addSeparator();
@@ -100,47 +100,49 @@ public class NodePopup extends JPopupMenu implements ActionListener {
                     CHANGENAME.length());
             graph.getModel().beginUpdate();
             try {
-                GraphClassSet graphClassSet = (GraphClassSet)cell
-                        .getValue();
-                //search the label matching the selection
+                GraphClassSet graphClassSet = (GraphClassSet)cell.getValue();
+                // search the label matching the selection
                 GraphClass label = null;
-                for(GraphClass gc : getAllClasses(cell)){
+                for (GraphClass gc : getAllClasses(cell)) {
 
-                    if(gc.toString().equals(fullname)){
+                    if (gc.toString().equals(fullname)) {
                         label = gc;
                     }
                 }
-                //set the label
+                // set the label
                 graphClassSet.setLabel(label);
-                //FIXME Layout machen
+                // FIXME Layout machen
                 graph.updateCellSize(cell);
             } finally {
                 graph.getModel().endUpdate();
             }
-        }  else if (source == miShowDetails) {
+        } else if (source == miShowDetails) {
             parent.sidebar.setVisible(true);
-            parent.graphCanvas.setSidebarConent();  
-        }else if (source == miShowSuperclasses) {
-            parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSuperNodes());
+            parent.graphCanvas.setSidebarConent();
+        } else if (source == miShowSuperclasses) {
+            parent.graphCanvas.drawSuperSub(parent.graphCanvas
+                    .getSuperNodes(cell));
         } else if (source == miHideSuperclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas
-                    .getSuperNodes());
+                    .getSuperNodes(cell));
         } else if (source == miShowSubclasses) {
-            parent.graphCanvas.drawSuperSub(parent.graphCanvas.getSubNodes());
+            parent.graphCanvas.drawSuperSub(parent.graphCanvas
+                    .getSubNodes(cell));
         } else if (source == miHideSubclasses) {
-            parent.graphCanvas.deleteSuperSub(parent.graphCanvas.getSubNodes());
+            parent.graphCanvas.deleteSuperSub(parent.graphCanvas
+                    .getSubNodes(cell));
         } else if (source == miShowNeighbours) {
-            parent.graphCanvas.drawNeighbours();
-        }else if (source == miAddSubclasses) {
-            parent.graphCanvas.addSubclasses();
-        }else if (source == miAddSuperclasses) {
-            parent.graphCanvas.addSuperclasses();
+            parent.graphCanvas.drawNeighbours(cell);
+        } else if (source == miAddSubclasses) {
+            parent.graphCanvas.addSubclasses(cell);
+        } else if (source == miAddSuperclasses) {
+            parent.graphCanvas.addSuperclasses(cell);
         }
     }
 
     public void show(Component orig, int x, int y) {
         // reworked
-//        LatexGraphics latex = ISGCIMainFrame.latex;
+        // LatexGraphics latex = ISGCIMainFrame.latex;
         Set<GraphClass> gcs = getAllClasses(cell);
         int i = 0;
 
@@ -187,7 +189,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @date 24.06.2013
      */
     public static GraphClass searchName(mxCell c) {
-       return ((GraphClassSet)c.getValue()).getLabel();
+        return ((GraphClassSet)c.getValue()).getLabel();
     }
 }
 
