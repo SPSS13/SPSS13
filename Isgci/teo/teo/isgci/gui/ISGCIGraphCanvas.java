@@ -28,6 +28,8 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.undo.UndoManager;
+
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
@@ -50,6 +52,7 @@ import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
 import com.mxgraph.util.mxRectangle;
@@ -184,9 +187,17 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 				if (cell == null) {
 					// add the node
 					GraphClassSet graphClasses = new GraphClassSet(gc, this);
-					Object vertex = graph.insertVertex(defaultParent,
-							gc.toString(), graphClasses, 20, 20, 80, 30,
-							vertexStyle);
+                    Object vertex;
+                    if (getSelectedCell() != null) {
+                        vertex = graph.insertVertex(defaultParent, gc
+                                .toString(), graphClasses, getSelectedCell()
+                                .getGeometry().getX(), getSelectedCell()
+                                .getGeometry().getY(), 80, 30, vertexStyle);
+                    } else {
+                        vertex = graph.insertVertex(defaultParent,
+                                gc.toString(), graphClasses, 20, 20, 80, 30,
+                                vertexStyle);
+                    }
 					// add the node to the map
 					map.put(gc, vertex);
 					// update the size of the node to match the text
@@ -239,8 +250,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 			}
 			graph.refresh();
 		} finally {
-			graph.getModel().endUpdate();
-			graph.getModel().beginUpdate();
 			try {
 				if (neighbours && animationActivated) {
 					neighbours = false;
@@ -254,6 +263,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 				graph.setCellsResizable(false);
 
 			} finally {
+				getGraphControl().setTranslate(new Point(20,20));
 				graph.getModel().endUpdate();
 			}
 		}
@@ -883,7 +893,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 			// highlight the cells of the new highlighted nodes
 			graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
 					ALTERNATE_CELL_COLOR, highlitedCells);
-			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "4",
+			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
 					highlitedCells);
 
 		} finally {
@@ -984,6 +994,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 							event.getYOnScreen() - parent.getY());
 				}
 			}
+//			parent.getUndoM().
 			return true;
 		}
 
@@ -1057,6 +1068,9 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 		}
 	}
 
+	
+	
+
 	/**
 	 * Zoom to Fit in Window: when calling this method and the graphbounds are
 	 * smaller than 3/4 of the windowsize, then will the graph zoomed to nearly
@@ -1127,7 +1141,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 				layout.execute(cell);
 			} finally {
 				mxMorphing morph = new mxMorphing(((mxGraphComponent) parent
-						.getContentPane().getComponent(0)), 50, 1.5, 10);
+						.getContentPane().getComponent(0)), 50, 1.15 ,30);
 
 				morph.addListener(mxEvent.DONE, new mxIEventListener() {
 
@@ -1156,7 +1170,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 	/**
 	 * Return whether Animation is activated
 	 * 
-	 * @return boolean value whether animation is activated ot not
+	 * @return boolean value whether animation is activated or not
 	 */
 	public boolean getAnimation() {
 		return animationActivated;

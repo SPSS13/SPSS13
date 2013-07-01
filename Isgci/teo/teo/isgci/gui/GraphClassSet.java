@@ -69,4 +69,5 @@ public class GraphClassSet {
     public String toString() {
         return XsltUtil.latex(label.toString());
     }
+    
 }
