@@ -28,6 +28,8 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.undo.UndoManager;
+
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
@@ -50,6 +52,7 @@ import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
 import com.mxgraph.util.mxRectangle;
@@ -245,8 +248,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 
             graph.refresh();
         } finally {
-            graph.getModel().endUpdate();
-            graph.getModel().beginUpdate();
             try {
                 if (neighbours && animationActivated) {
                     neighbours = false;
@@ -260,6 +261,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 graph.setCellsResizable(false);
 
             } finally {
+				getGraphControl().setTranslate(new Point(20,20));
                 graph.getModel().endUpdate();
             }
         }
@@ -993,6 +995,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                             event.getYOnScreen() - parent.getY());
                 }
             }
+//			parent.getUndoM().
             return true;
         }
     }
@@ -1039,6 +1042,9 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             graph.getModel().endUpdate();
         }
     }
+
+	
+	
 
     /**
      * Zoom to Fit in Window: when calling this method and the graphbounds are
@@ -1157,7 +1163,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     /**
      * Return whether Animation is activated
      * 
-     * @return boolean value whether animation is activated ot not
+	 * @return boolean value whether animation is activated or not
      */
     public boolean getAnimation() {
         return animationActivated;

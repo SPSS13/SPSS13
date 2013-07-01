@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
@@ -47,10 +48,12 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.shape.mxIMarker;
 import com.mxgraph.shape.mxMarkerRegistry;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.swing.mxGraphComponent.mxGraphControl;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
+import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUndoManager;
 import com.mxgraph.util.mxUndoableEdit;
 import com.mxgraph.util.mxUtils;
@@ -190,21 +193,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         setLocation(100, 20);
         this.setSize(500, 400);
         setVisible(true);
-
-    }
-
-    public Action bind(String name, final Action action) {
-        AbstractAction newAction = new AbstractAction(name, null) {
-            public void actionPerformed(ActionEvent e) {
-                action.actionPerformed(new ActionEvent(getContentPane()
-                        .getComponent(0), e.getID(), e.getActionCommand()));
-            }
-        };
-
-        newAction.putValue(Action.SHORT_DESCRIPTION,
-                action.getValue(Action.SHORT_DESCRIPTION));
-
-        return newAction;
     }
 
     /**
@@ -296,9 +284,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         editMenu = new JMenu("Editing");
 
         editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", true));
-        editMenu.add(miUndo = new JMenuItem("Undo"));
-        editMenu.add(miRedo = new JMenuItem("Redo"));
-        editMenu.add(miLayout = new JMenuItem("Vertical Hierarchical Layout"));
+		editMenu.add(miUndo = new JMenuItem("Undo..."));
+		editMenu.add(miRedo = new JMenuItem("Redo..."));
+		editMenu.add(miLayout = new JMenuItem("Relayout"));
 
         mainMenuBar.add(editMenu);
 
@@ -429,7 +417,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         mxGraph graph = new mxGraph();
         setGraphSwitches(graph);
         graph.setAllowDanglingEdges(false);
-        mxGraphComponent graphComponent = new mxGraphComponent(graph);
+		CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
         graphCanvas = new ISGCIGraphCanvas(this, graph);
         drawingPane = graphComponent;
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
@@ -440,8 +428,11 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         drawingPane.setBackground(Color.white);
         ((mxGraphComponent)drawingPane).setPanning(true);
         ((mxGraphComponent)drawingPane).setDragEnabled(false);
+		((mxGraphComponent) drawingPane).setToolTips(true);
         return drawingPane;
     }
+
+	
 
     private void setGraphSwitches(mxGraph graph) {
         graph.setCellsEditable(false);
@@ -556,8 +547,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             search.setLocation(50, 50);
             search.setVisible(true);
         } else if (object == miFitInWindow) {
+			// fits current shown graph into the window (nearly complete)
             graphCanvas.fitInWindow();
         } else if (object == miAnimation) {
+			// sets animation activated or not
             if (graphCanvas.getAnimation()) {
                 graphCanvas.setAnimation(false);
             } else {
@@ -573,7 +566,11 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             undoManager.redo();
             ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
         } else if (object == miLayout) {
-            graphCanvas.animateGraph();
+
+			graphCanvas.graphLayout();
+			if (!graphCanvas.getAnimation()) {
+				((mxGraphComponent) drawingPane).refresh();
+			}
         } else if (object == miSidebar) {
             sidebar.toggleVisibility();
             graphCanvas.setSidebarConent();
@@ -609,6 +606,20 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             open.setLocation(50, 50);
             open.setVisible(true);
         } else if (object == miShowInformation) {
+
+			if (((mxCell) ((mxGraphComponent) drawingPane).getGraph()
+					.getSelectionCell()).isEdge()) {
+				GraphClassSet edgesource = (GraphClassSet) ((mxCell) ((mxCell) ((mxGraphComponent) graphCanvas)
+						.getGraph().getSelectionCell()).getSource()).getValue();
+				GraphClassSet edgetarget = (GraphClassSet) ((mxCell) ((mxCell) ((mxGraphComponent) graphCanvas)
+						.getGraph().getSelectionCell()).getTarget()).getValue();
+				JDialog d = InclusionResultDialog.newInstance(
+						graphCanvas.getParent(), edgesource.getLabel(),
+						edgetarget.getLabel());
+				d.setLocation(50, 50);
+				d.pack();
+				d.setVisible(true);
+			} else {
             JDialog d = new GraphClassInformationDialog(
                     graphCanvas.getParent(), ((GraphClassSet)graphCanvas
                             .getSelectedCell().getValue()).getLabel());
@@ -616,6 +627,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             d.pack();
             d.setSize(800, 600);
             d.setVisible(true);
+			}
         } else if (object == miShowDetails) {
             sidebar.setVisible(true);
             graphCanvas.setSidebarConent();
@@ -657,7 +669,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         Object object = event.getSource();
 
         if (object == miDrawUnproper) {
-            graphCanvas.setDrawUnproper(((JCheckBoxMenuItem)object).getState());
+			graphCanvas
+					.setDrawUnproper(((JCheckBoxMenuItem) object).getState());
         }
     }
 
@@ -667,6 +680,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     }
 
     /**
+	 * sets the color (grey) for improper inclusions while using mxIMarker of
+	 * the Library JGraphX
+	 * 
      * @author Matthias Miller
      * @date 25.06.2013
      * @annotation sets the color (grey) for improper inclusion while using
@@ -706,6 +722,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         };
         mxMarkerRegistry.registerMarker("improper", tmp);
     }
+
+	public mxUndoManager getUndoM() {
+		return undoManager;
+}
 }
 
 /* EOF */
