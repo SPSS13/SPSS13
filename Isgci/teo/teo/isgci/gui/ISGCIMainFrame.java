@@ -708,7 +708,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                     canvas.fillShape(poly);
                 }
 
-                canvas.getGraphics().setPaint(Color.LIGHT_GRAY);
+                Color gray = new Color(180,180,180);
+                canvas.getGraphics().setPaint(gray);
                 canvas.fillShape(poly);
                 canvas.getGraphics().draw(poly);
 

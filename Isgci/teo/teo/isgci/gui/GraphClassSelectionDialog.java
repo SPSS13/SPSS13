@@ -15,8 +15,10 @@ import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -26,6 +28,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import com.mxgraph.model.mxCell;
+import com.mxgraph.swing.mxGraphComponent;
 
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
@@ -167,8 +172,16 @@ public class GraphClassSelectionDialog extends JDialog implements
             parent.graphCanvas.drawHierarchy(getNodes());
             // new method needs testing
             parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
+            ArrayList<GraphClass> list = (ArrayList<GraphClass>) classesList.getSelectedValuesList();
+            parent.drawingPane.getComponent(0).validate();
+            if(list.size() > 1){
+            	parent.graphCanvas.fitInWindow();
+            } else if (list.size() == 1) {
+            	mxCell cell = (mxCell) parent.graphCanvas.findNode(
+                        ((NodeList<GraphClass>)classesList).getSelectedNode());
+                parent.graphCanvas.centerNode(cell);	
+			}
             // parent.graphCanvas.updateBounds();
-//TODO Center on Node
             
             setCursor(oldcursor);
             closeDialog();
