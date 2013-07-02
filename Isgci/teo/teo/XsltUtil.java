@@ -64,6 +64,10 @@ public class XsltUtil {
     public static String latex(String str) {
         return converter.html(str);
     }
+    
+    public static String latexTruncated(String str){
+    	return converter.htmlTruncated(str);
+    }
 }
 
 

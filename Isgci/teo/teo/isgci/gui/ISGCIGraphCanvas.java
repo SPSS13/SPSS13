@@ -908,13 +908,13 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         return lastSelected;
 
     }
-
+    
     public void setSidebarConent() {
         if (parent.sidebar.isVisible()) {
             if (getSelectedCell() != null) {
                 if (parent.sidebar.getContent() != NodePopup.searchName(
                         getSelectedCell()).getID()) {
-                    parent.sidebar.setContent(NodePopup.searchName(
+                    parent.sidebar.changeContent(NodePopup.searchName(
                             getSelectedCell()).getID());
                 }
             }

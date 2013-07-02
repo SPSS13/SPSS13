@@ -1,6 +1,6 @@
 package teo.isgci.gui;
 
-//author: Nicolas Siebeck, Matthias Kraus
+//author: Nicolas Siebeck
 //date: 07.06.13
 
 import java.awt.BorderLayout;

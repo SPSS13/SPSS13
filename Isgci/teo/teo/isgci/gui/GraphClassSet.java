@@ -12,7 +12,8 @@ import teo.isgci.gc.GraphClass;
  * 
  * @author leo
  * @date 12.06. 9:30; 25.06.
- * @annotation reworked, now the label holds the representing GraphClass, if you really really need a string use toString ;)
+ * @annotation reworked, now the label holds the representing GraphClass, if you
+ *             really really need a string use toString ;)
  * @param <V>
  */
 public class GraphClassSet {
@@ -50,8 +51,9 @@ public class GraphClassSet {
     }
 
     /**
-     * @author leo
-     * @param label, the GraphClass representing the Node
+     * @author leo, matze
+     * @param label
+     *            , the GraphClass representing the Node
      * @annotation
      */
     public void setLabel(GraphClass label) {
@@ -67,7 +69,16 @@ public class GraphClassSet {
 
     @Override
     public String toString() {
-        return XsltUtil.latex(label.toString());
+        return XsltUtil.latexTruncated(label.toString());// ALARM: Das muss zu
+                                                         // nur .latex ohne
+                                                         // Truncated geändert
+                                                         // werden
+        // wir wissen nur leider nicht, wo wir die Methode unten aufrufen müssen
+        // :D
     }
-    
+
+    public String toShortString() {
+        return XsltUtil.latexTruncated(label.toString());
+    }
+
 }
