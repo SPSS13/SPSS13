@@ -103,7 +103,10 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private mxHierarchicalLayout layout;
     private Point start;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1a4eb8f49809e5a6e53c17e542865c9607125fa3
 
     private final String EDGE_COLOR = "black";
     private final String CELL_COLOR = "black";
@@ -152,8 +155,14 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         layout = new mxHierarchicalLayout(graph);
         layout.setParentBorder(0);
         layout.setResizeParent(true);
+<<<<<<< HEAD
+=======
         layout.setInterHierarchySpacing(100);
         this.graphControl = ((CustomGraphComponent)parent.drawingPane).getGraphControl();
+        graph.setMinimumGraphSize(new mxRectangle(10, 10, 500, 400));
+        graph.setBorder(100);
+        graph.getView().setTranslate(new mxPoint(10, 10));
+>>>>>>> 1a4eb8f49809e5a6e53c17e542865c9607125fa3
     }
 
     /**
@@ -273,7 +282,8 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 graph.setCellsResizable(false);
 
             } finally {
-            	graph.getModel().endUpdate();
+                getGraphControl().setTranslate(new Point(20, 20));
+                graph.getModel().endUpdate();
             }
         }
     }
@@ -326,7 +336,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         result = findMissingEdges(result);
         // add the new subgraph to the mxGraph
         makeGraph(result);
-        parent.drawingPane.getComponent(0).validate();
         centerNode(getSelectedCell());
     }
 
@@ -1123,11 +1132,8 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             } else {
                 newScale = Math.min(w / gw, h / gh);
             }
-            if(newScale < 0.05){
-            	newScale = 0.05;
-            }
+
             zoom(newScale);
-            
 
         } finally {
             graph.getModel().endUpdate();
@@ -1166,7 +1172,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                         graph.refresh();
                         graph.getModel().endUpdate();
                         parent.drawingPane.getComponent(0).validate();
-                        centerNode(getSelectedCell());
                     }
 
                 });
