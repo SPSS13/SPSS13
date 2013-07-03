@@ -27,10 +27,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.swing.undo.UndoManager;
 
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
@@ -54,9 +50,9 @@ import com.mxgraph.swing.util.mxMorphing;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
+import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
@@ -108,6 +104,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private Point start;
 
 
+
     private final String EDGE_COLOR = "black";
     private final String CELL_COLOR = "black";
     private final String ALTERNATE_EDGE_COLOR = "#3d86b8";
@@ -155,6 +152,11 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         layout = new mxHierarchicalLayout(graph);
         layout.setParentBorder(0);
         layout.setResizeParent(true);
+        layout.setInterHierarchySpacing(100);
+        this.graphControl = ((CustomGraphComponent)parent.drawingPane).getGraphControl();
+        graph.setMinimumGraphSize(new mxRectangle(10, 10, 500, 400));
+        graph.setBorder(100);
+        graph.getView().setTranslate(new mxPoint(10, 10));
     }
 
     /**
@@ -191,11 +193,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private void makeGraph(
             SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph) {
         Object defaultParent = graph.getDefaultParent();
-        // experimental code, do not delete
-        // graph.insertVertex(graph.getDefaultParent(), "defaultParent",
-        // "dontshowme" , 0, 0, getWidth(), getHeight(),
-        // "fontColor=white;strokeColor=white;fillColor=white");
-
         graph.getModel().beginUpdate();
         try {
             graph.setCellsResizable(true);
@@ -861,14 +858,15 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 	 * @date 01.07
 	 */
 	public void mouseMoved(MouseEvent e) {
-		Object cell = ((mxGraphComponent) parent.drawingPane).getCellAt(
+		mxCell cell = (mxCell)((mxGraphComponent) parent.drawingPane).getCellAt(
 				e.getX(), e.getY());
 		if(cell!=null){
+		    if(cell.isVertex())
 			((mxGraphComponent) parent.drawingPane).getGraphControl()
 			.setCursor(pointcursor);
 		}else{			
-			((mxGraphComponent) parent.drawingPane).getGraphControl()
-					.setCursor(grabcursor);
+//			((mxGraphComponent) parent.drawingPane).getGraphControl()
+//					.setCursor(grabcursor);
 		}
 	}
 
@@ -1195,6 +1193,43 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public boolean getAnimation() {
         return animationActivated;
     }
+    
+//    public static void toPdf(File file, mxGraph graph) throws IOException {
+////        file = checkExtension(file, ".pdf"); // ensures that .pdf is the extension
+//        FileOutputStream fos = new FileOutputStream(file);
+//        try {
+//            mxRectangle bounds = ((mxGraph) graph).getGraphBounds();
+//            Rectangle rectangle = new Rectangle( (int)bounds.getWidth(), (int) bounds.getHeight());
+//            Document document = new Document(rectangle);
+//            PdfWriter writer = PdfWriter.getInstance(document, fos);
+//            document.open();
+//            PdfCanvasFactory pdfCanvasFactory = new PdfCanvasFactory(writer.getDirectContent());
+//            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
+//                    .drawCells((mxGraph) graph, null, 1, null, pdfCanvasFactory);
+//            canvas.getGraphics().dispose();
+//            document.close();
+//        }
+//        catch (DocumentException e) {
+//            throw new IOException(e.getLocalizedMessage());
+//        }
+//        finally {
+//            if (fos != null) {
+//              fos.close();
+//            }
+//        }
+//    }
+//     private static final class PdfCanvasFactory extends CanvasFactory {
+//        private final PdfContentByte cb;
+//
+//        private PdfCanvasFactory(PdfContentByte cb) {
+//            this.cb = cb;
+//        }
+//
+//        public mxICanvas createCanvas(int width, int height) {
+//            Graphics2D g2 = cb.createGraphics(width, height);
+//            return new mxGraphics2DCanvas(g2);
+//        }
+//    }
 }
 
 /* EOF */

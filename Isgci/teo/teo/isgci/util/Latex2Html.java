@@ -57,24 +57,10 @@ public class Latex2Html extends Latex {
     }
 
     public String html(String s) {
-
         HtmlState state = new HtmlState(s);
         drawLatexPart(state, true);
-
-        String htmlName = state.target.toString();
-
-        try {
-            htmlName = "<div><table><tr><td style=\"margin-top:2;\">"
-                    + htmlName + "</td></tr></table></div>";
-
-            String panelTextBegin = "<html><body style=\"max-height:4;\">";
-            String panelTextEnd = "</body></html>";
-            htmlName = panelTextBegin + htmlName + panelTextEnd;
-
-        } catch (Exception e) {
-        }
-
-        return htmlName;
+        return "<div><table><tr><td style=\"margin-top:2;\">"
+                + state.target.toString() + "</td></tr></table></div>";
     }
 
     protected State startSuper(State s) {
