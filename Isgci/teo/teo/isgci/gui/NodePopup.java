@@ -13,7 +13,10 @@ package teo.isgci.gui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JDialog;
@@ -21,8 +24,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import teo.XsltUtil;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleDirectedGraph;
+
+import teo.isgci.db.Algo;
+import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.Inclusion;
 import teo.isgci.util.Utility;
 
 import com.mxgraph.model.mxCell;
@@ -42,7 +50,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private JMenuItem miShowDetails;
     private JMenuItem miAddSuperclasses;
     private JMenuItem miAddSubclasses;
-    private JMenuItem miShowNeighbours;
+    private JMenuItem miAddNeighbours;
 
     JMenu nameItem;
     // rework
@@ -50,40 +58,247 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     mxGraph graph;
 
     private static String CHANGENAME = "Name: ";
+    private HashMap<Set<GraphClass>, Object> map;
 
-    public NodePopup(ISGCIMainFrame parent, mxGraph graph) {
+    public NodePopup(ISGCIMainFrame parent, mxGraph graph,
+            HashMap<Set<GraphClass>, Object> map) {
         super();
         this.parent = parent;
         this.graph = graph;
+        this.map = map;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
         add(miShowDetails = new JMenuItem("Show sidebar"));
         addSeparator();
         add(nameItem = new JMenu("Change name"));
         addSeparator();
-        add(miShowSuperclasses = new JMenuItem("Show superclasses"));
-        add(miHideSuperclasses = new JMenuItem("Hide superclasses"));
+        add(miHideSuperclasses = new JMenuItem("superclasses - hide"));
+        add(miShowSuperclasses = new JMenuItem("superclasses - show"));
+        add(miAddSuperclasses = new JMenuItem("superclasses - add"));
         addSeparator();
-        add(miShowSubclasses = new JMenuItem("Show subclasses"));
-        add(miHideSubclasses = new JMenuItem("Hide subclasses"));
+        add(miHideSubclasses = new JMenuItem("subclasses - hide"));
+        add(miShowSubclasses = new JMenuItem("subclasses - show"));
+        add(miAddSubclasses = new JMenuItem("subclasses - add"));
         addSeparator();
-        add(miAddSuperclasses = new JMenuItem("Add superclasses"));
-        add(miAddSubclasses = new JMenuItem("Add subclasses"));
-        add(miShowNeighbours = new JMenuItem("Add neighbours"));
-        addSeparator();
+        add(miAddNeighbours = new JMenuItem("neighbours - add"));
+
+        // register Listeners
         miHideSubclasses.addActionListener(this);
         miHideSuperclasses.addActionListener(this);
         miShowSubclasses.addActionListener(this);
         miShowSuperclasses.addActionListener(this);
-        miShowNeighbours.addActionListener(this);
+        miAddNeighbours.addActionListener(this);
         miShowDetails.addActionListener(this);
         miAddSubclasses.addActionListener(this);
         miAddSuperclasses.addActionListener(this);
         infoItem.addActionListener(this);
     }
 
+    /**
+     * returns true if any superclass of the cell is visible; returns false if
+     * all superclass of the cell is visible; returns false if there are no
+     * superclasses
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean someSuperclassesVisible() {
+        return checkVisibility(true, true);
+    }
+
+    /**
+     * returns true if any superclass of the cell is invisible; returns false if
+     * all superclass of the cell are visible; returns false if there are no
+     * superclasses
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean someSuperclassesInvisible() {
+        return checkVisibility(true, false);
+    }
+
+    /**
+     * returns true if any subclass of the cell is visible; returns false if all
+     * subclass of the cell is invisible; returns false if there are no
+     * subclasses
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean someSubclassesVisible() {
+        return checkVisibility(false, true);
+    }
+
+    /**
+     * returns true if any subclass of the cell is invisible; returns false if
+     * all subclass of the cell are visible; returns false if there are no
+     * subclasses
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean someSubclassesInvisible() {
+        return checkVisibility(false, false);
+    }
+
+    /**
+     * (superclassesORsubclasses ? superclasses : subclasses) (visibility ?
+     * visible : invisible)
+     * 
+     * @param superclassesORsubclasses
+     * @param visibility
+     * @return
+     */
+    private boolean checkVisibility(boolean superclassesORsubclasses,
+            boolean visibility) {
+        // if the cell has associated edges in the given direction
+        Object[] edges;
+
+        LinkedList<Object> queue = new LinkedList<Object>();
+        // add root cell
+        queue.add(cell);
+        // find all subclasses with a BFS Search
+        while (!queue.isEmpty()) {
+            edges = (superclassesORsubclasses ? graph.getIncomingEdges(queue
+                    .pollFirst()) : graph.getOutgoingEdges(queue.pollFirst()));
+            for (Object edge : edges) {
+                // check if the cell is visible
+                if (visibility ? ((mxCell)edge).isVisible() : !((mxCell)edge)
+                        .isVisible())
+                    return true;
+                // otherwise add it to the queue
+                queue.add((superclassesORsubclasses ? ((mxCell)edge)
+                        .getSource() : ((mxCell)edge).getTarget()));
+            }
+        }
+        return false;
+    }
+
+    /**
+     * checks if all direct superclasses of the associated cell are present in
+     * the graph and visible
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean superclassesAddable() {
+        Set<GraphClass> classes = ((GraphClassSet)cell.getValue()).getSet();
+        // get all neighbours
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = getNeighbours(classes);
+        // check for all edges if they are already drawn
+        for (DefaultEdge edge : edgegraph.incomingEdgesOf(classes)) {
+            mxCell source = (mxCell)map.get(edgegraph.getEdgeSource(edge));
+            // the superclass is not present
+            if (source == null)
+                return true;
+            // the superclass is invisible
+            if (!source.isVisible())
+                return true;
+        }
+        // all superclasses are present and visible
+        return false;
+    }
+
+    /**
+     * checks if all direct sub- and superclasses of the associated cell are
+     * present in the graph and visible
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean neighboursAddable() {
+        Set<GraphClass> classes = ((GraphClassSet)cell.getValue()).getSet();
+        // get all neighbours
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = getNeighbours(classes);
+        // check for all edges if they are already drawn
+        for (DefaultEdge edge : edgegraph.outgoingEdgesOf(classes)) {
+            mxCell target = (mxCell)map.get(edgegraph.getEdgeTarget(edge));
+            // the subclass is not present
+            if (target == null)
+                return true;
+            // the subclass is invisible
+            if (!target.isVisible())
+                return true;
+        }
+        // -> all subclasses are present and visible
+        // check for all incoming edges if they are already drawn
+        for (DefaultEdge edge : edgegraph.incomingEdgesOf(classes)) {
+            mxCell source = (mxCell)map.get(edgegraph.getEdgeSource(edge));
+            // the superclass is not present
+            if (source == null)
+                return true;
+            // the superclass is invisible
+            if (!source.isVisible())
+                return true;
+        }
+        // -> all superclasses are present and visible
+        return false;
+    }
+
+    /**
+     * checks if all direct subclasses of the associated cell are present in the
+     * graph and visible
+     * 
+     * @return
+     * @author leo
+     */
+    private boolean subclassesAddable() {
+        Set<GraphClass> classes = ((GraphClassSet)cell.getValue()).getSet();
+        // get all neighbours
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = getNeighbours(classes);
+        // check for all edges if they are already drawn
+        // check for all outgoing edges if they are already drawn
+        for (DefaultEdge edge : edgegraph.outgoingEdgesOf(classes)) {
+            mxCell target = (mxCell)map.get(edgegraph.getEdgeTarget(edge));
+            // the subclass is not present
+            if (target == null)
+                return true;
+            // the subclass is invisible
+            if (!target.isVisible())
+                return true;
+        }
+        // all subclasses are present and visible
+        return false;
+    }
+
+    /**
+     * returns a SimpleDirectedGraph including all direct neighbours of the
+     * given node
+     * 
+     * @param classes
+     * @return
+     */
+    private SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> getNeighbours(
+            Set<GraphClass> classes) {
+        HashSet<GraphClass> nodes = new HashSet<GraphClass>();
+        for (GraphClass gc : classes) {
+            if (!DataSet.inclGraph.edgesOf(gc).isEmpty()) {
+                for (Inclusion inc : DataSet.inclGraph.edgesOf(gc)) {
+                    nodes.add(inc.getSuper());
+                    nodes.add(inc.getSub());
+                }
+            }
+        }
+        return Algo.createHierarchySubgraph(nodes);
+    }
+
     public void setNode(mxCell cell) {
         this.cell = cell;
+        // toggle menus
+        // superclasses
+        boolean superclassesAddable = superclassesAddable();
+        boolean subclassesAddable = subclassesAddable();
+        miHideSuperclasses.setEnabled(someSuperclassesVisible());
+        miShowSuperclasses.setEnabled(someSuperclassesInvisible());
+        miAddSuperclasses.setEnabled(superclassesAddable);
+        // subclasses
+        miHideSubclasses.setEnabled(someSubclassesVisible());
+        miShowSubclasses.setEnabled(someSubclassesInvisible());
+        miAddSubclasses.setEnabled(subclassesAddable);
+        // neighbours
+        miAddNeighbours.setEnabled(superclassesAddable || subclassesAddable);
+
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -134,7 +349,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         } else if (source == miHideSubclasses) {
             parent.graphCanvas.deleteSuperSub(parent.graphCanvas
                     .getSubNodes(cell));
-        } else if (source == miShowNeighbours) {
+        } else if (source == miAddNeighbours) {
             parent.graphCanvas.drawNeighbours(cell);
         } else if (source == miAddSubclasses) {
             parent.graphCanvas.addSubclasses(cell);
@@ -174,9 +389,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @date 24.06.2013
      */
     public Set<GraphClass> getAllClasses(mxCell c) {
-        Set<GraphClass> result = new HashSet<GraphClass>();
-        result = ((GraphClassSet)c.getValue()).getSet();
-        return result;
+        return ((GraphClassSet)c.getValue()).getSet();
     }
 
     /**

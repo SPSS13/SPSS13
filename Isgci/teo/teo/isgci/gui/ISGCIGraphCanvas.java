@@ -145,7 +145,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         this.graph = graph;
         namingPref = Algo.NamePref.BASIC;
         // setWidthFunc(new NodeWidthFunc());
-        nodePopup = new NodePopup(parent, graph);
+        nodePopup = new NodePopup(parent, graph, map);
         edgePopup = new EdgePopup(parent);
         add(nodePopup);
         add(edgePopup);
@@ -899,7 +899,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             // color the new edges
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
                     ALTERNATE_EDGE_COLOR, highlitedEdges);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
                     highlitedEdges);
             setProperness(highlitedEdges);
 
@@ -920,7 +920,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             // highlight the cells of the new highlighted nodes
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
                     ALTERNATE_CELL_COLOR, highlitedCells);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
                     highlitedCells);
 
         } finally {
