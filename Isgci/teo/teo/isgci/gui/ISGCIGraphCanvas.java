@@ -79,7 +79,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private final mxGraph graph;
     private mxCell lastSelected;
     private boolean neighbours = false;
-    private boolean animationActivated = true;
+    private boolean animationActivated = false;
     private Object[] highlitedEdges;
     private Object[] highlitedCells;
 
@@ -107,7 +107,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private mxHierarchicalLayout layout;
     private Point start;
 
-    private Timer timer;
 
     private final String EDGE_COLOR = "black";
     private final String CELL_COLOR = "black";
@@ -156,7 +155,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         layout = new mxHierarchicalLayout(graph);
         layout.setParentBorder(0);
         layout.setResizeParent(true);
-        timer = new Timer();
     }
 
     /**

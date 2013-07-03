@@ -97,10 +97,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     protected JMenu miOpenProblem, miColourProblem;
     protected JMenuItem miSmallgraphs, miHelp, miAbout;
     // Selection MenuItems
-    protected JMenuItem miShowInformation;
-    protected JMenuItem miShowDetails;
-    protected JMenuItem miShowNeighbours;
-    protected JMenuItem miHideNeighbours;
+    protected JMenuItem miShowInformation, miShowDetails, miAddSuperclasses, miAddSubclasses, miAddNeighbours;
     protected JMenuItem miShowSuperclasses;
     protected JMenuItem miHideSuperclasses;
     protected JMenuItem miShowSubclasses;
@@ -243,12 +240,14 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         miSelectGraphClasses.addActionListener(this);
         miCheckInclusion.addActionListener(this);
         miGraphClassInformation.addActionListener(this);
+        miAddSuperclasses.addActionListener(this);
+        miAddSubclasses.addActionListener(this);
         miShowSuperclasses.addActionListener(this);
         miHideSuperclasses.addActionListener(this);
         miHideSubclasses.addActionListener(this);
         miShowSubclasses.addActionListener(this);
         miHideSubclasses.addActionListener(this);
-        miShowNeighbours.addActionListener(this);
+        miAddNeighbours.addActionListener(this);
         // miHideNeighbours.addActionListener(this);
         // miDelete.addActionListener(this);
         // miSelectAll.addActionListener(this);
@@ -301,7 +300,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         viewMenu.add(miNaming = new JMenuItem("Naming preference..."));
         viewMenu.add(miSidebar = visibleHaken);
         viewMenu.add(miDrawUnproper = new JCheckBoxMenuItem(
-                "Mark unproper inclusions", true));
+                "Mark improper inclusions", true));
         /*
          * menu = new ScaleMenu(); menu.setEnabled(false); viewMenu.add(menu);
          */
@@ -310,7 +309,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         // Create new Menu to add Editing Options -> Redo, Undo
         editMenu = new JMenu("Editing");
 
-        editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", true));
+        editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", false));
         editMenu.add(miUndo = new JMenuItem("Undo..."));
         editMenu.add(miRedo = new JMenuItem("Redo..."));
         editMenu.add(miLayout = new JMenuItem("Relayout"));
@@ -321,11 +320,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         selectionMenu = new JMenu("Selection");
         // Add MenuItems
         selectionMenu
-                .add(miShowInformation = new JMenuItem("Show Information"));
-        selectionMenu.add(miShowDetails = new JMenuItem("Show details"));
-        selectionMenu.addSeparator();
-        selectionMenu.add(miShowNeighbours = new JMenuItem("Show neighbours"));
-        selectionMenu.add(miHideNeighbours = new JMenuItem("Hide neighbours"));
+                .add(miShowInformation = new JMenuItem("Show information"));
+        selectionMenu.add(miShowDetails = new JMenuItem("Show sidebar"));
         selectionMenu.addSeparator();
         selectionMenu.add(miShowSuperclasses = new JMenuItem(
                 "Show superclasses"));
@@ -334,6 +330,11 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         selectionMenu.addSeparator();
         selectionMenu.add(miShowSubclasses = new JMenuItem("Show subclasses"));
         selectionMenu.add(miHideSubclasses = new JMenuItem("Hide sublcasses"));
+        selectionMenu.addSeparator();
+        selectionMenu.add(miAddSuperclasses = new JMenuItem("Add superclasses"));
+        selectionMenu.add(miAddSubclasses = new JMenuItem("Add subclasses"));
+        selectionMenu.add(miAddNeighbours = new JMenuItem("Add neighbours"));
+        
         mainMenuBar.add(selectionMenu);
 
         graphMenu = new JMenu("Graph classes");
@@ -382,13 +383,13 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             if (((mxGraphComponent)drawingPane).getGraph().getSelectionCount() != 1) {
                 // disable all features
                 System.out.println("in");
-                miHideNeighbours.setEnabled(false);
                 miShowInformation.setEnabled(false);
                 miShowDetails.setEnabled(false);
-                miShowNeighbours.setEnabled(false);
-                miHideNeighbours.setEnabled(false);
+                miAddNeighbours.setEnabled(false);
                 miShowSuperclasses.setEnabled(false);
                 miHideSuperclasses.setEnabled(false);
+                miAddSubclasses.setEnabled(false);
+                miAddSuperclasses.setEnabled(false);
                 miShowSubclasses.setEnabled(false);
                 miHideSubclasses.setEnabled(false);
             } else {
@@ -396,24 +397,24 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                 if (((mxCell)((mxGraphComponent)drawingPane).getGraph()
                         .getSelectionCell()).isEdge()) {
                     // Cell is edge, show only miShowDetails
-                    miHideNeighbours.setEnabled(false);
                     miShowInformation.setEnabled(true);
                     miShowDetails.setEnabled(false);
-                    miShowNeighbours.setEnabled(false);
-                    miHideNeighbours.setEnabled(false);
+                    miAddNeighbours.setEnabled(false);
                     miShowSuperclasses.setEnabled(false);
                     miHideSuperclasses.setEnabled(false);
+                    miAddSubclasses.setEnabled(false);
+                    miAddSuperclasses.setEnabled(false);
                     miShowSubclasses.setEnabled(false);
                     miHideSubclasses.setEnabled(false);
                 } else {
                     // Cell is vertex, show all items
-                    miHideNeighbours.setEnabled(true);
                     miShowInformation.setEnabled(true);
                     miShowDetails.setEnabled(true);
-                    miShowNeighbours.setEnabled(true);
-                    miHideNeighbours.setEnabled(true);
+                    miAddNeighbours.setEnabled(true);
                     miShowSuperclasses.setEnabled(true);
                     miHideSuperclasses.setEnabled(true);
+                    miAddSubclasses.setEnabled(true);
+                    miAddSuperclasses.setEnabled(true);
                     miShowSubclasses.setEnabled(true);
                     miHideSubclasses.setEnabled(true);
                 }
@@ -656,12 +657,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         } else if (object == miShowDetails) {
             sidebar.visibilityChanged();
             graphCanvas.setSidebarConent();
-        } else if (object == miShowNeighbours) {
+        } else if (object == miAddNeighbours) {
             graphCanvas.drawNeighbours(graphCanvas.getSelectedCell());
-        } else if (object == miHideNeighbours) {
-
-            // new
-        } else if (object == miShowSuperclasses) {
+        }  else if (object == miShowSuperclasses) {
             graphCanvas.drawSuperSub(graphCanvas.getSuperNodes(graphCanvas
                     .getSelectedCell()));
         } else if (object == miHideSuperclasses) {
@@ -673,6 +671,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         } else if (object == miHideSubclasses) {
             graphCanvas.deleteSuperSub(graphCanvas.getSubNodes(graphCanvas
                     .getSelectedCell()));
+        } else if (object == miAddSubclasses){
+        	graphCanvas.addSubclasses(graphCanvas.getSelectedCell());
+        } else if (object == miAddSuperclasses){
+        	graphCanvas.addSuperclasses(graphCanvas.getSelectedCell());
         } else if (object == miAbout) {
             JDialog select = new AboutDialog(this);
             select.setLocation(50, 50);
