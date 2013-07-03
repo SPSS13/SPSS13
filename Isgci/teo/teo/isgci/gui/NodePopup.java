@@ -117,6 +117,9 @@ public class NodePopup extends JPopupMenu implements ActionListener {
                 graph.getModel().endUpdate();
             }
         } else if (source == miShowDetails) {
+            parent.visibleHaken.setState(true);
+            parent.getContentPane().add("West", parent.sidebar);
+            parent.button2.setVisible(false);
             parent.sidebar.setVisible(true);
             parent.graphCanvas.setSidebarConent();
         } else if (source == miShowSuperclasses) {
@@ -151,8 +154,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         JMenuItem[] mItem = new JMenuItem[gcs.size()];
         // FIXME sort and render latex properly
         for (GraphClass gc : gcs) {
-            nameItem.add(mItem[i] = new JMenuItem((Utility
-                    .getShortName(XsltUtil.latex(gc.toString())))));
+            nameItem.add(mItem[i] = new JMenuItem((Utility.getShortName(gc
+                    .toString()))));
             mItem[i].setActionCommand(CHANGENAME + gc.toString());
             mItem[i].addActionListener(this);
             i++;

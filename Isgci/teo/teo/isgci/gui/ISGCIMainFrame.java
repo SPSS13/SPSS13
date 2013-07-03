@@ -36,8 +36,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import javax.swing.plaf.basic.BasicArrowButton;
 
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.ForbiddenClass;
@@ -106,6 +109,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     protected JMenu editMenu;
     protected mxUndoManager undoManager;
 
+    protected BasicArrowButton button2;
+
     /**
      * Needed to add undoManager to the Mainframe
      */
@@ -121,6 +126,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     protected JScrollPane drawingPane;
     public ISGCIGraphCanvas graphCanvas;
     protected final Accordion sidebar;
+    protected final Thread sidebarThread;
+    protected JCheckBoxMenuItem visibleHaken = new JCheckBoxMenuItem(
+            "Details visible", false);
 
     /**
      * Creates the frame.
@@ -162,12 +170,31 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
 
         undoManager = new mxUndoManager();
 
-        sidebar = new Accordion();
+        sidebar = new Accordion(this);
+        sidebarThread = new Thread(sidebar);
+        sidebarThread.start();
+        sidebarThread.suspend();
         sidebar.setVisible(false);
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
         getContentPane().add("West", sidebar);
         registerListeners();
+
+        button2 = new BasicArrowButton(SwingConstants.EAST);// The fade-in
+                                                            // Button
+        button2.setBorder(new LineBorder(Color.BLACK, 2));
+//        button2.setBackground(new Color(255, 255, 255));
+        getContentPane().add("West", button2);
+
+        button2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                sidebar.visibilityChanged();
+                button2.setVisible(false);
+                getContentPane().add("West", sidebar);
+                // sidebar.setVisible(true);
+                visibleHaken.setState(true);
+            }
+        });
 
         /*
          * Add undomanager and undohandler to the mainframe by registrating to
@@ -272,7 +299,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         viewMenu.add(miFitInWindow = new JMenuItem("Fit in window"));
         viewMenu.add(miSearching = new JMenuItem("Search in drawing..."));
         viewMenu.add(miNaming = new JMenuItem("Naming preference..."));
-        viewMenu.add(miSidebar = new JCheckBoxMenuItem("Details visible"));
+        viewMenu.add(miSidebar = visibleHaken);
         viewMenu.add(miDrawUnproper = new JCheckBoxMenuItem(
                 "Mark unproper inclusions", true));
         /*
@@ -564,12 +591,13 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
         } else if (object == miLayout) {
 
-            graphCanvas.animateGraph();;
+            graphCanvas.animateGraph();
+            ;
             if (!graphCanvas.getAnimation()) {
                 ((mxGraphComponent)drawingPane).refresh();
             }
         } else if (object == miSidebar) {
-            sidebar.toggleVisibility();
+            sidebar.visibilityChanged();
             graphCanvas.setSidebarConent();
         } else if (object == miGraphClassInformation) {
             JDialog info = new GraphClassInformationDialog(this);
@@ -626,7 +654,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                 d.setVisible(true);
             }
         } else if (object == miShowDetails) {
-            sidebar.setVisible(true);
+            sidebar.visibilityChanged();
             graphCanvas.setSidebarConent();
         } else if (object == miShowNeighbours) {
             graphCanvas.drawNeighbours(graphCanvas.getSelectedCell());
@@ -708,7 +736,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                     canvas.fillShape(poly);
                 }
 
-                canvas.getGraphics().setPaint(Color.LIGHT_GRAY);
+                Color gray = new Color(180,180,180);
+                canvas.getGraphics().setPaint(gray);
                 canvas.fillShape(poly);
                 canvas.getGraphics().draw(poly);
 
