@@ -12,6 +12,7 @@ package teo.isgci.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -19,6 +20,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,10 +32,9 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.undo.UndoManager;
-
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.w3c.dom.Document;
 
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
@@ -44,15 +47,17 @@ import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
 
+import com.mxgraph.canvas.mxGraphics2DCanvas;
+import com.mxgraph.canvas.mxICanvas;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
+import com.mxgraph.util.mxCellRenderer.CanvasFactory;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
-import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
 import com.mxgraph.util.mxRectangle;
@@ -1167,6 +1172,43 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public boolean getAnimation() {
         return animationActivated;
     }
+    
+//    public static void toPdf(File file, mxGraph graph) throws IOException {
+////        file = checkExtension(file, ".pdf"); // ensures that .pdf is the extension
+//        FileOutputStream fos = new FileOutputStream(file);
+//        try {
+//            mxRectangle bounds = ((mxGraph) graph).getGraphBounds();
+//            Rectangle rectangle = new Rectangle( (int)bounds.getWidth(), (int) bounds.getHeight());
+//            Document document = new Document(rectangle);
+//            PdfWriter writer = PdfWriter.getInstance(document, fos);
+//            document.open();
+//            PdfCanvasFactory pdfCanvasFactory = new PdfCanvasFactory(writer.getDirectContent());
+//            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
+//                    .drawCells((mxGraph) graph, null, 1, null, pdfCanvasFactory);
+//            canvas.getGraphics().dispose();
+//            document.close();
+//        }
+//        catch (DocumentException e) {
+//            throw new IOException(e.getLocalizedMessage());
+//        }
+//        finally {
+//            if (fos != null) {
+//              fos.close();
+//            }
+//        }
+//    }
+//     private static final class PdfCanvasFactory extends CanvasFactory {
+//        private final PdfContentByte cb;
+//
+//        private PdfCanvasFactory(PdfContentByte cb) {
+//            this.cb = cb;
+//        }
+//
+//        public mxICanvas createCanvas(int width, int height) {
+//            Graphics2D g2 = cb.createGraphics(width, height);
+//            return new mxGraphics2DCanvas(g2);
+//        }
+//    }
 }
 
 /* EOF */

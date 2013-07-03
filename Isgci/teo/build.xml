@@ -97,6 +97,7 @@
 <pathelement location="${jarlib.dir}/accordiondoc.jar" />
 <pathelement location="${jarlib.dir}/framework.jar" />
 <pathelement location="${jarlib.dir}/timingframework.jar" />
+<pathelement location="${jarlib.dir}/VectorGraphics2D-0.9.1.jar" />
 <pathelement location="${jgrapht.jar}" />
 
 </path>
@@ -227,7 +228,7 @@
 	<!-- otherwise Class-Path doesn't work -->
 	<manifest>
 		<attribute name="Main-Class" value="teo.Loader" />
-		<attribute name="Class-Path" value="jgrapht.jar jgraphx.jar accordion.jar accordiondepen.jar accordiondoc.jar jsoup.jar" />
+		<attribute name="Class-Path" value="jgrapht.jar jgraphx.jar accordion.jar accordiondepen.jar accordiondoc.jar jsoup.jar VectorGraphics2D-0.9.1.jar" />
 	</manifest>
 	<fileset dir="${build.classes.dir}">
 		<include name="teo/**" />

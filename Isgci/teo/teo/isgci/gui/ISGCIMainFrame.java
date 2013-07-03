@@ -528,10 +528,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         } else if (object == miNew) {
             new ISGCIMainFrame(loader);
         } else if (object == miExport) {
-            // JDialog export = new ExportDialog(this);
-            // export.setLocation(50, 50);
-            // export.pack();
-            // export.setVisible(true);
+             JDialog export = new ExportDialog(this);
+             export.setLocation(50, 50);
+             export.pack();
+             export.setVisible(true);
         } else if (object == miNaming) {
             System.out.println("naming");
             JDialog d = new NamingDialog(this);
