@@ -332,8 +332,8 @@ public class ExportDialog extends JDialog implements ActionListener {
             gmlHtml.setEnabled(false);
             gmlLatex.setEnabled(false);
         } else if (e.getActionCommand() == JFileChooser.APPROVE_SELECTION) {
-            if (export())
-                closeDialog();
+//            if (export())
+//                closeDialog();
         } else if (e.getActionCommand() == JFileChooser.CANCEL_SELECTION)
             closeDialog();
     }
@@ -341,77 +341,77 @@ public class ExportDialog extends JDialog implements ActionListener {
     /**
      * Export using the entered settings. Return true iff no error occured.
      */
-    protected boolean export() {
-        boolean res = true;
-        FileOutputStream f;
-        try {
-            f = new FileOutputStream(file.getSelectedFile());
-        } catch (Exception e) {
-            e.printStackTrace();
-            MessageDialog.error(parent, "Cannot open file for writing:\n"
-                    + file.getSelectedFile().getPath());
-            return false;
-        }
-
-        try {
-            if (radioPS.isSelected())
-                exportPS(f);
-            else if (radioGML.isSelected())
-                exportGML(f);
-            else if (radioSVG.isSelected())
-                exportSVG(f);
-        } catch (Exception e) {
-            res = false;
-            e.printStackTrace();
-            MessageDialog.error(parent,
-                    "Error while exporting:\n" + e.toString());
-        }
-        return res;
-    }
+//    protected boolean export() {
+//        boolean res = true;
+//        FileOutputStream f;
+//        try {
+//            f = new FileOutputStream(file.getSelectedFile());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            MessageDialog.error(parent, "Cannot open file for writing:\n"
+//                    + file.getSelectedFile().getPath());
+//            return false;
+//        }
+//
+//        try {
+//            if (radioPS.isSelected())
+//                exportPS(f);
+//            else if (radioGML.isSelected())
+//                exportGML(f);
+//            else if (radioSVG.isSelected())
+//                exportSVG(f);
+//        } catch (Exception e) {
+//            res = false;
+//            e.printStackTrace();
+//            MessageDialog.error(parent,
+//                    "Error while exporting:\n" + e.toString());
+//        }
+//        return res;
+//    }
 
     /**
      * Export to Postscript.
      */
 
-    protected void exportPS(FileOutputStream f) throws Exception {
-        Exception res = null;
-        byte[] outstr;
-        DataOutputStream out = null;
-
-        try {
-            out = new DataOutputStream(f);
-            final PSGraphics g = new PSGraphics((String)papersize.getSelectedItem(),
-                    fittopage.isSelected(), keepsideratio.isSelected(),
-                    rotate.isSelected(), color.isSelected());
-            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas)mxCellRenderer.drawCells(
-                    parent.graphCanvas.getGraph(), null, 1, null,
-                    new CanvasFactory() {
-                        public mxICanvas createCanvas(int width, int height) {
-                            mxGraphics2DCanvas canvas = new mxGraphics2DCanvas(g.getG());
-                            canvas.setDrawLabels(true);
-                            return canvas;
-                        }
-
-                    });
-            
-            for(Object cell : parent.graphCanvas.getGraph().getChildCells(parent.graphCanvas.getGraph().getDefaultParent())){
-//                canvas.drawCell(parent.graphCanvas.getGraph().getModel().getStyle((((mxCell)cell))));
-            }
-            
-
-            
-            outstr = g.getG().getBytes();
-            g.dispose();
-            out.write(outstr);
-        } catch (IOException ex) {
-            res = ex;
-        } finally {
-            out.close();
-        }
-
-        if (res != null)
-            throw res;
-    }
+//    protected void exportPS(FileOutputStream f) throws Exception {
+//        Exception res = null;
+//        byte[] outstr;
+//        DataOutputStream out = null;
+//
+//        try {
+//            out = new DataOutputStream(f);
+//            final PSGraphics g = new PSGraphics((String)papersize.getSelectedItem(),
+//                    fittopage.isSelected(), keepsideratio.isSelected(),
+//                    rotate.isSelected(), color.isSelected());
+//            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas)mxCellRenderer.drawCells(
+//                    parent.graphCanvas.getGraph(), null, 1, null,
+//                    new CanvasFactory() {
+//                        public mxICanvas createCanvas(int width, int height) {
+//                            mxGraphics2DCanvas canvas = new mxGraphics2DCanvas(g.getG());
+//                            canvas.setDrawLabels(true);
+//                            return canvas;
+//                        }
+//
+//                    });
+//            
+//            for(Object cell : parent.graphCanvas.getGraph().getChildCells(parent.graphCanvas.getGraph().getDefaultParent())){
+////                canvas.drawCell(parent.graphCanvas.getGraph().getModel().getStyle((((mxCell)cell))));
+//            }
+//            
+//
+//            
+//            outstr = g.getG().getBytes();
+//            g.dispose();
+//            out.write(outstr);
+//        } catch (IOException ex) {
+//            res = ex;
+//        } finally {
+//            out.close();
+//        }
+//
+//        if (res != null)
+//            throw res;
+//    }
 
     /**
      * Export to GraphML.

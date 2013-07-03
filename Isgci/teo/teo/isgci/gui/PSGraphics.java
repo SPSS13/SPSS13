@@ -14,7 +14,7 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 
-import de.erichseifert.vectorgraphics2d.EPSGraphics2D;
+//import de.erichseifert.vectorgraphics2d.EPSGraphics2D;
 
 import java.io.*;
 import java.util.*;
@@ -109,7 +109,7 @@ public class PSGraphics extends SmartGraphics {
     /** Area that is actually in use by the drawing (PS coords) */
     private Box bounds;
 
-    private EPSGraphics2D g;
+//    private EPSGraphics2D g;
 
     public PSGraphics() {
         this("A4", true, true, false, false);
@@ -133,8 +133,8 @@ public class PSGraphics extends SmartGraphics {
         this.usecolor = usecolor;
         bounds = new Box();
         clip = new Rectangle();
-        setG(new EPSGraphics2D(MARGIN, MARGIN, paperwidth - MARGIN, paperheight - MARGIN));
-        g.setColor(color);
+//        setG(new EPSGraphics2D(MARGIN, MARGIN, paperwidth - MARGIN, paperheight - MARGIN));
+//        g.setColor(color);
     }
 
     /** Not all attributes make sense for derived graphics */
@@ -649,13 +649,13 @@ public class PSGraphics extends SmartGraphics {
         defaultprolog = new String(b.toString());
     }
 
-    public EPSGraphics2D getG() {
-        return g;
-    }
+//    public EPSGraphics2D getG() {
+//        return g;
+//    }
 
-    public void setG(EPSGraphics2D g) {
-        this.g = g;
-    }
+//    public void setG(EPSGraphics2D g) {
+//        this.g = g;
+//    }
 
     protected class Box {
         int left, right, top, bottom;
