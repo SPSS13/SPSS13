@@ -77,8 +77,8 @@ public class GraphClassSet {
         // :D
     }
 
-    public String toShortString() {
-        return XsltUtil.latexTruncated(label.toString());
+    public String toLongString() {
+        return XsltUtil.latex(label.toString());
     }
 
 }

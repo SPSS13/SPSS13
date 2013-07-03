@@ -179,7 +179,8 @@ public class GraphClassSelectionDialog extends JDialog implements
             } else if (list.size() == 1) {
             	mxCell cell = (mxCell) parent.graphCanvas.findNode(
                         ((NodeList<GraphClass>)classesList).getSelectedNode());
-                parent.graphCanvas.centerNode(cell);	
+                parent.graphCanvas.centerNode(cell);
+                parent.graphCanvas.setSelectedCell(cell);
 			}
             // parent.graphCanvas.updateBounds();
             

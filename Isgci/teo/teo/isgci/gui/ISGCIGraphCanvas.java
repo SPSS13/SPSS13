@@ -11,9 +11,11 @@
 package teo.isgci.gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -119,6 +121,22 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             + ";spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
     private final String edgeStyle = "strokeColor=" + EDGE_COLOR
             + ";rounded=true" + ";selectable=false";
+    
+ // Implementation of custom cursors for panning events and clicking on nodes
+ 	private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 			Toolkit.getDefaultToolkit().createImage(
+ 					"../teo/data/images/grab.png"), new Point(0, 0),
+ 			"grab");
+
+ 	private Cursor grabbingcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 			Toolkit.getDefaultToolkit().createImage(
+ 					"../teo/data/images/grabbing.png"), new Point(0, 0),
+ 			"grabbing");
+ 	
+ 	private Cursor pointcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 			Toolkit.getDefaultToolkit().createImage(
+ 					"../teo/data/images/point.png"), new Point(0, 0),
+ 			"point");
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
         super(graph);
@@ -839,8 +857,22 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public void mouseExited(MouseEvent event) {
     }
 
-    public void mouseMoved(MouseEvent e) {
-    }
+    /**
+	 * Modified for changing cursor while on Canvas for different cursors on Cells and Plain
+	 * @author Fabian Vollmer
+	 * @date 01.07
+	 */
+	public void mouseMoved(MouseEvent e) {
+		Object cell = ((mxGraphComponent) parent.drawingPane).getCellAt(
+				e.getX(), e.getY());
+		if(cell!=null){
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+			.setCursor(pointcursor);
+		}else{			
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+					.setCursor(grabcursor);
+		}
+	}
 
     /**
      * few Methods needed for "Show Information" and other Functionality
@@ -938,24 +970,38 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         mousePopup(event);
     }
 
-    public void mouseDragged(MouseEvent event) {
+    /**
+	 * Method to enable panning if the mouse is dragged with a pressed
+	 * mousebutton.
+	 */
+	public void mouseDragged(MouseEvent event) {
+		if (!event.isConsumed() && start != null) {
 
-        if (!event.isConsumed() && start != null) {
-            int dx = event.getX() - start.x;
-            int dy = event.getY() - start.y;
+			//Cursor handling for dragging
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+					.setCursor(grabbingcursor);
+			
+			int dx = event.getX() - start.x;
+			int dy = event.getY() - start.y;
 
-            Rectangle r = parent.drawingPane.getViewport().getViewRect();
+			Rectangle r = parent.drawingPane.getViewport().getViewRect();
 
-            int right = r.x + ((dx > 0) ? 0 : r.width) - dx;
-            int bottom = r.y + ((dy > 0) ? 0 : r.height) - dy;
+			int right = r.x + ((dx > 0) ? 0 : r.width) - dx;
+			int bottom = r.y + ((dy > 0) ? 0 : r.height) - dy;
 
-            ((mxGraphComponent)parent.drawingPane).getGraphControl()
-                    .scrollRectToVisible(new Rectangle(right, bottom, 0, 0));
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+					.scrollRectToVisible(new Rectangle(right, bottom, 0, 0));
 
-            event.consume();
-        }
-        super.repaint();
-    }
+			event.consume();
+		}
+
+		// if (!dragInProcess) {
+		// markSetShadow(true);
+		// dragInProcess = true;
+		// }
+		// markSetShadowAnchorLocation(event.getPoint());
+		super.repaint();
+	}
 
     /**
      * Method for showing a popup menu if a node or an edge is rightclicked

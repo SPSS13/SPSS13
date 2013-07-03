@@ -46,7 +46,7 @@ public class Latex2Html extends Latex {
 
             String panelTextBegin = "<html><body style=\"max-height:4;\">";
             String panelTextEnd = "</body></html>";
-            htmlName = panelTextBegin + truncateHTML(htmlName, 20, "...")
+            htmlName = panelTextBegin + truncateHTML(htmlName, 40, "...")
                     + panelTextEnd;
 
         } catch (Exception e) {

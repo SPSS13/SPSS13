@@ -183,7 +183,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         button2 = new BasicArrowButton(SwingConstants.EAST);// The fade-in
                                                             // Button
         button2.setBorder(new LineBorder(Color.BLACK, 2));
-        button2.setBackground(new Color(255, 255, 255));
+//        button2.setBackground(new Color(255, 255, 255));
         getContentPane().add("West", button2);
 
         button2.addActionListener(new ActionListener() {
