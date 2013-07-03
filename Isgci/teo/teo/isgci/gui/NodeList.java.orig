@@ -18,11 +18,6 @@ import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-<<<<<<< HEAD
-=======
-import teo.isgci.gc.GraphClass;
-
->>>>>>> 4124c89fa615a3a2d51598f30a3ca1b15a2ce182
 
 /**
  * A JList filled with ISGCINodes, that are displayed with formatted html.
@@ -70,13 +65,8 @@ public class NodeList<V> extends JList<V> {
     /**
      * Replace all nodes in this list by the given data.
      */
-<<<<<<< HEAD
     public void setListData(Iterator<?> data) {
         Vector<Object> v = new Vector<Object>();
-=======
-    public void setListData(Iterator data) {
-        Vector v = new Vector();
->>>>>>> 4124c89fa615a3a2d51598f30a3ca1b15a2ce182
         while (data.hasNext())
             v.add(data.next());
         setListData(v);
@@ -86,11 +76,7 @@ public class NodeList<V> extends JList<V> {
     /**
      * Replace all nodes in this list by the given data.
      */
-<<<<<<< HEAD
     public void setListData(Collection<?> data) {
-=======
-    public void setListData(Collection data) {
->>>>>>> 4124c89fa615a3a2d51598f30a3ca1b15a2ce182
         Vector v = new Vector(data);
         setListData(v);
     }
@@ -99,13 +85,8 @@ public class NodeList<V> extends JList<V> {
     /**
      * Return the smallest selected node.
      */
-<<<<<<< HEAD
     public V getSelectedNode() {
         return  getSelectedValue();
-=======
-    public GraphClass getSelectedNode() {
-        return (GraphClass) getSelectedValue();
->>>>>>> 4124c89fa615a3a2d51598f30a3ca1b15a2ce182
     }
 
 
@@ -117,11 +98,7 @@ public class NodeList<V> extends JList<V> {
                 JList<?> list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             LatexLabel label =
-<<<<<<< HEAD
                     latex.newLabel(value.toString());
-=======
-                    latex.newLabel(((GraphClass) value).toString());
->>>>>>> 4124c89fa615a3a2d51598f30a3ca1b15a2ce182
             if (isSelected) {
                 label.setBackground(list.getSelectionBackground());
                 label.setForeground(list.getSelectionForeground());

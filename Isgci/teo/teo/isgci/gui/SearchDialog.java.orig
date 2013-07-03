@@ -112,13 +112,8 @@ public class SearchDialog extends JDialog implements ActionListener {
             closeDialog();
         } else if (source == searchButton) {
             mxCell cell = (mxCell) parent.graphCanvas.findNode(
-<<<<<<< HEAD
                     ((NodeList<GraphClass>)classesList).getSelectedNode());
             parent.graphCanvas.setSelectedCell(cell);
-=======
-                    classesList.getSelectedNode(), true);
-            parent.graphCanvas.markOnly(cell);
->>>>>>> 4124c89fa615a3a2d51598f30a3ca1b15a2ce182
             parent.graphCanvas.centerNode(cell);
             closeDialog();
         }
