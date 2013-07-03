@@ -654,7 +654,7 @@ public class Accordion extends JPanel implements Runnable {
 		// backgroundPainter.setEndColor(Color.lightGray);
 		// accordion.setBackgroundPainter(backgroundPainter);
 
-		// Selbiges f�r die Tabs geschieht in der Klasse
+		// Selbiges for die Tabs geschieht in der Klasse
 		// MyAccordionTabRenderer
 		MyAccordionTabRenderer renderer = new MyAccordionTabRenderer();
 		accordion.setVerticalAccordionTabRenderer(new MyAccordionTabRenderer());
