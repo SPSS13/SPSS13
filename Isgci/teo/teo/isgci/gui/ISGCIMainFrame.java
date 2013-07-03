@@ -144,7 +144,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         loader.register();
         this.loader = loader;
         tracker = this;
-
+        
         DataSet.init(loader, "data/isgci.xml");
         ForbiddenClass.initRules(loader, "data/smallgraphs.xml");
         PSGraphics.init(loader);
@@ -379,7 +379,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     public void menuSelected(MenuEvent e) {
         if (e.getSource() == selectionMenu) {
             // System.out.println(((mxGraphComponent)drawingPane).getGraph().getSelectionCount());
-            if (((mxGraphComponent)drawingPane).getGraph().getSelectionCount() != 1) {
+            if (graphCanvas.getSelectedCell() == null) {
                 // disable all features
                 System.out.println("in");
                 miHideNeighbours.setEnabled(false);
@@ -393,8 +393,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                 miHideSubclasses.setEnabled(false);
             } else {
                 // Test if the selection is a vertex or an edge
-                if (((mxCell)((mxGraphComponent)drawingPane).getGraph()
-                        .getSelectionCell()).isEdge()) {
+                if (graphCanvas.getSelectedCell().isEdge()) {
                     // Cell is edge, show only miShowDetails
                     miHideNeighbours.setEnabled(false);
                     miShowInformation.setEnabled(true);
@@ -441,12 +440,12 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
      * @return the panel
      */
     protected JComponent createCanvasPanel() {
-        mxGraph graph = new mxGraph();
+        mxGraph graph = new CustomGraph();
         setGraphSwitches(graph);
         graph.setAllowDanglingEdges(false);
         CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
-        graphCanvas = new ISGCIGraphCanvas(this, graph);
         drawingPane = graphComponent;
+        graphCanvas = new ISGCIGraphCanvas(this, graph);
         drawingPane.getHorizontalScrollBar().setUnitIncrement(100);
         drawingPane.getVerticalScrollBar().setUnitIncrement(100);
         drawingPane.setLocation(100, 100);
@@ -474,6 +473,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         graph.setAllowDanglingEdges(false);
         graph.setConnectableEdges(false);
         graph.setDisconnectOnMove(false);
+        graph.setCellsBendable(false);
         // does not seem to have any effect
         graph.setMultigraph(false);
 

@@ -13,7 +13,6 @@ package teo.isgci.gui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -22,21 +21,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
-import org.w3c.dom.Document;
 
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
@@ -49,19 +42,17 @@ import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
 
-import com.mxgraph.canvas.mxGraphics2DCanvas;
-import com.mxgraph.canvas.mxICanvas;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.swing.util.mxMorphing;
-import com.mxgraph.util.mxCellRenderer.CanvasFactory;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
+import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
@@ -112,7 +103,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private mxHierarchicalLayout layout;
     private Point start;
 
-    private Timer timer;
+
 
     private final String EDGE_COLOR = "black";
     private final String CELL_COLOR = "black";
@@ -161,7 +152,11 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         layout = new mxHierarchicalLayout(graph);
         layout.setParentBorder(0);
         layout.setResizeParent(true);
-        timer = new Timer();
+        layout.setInterHierarchySpacing(100);
+        this.graphControl = ((CustomGraphComponent)parent.drawingPane).getGraphControl();
+        graph.setMinimumGraphSize(new mxRectangle(10, 10, 500, 400));
+        graph.setBorder(100);
+        graph.getView().setTranslate(new mxPoint(10, 10));
     }
 
     /**
@@ -198,11 +193,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     private void makeGraph(
             SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph) {
         Object defaultParent = graph.getDefaultParent();
-        // experimental code, do not delete
-        // graph.insertVertex(graph.getDefaultParent(), "defaultParent",
-        // "dontshowme" , 0, 0, getWidth(), getHeight(),
-        // "fontColor=white;strokeColor=white;fillColor=white");
-
         graph.getModel().beginUpdate();
         try {
             graph.setCellsResizable(true);
@@ -868,14 +858,15 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 	 * @date 01.07
 	 */
 	public void mouseMoved(MouseEvent e) {
-		Object cell = ((mxGraphComponent) parent.drawingPane).getCellAt(
+		mxCell cell = (mxCell)((mxGraphComponent) parent.drawingPane).getCellAt(
 				e.getX(), e.getY());
 		if(cell!=null){
+		    if(cell.isVertex())
 			((mxGraphComponent) parent.drawingPane).getGraphControl()
 			.setCursor(pointcursor);
 		}else{			
-			((mxGraphComponent) parent.drawingPane).getGraphControl()
-					.setCursor(grabcursor);
+//			((mxGraphComponent) parent.drawingPane).getGraphControl()
+//					.setCursor(grabcursor);
 		}
 	}
 

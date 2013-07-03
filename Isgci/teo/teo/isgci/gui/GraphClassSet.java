@@ -32,14 +32,7 @@ public class GraphClassSet {
             GraphClass label) {
         this.set = v;
         this.parent = parent;
-        if (label == null) {
-            for (GraphClass gc : set) {
-                if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
-                    label = gc;
-                }
-            }
-        }
-        this.label = label;
+        setLabel(label);
     }
 
     public GraphClass getLabel() {
@@ -69,15 +62,11 @@ public class GraphClassSet {
 
     @Override
     public String toString() {
-        return XsltUtil.latexTruncated(label.toString());// ALARM: Das muss zu
-                                                         // nur .latex ohne
-                                                         // Truncated geändert
-                                                         // werden
-        // wir wissen nur leider nicht, wo wir die Methode unten aufrufen müssen
-        // :D
+        return XsltUtil.latexTruncated(label.toString());
     }
 
     public String toLongString() {
+//        System.out.println("label.toString() = " + label.toString());
         return XsltUtil.latex(label.toString());
     }
 
