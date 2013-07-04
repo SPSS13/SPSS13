@@ -11,17 +11,37 @@
 package teo.isgci.xml;
 
 import java.io.Writer;
-import java.util.*;
 import java.text.SimpleDateFormat;
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.Graphs;
-import teo.isgci.grapht.*;
-import teo.isgci.db.*;
-import teo.isgci.gc.*;
-import teo.isgci.problem.*;
+import org.jgrapht.graph.SimpleDirectedGraph;
+import org.xml.sax.SAXException;
+
+import teo.isgci.db.AbstractRelation;
+import teo.isgci.db.Disjointness;
+import teo.isgci.db.Note;
+import teo.isgci.db.Ref;
+import teo.isgci.gc.BaseClass;
+import teo.isgci.gc.ComplementClass;
+import teo.isgci.gc.DerivedClass;
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.gc.HereditaryClass;
+import teo.isgci.gc.IntersectClass;
+import teo.isgci.gc.UnionClass;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.Inclusion;
+import teo.isgci.problem.Algorithm;
+import teo.isgci.problem.Complexity;
+import teo.isgci.problem.Problem;
+import teo.isgci.problem.Reduction;
 import teo.isgci.util.LessLatex;
 import teo.sax.XMLWriter;
 

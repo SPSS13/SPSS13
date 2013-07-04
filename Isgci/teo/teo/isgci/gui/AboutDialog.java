@@ -10,14 +10,19 @@
 
 package teo.isgci.gui;
 
-import java.awt.event.*;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Container;
-import javax.swing.*;
-import teo.isgci.db.*;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+
+import teo.isgci.db.DataSet;
 
 public class AboutDialog extends JDialog implements ActionListener {
     protected ISGCIMainFrame parent;

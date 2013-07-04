@@ -11,7 +11,6 @@
 package teo.isgci.util;
 
 import java.util.Iterator;
-import java.util.Vector;
 
 public class Itera<T> implements Iterable<T>, Iterator<T> {
     private Iterator<T> iter;

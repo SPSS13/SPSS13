@@ -12,9 +12,11 @@ package teo.isgci.grapht;
 
 import java.util.Collections;
 import java.util.Set;
+
 import org.jgrapht.VertexFactory;
-import teo.isgci.gc.GraphClass;
+
 import teo.isgci.gc.BaseClass;
+import teo.isgci.gc.GraphClass;
 
 public class ISGCIVertexFactory implements VertexFactory<Set<GraphClass> > {
     int running;

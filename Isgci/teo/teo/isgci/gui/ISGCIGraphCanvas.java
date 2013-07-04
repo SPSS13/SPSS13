@@ -52,7 +52,6 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
-import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
@@ -119,7 +118,8 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             + ";rounded=true" + ";selectable=false";
     
  // Implementation of custom cursors for panning events and clicking on nodes
- 	private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 	@SuppressWarnings("unused")
+    private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
  			Toolkit.getDefaultToolkit().createImage(
  					"../teo/data/images/grab.png"), new Point(0, 0),
  			"grab");
@@ -145,7 +145,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         this.graph = graph;
         namingPref = Algo.NamePref.BASIC;
         // setWidthFunc(new NodeWidthFunc());
-        nodePopup = new NodePopup(parent, graph);
+        nodePopup = new NodePopup(parent, graph, map);
         edgePopup = new EdgePopup(parent);
         add(nodePopup);
         add(edgePopup);
@@ -171,7 +171,8 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         graph.getModel().beginUpdate();
         ((mxGraphModel)graph.getModel()).clear();
         graph.getModel().endUpdate();
-
+        //reset selection to prevent side effects
+        lastSelected = null;
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
                 .createHierarchySubgraph(nodes);
 
@@ -506,7 +507,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public Collection<GraphClass> getSuperNodes(mxCell cell) {
         final HashSet<GraphClass> result = new HashSet<GraphClass>();
         if (cell != null) {
-            GraphClass gc = NodePopup.searchName(cell);
+            GraphClass gc = ((GraphClassSet)cell.getValue()).getLabel();
             new RevBFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc,
                     null, GraphWalker.InitCode.DYNAMIC) {
                 public void visit(GraphClass v) {
@@ -535,7 +536,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public Collection<GraphClass> getSubNodes(mxCell cell) {
         final HashSet<GraphClass> result = new HashSet<GraphClass>();
         if (cell != null) {
-            GraphClass gc = NodePopup.searchName(cell);
+            GraphClass gc = ((GraphClassSet)cell.getValue()).getLabel();
             new BFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc, null,
                     GraphWalker.InitCode.DYNAMIC) {
                 public void visit(GraphClass v) {
@@ -899,7 +900,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             // color the new edges
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
                     ALTERNATE_EDGE_COLOR, highlitedEdges);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
                     highlitedEdges);
             setProperness(highlitedEdges);
 
@@ -920,7 +921,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             // highlight the cells of the new highlighted nodes
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
                     ALTERNATE_CELL_COLOR, highlitedCells);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
                     highlitedCells);
 
         } finally {
@@ -937,10 +938,10 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public void setSidebarConent() {
         if (parent.sidebar.isVisible()) {
             if (getSelectedCell() != null) {
-                if (parent.sidebar.getContent() != NodePopup.searchName(
-                        getSelectedCell()).getID()) {
-                    parent.sidebar.changeContent(NodePopup.searchName(
-                            getSelectedCell()).getID());
+                if (parent.sidebar.getContent() != ((GraphClassSet)
+                        getSelectedCell().getValue()).getLabel().getID()) {
+                    parent.sidebar.changeContent(((GraphClassSet)
+                            getSelectedCell().getValue()).getLabel().getID());
                 }
             }
         }
@@ -987,12 +988,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
 
 			event.consume();
 		}
-
-		// if (!dragInProcess) {
-		// markSetShadow(true);
-		// dragInProcess = true;
-		// }
-		// markSetShadowAnchorLocation(event.getPoint());
 		super.repaint();
 	}
 
@@ -1030,7 +1025,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                             event.getXOnScreen() - parent.getX(),
                             event.getYOnScreen() - parent.getY());
                 } else {
-                    nodePopup.setNode(c);
                     nodePopup.show(parent,
                             event.getXOnScreen() - parent.getX(),
                             event.getYOnScreen() - parent.getY());
@@ -1195,6 +1189,9 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
         return animationActivated;
     }
     
+    public NodePopup getNodePopup(){
+        return nodePopup;
+    }
 //    public static void toPdf(File file, mxGraph graph) throws IOException {
 ////        file = checkExtension(file, ".pdf"); // ensures that .pdf is the extension
 //        FileOutputStream fos = new FileOutputStream(file);

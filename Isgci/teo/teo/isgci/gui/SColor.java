@@ -11,7 +11,6 @@
 package teo.isgci.gui;
 
 import java.awt.Color;
-import javax.swing.*;
 
 public class SColor {
     private static final double FACTOR = 0.7;

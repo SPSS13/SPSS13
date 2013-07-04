@@ -10,21 +10,6 @@
 
 package teo.isgci.layout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-
-import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.Graphs;
-import org.jgrapht.VertexFactory;
-
-import teo.isgci.grapht.GAlg;
-import teo.isgci.grapht.Annotation;
-import teo.isgci.grapht.GraphWalker;
-import teo.isgci.grapht.TreeDFSWalker;
-import teo.isgci.grapht.WalkerInfo;
-import teo.isgci.util.IntFunction;
 //
 ///**
 // * Calculates a hierarchy layout for a DAG. The graph should be transitively
@@ -1239,3 +1224,4 @@ import teo.isgci.util.IntFunction;
 //        layout.printDebug();
 //    }
 //}
+

@@ -10,19 +10,24 @@
 
 package teo.isgci.gui;
 
-import teo.isgci.db.DataSet;
-import teo.isgci.db.Algo;
-import teo.isgci.gc.GraphClass;
-
-import java.io.IOException;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Container;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import teo.isgci.db.DataSet;
+import teo.isgci.gc.GraphClass;
 
 /**
  * The dialog the checks for an inclusion between two graphclasses.

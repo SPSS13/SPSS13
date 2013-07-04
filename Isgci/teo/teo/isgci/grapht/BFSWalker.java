@@ -12,10 +12,10 @@
 
 package teo.isgci.grapht;
 
-import java.util.Queue;
 import java.util.ArrayDeque;
+import java.util.Queue;
+
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.*;
 
 public class BFSWalker<V,E> extends GraphWalker<V,E> {
     protected Queue<V> q;
