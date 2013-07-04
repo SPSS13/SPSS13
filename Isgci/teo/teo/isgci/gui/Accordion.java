@@ -106,8 +106,8 @@ public class Accordion extends JPanel implements Runnable {
 			visibilityChanged = false;
 			toggleVisibility();
 			if (mainFrame.graphCanvas.getSelectedCell() != null) {
-				setContent(NodePopup.searchName(
-						mainFrame.graphCanvas.getSelectedCell()).getID());
+				setContent(((GraphClassSet)
+                        mainFrame.graphCanvas.getSelectedCell().getValue()).getLabel().getID());
 			}
 			mainFrame.sidebarThread.suspend();
 		}

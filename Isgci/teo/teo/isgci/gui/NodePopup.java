@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import javax.swing.JDialog;
@@ -27,6 +26,7 @@ import javax.swing.JPopupMenu;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
+import teo.XsltUtil;
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
@@ -66,6 +66,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         this.parent = parent;
         this.graph = graph;
         this.map = map;
+        this.cell = cell;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
         add(miShowDetails = new JMenuItem("Show sidebar"));
@@ -143,6 +144,10 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     }
 
     /**
+     * Utility method to check weather super or subclasses are hidden or
+     * visible, use someSuperclassesVisible(), someSuperclassesInvisible(),
+     * someSubclassesVisible() and someSubclassesInvisible() for easy access.
+     * 
      * (superclassesORsubclasses ? superclasses : subclasses) (visibility ?
      * visible : invisible)
      * 
@@ -247,7 +252,6 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         Set<GraphClass> classes = ((GraphClassSet)cell.getValue()).getSet();
         // get all neighbours
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = getNeighbours(classes);
-        // check for all edges if they are already drawn
         // check for all outgoing edges if they are already drawn
         for (DefaultEdge edge : edgegraph.outgoingEdgesOf(classes)) {
             mxCell target = (mxCell)map.get(edgegraph.getEdgeTarget(edge));
@@ -263,8 +267,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     }
 
     /**
-     * returns a SimpleDirectedGraph including all direct neighbours of the
-     * given node
+     * Utility method. Returns a SimpleDirectedGraph including all direct
+     * neighbours of the given node
      * 
      * @param classes
      * @return
@@ -283,8 +287,12 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         return Algo.createHierarchySubgraph(nodes);
     }
 
-    public void setNode(mxCell cell) {
-        this.cell = cell;
+    public void setMenuItemSwitches(JMenuItem miShowSuperclasses,
+            JMenuItem miHideSuperclasses, JMenuItem miShowSubclasses,
+            JMenuItem miHideSubclasses, JMenuItem miShowDetails,
+            JMenuItem miAddSuperclasses, JMenuItem miAddSubclasses,
+            JMenuItem miAddNeighbours) {
+        cell = parent.graphCanvas.getSelectedCell();
         // toggle menus
         // superclasses
         boolean superclassesAddable = superclassesAddable();
@@ -305,7 +313,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         Object source = event.getSource();
         if (source == infoItem) {
             JDialog d = new GraphClassInformationDialog(parent,
-                    searchName(cell));
+                    ((GraphClassSet)cell.getValue()).getLabel());
             d.setLocation(50, 50);
             d.pack();
             d.setSize(800, 600);
@@ -318,8 +326,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
                 GraphClassSet graphClassSet = (GraphClassSet)cell.getValue();
                 // search the label matching the selection
                 GraphClass label = null;
-                for (GraphClass gc : getAllClasses(cell)) {
-
+                for (GraphClass gc : ((GraphClassSet)cell.getValue()).getSet()) {
                     if (gc.toString().equals(fullname)) {
                         label = gc;
                     }
@@ -358,19 +365,24 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         }
     }
 
+    /**
+     * updates the visibility of the menuitems and the content of the nameItem
+     * 
+     * @author leo
+     */
     public void show(Component orig, int x, int y) {
-        // reworked
-        // LatexGraphics latex = ISGCIMainFrame.latex;
-        Set<GraphClass> gcs = getAllClasses(cell);
+        setMenuItemSwitches(miShowSuperclasses, miHideSuperclasses,
+                miShowSubclasses, miHideSubclasses, miShowDetails,
+                miAddSuperclasses, miAddSubclasses, miAddNeighbours);
+        Set<GraphClass> gcs = ((GraphClassSet)cell.getValue()).getSet();
         int i = 0;
-
         nameItem.removeAll();
         nameItem.setEnabled(gcs.size() != 1);
         JMenuItem[] mItem = new JMenuItem[gcs.size()];
         // FIXME sort and render latex properly
         for (GraphClass gc : gcs) {
-            nameItem.add(mItem[i] = new JMenuItem((Utility.getShortName(gc
-                    .toString()))));
+            nameItem.add(mItem[i] = new JMenuItem(XsltUtil.latexTruncated(gc
+                    .toString())));
             mItem[i].setActionCommand(CHANGENAME + gc.toString());
             mItem[i].addActionListener(this);
             i++;
@@ -379,34 +391,6 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         super.show(orig, x, y);
     }
 
-    /**
-     * A method for getting all GraphClasses a mxCell contains of.
-     * 
-     * @param c
-     *            the mxCell whose GraphClasses should be returned
-     * @return A Set of all GraphClasses contained in a mxCell
-     * @author Fabian Vollmer
-     * @date 24.06.2013
-     */
-    public Set<GraphClass> getAllClasses(mxCell c) {
-        return ((GraphClassSet)c.getValue()).getSet();
-    }
-
-    /**
-     * Searches for the GraphClass represented by the name of a mxCell which is
-     * a Latex String
-     * 
-     * @param c
-     *            the mxCell that includes the name of the GraphClass that
-     *            should be searched
-     * @return the GraphClass represented by the Name
-     * 
-     * @author Fabian Vollmer
-     * @date 24.06.2013
-     */
-    public static GraphClass searchName(mxCell c) {
-        return ((GraphClassSet)c.getValue()).getLabel();
-    }
 }
 
 /* EOF */
