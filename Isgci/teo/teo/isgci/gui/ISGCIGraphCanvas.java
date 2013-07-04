@@ -458,7 +458,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
      * @date 22.06 9:30
      * @annotation redraw the graph and remove subgraph/superclass of the given
      *             class
-     * @annotation2 now deletes from the map too, cleaned up a bit
+     * @annotation2 cleaned up a bit
      * 
      */
 
@@ -884,11 +884,12 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                 graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
                         new Object[] { lastSelected });
             }
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
-                    new Object[] { cell });
+            
             this.lastSelected = cell;
             setSidebarConent();
-
+          //make selected cell back
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+                    new Object[] { cell });
             // reset the old selection of edges
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, EDGE_COLOR,
                     highlitedEdges);
@@ -903,7 +904,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
                     highlitedEdges);
             setProperness(highlitedEdges);
-
             // reset the style of the old highlighted nodes
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, CELL_COLOR,
                     highlitedCells);
@@ -923,7 +923,6 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                     ALTERNATE_CELL_COLOR, highlitedCells);
             graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
                     highlitedCells);
-
         } finally {
             graph.getModel().endUpdate();
         }
@@ -1025,6 +1024,7 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
                             event.getXOnScreen() - parent.getX(),
                             event.getYOnScreen() - parent.getY());
                 } else {
+                    System.out.println("showing NodePopup");
                     nodePopup.show(parent,
                             event.getXOnScreen() - parent.getX(),
                             event.getYOnScreen() - parent.getY());
