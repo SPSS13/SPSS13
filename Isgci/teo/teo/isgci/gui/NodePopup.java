@@ -31,7 +31,6 @@ import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.grapht.Inclusion;
-import teo.isgci.util.Utility;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
@@ -42,7 +41,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 	 */
     private static final long serialVersionUID = 2260105093000618855L;
     ISGCIMainFrame parent;
-    private JMenuItem deleteItem, infoItem;
+    private JMenuItem infoItem;
     private JMenuItem miShowSuperclasses;
     private JMenuItem miHideSuperclasses;
     private JMenuItem miShowSubclasses;
@@ -66,7 +65,6 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         this.parent = parent;
         this.graph = graph;
         this.map = map;
-        this.cell = cell;
         // deleteItem = new JMenuItem("Delete");
         add(infoItem = new JMenuItem("Information"));
         add(miShowDetails = new JMenuItem("Show sidebar"));
@@ -212,6 +210,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @return
      * @author leo
      */
+    @SuppressWarnings("unused")
     private boolean neighboursAddable() {
         Set<GraphClass> classes = ((GraphClassSet)cell.getValue()).getSet();
         // get all neighbours

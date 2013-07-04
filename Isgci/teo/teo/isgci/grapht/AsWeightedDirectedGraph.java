@@ -11,8 +11,8 @@ package teo.isgci.grapht;
 
 import java.util.Map;
 
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
+import org.jgrapht.DirectedGraph;
+import org.jgrapht.graph.AsWeightedGraph;
 
 
 /**

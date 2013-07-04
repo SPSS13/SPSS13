@@ -10,16 +10,22 @@
 
 package teo.isgci.problem;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.jgrapht.DirectedGraph;
-import teo.isgci.grapht.*;
-import teo.isgci.gc.*;
+
 import teo.isgci.db.Note;
+import teo.isgci.gc.ComplementClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.gc.UnionClass;
+import teo.isgci.grapht.Annotation;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.Inclusion;
 
 
 /**

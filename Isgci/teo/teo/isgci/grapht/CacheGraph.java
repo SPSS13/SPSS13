@@ -13,10 +13,10 @@ package teo.isgci.grapht;
 import java.util.HashMap;
 
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.ListenableDirectedGraph;
-import org.jgrapht.event.GraphListener;
 import org.jgrapht.event.GraphEdgeChangeEvent;
+import org.jgrapht.event.GraphListener;
 import org.jgrapht.event.GraphVertexChangeEvent;
+import org.jgrapht.graph.ListenableDirectedGraph;
 
 import teo.isgci.util.Pair;
 

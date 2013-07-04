@@ -15,7 +15,6 @@ import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,15 +28,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.mxgraph.model.mxCell;
-import com.mxgraph.swing.mxGraphComponent;
-
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.grapht.BFSWalker;
 import teo.isgci.grapht.GraphWalker;
 import teo.isgci.grapht.Inclusion;
 import teo.isgci.grapht.RevBFSWalker;
+
+import com.mxgraph.model.mxCell;
 
 /**
  * Display a list of graphclasses and change the drawing according to the

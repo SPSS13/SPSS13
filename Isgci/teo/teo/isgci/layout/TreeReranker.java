@@ -10,12 +10,6 @@
 
 package teo.isgci.layout;
 
-import org.jgrapht.DirectedGraph;
-
-import teo.isgci.grapht.GraphWalker;
-import teo.isgci.grapht.TreeBFSWalker;
-import teo.isgci.grapht.WalkerInfo;
-import teo.isgci.grapht.Annotation;
 //
 //public class TreeReranker<V,E> extends TreeBFSWalker<V,E> {
 //    protected int delta;
@@ -38,3 +32,4 @@ import teo.isgci.grapht.Annotation;
 //}
 //
 ///* EOF */
+

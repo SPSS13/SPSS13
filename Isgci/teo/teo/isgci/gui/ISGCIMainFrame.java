@@ -20,13 +20,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.List;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -51,17 +48,14 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.shape.mxIMarker;
 import com.mxgraph.shape.mxMarkerRegistry;
 import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.swing.mxGraphComponent.mxGraphControl;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
+import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxPoint;
-import com.mxgraph.util.mxRectangle;
-import com.mxgraph.util.mxResources;
 import com.mxgraph.util.mxUndoManager;
 import com.mxgraph.util.mxUndoableEdit;
-import com.mxgraph.util.mxUtils;
-import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxUndoableEdit.mxUndoableChange;
+import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
 
@@ -171,7 +165,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         sidebar = new Accordion(this);
         sidebarThread = new Thread(sidebar);
         sidebarThread.start();
-        sidebarThread.suspend();
         sidebar.setVisible(false);
         setJMenuBar(createMenus());
         getContentPane().add("Center", createCanvasPanel());
@@ -189,7 +182,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                 sidebar.visibilityChanged();
                 button2.setVisible(false);
                 getContentPane().add("West", sidebar);
-                // sidebar.setVisible(true);
                 visibleHaken.setState(true);
             }
         });

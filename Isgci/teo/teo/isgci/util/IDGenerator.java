@@ -11,11 +11,11 @@
 package teo.isgci.util;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.BitSet;
+import java.util.HashMap;
 
 public class IDGenerator {
     /** The id strings start with this */

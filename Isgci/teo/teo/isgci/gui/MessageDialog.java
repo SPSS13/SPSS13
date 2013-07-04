@@ -11,6 +11,7 @@
 package teo.isgci.gui;
 
 import java.awt.Component;
+
 import javax.swing.JOptionPane;
 
 public class MessageDialog {

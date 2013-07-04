@@ -13,10 +13,12 @@
 package teo.isgci.xml;
 
 import java.io.StringWriter;
-import teo.sax.XMLWriter;
-import org.xml.sax.helpers.XMLFilterImpl;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.XMLFilterImpl;
+
+import teo.sax.XMLWriter;
 
 /**
  * A NoteFilter passes the contents of a <note> element as a string to its

@@ -10,8 +10,8 @@
 
 package teo.isgci.gui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 
 /**

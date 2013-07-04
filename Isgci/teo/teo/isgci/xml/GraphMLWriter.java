@@ -10,12 +10,12 @@
 
 package teo.isgci.xml;
 
-import java.io.Writer;
-import java.util.Date;
 import java.awt.Color;
+import java.io.Writer;
+
+import org.xml.sax.SAXException;
+
 import teo.isgci.util.Latex2JHtml;
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
 import teo.sax.XMLWriter;
 
 public class GraphMLWriter {

@@ -52,7 +52,6 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
-import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
@@ -119,7 +118,8 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
             + ";rounded=true" + ";selectable=false";
     
  // Implementation of custom cursors for panning events and clicking on nodes
- 	private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 	@SuppressWarnings("unused")
+    private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
  			Toolkit.getDefaultToolkit().createImage(
  					"../teo/data/images/grab.png"), new Point(0, 0),
  			"grab");

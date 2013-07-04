@@ -11,10 +11,10 @@
 
 package teo.isgci.gc;
 
-import java.util.Collection;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A GraphClass defined by intersection of two or more other GraphClasses.

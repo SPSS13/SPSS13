@@ -12,6 +12,7 @@
 package teo.isgci.grapht;
 
 import org.jgrapht.DirectedGraph;
+
 import teo.isgci.util.UnaryFunction;
 
 public class WalkerInfo<V,E> {

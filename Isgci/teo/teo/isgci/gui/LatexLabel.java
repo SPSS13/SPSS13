@@ -11,13 +11,13 @@
 package teo.isgci.gui;
 
 import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.Graphics;
-import java.awt.Font;
 import java.awt.FontMetrics;
-import javax.swing.*;
-import java.net.*;
-import java.io.*;
+import java.awt.Graphics;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 /**
  * A Label that can depict a subset of latex. drawLatexString can also

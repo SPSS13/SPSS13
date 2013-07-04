@@ -13,12 +13,6 @@
 
 package teo.isgci.layout;
 
-import org.jgrapht.DirectedGraph;
-
-import teo.isgci.grapht.GraphWalker;
-import teo.isgci.grapht.UBFSWalker;
-import teo.isgci.grapht.WalkerInfo;
-import teo.isgci.grapht.Annotation;
 
 /**
  * This class realizes a undirected walk over tight edges
