@@ -73,7 +73,7 @@
    &  &  Kontextmenü komplett überarbeitet \\\hline 
     &  &  Selection (Menü-Bar-Parent) ergänzt \\\hline
      &  &  Sidebar hinzugefügt (Mockup) \\\hline
-      1.3& 01.07.2013 & \textbf{Zusätzliches Feature: "`Mark Neighbors"'} (vgl. 4.1 - 22) \\\hline
+      1.3& 01.07.2013 & \textbf{Zusätzliche Features: \newline nicht-rekursives Einblenden von Nachbarn, Sub- und Superklassen} (vgl. 4.1 - 13-15) \\\hline
  
  
  
@@ -241,33 +241,35 @@ gehandhabt. Daher wird jede Dokumentation, die zur Erweiterung des Source-Codes 
 \hline
 12 & Kontextmenü Change name & Beinhaltet die bereits vorhandene Funktionalität. \\
 \hline
-13 & Kontextmenü Show neighbours & Kontextmenü-item um vom jeweiligen Knoten alle Nachbarknoten einzublenden. \\
+13 & Kontextmenü Add neighbours & Kontextmenü-item um vom jeweiligen Knoten alle Nachbarknoten einzublenden. \\
 \hline
-14 & Kontextmenü Hide neighbours & Kontextmenü-item um vom jeweiligen Knoten alle Nachbarknoten auszublenden. \\
+14 & Kontextmenü Add superclasses& Kontextmenü-item um vom jeweiligen Knoten alle direkten Superklassen einzublenden. \\
 \hline
-15 & Kontextmenü Show superclasses &  Kontextmenü-item um vom jeweiligen Knoten alle Superklassen einzublenden. \\
+15 & Kontextmenü Add subclasses & Kontextmenü-item um vom jeweiligen Knoten alle direkten Subklassen einzublenden. \\
 \hline
-16 & Kontextmenü Hide superclasses &  Kontextmenü-item um vom jeweiligen Knoten alle Superklassen auszublenden. \\
+16 & Kontextmenü Show superclasses &  Kontextmenü-item um vom jeweiligen Knoten alle Superklassen einzublenden (rekursiv). \\
 \hline
-17 & Kontextmenü Show subclasses & Kontextmenü-item um vom jeweiligen Knoten alle Subklassen einzublenden. \\
+17 & Kontextmenü Hide superclasses &  Kontextmenü-item um vom jeweiligen Knoten alle Superklassen auszublenden (rekursiv). \\
 \hline
-18 & Kontextmenü Hide subclasses & Kontextmenü-item um vom jeweiligen Knoten alle Subklassen auszublenden. \\
+18 & Kontextmenü Show subclasses & Kontextmenü-item um vom jeweiligen Knoten alle Subklassen einzublenden (rekursiv). \\
+\hline
+19 & Kontextmenü Hide subclasses & Kontextmenü-item um vom jeweiligen Knoten alle Subklassen auszublenden (rekursiv). \\
 \hline
 \end{tabular}
 \vspace*{1cm}
 \begin{tabular}{|c|p{5cm}|p{10cm}|}
 \hline 
-19 & Selection (Menu-Bar-Parent) & Es soll einen neuen Reiter in der Menu-Bar geben, der alle Funktionen des Kontextmenüs, außer 12 Change Name, für einen ausgewählten Knoten zur Verfügung stellt (Funktionen 10,11,13-18). Wenn kein Knoten ausgewählt ist, werden alle Child-Items grau dargestellt und besitzten keine Funktionalität.  \\
+20 & Selection (Menu-Bar-Parent) & Es soll einen neuen Reiter in der Menu-Bar geben, der alle Funktionen des Kontextmenüs, außer 12 Change Name, für einen ausgewählten Knoten zur Verfügung stellt (Funktionen 10,11,13-18). Wenn kein Knoten ausgewählt ist, werden alle Child-Items grau dargestellt und besitzten keine Funktionalität.  \\
 \hline
-20 & Details visible (Menu-Bar-Child) & Im Menu-Bar-Parent View soll ein Punkt Details visible existieren. Dieser signalisiert (mit einem Häkchen) ob, die Sidebar ein- (Häckchen) oder ausgeblendet (kein Häkchen) ist. Außerdem kann über diesen auch die Sidebar ein und ausgeblendet werden.\\ 
+21 & Details visible (Menu-Bar-Child) & Im Menu-Bar-Parent View soll ein Punkt Details visible existieren. Dieser signalisiert (mit einem Häkchen) ob, die Sidebar ein- (Häckchen) oder ausgeblendet (kein Häkchen) ist. Außerdem kann über diesen auch die Sidebar ein und ausgeblendet werden.\\ 
 \hline
-21 & Sidebar & Die Sidebar soll sich durch 3 verschiedene Wege öffnen lassen. Im Kontextmenü über Show details, im Menu-Bar-Parent Selection mit Show details und im Menu-Bar-Parent View über Details visible, falls noch nicht sichtbar. Die Sidebar soll auf der linken Seite sein und wenn nötig eine Scrollbar auf der rechten Seite haben. Die Sidebar wird in ihrer Breite anpassbar sein. Durch einen Button oben in der Sidebar lässt sie sich ausblenden. Außerdem über Details visible in View. Durch das Markieren eines anderen Knoten wird der Inhalt der Sidebar auf die ausgewählte Graphklasse angepasst und deren Informationen in dargestellt. Ist kein Knoten markiert, werden die Informationen der zuletzt ausgewählten Graphklasse angezeigt. Sollte die Sidebar ohne eine Auswahl getroffen zu haben, angezeigt werden, wird die Sidebar leer dargestellt. In der Sidebar wird es möglich sein vertikal in einer Accordion-Navigation zu navigieren. Diese besitzt drei Selektionsmöglichkeiten: Graphclasses, Inclusions, Problems. Dabei führt die Auswahl einer Selektion, zum Einklappen der anderen Selektionsmöglichkeiten. \\
+22 & Sidebar & Die Sidebar soll sich durch 3 verschiedene Wege öffnen lassen. Im Kontextmenü über Show details, im Menu-Bar-Parent Selection mit Show details und im Menu-Bar-Parent View über Details visible, falls noch nicht sichtbar. Die Sidebar soll auf der linken Seite sein und wenn nötig eine Scrollbar auf der rechten Seite haben. Die Sidebar wird in ihrer Breite anpassbar sein. Durch einen Button oben in der Sidebar lässt sie sich ausblenden. Außerdem über Details visible in View. Durch das Markieren eines anderen Knoten wird der Inhalt der Sidebar auf die ausgewählte Graphklasse angepasst und deren Informationen in dargestellt. Ist kein Knoten markiert, werden die Informationen der zuletzt ausgewählten Graphklasse angezeigt. Sollte die Sidebar ohne eine Auswahl getroffen zu haben, angezeigt werden, wird die Sidebar leer dargestellt. In der Sidebar wird es möglich sein vertikal in einer Accordion-Navigation zu navigieren. Diese besitzt drei Selektionsmöglichkeiten: Graphclasses, Inclusions, Problems. Dabei führt die Auswahl einer Selektion, zum Einklappen der anderen Selektionsmöglichkeiten. \\
 \hline
-21 & Sidebar - Selection:Graphclasses  & In der Selection:Graphclasses werden allgemeine Informationen über die ausgewählte Graphklasse angezeigt. \\
+22 & Sidebar - Selection:Graphclasses  & In der Selection:Graphclasses werden allgemeine Informationen über die ausgewählte Graphklasse angezeigt. \\
 \hline
-21 & Sidebar - Selection:Inclusions & In der Selection:Inclusions werden Informationen über die Inklusionen der ausgewählten Graphklasse angezeigt. \\
+22 & Sidebar - Selection:Inclusions & In der Selection:Inclusions werden Informationen über die Inklusionen der ausgewählten Graphklasse angezeigt. \\
 \hline
-21 & Sidebar - Selection:Problems & In der Selection:Problems werden die Probleme der ausgewählten Graphklasse angezeigt. \\
+22 & Sidebar - Selection:Problems & In der Selection:Problems werden die Probleme der ausgewählten Graphklasse angezeigt. \\
 \hline
 \end{tabular} \newpage
 
