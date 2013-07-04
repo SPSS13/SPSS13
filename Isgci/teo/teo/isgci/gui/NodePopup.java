@@ -311,6 +311,8 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         cell = parent.graphCanvas.getSelectedCell();
 
         // toggle menus
+        //sidebar
+        miShowDetails.setEnabled(true);
         // superclasses
         boolean superclassesAddable = superclassesAddable();
         boolean subclassesAddable = subclassesAddable();

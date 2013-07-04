@@ -58,7 +58,7 @@ public class CustomGraphComponent extends mxGraphComponent {
                 // get the following
                 for (GraphClass gc : gcs.getSet()) {
                     if (gc != gcs.getLabel()) {
-                        tip += ("<br>" + XsltUtil.latex(gc.toString()));
+                        tip += XsltUtil.latex(gc.toString());
                     }
                 }
                 // add html-tag
