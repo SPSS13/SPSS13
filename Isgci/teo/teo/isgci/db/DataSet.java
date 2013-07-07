@@ -10,15 +10,23 @@
 
 package teo.isgci.db;
 
-import java.util.*;
-import org.jgrapht.Graph;
-import org.jgrapht.DirectedGraph;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.Vector;
+
 import org.jgrapht.graph.SimpleDirectedGraph;
-import teo.isgci.grapht.*;
-import teo.isgci.xml.*;
+
 import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.Inclusion;
 import teo.isgci.problem.Problem;
 import teo.isgci.util.LessLatex;
+import teo.isgci.xml.ISGCIReader;
+import teo.isgci.xml.XMLParser;
 
 /**
  * The Database of the information system.

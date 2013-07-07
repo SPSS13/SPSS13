@@ -10,8 +10,11 @@
 
 package teo.isgci.gui;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import teo.isgci.gc.GraphClass;
 
 /**

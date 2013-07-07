@@ -10,7 +10,6 @@
  
 package teo.isgci.util;
 
-import java.util.Vector;
 
 public final class Utility{
     

@@ -12,7 +12,9 @@ package teo.isgci.grapht;
 
 import java.util.Collection;
 import java.util.WeakHashMap;
+
 import org.jgrapht.Graph;
+
 import teo.isgci.util.UnaryFunction;
 
 /**

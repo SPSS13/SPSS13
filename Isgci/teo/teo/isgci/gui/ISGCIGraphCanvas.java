@@ -52,7 +52,6 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxHtmlColor;
-import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.view.mxCellState;
 import com.mxgraph.view.mxGraph;
@@ -171,7 +170,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 		graph.getModel().beginUpdate();
 		((mxGraphModel) graph.getModel()).clear();
 		graph.getModel().endUpdate();
-
+        //reset selection to prevent side effects
+        lastSelected = null;
 		SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
 				.createHierarchySubgraph(nodes);
 		// System.out.println(edgegraph);
@@ -450,17 +450,17 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 		centerNode(getSelectedCell());
 	}
 
-	/**
-	 * Create a hierarchy subgraph of the given classes and draw it. and remove
-	 * Sub / Superclasses of selected node.
-	 * 
-	 * @author philipp, leo
-	 * @date 22.06 9:30
-	 * @annotation redraw the graph and remove subgraph/superclass of the given
-	 *             class
-	 * @annotation2 now deletes from the map too, cleaned up a bit
-	 * 
-	 */
+    /**
+     * Create a hierarchy subgraph of the given classes and draw it. and remove
+     * Sub / Superclasses of selected node.
+     * 
+     * @author philipp, leo
+     * @date 22.06 9:30
+     * @annotation redraw the graph and remove subgraph/superclass of the given
+     *             class
+     * @annotation2 cleaned up a bit
+     * 
+     */
 
 	public void deleteSuperSub(Collection<GraphClass> nodes) {
 		SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
@@ -504,24 +504,24 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 	 * 
 	 */
 
-	public Collection<GraphClass> getSuperNodes(mxCell cell) {
-		final HashSet<GraphClass> result = new HashSet<GraphClass>();
-		if (cell != null) {
-			GraphClass gc = NodePopup.searchName(cell);
-			new RevBFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc,
-					null, GraphWalker.InitCode.DYNAMIC) {
-				public void visit(GraphClass v) {
-					result.add(v);
-					super.visit(v);
-				}
-			}.run();
-			// retain just the classes, that are already in the Graph
-			result.retainAll(getClasses());
-			result.removeAll(((GraphClassSet) getSelectedCell().getValue())
-					.getSet());
-		}
-		return result;
-	}
+    public Collection<GraphClass> getSuperNodes(mxCell cell) {
+        final HashSet<GraphClass> result = new HashSet<GraphClass>();
+        if (cell != null) {
+            GraphClass gc = ((GraphClassSet)cell.getValue()).getLabel();
+            new RevBFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc,
+                    null, GraphWalker.InitCode.DYNAMIC) {
+                public void visit(GraphClass v) {
+                    result.add(v);
+                    super.visit(v);
+                }
+            }.run();
+            // retain just the classes, that are already in the Graph
+            result.retainAll(getClasses());
+            result.removeAll(((GraphClassSet)getSelectedCell().getValue())
+                    .getSet());
+        }
+        return result;
+    }
 
 	/**
 	 * Get the subnodes for adding and deleting subnodes
@@ -533,24 +533,24 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 	 * 
 	 */
 
-	public Collection<GraphClass> getSubNodes(mxCell cell) {
-		final HashSet<GraphClass> result = new HashSet<GraphClass>();
-		if (cell != null) {
-			GraphClass gc = NodePopup.searchName(cell);
-			new BFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc, null,
-					GraphWalker.InitCode.DYNAMIC) {
-				public void visit(GraphClass v) {
-					result.add(v);
-					super.visit(v);
-				}
-			}.run();
-			// retain just the classes, that are already in the Graph
-			result.retainAll(getClasses());
-			result.removeAll(((GraphClassSet) getSelectedCell().getValue())
-					.getSet());
-		}
-		return result;
-	}
+    public Collection<GraphClass> getSubNodes(mxCell cell) {
+        final HashSet<GraphClass> result = new HashSet<GraphClass>();
+        if (cell != null) {
+            GraphClass gc = ((GraphClassSet)cell.getValue()).getLabel();
+            new BFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc, null,
+                    GraphWalker.InitCode.DYNAMIC) {
+                public void visit(GraphClass v) {
+                    result.add(v);
+                    super.visit(v);
+                }
+            }.run();
+            // retain just the classes, that are already in the Graph
+            result.retainAll(getClasses());
+            result.removeAll(((GraphClassSet)getSelectedCell().getValue())
+                    .getSet());
+        }
+        return result;
+    }
 
 	/**
 	 * Returns all classes on the canvas (unsorted).
@@ -884,54 +884,53 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 	 * @annotation now changes teh e
 	 */
 
-	public void setSelectedCell(mxCell cell) {
+    public void setSelectedCell(mxCell cell) {
 		int a = ind();
-		graph.getModel().beginUpdate();
-		try {
-			if (lastSelected != null && cell != lastSelected) {
-				graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
-						new Object[] { lastSelected });
-			}
-			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
-					new Object[] { cell });
-			this.lastSelected = cell;
-			setSidebarConent();
-
-			// reset the old selection of edges
-			graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, EDGE_COLOR,
-					highlitedEdges);
-			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
-					highlitedEdges);
-			setProperness(highlitedEdges);
-			// switch the selected edges
-			highlitedEdges = graph.getEdges(cell);
-			// color the new edges
-			graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
-					ALTERNATE_EDGE_COLOR, highlitedEdges);
-			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
-					highlitedEdges);
-			setProperness(highlitedEdges);
-
-			// reset the style of the old highlighted nodes
-			graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, CELL_COLOR,
-					highlitedCells);
-			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
-					highlitedCells);
-			// get and switch the associated cells
-			Set<Object> temp = new HashSet<Object>();
-			for (Object edge : graph.getIncomingEdges(cell)) {
-				temp.add(((mxCell) edge).getSource());
-			}
-			for (Object edge : graph.getOutgoingEdges(cell)) {
-				temp.add(((mxCell) edge).getTarget());
-			}
-			highlitedCells = temp.toArray();
-			// highlight the cells of the new highlighted nodes
-			graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
-					ALTERNATE_CELL_COLOR, highlitedCells);
-			graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
-					highlitedCells);
-
+        graph.getModel().beginUpdate();
+        try {
+            if (lastSelected != null && cell != lastSelected) {
+                graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
+                        new Object[] { lastSelected });
+            }
+            
+            this.lastSelected = cell;
+            setSidebarConent();
+          //make selected cell back
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+                    new Object[] { cell });
+            // reset the old selection of edges
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, EDGE_COLOR,
+                    highlitedEdges);
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
+                    highlitedEdges);
+            setProperness(highlitedEdges);
+            // switch the selected edges
+            highlitedEdges = graph.getEdges(cell);
+            // color the new edges
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
+                    ALTERNATE_EDGE_COLOR, highlitedEdges);
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+                    highlitedEdges);
+            setProperness(highlitedEdges);
+            // reset the style of the old highlighted nodes
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, CELL_COLOR,
+                    highlitedCells);
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
+                    highlitedCells);
+            // get and switch the associated cells
+            Set<Object> temp = new HashSet<Object>();
+            for (Object edge : graph.getIncomingEdges(cell)) {
+                temp.add(((mxCell)edge).getSource());
+            }
+            for (Object edge : graph.getOutgoingEdges(cell)) {
+                temp.add(((mxCell)edge).getTarget());
+            }
+            highlitedCells = temp.toArray();
+            // highlight the cells of the new highlighted nodes
+            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
+                    ALTERNATE_CELL_COLOR, highlitedCells);
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+                    highlitedCells);
 		} finally {
 			graph.getModel().endUpdate();
 		}
@@ -947,17 +946,19 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 
 	}
 
-	public void setSidebarConent() {
-		if (parent.sidebar.isVisible()) {
-			if (getSelectedCell() != null) {
-				if (parent.sidebar.getContent() != NodePopup.searchName(
-						getSelectedCell()).getID()) {
-					parent.sidebar.changeContent(NodePopup.searchName(
-							getSelectedCell()).getID());
-				}
-			}
-		}
-	}
+    
+    
+    public void setSidebarConent() {
+        if (parent.sidebar.isVisible()) {
+            if (getSelectedCell() != null) {
+                if (parent.sidebar.getContent() != ((GraphClassSet)
+                        getSelectedCell().getValue()).getLabel().getID()) {
+                    parent.sidebar.changeContent(((GraphClassSet)
+                            getSelectedCell().getValue()).getLabel().getID());
+                }
+            }
+        }
+    }
 
 	public void setParent(ISGCIMainFrame parent) {
 		this.parent = parent;
@@ -1027,32 +1028,32 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 			}
 			return false;
 
-			/*
-			 * Method for showing a popup menu if a node or an edge is
-			 * rightclicked
-			 */
-		} else {
-			event.consume();
-			Object cell = ((mxGraphComponent) parent.drawingPane).getCellAt(
-					event.getX(), event.getY());
-			if (cell != null) {
-				mxCell c = (mxCell) cell;
-				if (c.isEdge()) {
-					edgePopup.setEdge(c);
-					edgePopup.show(parent,
-							event.getXOnScreen() - parent.getX(),
-							event.getYOnScreen() - parent.getY());
-				} else {
-					nodePopup.setNode(c);
-					nodePopup.show(parent,
-							event.getXOnScreen() - parent.getX(),
-							event.getYOnScreen() - parent.getY());
-				}
-			}
-			// parent.getUndoM().
-			return true;
-		}
-	}
+            /*
+             * Method for showing a popup menu if a node or an edge is
+             * rightclicked
+             */
+        } else {
+            event.consume();
+            Object cell = ((mxGraphComponent)parent.drawingPane).getCellAt(
+                    event.getX(), event.getY());
+            if (cell != null) {
+                mxCell c = (mxCell)cell;
+                if (c.isEdge()) {
+                    edgePopup.setEdge(c);
+                    edgePopup.show(parent,
+                            event.getXOnScreen() - parent.getX(),
+                            event.getYOnScreen() - parent.getY());
+                } else {
+                    System.out.println("showing NodePopup");
+                    nodePopup.show(parent,
+                            event.getXOnScreen() - parent.getX(),
+                            event.getYOnScreen() - parent.getY());
+                }
+            }
+            // parent.getUndoM().
+            return true;
+        }
+    }
 
 	/**
 	 * Zooming Function by setting values after computing relative to the mouse

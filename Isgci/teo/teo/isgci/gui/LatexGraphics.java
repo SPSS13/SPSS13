@@ -10,13 +10,14 @@
 
 package teo.isgci.gui;
 
-import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
-import teo.isgci.util.LatexGlyph;
+
 import teo.isgci.util.Latex;
+import teo.isgci.util.LatexGlyph;
 
 public class LatexGraphics extends Latex {
 

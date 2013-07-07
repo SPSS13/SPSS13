@@ -10,12 +10,6 @@
 
 package teo.isgci.layout;
 
-import org.jgrapht.DirectedGraph;
-
-import teo.isgci.grapht.TreeDFSWalker;
-import teo.isgci.grapht.Annotation;
-import teo.isgci.grapht.WalkerInfo;
-import teo.isgci.grapht.GraphWalker;
 
 //public class LLWalker<V,E> extends TreeDFSWalker<V,E> {
 //

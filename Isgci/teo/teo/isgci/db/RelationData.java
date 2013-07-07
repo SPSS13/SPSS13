@@ -10,8 +10,8 @@
 
 package teo.isgci.db;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RelationData implements Relation {

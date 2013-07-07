@@ -10,7 +10,6 @@
 
 package teo.isgci.layout;
 
-import teo.isgci.grapht.WalkerInfo;
 //
 ///**
 // * This extended WalkerInfo contains some additional fields
@@ -85,3 +84,4 @@ import teo.isgci.grapht.WalkerInfo;
 //        return s.toString();
 //    }
 //}
+

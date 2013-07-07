@@ -11,7 +11,6 @@
 package teo.isgci.grapht;
 
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.*;
 
 public class DFSWalker<V,E> extends GraphWalker<V,E> {
     protected int time;

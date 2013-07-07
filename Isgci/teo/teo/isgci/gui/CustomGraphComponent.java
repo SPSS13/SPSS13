@@ -1,7 +1,5 @@
 package teo.isgci.gui;
 
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import teo.XsltUtil;
@@ -60,7 +58,7 @@ public class CustomGraphComponent extends mxGraphComponent {
                 // get the following
                 for (GraphClass gc : gcs.getSet()) {
                     if (gc != gcs.getLabel()) {
-                        tip += ("<br>" + XsltUtil.latex(gc.toString()));
+                        tip += XsltUtil.latex(gc.toString());
                     }
                 }
                 // add html-tag

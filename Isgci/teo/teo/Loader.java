@@ -14,14 +14,13 @@ package teo;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-import java.net.URL;
-import java.net.MalformedURLException;
 import java.io.InputStream;
-import java.io.File;
-import org.xml.sax.InputSource;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+
 import teo.isgci.gui.ISGCIMainFrame;
 
 public class Loader {

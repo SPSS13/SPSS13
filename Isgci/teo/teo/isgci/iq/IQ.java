@@ -12,14 +12,10 @@ package teo.isgci.iq;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
-import teo.isgci.gc.GraphClass;
-import teo.isgci.db.Algo;
+
 import teo.isgci.db.DataSet;
+import teo.isgci.gc.GraphClass;
 
 public class IQ {
     /** The string that contains the query */

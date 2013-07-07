@@ -10,21 +10,25 @@
  
 package teo.isgci.xml;
  
-import org.xml.sax.*;
-import teo.sax.XMLWriter;
-import java.util.*;
-import java.io.*;
-import teo.isg.SmallGraph;
-import teo.isg.Graph;
-import teo.isg.Family;
-import teo.isg.SimpleFamily;
-import teo.isg.HMTFamily;
-import teo.isg.UnionFamily;
-import teo.isg.Configuration;
-import teo.isg.HMTGrammar;
-import teo.isg.HMTGrammar.HMTGraph;
+import java.io.Writer;
+import java.util.Collection;
+import java.util.List;
+import java.util.Vector;
+
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
+import org.xml.sax.SAXException;
+
+import teo.isg.Configuration;
+import teo.isg.Family;
+import teo.isg.Graph;
+import teo.isg.HMTFamily;
+import teo.isg.HMTGrammar;
+import teo.isg.HMTGrammar.HMTGraph;
+import teo.isg.SimpleFamily;
+import teo.isg.SmallGraph;
+import teo.isg.UnionFamily;
+import teo.sax.XMLWriter;
 
 public class SmallGraphWriter {
     /* Where to write to */

@@ -10,11 +10,24 @@
 
 package teo.isgci.grapht;
 
-import java.util.*;
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
-import org.jgrapht.alg.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.jgrapht.DirectedGraph;
+import org.jgrapht.alg.ConnectivityInspector;
+import org.jgrapht.alg.CycleDetector;
+import org.jgrapht.alg.StrongConnectivityInspector;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.traverse.TopologicalOrderIterator;
+
 import teo.isgci.util.Itera;
 
 public class GAlg {

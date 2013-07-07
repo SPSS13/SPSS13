@@ -10,7 +10,10 @@
 
 package teo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
 import teo.isgci.util.Latex2Html;
 
 public class XsltUtil {

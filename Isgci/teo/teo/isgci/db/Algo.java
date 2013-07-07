@@ -10,16 +10,31 @@
 
 package teo.isgci.db;
 
-import teo.isgci.grapht.*;
-import teo.isgci.gc.*;
-import teo.isgci.util.LessLatex;
-import java.util.*;
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.graph.DirectedSubgraph;
-import org.jgrapht.graph.DefaultEdge;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.jgrapht.alg.ConnectivityInspector;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DirectedSubgraph;
+import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.util.ArrayUnenforcedSet;
+
+import teo.isgci.gc.ComplementClass;
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.gc.HereditaryClass;
+import teo.isgci.gc.IntersectClass;
+import teo.isgci.gc.UnionClass;
+import teo.isgci.grapht.BFSWalker;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.GraphWalker;
+import teo.isgci.grapht.Inclusion;
+import teo.isgci.grapht.RevBFSWalker;
+import teo.isgci.util.LessLatex;
 
 /**
  * Some general algorithms for graph class hierarchies.

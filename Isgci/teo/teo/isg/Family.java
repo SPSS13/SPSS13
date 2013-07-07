@@ -10,7 +10,6 @@
 
 package teo.isg;
 
-import java.util.Vector;
 
 public class Family extends SmallGraph{
     

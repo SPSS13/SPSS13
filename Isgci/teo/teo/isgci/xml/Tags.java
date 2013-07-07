@@ -10,8 +10,18 @@
 
 package teo.isgci.xml;
 
+import teo.isgci.gc.BaseClass;
+import teo.isgci.gc.CliqueClass;
+import teo.isgci.gc.ComplementClass;
+import teo.isgci.gc.ConnectedHereditaryClass;
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.gc.InducedHereditaryClass;
+import teo.isgci.gc.IntersectClass;
+import teo.isgci.gc.IsometricHereditaryClass;
+import teo.isgci.gc.ProbeClass;
+import teo.isgci.gc.UnionClass;
 import teo.isgci.grapht.Inclusion;
-import teo.isgci.gc.*;
 
 class Tags {
     /* Root types */

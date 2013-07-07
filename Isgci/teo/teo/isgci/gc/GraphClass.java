@@ -12,7 +12,6 @@
 package teo.isgci.gc;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Collection;
 
 public abstract class GraphClass {
