@@ -12,33 +12,33 @@ package teo.isgci.xml;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Deque;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Vector;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Collections;
 
-import org.xml.sax.XMLReader;
-import org.xml.sax.Locator;
-import org.xml.sax.InputSource;
-import org.xml.sax.helpers.XMLReaderFactory;
-import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.SAXException;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.helpers.XMLReaderFactory;
 
-import teo.isg.SmallGraph;
-import teo.isg.Graph;
-import teo.isg.Family;
-import teo.isg.SimpleFamily;
-import teo.isg.HMTFamily;
-import teo.isg.UnionFamily;
-import teo.isg.HMTGrammar;
 import teo.isg.Configuration;
+import teo.isg.Family;
+import teo.isg.Graph;
+import teo.isg.HMTFamily;
+import teo.isg.HMTGrammar;
+import teo.isg.SimpleFamily;
+import teo.isg.SmallGraph;
+import teo.isg.UnionFamily;
 import teo.isgci.util.Pair;
 
 public class SmallGraphReader extends DefaultHandler {

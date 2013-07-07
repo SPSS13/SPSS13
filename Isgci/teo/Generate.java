@@ -8,21 +8,38 @@
  * Email: isgci@graphclasses.org
  */
 
-import teo.isgci.grapht.*;
-import teo.isgci.xml.*;
-import teo.isgci.gc.*;
-import teo.isgci.db.*;
-import teo.isgci.problem.*;
-import teo.Loader;
-
 import gnu.getopt.Getopt;
-import java.io.*;
-import java.util.*;
-import java.net.URL;
-import org.xml.sax.InputSource;
-import org.jgrapht.Graph;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.jgrapht.DirectedGraph;
+import org.jgrapht.Graph;
 import org.jgrapht.graph.DirectedMultigraph;
+
+import teo.Loader;
+import teo.isgci.db.AbstractRelation;
+import teo.isgci.gc.ComplementClass;
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.Deducer;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.Inclusion;
+import teo.isgci.problem.Complexity;
+import teo.isgci.problem.Problem;
+import teo.isgci.xml.ISGCIReader;
+import teo.isgci.xml.ISGCIWriter;
+import teo.isgci.xml.NoteFilter;
+import teo.isgci.xml.XMLParser;
 
 public class Generate {
 

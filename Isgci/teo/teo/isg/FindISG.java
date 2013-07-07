@@ -10,18 +10,30 @@
 
 package teo.isg;
 
-import java.util.*;
+import gnu.getopt.Getopt;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.URL;
-import java.io.*;
-import org.xml.sax.XMLReader;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Vector;
+
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleDirectedGraph;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.*;
-import gnu.getopt.Getopt;
+
 import teo.isgci.grapht.GAlg;
-import teo.isgci.xml.*;
-import teo.isgci.util.Itera;
+import teo.isgci.xml.NoteFilter;
+import teo.isgci.xml.SmallGraphReader;
+import teo.isgci.xml.SmallGraphTags;
+import teo.isgci.xml.SmallGraphWriter;
+import teo.isgci.xml.XMLParser;
 
 public class FindISG{
     

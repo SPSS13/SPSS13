@@ -10,9 +10,11 @@
 
 package teo.isgci.grapht;
 
-import org.jgrapht.DirectedGraph;
-import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+
+import org.jgrapht.DirectedGraph;
+
 import teo.isgci.util.UnaryFunction;
 
 /**

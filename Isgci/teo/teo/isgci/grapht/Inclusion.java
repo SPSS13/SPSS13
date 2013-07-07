@@ -11,10 +11,10 @@
 package teo.isgci.grapht;
 
 import java.util.List;
-import java.util.ArrayList;
-import teo.isgci.gc.GraphClass;
+
 import teo.isgci.db.Relation;
 import teo.isgci.db.RelationData;
+import teo.isgci.gc.GraphClass;
 
 /**
  * Represents an inclusion in the system. For efficiency of the graph

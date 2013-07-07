@@ -12,38 +12,38 @@
 package teo.isgci.gc;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.HashMap;
-import java.util.Collection;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Vector;
-import java.util.StringTokenizer;
-import java.util.Arrays;
 import java.io.File;
-import java.net.URL;
-import java.io.LineNumberReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
-import org.xml.sax.XMLReader;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleDirectedGraph;
+import org.jgrapht.util.ArrayUnenforcedSet;
 import org.xml.sax.InputSource;
 
-import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.util.ArrayUnenforcedSet;
-
+import teo.isg.Configuration;
+import teo.isg.Family;
+import teo.isg.Graph;
+import teo.isg.HMTFamily;
+import teo.isg.SimpleFamily;
+import teo.isg.SmallGraph;
+import teo.isg.UnionFamily;
 import teo.isgci.grapht.GAlg;
-import teo.isgci.util.Utility;
 import teo.isgci.util.LessLatex;
 import teo.isgci.util.Pair;
-import teo.isgci.xml.*;
-import teo.isg.*;
+import teo.isgci.xml.SmallGraphReader;
+import teo.isgci.xml.XMLParser;
 
 /**
  * A GraphClass defined by forbidding induced subgraphs.

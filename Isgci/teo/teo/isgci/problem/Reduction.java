@@ -10,8 +10,8 @@
 
 package teo.isgci.problem;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a reduction from a parent to a child.

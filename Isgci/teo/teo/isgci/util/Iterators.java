@@ -10,10 +10,10 @@
 
 package teo.isgci.util;
 
-import java.util.NoSuchElementException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * Adapted from java2s.com/Collections data structures.

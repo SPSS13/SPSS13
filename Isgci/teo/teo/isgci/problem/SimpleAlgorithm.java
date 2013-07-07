@@ -11,6 +11,7 @@
 package teo.isgci.problem;
 
 import java.util.List;
+
 import teo.isgci.gc.GraphClass;
 
 

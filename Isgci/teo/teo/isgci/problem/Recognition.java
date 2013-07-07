@@ -10,14 +10,19 @@
 
 package teo.isgci.problem;
 
-import java.util.Map;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import org.jgrapht.DirectedGraph;
-import teo.isgci.grapht.*;
-import teo.isgci.gc.*;
-import teo.isgci.db.Note;
+
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.gc.IntersectClass;
+import teo.isgci.gc.UnionClass;
+import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.Inclusion;
 
 /**
  * Stores information about recognizing a graph.
