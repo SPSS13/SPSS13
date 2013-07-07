@@ -11,18 +11,36 @@
 
 package teo.isgci.grapht;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.jgrapht.DirectedGraph;
-import org.jgrapht.Graphs;
-import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.graph.DirectedMultigraph;
 import org.jgrapht.WeightedGraph;
 import org.jgrapht.alg.FloydWarshallShortestPaths;
-import teo.isgci.gc.*;
-import teo.isg.Graph;
-import teo.isgci.db.*;
+import org.jgrapht.graph.SimpleDirectedGraph;
+
+import teo.isgci.db.AbstractRelation;
+import teo.isgci.db.Disjointness;
+import teo.isgci.db.Incomparability;
+import teo.isgci.db.Ref;
+import teo.isgci.gc.CliqueClass;
+import teo.isgci.gc.ComplementClass;
+import teo.isgci.gc.ForbiddenClass;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.gc.HereditaryClass;
+import teo.isgci.gc.IntersectClass;
+import teo.isgci.gc.ProbeClass;
+import teo.isgci.gc.SetClass;
+import teo.isgci.gc.UnionClass;
 import teo.isgci.util.IDGenerator;
 import teo.isgci.util.Itera;
 import teo.isgci.util.Iterators;

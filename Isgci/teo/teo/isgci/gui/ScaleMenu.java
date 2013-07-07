@@ -11,8 +11,10 @@
 
 package teo.isgci.gui;
 
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+import javax.swing.JMenu;
 
 public class ScaleMenu extends JMenu implements ItemListener {
 /*

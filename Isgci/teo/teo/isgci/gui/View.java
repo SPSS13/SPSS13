@@ -10,10 +10,10 @@
 
 package teo.isgci.gui;
 
-import java.awt.Point;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
-import javax.swing.*;
+
 import teo.isgci.xml.GraphMLWriter;
 
 /*

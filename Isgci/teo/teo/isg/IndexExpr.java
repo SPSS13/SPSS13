@@ -10,8 +10,8 @@
 
 package teo.isg;
 
-import java.util.Vector;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 /**
  * An IndexExpr is a unary total function natural -> int. It is used to

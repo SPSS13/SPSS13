@@ -11,12 +11,16 @@
 package teo.isgci.gui;
 
 //import.java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
-import teo.isgci.db.*;
-import teo.isgci.problem.*;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
+import javax.swing.JRadioButtonMenuItem;
+
+import teo.isgci.db.DataSet;
+import teo.isgci.problem.Problem;
 
 public class ProblemsMenu extends JMenu implements ActionListener {
 

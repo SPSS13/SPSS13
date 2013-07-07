@@ -10,7 +10,6 @@
 
 package teo.isg;
 
-import java.util.Vector;
 
 public class Graph extends SmallGraph{
     private boolean matrix[][];

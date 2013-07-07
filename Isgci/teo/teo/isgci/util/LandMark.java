@@ -10,22 +10,20 @@
 
 package teo.isgci.util;
 
-import java.io.*;
-import java.util.*;
-import java.net.URL;
-import java.awt.image.BufferedImage;
-import java.awt.Dimension;
-import javax.imageio.ImageIO;
-import org.xml.sax.InputSource;
-import gnu.getopt.Getopt;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import org.jgrapht.graph.SimpleDirectedGraph;
-import teo.isgci.grapht.*;
-import teo.isgci.gui.*;
-import teo.isgci.xml.*;
-import teo.isgci.gc.*;
-import teo.isgci.db.*;
-import teo.isgci.problem.*;
+
 import teo.Loader;
+import teo.isgci.db.DataSet;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.Inclusion;
+import teo.isgci.gui.ISGCIMainFrame;
+import teo.isgci.xml.ISGCIReader;
+import teo.isgci.xml.NoteFilter;
+import teo.isgci.xml.XMLParser;
 
 public class LandMark {
     /** Where we check for relations */

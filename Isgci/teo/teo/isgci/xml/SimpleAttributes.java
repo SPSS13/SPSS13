@@ -10,7 +10,7 @@
 
 package teo.isgci.xml;
 
-import org.xml.sax.helpers.*;
+import org.xml.sax.helpers.AttributesImpl;
 
 public class SimpleAttributes extends AttributesImpl {
     public void addAttribute(String locName, String value) {
