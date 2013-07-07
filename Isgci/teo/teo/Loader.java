@@ -70,6 +70,7 @@ public class Loader {
     public void showDocument(String url) {
         try {
             System.err.println(new URL(locationURL, url).toURI());
+            System.out.println(new URL(locationURL, url).toURI());
             Desktop.getDesktop().browse(new URL(locationURL, url).toURI());
         } catch (Exception e) {
             System.err.println(e);

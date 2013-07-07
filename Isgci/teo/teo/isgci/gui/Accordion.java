@@ -58,16 +58,7 @@ public class Accordion extends JPanel implements Runnable {
 		/*
 		 * Set default-content of Sidebar html possible here!!
 		 */
-		String defaultTextSidebar = "<div style='margin:10px;'>Please select Graph-Class...<div>";// <div
-																									// style='height:
-																									// 1000px;
-																									// border:1px
-																									// solid
-																									// red;'><img
-																									// src='file:data/images/logo.png'
-																									// width='250'
-																									// height='83'/><div>
-
+		String defaultTextSidebar = "<div style='margin:10px;'>Please select Graph-Class...<div>";
 		GraphclassPane.setText(defaultTextSidebar);
 		InclusionPane.setText(defaultTextSidebar);
 		ProblemsPane.setText(defaultTextSidebar);
@@ -279,7 +270,7 @@ public class Accordion extends JPanel implements Runnable {
 		}
 	}
 
-	/*
+	/**
 	 * Fetches html from given URL of Graph-Class, bunches the information in
 	 * seperate html-blocks and returns them as a String-Array JSoup is used to
 	 * parse the html.
@@ -302,9 +293,9 @@ public class Accordion extends JPanel implements Runnable {
 		resultArray[0] = resultArray[0]
 				.replace(
 						"<span class=\"complement\">",
-						"</b></td><td style=\"border-top:1px solid; margin-right:-5; margin-left:-5; padding-top:-3; height:10px;\">");
+						"</b></td><td style=\"font:bold; border-top:1px solid; margin-right:-5; margin-left:-5; padding-top:-3; height:10px;\">");
 		resultArray[0] = resultArray[0].replace("</span>",
-				"</b></td><td style=\"padding-top:-3;\"><b>");
+				"</b></td><td style=\"padding-top:-3; font:bold;\"><b>");
 		resultArray[0] = "<div style='border-bottom: 1px solid;margin-left: -2 cm; width:100cm;'><table><tr><td style=\"padding-top:-3;\"><b>"
 				+ resultArray[0] + "</b></td></tr></table></div><br>";
 

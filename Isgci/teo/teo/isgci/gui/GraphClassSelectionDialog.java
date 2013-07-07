@@ -162,6 +162,14 @@ public class GraphClassSelectionDialog extends JDialog implements
         classesList.setSelectedValue(node, true);
     }
 
+    /**
+     * Method for drawing and computing graph an canvas.
+     * Centering, if only one Class is selected in the Dialog for drawing, 
+     * else if more than one is selected, then fit graph in Window.
+     * 
+     * @author Matthias Miller
+     * @date 06.07.2013
+     */
     public void actionPerformed(ActionEvent event) {
         Object source = event.getSource();
         if (source == cancelButton) {
@@ -169,20 +177,31 @@ public class GraphClassSelectionDialog extends JDialog implements
         } else if (source == newButton) {
             Cursor oldcursor = parent.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            parent.graphCanvas.drawHierarchy(getNodes());
-            // new method needs testing
-            parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
-            ArrayList<GraphClass> list = (ArrayList<GraphClass>) classesList.getSelectedValuesList();
-            parent.drawingPane.getComponent(0).validate();
-            if(list.size() > 1){
-            	parent.graphCanvas.fitInWindow();
-            } else if (list.size() == 1) {
-            	mxCell cell = (mxCell) parent.graphCanvas.findNode(
-                        ((NodeList<GraphClass>)classesList).getSelectedNode());
-                parent.graphCanvas.centerNode(cell);
-                parent.graphCanvas.setSelectedCell(cell);
-			}
-            // parent.graphCanvas.updateBounds();
+            System.out.print("vor drawHierarchy: ");
+            parent.graphCanvas.indOut();
+            Collection<GraphClass> nodes = getNodes();
+            System.out.println("Nodes.Size: " + nodes.size());
+            parent.graphCanvas.getGraph().getModel().beginUpdate();
+            try {
+            	parent.graphCanvas.drawHierarchy(nodes);
+                System.out.print("nach drawHierarchy: ");
+                parent.graphCanvas.indOut();
+                parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
+                System.out.print(classesList.getSelectedValuesList().size() + "GCSDialog setNodeName: ");
+    			// remove Undo for setNodeNames
+                ArrayList<GraphClass> list = (ArrayList<GraphClass>) classesList.getSelectedValuesList();
+                parent.drawingPane.getComponent(0).validate();
+                if(list.size() > 1){
+                	parent.graphCanvas.fitInWindow();
+                } else if (list.size() == 1) {
+                	mxCell cell = (mxCell) parent.graphCanvas.findNode(
+                            ((NodeList<GraphClass>)classesList).getSelectedNode());
+                    parent.graphCanvas.centerNode(cell);
+    			}
+            } finally {
+                parent.graphCanvas.getGraph().getModel().endUpdate();
+            }
+            
             
             setCursor(oldcursor);
             closeDialog();
@@ -223,7 +242,6 @@ public class GraphClassSelectionDialog extends JDialog implements
                 }.run();
             }
         }
-
         return result;
     }
 }
