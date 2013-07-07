@@ -143,7 +143,7 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 		this.graph = graph;
 		namingPref = Algo.NamePref.BASIC;
 		// setWidthFunc(new NodeWidthFunc());
-		nodePopup = new NodePopup(parent, graph);
+		nodePopup = new NodePopup(parent, graph, map);
 		edgePopup = new EdgePopup(parent);
 		add(nodePopup);
 		add(edgePopup);
@@ -1212,6 +1212,10 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 		return animationActivated;
 	}
 
+	public NodePopup getNodePopup(){
+        return nodePopup;
+    }
+	
 	public void indOut() {
 		System.out.println(parent.getUndoM().getIndexNext());
 	}
