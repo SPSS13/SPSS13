@@ -99,12 +99,12 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     protected JMenuItem miHideSubclasses;
     protected JMenu selectionMenu;
     protected JMenu editMenu;
-    protected mxUndoManager undoManager;
+    protected ISGCIUndoManager undoManager;
 
     protected BasicArrowButton button2;
 
     /**
-     * Needed to add undoManager to the Mainframe
+     * Add undoManager to the Mainframe
      */
     protected mxIEventListener undoHandler = new mxIEventListener() {
         public void invoke(Object source, mxEventObject evt) {
@@ -160,7 +160,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         // set Color for improper Inclusions
         addImproperInclColor();
 
-        undoManager = new mxUndoManager();
+        undoManager = new ISGCIUndoManager();
 
         sidebar = new Accordion(this);
         sidebarThread = new Thread(sidebar);
@@ -194,6 +194,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                 .addListener(mxEvent.UNDO, undoHandler);
         ((mxGraphComponent)drawingPane).getGraph().getView()
                 .addListener(mxEvent.UNDO, undoHandler);
+        
         mxIEventListener undoHandler = new mxIEventListener() {
             public void invoke(Object source, mxEventObject evt) {
                 List<mxUndoableChange> changes = ((mxUndoableEdit)evt
@@ -740,7 +741,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         mxMarkerRegistry.registerMarker("improper", tmp);
     }
 
-    public mxUndoManager getUndoM() {
+    public ISGCIUndoManager getUndoM() {
         return undoManager;
     }
 }
