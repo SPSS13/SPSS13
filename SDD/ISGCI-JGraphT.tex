@@ -35,8 +35,8 @@
 \vspace*{1cm} 
 \begin{center}
 {\huge Software Design Document}\\
-{\large Version 1.1}\\
-{\large 08. Juni 2013}\\
+{\large Version 1.2}\\
+{\large 07. Juli 2013}\\
 \end{center}
 
 \begin{center}
@@ -75,10 +75,13 @@
  0.6& 07.06.2013 & Gesamtes SDD: Rechtschreibung verbessert.\\\hline
  1.0& 07.06.2013 & SDD Version 1.0 \\\hline
  1.1& 08.06.2013 & Änderungen Punkt 5: Vorgeschlagene Software Architektur. \newline Umsetzung nach altem Design nicht möglich. \newline Vgl. 5.3 - ISGCI.GUI Grundlegende Änderungen\\\hline
+  1.2& 07.07.2013 & 5.4 - Experimental Features; kleine Änderungen in 5.3 - ISGCI.Gui \\\hline
  %1.0&28.05.2013&Basissversion\\\hline
 \end{tabular}\\
+\vfill
 \section{Einleitung}
 Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das bestehende ISGCI wird mit Funktionalitäten der Graphenzeichenbibliothek JGraphX erweitert. Außerdem werden der neuen Version verschiedene neue Features hinzugefügt, die zur Verbesserung der Benutzerfreundlichkeit beitragen sollen. Zweck des Updates ist es, nicht nur die Verfügbarkeit des Tools in Zukunft zu gewährleisten und neue Funktionen zu implementieren, sondern auch die Instandhaltungskosten zu senken und das Tool für interessierte Entwickler und Nutzer ansprechender zu gestalten.
+\newpage
 \subsection{Designziele}
 %copy pasta aus dem SRS
 \begin{itemize}	
@@ -95,7 +98,7 @@ Das gelieferte Produkt ist eine Aktualisierung des bestehenden ISGCI. Das besteh
 		Dadurch, dass die Datenbank des Programmes online, zentral gelagert wird, lassen sich Datensätze leicht und ohne Updates im Programm manipulieren oder hinzufügen.
 		\end{itemize}
 
-
+\newpage
 \subsection{Referenzen}
 %http://www.graphclasses.org/help.html
 \begin{table}[h]
@@ -516,13 +519,17 @@ JGraphX übernimmt mit dem ISGCIGraph, den angehängten \G{mxCells}, \G{mxCellSt
 
 %\paragraph{Layoutverbesserungen}
 \paragraph{Detail-Sidebar} \ \\
-Es wird eine Klasse \G{Sidebar.java} im Package \G{teo.isgci.gui} implementiert, welche Details zu einem ausgewählten Knoten enthält. Diese Klasse erweitert die Klasse \G{JPanel}. Die anzuzeigenden Informationen werden mithilfe der Klasse \G{DataSet} ausgelesen. Bei Programmstart ist die \G{Sidebar} ausgeblendet. Es werden folgende Optionen zum Anzeigen der Sidebar implementiert:
+Es wird eine Klasse \G{Sidebar.java} im Package \G{teo.isgci.gui} implementiert, welche Details zu einem ausgewählten Knoten enthält. Diese Klasse erweitert die Klasse \G{JPanel}. Die anzuzeigenden Informationen werden von der Homepage geparst. Bei Programmstart ist die \G{Sidebar} ausgeblendet. Es werden folgende Optionen zum Anzeigen der Sidebar implementiert:
 \begin{itemize}
 \item Menu-Bar-Parent \G{View}; \G{Details visible}, welche in der \G{ISGCIMainFrame} Klasse implementiert wird. 
 \item Kontext-Menü; \G{Show Details}, vgl. Kontextmenü. 
 \item Menu-Bar-Parent \G{Selected}, \G{Show Details}, welche in der \G{ISGCIMainFrame} Klasse implementiert wird. 
 \end{itemize} 
 Es existiert ein Button, um die Sidebar auszublenden. Das ist zudem auch über das Menu-Bar-Parent \G{View}, \G{Details visible} möglich.\\
+Um die Graphclasses.org-Homepage zu parsen wird die Java-Bibliothek \G{Jsoup} benutzt. In der Klasse Sidebar werden die entsprechenden vorgeparsten Informationen von der Homepage in eine passende HTML-Form gebracht. 
+
+
+
 
 
 \paragraph{Knoten Verschieben}\ \\ 
@@ -543,7 +550,7 @@ Wird in der ISGCIGraphCanvas.java realisiert. Es wird über den MouseListener im
 
 \paragraph{Tooltip Inhalt}\ \\ 
 
- Der ISGCINodeTooltip greift auf Daten in der Klasse DataSet.java aus dem Package teo.isgci.db zu. Er enthält alle alternativen Namen des Nodes (der aktuelle Name inbegriffen) in Listenform.
+ Der ISGCINodeTooltip greift auf Daten in der Klasse DataSet.java aus dem Package teo.isgci.db zu. Er enthält alle alternativen, ungekürzten Namen des Nodes (der aktuelle Name inbegriffen) in Listenform.
 
 \paragraph{Scrolling}\ \\ 
 In der ISGCIMainFrame.java Klasse existiert bereits eine Methode createCanvasPanel(), welche den Canvas und die Scrollbalken unten und rechts des Canvas erzeugt. Um sich darin auch per click and pull bewegen zu können erstellen wir eine weitere Methode in dieser Klasse, die das MousePressed Event auswertet, wenn es nicht auf einem Knoten liegt und den Viewport anpasst.
@@ -559,8 +566,18 @@ In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der Nod
 In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Subklassen ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getSubnodes(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, suchen aus dem Ergebnis alle Nachfolgerknoten heraus (rekursiv für Kanten, die eine Kante als Nachfolgerknoten haben) und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
 
 \paragraph{Kontextmenü Nachbarn}\ \\ 
-In NodePopup.java werden zwei neue Items durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Nachbarn ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getNeighbour(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an.
+In NodePopup.java wird ein neues Item durch anpassen des Konstruktors der NodePopup-Klasse implementiert und die dazugehörige Funktionalität durch anpassen der actionPerformed() Methode aufgerufen. actionPerformed() ruft dabei Informationen über den angewählten Knoten und dessen Nachbarn ab und zeichnet das Ergebnis (die Knoten) auf den Canvas, hierfür erstellen wir eine Methode "`private Object[] getNeighbour(Object cell)"'. Dafür rufen wir "`mxGraph.getAllEdges(Object cell)"' mit selbigem Knoten auf, und wenden auf diese "`mxGraph.toggleCells( boolean show, Object[] cells)"' an. Das Ergebnis der Aktion ist folglich das nicht-rekursive Einblenden aller Nachbarknoten eines Knoten.
 
+\subsection{Experimental Features}
+Folgende Funktionen werden ggf. optional zur Verfügung stehen.
+\begin{itemize}
+\item Nicht-rekursives Einblenden von Super-/Subklassen über das Kontext-menü ("`Add Superclasses"'/"`Add Subclasses"') 
+\item Animationen (Zeichnen von Knoten, Erweitern des Graphen um Knoten etc. wird animiert dargestellt)
+\item Undo-/Redo-Manager ("`Zurück"'-Funktion)
+\item Knotenfärbung über Sidebar-Reiter "`Probleme"' möglich.
+\item Namenkürzung (Namen der Graphklassen im gezeichneten Graphen werden gekürzt dargestellt)
+\item Relayout Funktion - der aktuell dargestellte Graph kann jederzeit neu gelayoutet werden (Neuzeichnung aller Knoten).
+\end{itemize}
 
 \newpage
 \section{Hardware/Software Mapping}
