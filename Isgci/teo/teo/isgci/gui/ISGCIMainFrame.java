@@ -97,7 +97,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     protected JMenu miOpenProblem, miColourProblem;
     protected JMenuItem miSmallgraphs, miHelp, miAbout;
     // Selection MenuItems
-    protected JMenuItem miShowInformation, miShowDetails, miAddSuperclasses, miAddSubclasses, miAddNeighbours;
+    protected JMenuItem miShowInformation, miShowDetails, miAddSuperclasses,
+            miAddSubclasses, miAddNeighbours;
     protected JMenuItem miShowSuperclasses;
     protected JMenuItem miHideSuperclasses;
     protected JMenuItem miShowSubclasses;
@@ -141,7 +142,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         loader.register();
         this.loader = loader;
         tracker = this;
-        
+
         DataSet.init(loader, "data/isgci.xml");
         ForbiddenClass.initRules(loader, "data/smallgraphs.xml");
         PSGraphics.init(loader);
@@ -177,10 +178,11 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         getContentPane().add("West", sidebar);
         registerListeners();
 
-        button2 = new BasicArrowButton(SwingConstants.EAST);// The fade-in
-                                                            // Button
+        /*
+         * This is the fade-in Button
+         */
+        button2 = new BasicArrowButton(SwingConstants.EAST);
         button2.setBorder(new LineBorder(Color.BLACK, 2));
-//        button2.setBackground(new Color(255, 255, 255));
         getContentPane().add("West", button2);
 
         button2.addActionListener(new ActionListener() {
@@ -331,10 +333,11 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         selectionMenu.add(miShowSubclasses = new JMenuItem("Show subclasses"));
         selectionMenu.add(miHideSubclasses = new JMenuItem("Hide sublcasses"));
         selectionMenu.addSeparator();
-        selectionMenu.add(miAddSuperclasses = new JMenuItem("Add superclasses"));
+        selectionMenu
+                .add(miAddSuperclasses = new JMenuItem("Add superclasses"));
         selectionMenu.add(miAddSubclasses = new JMenuItem("Add subclasses"));
         selectionMenu.add(miAddNeighbours = new JMenuItem("Add neighbours"));
-        
+
         mainMenuBar.add(selectionMenu);
 
         graphMenu = new JMenu("Graph classes");
@@ -556,10 +559,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         } else if (object == miNew) {
             new ISGCIMainFrame(loader);
         } else if (object == miExport) {
-             JDialog export = new ExportDialog(this);
-             export.setLocation(50, 50);
-             export.pack();
-             export.setVisible(true);
+            JDialog export = new ExportDialog(this);
+            export.setLocation(50, 50);
+            export.pack();
+            export.setVisible(true);
         } else if (object == miNaming) {
             System.out.println("naming");
             JDialog d = new NamingDialog(this);
@@ -659,7 +662,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             graphCanvas.setSidebarConent();
         } else if (object == miAddNeighbours) {
             graphCanvas.drawNeighbours(graphCanvas.getSelectedCell());
-        }  else if (object == miShowSuperclasses) {
+        } else if (object == miShowSuperclasses) {
             graphCanvas.drawSuperSub(graphCanvas.getSuperNodes(graphCanvas
                     .getSelectedCell()));
         } else if (object == miHideSuperclasses) {
@@ -671,10 +674,10 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         } else if (object == miHideSubclasses) {
             graphCanvas.deleteSuperSub(graphCanvas.getSubNodes(graphCanvas
                     .getSelectedCell()));
-        } else if (object == miAddSubclasses){
-        	graphCanvas.addSubclasses(graphCanvas.getSelectedCell());
-        } else if (object == miAddSuperclasses){
-        	graphCanvas.addSuperclasses(graphCanvas.getSelectedCell());
+        } else if (object == miAddSubclasses) {
+            graphCanvas.addSubclasses(graphCanvas.getSelectedCell());
+        } else if (object == miAddSuperclasses) {
+            graphCanvas.addSuperclasses(graphCanvas.getSelectedCell());
         } else if (object == miAbout) {
             JDialog select = new AboutDialog(this);
             select.setLocation(50, 50);
@@ -738,7 +741,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                     canvas.fillShape(poly);
                 }
 
-                Color gray = new Color(180,180,180);
+                Color gray = new Color(180, 180, 180);
                 canvas.getGraphics().setPaint(gray);
                 canvas.fillShape(poly);
                 canvas.getGraphics().draw(poly);

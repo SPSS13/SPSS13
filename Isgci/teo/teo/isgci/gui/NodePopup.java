@@ -21,7 +21,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import teo.XsltUtil;
 import teo.isgci.gc.GraphClass;
 import teo.isgci.util.Utility;
 
@@ -34,7 +33,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 	 */
     private static final long serialVersionUID = 2260105093000618855L;
     ISGCIMainFrame parent;
-    private JMenuItem deleteItem, infoItem;
+    private JMenuItem infoItem;
     private JMenuItem miShowSuperclasses;
     private JMenuItem miHideSuperclasses;
     private JMenuItem miShowSubclasses;
