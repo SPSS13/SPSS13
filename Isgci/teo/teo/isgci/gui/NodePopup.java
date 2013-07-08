@@ -337,9 +337,11 @@ public class NodePopup extends JPopupMenu implements ActionListener {
             d.setSize(800, 600);
             d.setVisible(true);
         } else if (event.getActionCommand().startsWith(CHANGENAME)) {
+        	int a = parent.graphCanvas.ind();
             String fullname = event.getActionCommand().substring(
                     CHANGENAME.length());
             graph.getModel().beginUpdate();
+    		graph.setCellsResizable(true);
             try {
                 GraphClassSet graphClassSet = (GraphClassSet)cell.getValue();
                 // search the label matching the selection
@@ -354,7 +356,11 @@ public class NodePopup extends JPopupMenu implements ActionListener {
                 graph.updateCellSize(cell);
                 parent.graphCanvas.animateGraph();
             } finally {
-                graph.getModel().endUpdate();
+            	graph.setCellsResizable(false);
+            	graph.getModel().endUpdate();
+            	for (int i = 0; i < parent.graphCanvas.ind() - a; i++) {
+        			parent.getUndoM().removeUndos(1);
+        		}
             }
         } else if (source == miShowDetails) {
             parent.visibleHaken.setState(true);

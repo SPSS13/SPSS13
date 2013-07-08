@@ -50,14 +50,19 @@ public class GraphClassSet {
      * @annotation
      */
     public void setLabel(GraphClass label) {
-        if (label == null) {
-            for (GraphClass gc : set) {
-                if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
-                    label = gc;
+        parent.getGraph().getModel().beginUpdate();
+        try{
+        	if (label == null) {
+                for (GraphClass gc : set) {
+                    if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
+                        label = gc;
+                    }
                 }
             }
+            this.label = label;	
+        } finally {
+        	parent.getGraph().getModel().endUpdate();	
         }
-        this.label = label;
     }
 
     @Override
