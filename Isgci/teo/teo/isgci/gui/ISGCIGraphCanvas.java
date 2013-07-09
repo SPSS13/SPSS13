@@ -1192,6 +1192,10 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public NodePopup getNodePopup(){
         return nodePopup;
     }
+    
+    public HashMap<Set<GraphClass>, Object> getMap(){
+    	return map;
+    }
 //    public static void toPdf(File file, mxGraph graph) throws IOException {
 ////        file = checkExtension(file, ".pdf"); // ensures that .pdf is the extension
 //        FileOutputStream fos = new FileOutputStream(file);

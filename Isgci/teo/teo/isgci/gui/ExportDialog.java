@@ -23,6 +23,15 @@ import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,12 +48,23 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleDirectedGraph;
+
+import teo.isgci.db.Algo;
+import teo.isgci.gc.GraphClass;
+import teo.isgci.xml.GraphMLWriter;
+
+import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.canvas.mxICanvas;
 import com.mxgraph.canvas.mxSvgCanvas;
+import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxCellRenderer.CanvasFactory;
 import com.mxgraph.util.mxDomUtils;
 import com.mxgraph.util.mxXmlUtils;
+import com.mxgraph.view.mxGraph;
 
 //TODO make import work
 public class ExportDialog extends JDialog implements ActionListener {
@@ -112,7 +132,7 @@ public class ExportDialog extends JDialog implements ActionListener {
 
         title = new JLabel("");
         Font f = title.getFont();
-        title.setFont(f.deriveFont((float)(f.getSize() * 1.2)));
+        title.setFont(f.deriveFont((float) (f.getSize() * 1.2)));
         title.setOpaque(true);
         title.setBackground(Color.darkGray);
         title.setForeground(Color.white);
@@ -330,8 +350,8 @@ public class ExportDialog extends JDialog implements ActionListener {
             gmlHtml.setEnabled(false);
             gmlLatex.setEnabled(false);
         } else if (e.getActionCommand() == JFileChooser.APPROVE_SELECTION) {
-//            if (export())
-//                closeDialog();
+            if (export())
+                closeDialog();
         } else if (e.getActionCommand() == JFileChooser.CANCEL_SELECTION)
             closeDialog();
     }
@@ -339,98 +359,73 @@ public class ExportDialog extends JDialog implements ActionListener {
     /**
      * Export using the entered settings. Return true iff no error occured.
      */
-//    protected boolean export() {
-//        boolean res = true;
-//        FileOutputStream f;
-//        try {
-//            f = new FileOutputStream(file.getSelectedFile());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            MessageDialog.error(parent, "Cannot open file for writing:\n"
-//                    + file.getSelectedFile().getPath());
-//            return false;
-//        }
-//
-//        try {
-//            if (radioPS.isSelected())
-//                exportPS(f);
-//            else if (radioGML.isSelected())
-//                exportGML(f);
-//            else if (radioSVG.isSelected())
-//                exportSVG(f);
-//        } catch (Exception e) {
-//            res = false;
-//            e.printStackTrace();
-//            MessageDialog.error(parent,
-//                    "Error while exporting:\n" + e.toString());
-//        }
-//        return res;
-//    }
+    protected boolean export() {
+        boolean res = true;
+        FileOutputStream f;
+        try {
+            f = new FileOutputStream(file.getSelectedFile());
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialog.error(parent, "Cannot open file for writing:\n"
+                    + file.getSelectedFile().getPath());
+            return false;
+        }
+
+        try {
+            if (radioPS.isSelected())
+                exportPS(f);
+            else if (radioGML.isSelected())
+                exportGML(f);
+            else if (radioSVG.isSelected())
+                exportSVG(f);
+        } catch (Exception e) {
+            res = false;
+            e.printStackTrace();
+            MessageDialog.error(parent,
+                    "Error while exporting:\n" + e.toString());
+        }
+        return res;
+    }
 
     /**
      * Export to Postscript.
      */
 
-//    protected void exportPS(FileOutputStream f) throws Exception {
-//        Exception res = null;
-//        byte[] outstr;
-//        DataOutputStream out = null;
-//
-//        try {
-//            out = new DataOutputStream(f);
-//            final PSGraphics g = new PSGraphics((String)papersize.getSelectedItem(),
-//                    fittopage.isSelected(), keepsideratio.isSelected(),
-//                    rotate.isSelected(), color.isSelected());
-//            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas)mxCellRenderer.drawCells(
-//                    parent.graphCanvas.getGraph(), null, 1, null,
-//                    new CanvasFactory() {
-//                        public mxICanvas createCanvas(int width, int height) {
-//                            mxGraphics2DCanvas canvas = new mxGraphics2DCanvas(g.getG());
-//                            canvas.setDrawLabels(true);
-//                            return canvas;
-//                        }
-//
-//                    });
-//            
-//            for(Object cell : parent.graphCanvas.getGraph().getChildCells(parent.graphCanvas.getGraph().getDefaultParent())){
-////                canvas.drawCell(parent.graphCanvas.getGraph().getModel().getStyle((((mxCell)cell))));
-//            }
-//            
-//
-//            
-//            outstr = g.getG().getBytes();
-//            g.dispose();
-//            out.write(outstr);
-//        } catch (IOException ex) {
-//            res = ex;
-//        } finally {
-//            out.close();
-//        }
-//
-//        if (res != null)
-//            throw res;
-//    }
-
-    /**
-     * Export to GraphML.
-     */
-    protected void exportGML(FileOutputStream f) throws Exception {
+    protected void exportPS(FileOutputStream f) throws Exception {
         // Exception res = null;
-        // String outstr;
-        // Writer out = null;
+        // byte[] outstr;
+        // DataOutputStream out = null;
         //
         // try {
-        // out = new OutputStreamWriter(f, "UTF-8");
-        // GraphMLWriter w = new GraphMLWriter(out,
-        // gmlYed.isSelected() ? GraphMLWriter.MODE_YED
-        // : GraphMLWriter.MODE_PLAIN,
-        // parent.graphCanvas.getDrawUnproper(), gmlHtml.isSelected());
+        // out = new DataOutputStream(f);
+        // final PSGraphics g = new PSGraphics(
+        // (String) papersize.getSelectedItem(),
+        // fittopage.isSelected(), keepsideratio.isSelected(),
+        // rotate.isSelected(), color.isSelected());
+        // mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
+        // .drawCells(parent.graphCanvas.getGraph(), null, 1, null,
+        // new CanvasFactory() {
+        // // public mxICanvas createCanvas(int width,
+        // // int height) {
+        // // mxGraphics2DCanvas canvas = new mxGraphics2DCanvas(
+        // // g.getG());
+        // // canvas.setDrawLabels(true);
+        // // return canvas;
+        // }
         //
-        // w.startDocument();
-        // parent.graphCanvas.write(w);
-        // w.endDocument();
-        // } catch (IOException ex) {
-        // res = ex;
+        // });
+        //
+        // for (Object cell : parent.graphCanvas.getGraph().getChildCells(
+        // parent.graphCanvas.getGraph().getDefaultParent())) {
+        // //
+        // canvas.drawCell(parent.graphCanvas.getGraph().getModel().getStyle((((mxCell)cell))));
+        // }
+        //
+        // // outstr = g.getG().getBytes();
+        // g.dispose();
+        // // out.write(outstr);
+        // // } catch (IOException ex) {
+        // // res = ex;
         // } finally {
         // out.close();
         // }
@@ -440,27 +435,72 @@ public class ExportDialog extends JDialog implements ActionListener {
     }
 
     /**
+     * Export to GraphML.
+     */
+    protected void exportGML(FileOutputStream f) throws Exception {
+        Exception res = null;
+        String outstr;
+        Writer out = null;
+
+        try {
+            out = new OutputStreamWriter(f, "UTF-8");
+            GraphMLWriter w = new GraphMLWriter(out,
+                    gmlYed.isSelected() ? GraphMLWriter.MODE_YED
+                            : GraphMLWriter.MODE_PLAIN,
+                    parent.graphCanvas.drawUnproper, gmlHtml.isSelected());
+
+            w.startDocument();
+            // parent.graphCanvas.write(w);
+            w.endDocument();
+        } catch (IOException ex) {
+            res = ex;
+        } finally {
+            out.close();
+        }
+
+        if (res != null)
+            throw res;
+    }
+
+    /**
      * Export to SVG.
      */
     protected void exportSVG(FileOutputStream f) throws Exception {
+
+        final int mywidth = (int) (parent.graphCanvas.getGraphControl()
+                .getWidth() * (parent.graphCanvas.getZoomFactor()));
+        final int myheight = (int) (parent.graphCanvas.getGraphControl()
+                .getHeight() * (parent.graphCanvas.getZoomFactor()));
+
         Exception res = null;
-        DataOutputStream out = new DataOutputStream(f);
+        // DataOutputStream out = new DataOutputStream(f);
+        Writer out = new OutputStreamWriter(f, "UTF-8");
+
+        HashSet<Object> set = new HashSet<Object>();
+
+        Map<String, Object> map = ((mxGraphModel) parent.graphCanvas
+                .getGraph().getModel()).getCells();
+        for (Object o : map.values()) {
+            set.add(o);
+        }
+        
+        Object[] toDraw = set.toArray();
 
         try {
-            mxSvgCanvas canvas = (mxSvgCanvas)mxCellRenderer.drawCells(
-                    parent.graphCanvas.getGraph(), null, 1, null,
+            final ISGCISvgCanvas can = new ISGCISvgCanvas(
+                    mxDomUtils.createSvgDocument(mywidth, myheight));
+            mxCellRenderer.drawCells(new mxGraph(), toDraw, 1, null,
                     new CanvasFactory() {
-                        public mxICanvas createCanvas(int width, int height) {
-                            mxSvgCanvas canvas = new mxSvgCanvas(mxDomUtils
-                                    .createSvgDocument(width, height));
-                            canvas.setEmbedded(true);
-                            canvas.setDrawLabels(true);
-                            return canvas;
-                        }
 
+                        @Override
+                        public mxICanvas createCanvas(int mywidth, int myheight) {
+
+                            return can;
+                        }
                     });
 
-            out.writeBytes(mxXmlUtils.getXml(canvas.getDocument()));
+            out.write(mxXmlUtils.getXml(can.getDocument()));
+            // out.writeBytes(mxXmlUtils.getXml(can.getDocument()));
         } catch (IOException ex) {
             res = ex;
         } finally {
