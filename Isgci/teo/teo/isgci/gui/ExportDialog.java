@@ -50,6 +50,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.w3c.dom.Element;
 
 import teo.isgci.db.Algo;
 import teo.isgci.gc.GraphClass;
@@ -132,7 +133,7 @@ public class ExportDialog extends JDialog implements ActionListener {
 
         title = new JLabel("");
         Font f = title.getFont();
-        title.setFont(f.deriveFont((float)(f.getSize() * 1.2)));
+        title.setFont(f.deriveFont((float) (f.getSize() * 1.2)));
         title.setOpaque(true);
         title.setBackground(Color.darkGray);
         title.setForeground(Color.white);
@@ -142,9 +143,9 @@ public class ExportDialog extends JDialog implements ActionListener {
         content.add(buttonPanel, BorderLayout.SOUTH);
         content.add(cardPanel, BorderLayout.CENTER);
 
-//        cardPanel.add(cardFormat(), CARD_FORMAT);
-//        cardPanel.add(cardPS(), CARD_PS);
-//        cardPanel.add(cardGML(), CARD_GML);
+        // cardPanel.add(cardFormat(), CARD_FORMAT);
+        // cardPanel.add(cardPS(), CARD_PS);
+        // cardPanel.add(cardGML(), CARD_GML);
         cardPanel.add(cardFile(), CARD_FILE);
 
         showCard(CARD_FILE);
@@ -248,47 +249,47 @@ public class ExportDialog extends JDialog implements ActionListener {
     /**
      * Return the card where the user can set GraphML options
      */
-//    private Component cardGML() {
-//        ButtonGroup b;
-//        Box box = new Box(BoxLayout.Y_AXIS);
-//
-//        b = new ButtonGroup();
-//
-//        gmlPlain = new JRadioButton("Plain graphml");
-//        gmlPlain.addActionListener(this);
-//        b.add(gmlPlain);
-//        box.add(gmlPlain);
-//        box.add(explText("This contains the class names in Latex format as comments\n"
-//                + "and the relations between the classes."));
-//
-//        gmlYed = new JRadioButton("Graphml for yEd");
-//        gmlYed.setSelected(true);
-//        gmlYed.addActionListener(this);
-//        b.add(gmlYed);
-//        box.add(gmlYed);
-//        box.add(explText("This contains class names as labels of the nodes, styled\n"
-//                + "arrows for (un)proper inclusions and colourings for\n"
-//                + "algorithmic complexity. Note that for yEd the file must have\n"
-//                + "extension .graphml."));
-//
-//        b = new ButtonGroup();
-//        box.add(Box.createRigidArea(new Dimension(0, 20)));
-//
-//        gmlHtml = new JRadioButton("Html labels");
-//        gmlHtml.setSelected(true);
-//        b.add(gmlHtml);
-//        box.add(gmlHtml);
-//        box.add(explText("Class names are formatted using html"));
-//
-//        gmlLatex = new JRadioButton("Latex labels");
-//        b.add(gmlLatex);
-//        box.add(gmlLatex);
-//        box.add(explText("Class names are unformatted LaTeX code"));
-//
-//        JPanel p = new JPanel();
-//        p.add(box, BorderLayout.CENTER);
-//        return p;
-//    }
+    // private Component cardGML() {
+    // ButtonGroup b;
+    // Box box = new Box(BoxLayout.Y_AXIS);
+    //
+    // b = new ButtonGroup();
+    //
+    // gmlPlain = new JRadioButton("Plain graphml");
+    // gmlPlain.addActionListener(this);
+    // b.add(gmlPlain);
+    // box.add(gmlPlain);
+    // box.add(explText("This contains the class names in Latex format as comments\n"
+    // + "and the relations between the classes."));
+    //
+    // gmlYed = new JRadioButton("Graphml for yEd");
+    // gmlYed.setSelected(true);
+    // gmlYed.addActionListener(this);
+    // b.add(gmlYed);
+    // box.add(gmlYed);
+    // box.add(explText("This contains class names as labels of the nodes, styled\n"
+    // + "arrows for (un)proper inclusions and colourings for\n"
+    // + "algorithmic complexity. Note that for yEd the file must have\n"
+    // + "extension .graphml."));
+    //
+    // b = new ButtonGroup();
+    // box.add(Box.createRigidArea(new Dimension(0, 20)));
+    //
+    // gmlHtml = new JRadioButton("Html labels");
+    // gmlHtml.setSelected(true);
+    // b.add(gmlHtml);
+    // box.add(gmlHtml);
+    // box.add(explText("Class names are formatted using html"));
+    //
+    // gmlLatex = new JRadioButton("Latex labels");
+    // b.add(gmlLatex);
+    // box.add(gmlLatex);
+    // box.add(explText("Class names are unformatted LaTeX code"));
+    //
+    // JPanel p = new JPanel();
+    // p.add(box, BorderLayout.CENTER);
+    // return p;
+    // }
 
     /**
      * Return the card where the user can select the destination file.
@@ -437,19 +438,21 @@ public class ExportDialog extends JDialog implements ActionListener {
      */
     protected void exportSVG(FileOutputStream f) throws Exception {
 
-        final int mywidth = (int)(parent.graphCanvas.getGraphControl()
+        final int mywidth = (int) (parent.graphCanvas.getGraphControl()
                 .getWidth() * (parent.graphCanvas.getZoomFactor()));
-        final int myheight = (int)(parent.graphCanvas.getGraphControl()
+        System.out.println(parent.graphCanvas.getZoomFactor());
+        System.out.println(mywidth);
+        final int myheight = (int) (parent.graphCanvas.getGraphControl()
                 .getHeight() * (parent.graphCanvas.getZoomFactor()));
-
+        System.out.println(myheight);
         Exception res = null;
         // DataOutputStream out = new DataOutputStream(f);
         Writer out = new OutputStreamWriter(f, "UTF-8");
 
         HashSet<Object> set = new HashSet<Object>();
 
-        Map<String, Object> map = ((mxGraphModel)parent.graphCanvas.getGraph()
-                .getModel()).getCells();
+        Map<String, Object> map = ((mxGraphModel) parent.graphCanvas
+                .getGraph().getModel()).getCells();
         for (Object o : map.values()) {
             set.add(o);
         }
@@ -468,6 +471,16 @@ public class ExportDialog extends JDialog implements ActionListener {
                             return can;
                         }
                     });
+            // resizing dependent on the drawn nodes
+            String myW = String.valueOf(can.farX + 600);
+            String myH = String.valueOf(can.farY + 200);
+
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("width", myW);
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("height", myH);
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("viewBox", "-10 -10 " + myW + " " + myH);
 
             out.write(mxXmlUtils.getXml(can.getDocument()));
             // out.writeBytes(mxXmlUtils.getXml(can.getDocument()));
