@@ -13,11 +13,13 @@ package teo.isgci.gui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import javax.swing.AbstractButton;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -95,13 +97,13 @@ public class NodePopup extends JPopupMenu implements ActionListener {
 
     /**
      * returns true if any superclass of the cell is visible; returns false if
-     * all superclass of the cell is visible; returns false if there are no
+     * all superclass of the cell are invisible; returns false if there are no
      * superclasses
      * 
      * @return
      * @author leo
      */
-    private boolean someSuperclassesVisible() {
+    private boolean hideSuperclassesSwitch() {
         return checkVisibility(true, true);
     }
 
@@ -113,7 +115,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @return
      * @author leo
      */
-    private boolean someSuperclassesInvisible() {
+    private boolean showSuperclassesSwitch() {
         return checkVisibility(true, false);
     }
 
@@ -125,7 +127,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @return
      * @author leo
      */
-    private boolean someSubclassesVisible() {
+    private boolean hideSubclassesSwitch() {
         return checkVisibility(false, true);
     }
 
@@ -137,7 +139,7 @@ public class NodePopup extends JPopupMenu implements ActionListener {
      * @return
      * @author leo
      */
-    private boolean someSubclassesInvisible() {
+    private boolean showSubclassesSwitch() {
         return checkVisibility(false, false);
     }
 
@@ -156,8 +158,14 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private boolean checkVisibility(boolean superclassesORsubclasses,
             boolean visibility) {
         // if the cell has associated edges in the given direction
-        Object[] edges;
-
+        Object[] edges = new Object[]{};
+//                (superclassesORsubclasses ? graph
+//                .getIncomingEdges(cell) : graph.getOutgoingEdges(cell));
+//        // there is no sub- or supernode
+//        if (edges == null || edges.length == 0) {
+//            System.out.println("no super or subclasses");
+//            return false;
+//        }
         LinkedList<Object> queue = new LinkedList<Object>();
         // add root cell
         queue.add(cell);
@@ -166,9 +174,18 @@ public class NodePopup extends JPopupMenu implements ActionListener {
             edges = (superclassesORsubclasses ? graph.getIncomingEdges(queue
                     .pollFirst()) : graph.getOutgoingEdges(queue.pollFirst()));
             for (Object edge : edges) {
+                mxCell temp = (mxCell)(superclassesORsubclasses ? ((mxCell)edge)
+                        .getSource() : ((mxCell)edge).getTarget());
+                /*
+                 * debug Code System.out.println((superclassesORsubclasses ?
+                 * "Super" : "Sub") + "Node: " + (visibility ?
+                 * ((GraphClassSet)temp.getValue()) .getLabel().toString() :
+                 * ((GraphClassSet)temp .getValue()).getLabel().toString()) +
+                 * (visibility ? "; is visible " : "; is invisible ") +
+                 * (visibility ? temp.isVisible() : temp.isVisible()));
+                 */
                 // check if the cell is visible
-                if (visibility ? ((mxCell)edge).isVisible() : !((mxCell)edge)
-                        .isVisible())
+                if ((visibility ? temp.isVisible() : !temp.isVisible()))
                     return true;
                 // otherwise add it to the queue
                 queue.add((superclassesORsubclasses ? ((mxCell)edge)
@@ -292,20 +309,22 @@ public class NodePopup extends JPopupMenu implements ActionListener {
             JMenuItem miAddSuperclasses, JMenuItem miAddSubclasses,
             JMenuItem miAddNeighbours) {
         cell = parent.graphCanvas.getSelectedCell();
+
         // toggle menus
+        //sidebar
+        miShowDetails.setEnabled(true);
         // superclasses
         boolean superclassesAddable = superclassesAddable();
         boolean subclassesAddable = subclassesAddable();
-        miHideSuperclasses.setEnabled(someSuperclassesVisible());
-        miShowSuperclasses.setEnabled(someSuperclassesInvisible());
+        miHideSuperclasses.setEnabled(hideSuperclassesSwitch());      
+        miShowSuperclasses.setEnabled(showSuperclassesSwitch());
         miAddSuperclasses.setEnabled(superclassesAddable);
         // subclasses
-        miHideSubclasses.setEnabled(someSubclassesVisible());
-        miShowSubclasses.setEnabled(someSubclassesInvisible());
+        miHideSubclasses.setEnabled(hideSubclassesSwitch());
+        miShowSubclasses.setEnabled(showSubclassesSwitch());
         miAddSubclasses.setEnabled(subclassesAddable);
         // neighbours
         miAddNeighbours.setEnabled(superclassesAddable || subclassesAddable);
-
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -378,7 +397,6 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         nameItem.removeAll();
         nameItem.setEnabled(gcs.size() != 1);
         JMenuItem[] mItem = new JMenuItem[gcs.size()];
-        // FIXME sort and render latex properly
         for (GraphClass gc : gcs) {
             nameItem.add(mItem[i] = new JMenuItem(XsltUtil.latexTruncated(gc
                     .toString())));
