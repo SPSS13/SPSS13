@@ -272,7 +272,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
 
         fileMenu = new JMenu("File");
         fileMenu.add(miNew = new JMenuItem("New window"));
-        fileMenu.add(miExport = new JMenuItem("Export drawing..."));
+        fileMenu.add(miExport = new JMenuItem("Export SVG..."));
         fileMenu.add(miExit = new JMenuItem("Exit"));
         mainMenuBar.add(fileMenu);
 
@@ -302,9 +302,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         editMenu = new JMenu("Edit");
 
         editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", false));
-        editMenu.add(miUndo = new JMenuItem("Undo..."));
-        editMenu.add(miRedo = new JMenuItem("Redo..."));
-        editMenu.add(miLayout = new JMenuItem("Relayout"));
+        editMenu.add(miUndo = new JMenuItem("Undo"));
+        editMenu.add(miRedo = new JMenuItem("Redo"));
+        editMenu.add(miLayout = new JMenuItem("Reset Layout"));
 
         mainMenuBar.add(editMenu);
 
