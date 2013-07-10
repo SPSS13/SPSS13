@@ -74,5 +74,9 @@ public class GraphClassSet {
 //        System.out.println("label.toString() = " + label.toString());
         return XsltUtil.latex(label.toString());
     }
+    
+    public String toPlainString(){
+        return label.toString();
+    }
 
 }

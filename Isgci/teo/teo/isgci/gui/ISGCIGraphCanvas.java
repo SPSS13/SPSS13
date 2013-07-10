@@ -1218,6 +1218,10 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 	
 	public void indOut() {
 		System.out.println(parent.getUndoM().getIndexNext());
+    
+    public HashMap<Set<GraphClass>, Object> getMap(){
+    	return map;
+    }
 	}
 	
 	public int ind(){
