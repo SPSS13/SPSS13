@@ -576,12 +576,16 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
 
         } else if (object == miUndo) {
             // undo last change in the drawingPane
+        	graphCanvas.setSelectedCell(null);
             undoManager.undo();
             ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
+            graphCanvas.updateMap();
         } else if (object == miRedo) {
             // redo change in the drawingPane
+        	graphCanvas.setSelectedCell(null);
             undoManager.redo();
             ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
+            graphCanvas.updateMap();
         } else if (object == miLayout) {
 
             graphCanvas.animateGraph();

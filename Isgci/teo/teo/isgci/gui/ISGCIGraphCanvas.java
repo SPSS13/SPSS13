@@ -242,8 +242,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 			// make edges look nice
 			if (drawUnproper) {
 				// set properness for all possible cells
-				setProperness(graph.getAllEdges(new Object[] { graph
-						.getDefaultParent() }));
+				setProperness(graph.getChildCells(graph
+						.getDefaultParent(),false,true));
 			}
 
 			// make nodes colorful
@@ -1220,9 +1220,21 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 		System.out.println(parent.getUndoM().getIndexNext());
 	}
 	
+	/*
+	 * shortened index method
+	 * @author Matthias Miller
+	 * 
+	 */
 	public int ind(){
 		return parent.getUndoM().getIndexNext();
 	}
+	
+	public void updateMap(){
+        map.clear();
+        for(Object cell : graph.getChildCells(graph.getDefaultParent(), true, false)){
+            map.put(((GraphClassSet)((mxCell)cell).getValue()).getSet(), cell);
+        }
+    }
 }
 
 /* EOF */
