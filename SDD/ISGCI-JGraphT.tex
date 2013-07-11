@@ -28,7 +28,7 @@
 
 \thispagestyle{empty} %Seitennummerierung 1 ausblenden
 \begin{center}
-\includegraphics*[width=11cm]{Logo.png}
+%\includegraphics*[width=11cm]{Logo.png}
 \end{center}
 
 
@@ -539,11 +539,7 @@ In der ISGCIMainFrame.java Klasse werden die Menüs und dazugehörigen Items erz
 
 \paragraph{Tooltip}\ \\ 
 
-Wird in der ISGCIGraphCanvas.java realisiert. Es wird über den MouseListener implementiert, der falls er über dem Knoten verweilt den Tooltip, dessen Form in der neuen Klasse ISGCINodeTooltip beschrieben wird.
-
-\paragraph{Tooltip Inhalt}\ \\ 
-
- Der ISGCINodeTooltip greift auf Daten in der Klasse DataSet.java aus dem Package teo.isgci.db zu. Er enthält alle alternativen Namen des Nodes (der aktuelle Name inbegriffen) in Listenform.
+Wird in der "`CustomGraphComponent.java"' realisiert welche die Klasse "`mxGraphComponent.java"' erweitert. Mithilfe der überschriebenen Methode "`getToolTipText()"' wird über das Auswerten eines Maus Events, welches durch das Verweilen der Maus auf einer Stelle erzeugt wird, zunächst überprüft ob sich ein Knoten an eben dieser Stelle befindet. Ist ein Knoten vorhanden so wird das "`GraphClassSet"' dieses Knotens ausgelesen und die darin enthaltenen Graphklassen als HTML-String verarbeitet und zurück gegeben um sie auszugeben. 
 
 \paragraph{Scrolling}\ \\ 
 In der ISGCIMainFrame.java Klasse existiert bereits eine Methode createCanvasPanel(), welche den Canvas und die Scrollbalken unten und rechts des Canvas erzeugt. Um sich darin auch per click and pull bewegen zu können erstellen wir eine weitere Methode in dieser Klasse, die das MousePressed Event auswertet, wenn es nicht auf einem Knoten liegt und den Viewport anpasst.
