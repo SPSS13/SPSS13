@@ -1,5 +1,6 @@
 package teo.isgci.gui;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +10,42 @@ import org.w3c.dom.Element;
 
 import com.mxgraph.canvas.mxSvgCanvas;
 import com.mxgraph.model.mxCell;
+=======
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.parser.ParserDelegator;
+
+import org.jsoup.examples.HtmlToPlainText;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import teo.XsltUtil;
+import teo.isgci.util.Latex2Html;
+import teo.isgci.util.LatexGlyph;
+
+import com.mxgraph.canvas.mxSvgCanvas;
+import com.mxgraph.model.mxCell;
+import com.mxgraph.shape.mxCloudShape;
+>>>>>>> 87d39e6778f6a8099337142cd6a0ccc4418bed78
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.util.mxUtils;
+<<<<<<< HEAD
+=======
+import com.mxgraph.util.mxXmlUtils;
+>>>>>>> 87d39e6778f6a8099337142cd6a0ccc4418bed78
 import com.mxgraph.view.mxCellState;
 
 public class ISGCISvgCanvas extends mxSvgCanvas {

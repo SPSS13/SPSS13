@@ -7,11 +7,10 @@
    <li><a href="#main">Main window</a></li>
    <li><a href="#file">File menu</a></li>
    <li><a href="#view">View menu</a></li>
-   <li><a href="#edit">Edit menu</a></li>
+   <li><a href="#edit">Edit</a></li>
    <li><a href="#selection">Selection menu</a></li>
    <li><a href="#classes">Graph classes menu</a></li>
    <li><a href="#problems">Problems menu</a></li>
-   <li><a href="#sidebar">Sidebar including information about selected graphclass</a></li>
    <li><a href="#problemdefs">Problem definitions</a></li>
    <li><a href="#filter">Filtering lists of graph classes</a></li>
 </menu>
@@ -48,7 +47,7 @@
 <a name="view"></a><h2>View menu</h2>
    <dl>
       <dt>Fit in window</dt>
-	  <dd>Zooms the current drawn graph with a scale factor, to fit the whole shown graph into the current window size (as far as possible; there is a boundary, how small the scalefactor is allowed to be: ~0.05). There are used a policy to zoom a graph (in), iff it's width and height are smaller than 75% of the current window size.</dd>
+	  <dd>Zooms the current drawn graph with a scale factor, to fit the whole shown graph into the current window size (as far as possible; there is a boundary, how small the scalefactor is allowed to be: ~0.05). There are used a policy to zoom a graph (in), iff it's width and height are smaller than 75% percent of the current window size.</dd>
    </dl>
    <dl>
       <dt>Search...</dt>
@@ -74,7 +73,7 @@
    <dl>
     <dt>Sidebar visible</dt>
     <dd> 
-        When checked, the <a href="#sidebar">Sidebar</a> on the left hand side from the Main window is openend, where further information are shown about the current (last) selected graphclass. 
+        When checked, the <a href="#sidebar">Sidebar</a> on the left hand side from the Main window is openend, where further information are shown about the current (last) selected graph class. 
     </dd>
    </dl>
    <dl>
@@ -83,7 +82,7 @@
    </dl>
    <a href="#contents">Back to contents</a>
 
-<a name="edit"></a><h2>Edit menu</h2>
+<a name="edit"></a><h2>Edit</h2>
    <dl>
       <dt>Animation</dt>
 	 <dd>When checked, then animations are activated, i.e. if you add neighbours, superclasses or subclasses for a selected node in the graph, then according to these changes the graph will be animated into his new appearance. Yet, this part of the software is still experimental, which means, that there could appear some Bugs, but this relates to the used graph drawing library. Therefore only further improvements of the library can fix these problems in the future.</dd>
@@ -93,29 +92,6 @@
 	 <dd>According to Undo: Redos last "Undo(s)". You can't redo before you did an "Undo". </dd>
       <dt>Relayout</dt>
 	 <dd>Computes a new layout for the current nodes and edges, which the canvas currently consists and draws it. (Animation, iff activated)</dd>
-   </dl>
-   <a href="#contents">Back to contents</a>
-
-<a name="selection"></a><h2>Selection menu</h2>
-   <dl> Consists mostly of the same features like the context menu of the graph classes; i.e. the Popup menu of graphclasses or inclusions. Those funtionalities which will not have any effect on the graph are grayed out.
-      <dt>Show information</dt>
-	 <dd>Opens the graph class information dialogue and the selected class in the list is the selected graphclass in the graph or opens the Relation dialogue if an inclusion is selected.</dd>
-     <dt>Show sidebar</dt>
-	 <dd>Sets the <a href="#sidebar">Sidebar</a> visible, which directly contains extensive information about the selected graphclass.</dd>
-     <dt>Super - hide</dt>
-	 <dd>Hides all current shown superclasses of the selected graphclass in the drawing pane.</dd>
-     <dt>Super - show</dt>
-	 <dd>Shows all superclasses, iff they are added to the current universum of the drawing; i.e. you can only show superclasses, if you added it before or they existed since using a dialogue.</dd>
-     <dt>Super - add</dt>
-	 <dd>Adds all adjacent (direct inclusion) superclasses of the selected graphclass. </dd>
-     <dt>Sub - hide</dt>
-	 <dd>Equivalent to "Super - hide".</dd>
-     <dt>Sub - show</dt>
-	 <dd>Equivalent to "Super - show".</dd>
-     <dt>Sub - add</dt>
-	 <dd>Equivalent to "Super - add".</dd>
-     <dt>Neighbours - add</dt>
-	 <dd>Equivalent to "Super - add" and "Sub - add" concurrently.</dd>
    </dl>
    <a href="#contents">Back to contents</a>
 
@@ -149,7 +125,7 @@
 	 subclasses are displayed.<br> =&gt; Clicking on an inclusion button
 	 in the result window will display references to this
 	 inclusion.</dd>
-      <dt>Draw...</dt>
+      <dt>Draw</dt>
 	 <dd>Select one or more graph classes, whether you would like
 	 their super/subclasses to be drawn also, and click <em>New
 	 drawing</em> to create a new inclusion diagram in the current
@@ -181,11 +157,7 @@
    </dl>
    <a href="#contents">Back to contents</a>
 
-<a name="sidebar"></a><h2>Sidebar including information about selected graphclass</h2>
-To display more information about a selected graph class (in the drawn graph within the Main window). These information will be loaded from the http://www.graphclasses.org/ Website on the fly, wherefore a continuous internet connection is required for correct functionality. There are different ways to open a Sidebar on the left hand side of the window (context menu of classes: Popup, Selection menu, View menu). The sidebar can also be open by pressing the button on the left hand side on the window, if closed and closed via the same button between the sidebar and the Main window, which also serves as semantic border among them. If opened, then there are three content boxes, in which all of the on the top is written the current name of the graph class:<p>
-Graphclass: Contains information about equivalent, complement and related classes, if they exist. Moreover it holds the formal definition of the class. </br>
-Inclusion: Includes an overall description about inclusions and especially for every class its minimal superclasses and maximal subclasses (if they exist). </br>
-Problems: Contains the list of all problems, like in the Problems Dropdown-Menu. They get acutalized if another class will be selected (like the other content boxes - actualized) and the problems are displayed according to the color like on the website. A very useful feature is, that you can press on a problem to set the correlated color for all classes in the canvas.<p>
+<a name="filter"></a><h2>Sidebar including information about selected class</h2>
  <a href="#contents">Back to contents</a>
 
 <a name="problemdefs"></a><h2>Problem definitions</h2>
