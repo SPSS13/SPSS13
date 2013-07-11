@@ -25,6 +25,11 @@ import javax.swing.JLabel;
  */
 public class LatexLabel extends JComponent {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1004567256762360155L;
+
     /** Where the glyphs come from. */
     private LatexGraphics latex;
     

@@ -51,7 +51,7 @@ public class Generate {
     /**
      * Print node/edge count statistics of the given graph.
      */
-    public static void show(Graph dg){
+    public static void show(Graph<GraphClass, Inclusion> dg){
         System.err.print("Nodes: "+ dg.vertexSet().size());
 	System.err.println("     Edges: "+ dg.edgeSet().size());
     }
@@ -63,7 +63,6 @@ public class Generate {
     public static void showProblemStats(
             DirectedGraph<GraphClass,Inclusion> dg, Problem p) {
         int i;
-        String cs;
         int[] count = new int[Complexity.values().length];
 
         Arrays.fill(count, 0);
@@ -234,10 +233,8 @@ public class Generate {
      */
     public static void checkPaths(DirectedGraph<GraphClass,Inclusion> g,
             Collection<Inclusion> list) {
-        int i;
         GraphClass from, to;
         PrintWriter w = new PrintWriter(System.out);
-
         for (Inclusion e :  list) {
             from = e.getSuper();
             to = e.getSub();

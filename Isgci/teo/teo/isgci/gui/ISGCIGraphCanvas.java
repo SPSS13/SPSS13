@@ -1192,42 +1192,13 @@ public class ISGCIGraphCanvas extends mxGraphComponent implements
     public NodePopup getNodePopup(){
         return nodePopup;
     }
-//    public static void toPdf(File file, mxGraph graph) throws IOException {
-////        file = checkExtension(file, ".pdf"); // ensures that .pdf is the extension
-//        FileOutputStream fos = new FileOutputStream(file);
-//        try {
-//            mxRectangle bounds = ((mxGraph) graph).getGraphBounds();
-//            Rectangle rectangle = new Rectangle( (int)bounds.getWidth(), (int) bounds.getHeight());
-//            Document document = new Document(rectangle);
-//            PdfWriter writer = PdfWriter.getInstance(document, fos);
-//            document.open();
-//            PdfCanvasFactory pdfCanvasFactory = new PdfCanvasFactory(writer.getDirectContent());
-//            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
-//                    .drawCells((mxGraph) graph, null, 1, null, pdfCanvasFactory);
-//            canvas.getGraphics().dispose();
-//            document.close();
-//        }
-//        catch (DocumentException e) {
-//            throw new IOException(e.getLocalizedMessage());
-//        }
-//        finally {
-//            if (fos != null) {
-//              fos.close();
-//            }
-//        }
-//    }
-//     private static final class PdfCanvasFactory extends CanvasFactory {
-//        private final PdfContentByte cb;
-//
-//        private PdfCanvasFactory(PdfContentByte cb) {
-//            this.cb = cb;
-//        }
-//
-//        public mxICanvas createCanvas(int width, int height) {
-//            Graphics2D g2 = cb.createGraphics(width, height);
-//            return new mxGraphics2DCanvas(g2);
-//        }
-//    }
+
+    public void updateMap(){
+        map.clear();
+        for(Object cell : graph.getChildCells(graph.getDefaultParent(), true, false)){
+            map.put(((GraphClassSet)((mxCell)cell).getValue()).getSet(), cell);
+        }
+    }
 }
 
 /* EOF */

@@ -219,6 +219,7 @@ public class GraphClassInformationDialog extends JDialog
         mouseAdapter = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
+                    @SuppressWarnings("unchecked")
                     NodeList<GraphClass> list = (NodeList<GraphClass>) e.getSource();
                     showNode(list.getSelectedNode());
                 }

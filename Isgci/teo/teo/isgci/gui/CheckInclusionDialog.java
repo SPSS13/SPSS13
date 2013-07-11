@@ -36,6 +36,10 @@ import teo.isgci.gc.GraphClass;
 public class CheckInclusionDialog extends JDialog
         implements ActionListener, ListSelectionListener {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 543785623902163761L;
     protected ISGCIMainFrame parent;
     protected NodeList<GraphClass> firstList, secondList;
     protected JButton cancelButton;

@@ -56,6 +56,10 @@ public class GraphClassSet {
                     label = gc;
                 }
             }
+        } else{
+            //assertion
+            if(set.contains(label) == false)
+                throw new IllegalArgumentException("The label "+ label.toString() + " is not applicable for this node");
         }
         this.label = label;
     }

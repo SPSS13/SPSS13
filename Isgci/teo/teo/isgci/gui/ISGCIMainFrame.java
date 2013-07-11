@@ -433,7 +433,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
      */
     protected JComponent createCanvasPanel() {
         mxGraph graph = new CustomGraph();
-        setGraphSwitches(graph);
         graph.setAllowDanglingEdges(false);
         CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
         drawingPane = graphComponent;
@@ -450,26 +449,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         return drawingPane;
     }
 
-    private void setGraphSwitches(mxGraph graph) {
-        graph.setCellsEditable(false);
-        graph.setCellsDisconnectable(false);
-        graph.setCellsDeletable(false);
-        graph.setCellsCloneable(false);
-        graph.setAutoSizeCells(true);
-        graph.setBorder(10);
-        graph.setEdgeLabelsMovable(false);
-        graph.setVertexLabelsMovable(false);
-        graph.setSplitEnabled(false);
-        graph.setResetEdgesOnMove(true);
-        graph.setHtmlLabels(true);
-        graph.setAllowDanglingEdges(false);
-        graph.setConnectableEdges(false);
-        graph.setDisconnectOnMove(false);
-        graph.setCellsBendable(false);
-        // does not seem to have any effect
-        graph.setMultigraph(false);
-
-    }
 
     /**
      * Center the canvas on the given point.

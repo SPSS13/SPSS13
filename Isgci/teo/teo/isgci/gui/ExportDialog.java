@@ -15,23 +15,16 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -48,17 +41,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleDirectedGraph;
-
-import teo.isgci.db.Algo;
-import teo.isgci.gc.GraphClass;
-import teo.isgci.xml.GraphMLWriter;
-
-import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.canvas.mxICanvas;
-import com.mxgraph.canvas.mxSvgCanvas;
-import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxCellRenderer.CanvasFactory;
@@ -69,6 +52,10 @@ import com.mxgraph.view.mxGraph;
 //TODO make import work
 public class ExportDialog extends JDialog implements ActionListener {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7006637049631986533L;
     /** The card titles (and ids) */
     protected static final String CARD_FORMAT = "Please choose the file format";
     protected static final String CARD_PS = "Postscript options";
@@ -89,7 +76,6 @@ public class ExportDialog extends JDialog implements ActionListener {
 
     /* Postscript items */
     protected JCheckBox fittopage, keepsideratio, rotate, color;
-    protected JComboBox papersize;
 
     /* GraphML items */
     protected JRadioButton gmlPlain, gmlYed, gmlHtml, gmlLatex;
@@ -301,19 +287,19 @@ public class ExportDialog extends JDialog implements ActionListener {
         return file;
     }
 
-    /**
-     * Returns a component with explanation of e.g. a radiobutton.
-     */
-    private Component explText(String text) {
-        JTextArea t = new JTextArea(text);
-        // t.setLineWrap(true);
-        // t.setWrapStyleWord(true);
-        t.setEditable(false);
-        t.setAlignmentX(Component.LEFT_ALIGNMENT);
-        t.setOpaque(false);
-        t.setBorder(new EmptyBorder(new Insets(0, 20, 0, 0)));
-        return t;
-    }
+//    /**
+//     * Returns a component with explanation of e.g. a radiobutton.
+//     */
+//    private Component explText(String text) {
+//        JTextArea t = new JTextArea(text);
+//        // t.setLineWrap(true);
+//        // t.setWrapStyleWord(true);
+//        t.setEditable(false);
+//        t.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        t.setOpaque(false);
+//        t.setBorder(new EmptyBorder(new Insets(0, 20, 0, 0)));
+//        return t;
+//    }
 
     public void closeDialog() {
         setVisible(false);
