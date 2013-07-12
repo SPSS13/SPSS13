@@ -183,8 +183,9 @@ public class Loader {
 
     public static void main(String args[]) {
         if (args.length < 1) {
-            System.err.println("Usage: ISGCI.jar url");
-            System.exit(1);
+            args = new String[]{"http://www.graphclasses.org"};
+//            System.err.println("Usage: ISGCI.jar url");
+//            System.exit(1);
         }
 
         try {

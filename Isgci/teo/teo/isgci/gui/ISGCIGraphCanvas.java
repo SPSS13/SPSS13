@@ -35,11 +35,8 @@ import org.jgrapht.graph.SimpleDirectedGraph;
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
-import teo.isgci.grapht.BFSWalker;
 import teo.isgci.grapht.GAlg;
-import teo.isgci.grapht.GraphWalker;
 import teo.isgci.grapht.Inclusion;
-import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
 
@@ -118,15 +115,18 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             + ";rounded=true" + ";selectable=false";
 
     // Implementation of custom cursors for panning events and clicking on nodes
+    @SuppressWarnings("unused")
+    private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
             Toolkit.getDefaultToolkit().createImage(
-                            this.getClass().getResource("/images/grab.png")),
-                    new Point(0, 0), "grab");
+                    this.getClass().getResource("/images/grab.png")),
+            new Point(0, 0), "grab");
 
     private Cursor grabbingcursor = Toolkit.getDefaultToolkit()
             .createCustomCursor(
-                    Toolkit.getDefaultToolkit().createImage(
-                            this.getClass()
-                                    .getResource("/images/grabbing.png")),
+                    Toolkit.getDefaultToolkit()
+                            .createImage(
+                                    this.getClass().getResource(
+                                            "/images/grabbing.png")),
                     new Point(0, 0), "grabbing");
 
     private Cursor pointcursor = Toolkit.getDefaultToolkit()
@@ -170,9 +170,11 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     public void drawHierarchy(Collection<GraphClass> nodes) {
 
         map.clear();
+        parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         ((mxGraphModel)graph.getModel()).clear();
         graph.getModel().endUpdate();
+        parent.undoManager.setSignificant(true);
         // reset selection to prevent side effects
         lastSelected = null;
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
@@ -426,8 +428,7 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         for (Set<GraphClass> gc : result.vertexSet()) {
             allNeededClasses.addAll(gc);
         }
-        Object[] allVertexes = graph
-                .getChildVertices(graph.getDefaultParent());
+        Object[] allVertexes = graph.getChildVertices(graph.getDefaultParent());
         for (Object gc : allVertexes) {
             Set<GraphClass> value = ((GraphClassSet)((mxCell)gc).getValue())
                     .getSet();
@@ -590,11 +591,9 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         try {
-            for (Object cell : graph
-                    .getChildVertices(graph.getDefaultParent())) {
+            for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
                 // reset all labels, because the cell does the naming alone
-                GraphClassSet gcs = ((GraphClassSet) ((mxCell) cell)
-                        .getValue());
+                GraphClassSet gcs = ((GraphClassSet)((mxCell)cell).getValue());
                 gcs.setLabel(null);
                 graph.updateCellSize(cell);
             }
@@ -636,6 +635,7 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      */
     public void setDrawUnproper(boolean b) {
         drawUnproper = b;
+        parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         try {
             setProperness(graph.getAllEdges(new Object[] { graph
@@ -643,6 +643,7 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         } finally {
             ((mxGraphComponent)parent.drawingPane).refresh();
             graph.getModel().endUpdate();
+            parent.undoManager.setSignificant(true);
         }
     }
 
@@ -671,8 +672,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                         List<Inclusion> path = GAlg.getPath(DataSet.inclGraph,
                                 source.getSet().iterator().next(), target
                                         .getSet().iterator().next());
-                        if (!(Algo.isPathProper(path) || Algo
-                                .isPathProper(Algo.makePathProper(path)))) {
+                        if (!(Algo.isPathProper(path) || Algo.isPathProper(Algo
+                                .makePathProper(path)))) {
                             // uses color gray for drawing improper inclusions
                             graph.setCellStyles("startArrow", "improper",
                                     new Object[] { cell });
@@ -857,11 +858,11 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      * @date 01.07
      */
     public void mouseMoved(MouseEvent e) {
-        mxCell cell = (mxCell) ((mxGraphComponent) parent.drawingPane)
-                .getCellAt(e.getX(), e.getY());
+        mxCell cell = (mxCell)((mxGraphComponent)parent.drawingPane).getCellAt(
+                e.getX(), e.getY());
         if (cell != null) {
             if (cell.isVertex())
-                ((mxGraphComponent) parent.drawingPane).getGraphControl()
+                ((mxGraphComponent)parent.drawingPane).getGraphControl()
                         .setCursor(pointcursor);
         } else {
             // ((mxGraphComponent) parent.drawingPane).getGraphControl()
@@ -1065,8 +1066,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         int x = e.getX();
         int y = e.getY();
 
-        Point view = ((mxGraphComponent) parent.getContentPane().getComponent(
-                0)).getViewport().getViewPosition();
+        Point view = ((mxGraphComponent)parent.getContentPane().getComponent(0))
+                .getViewport().getViewPosition();
         int width = parent.drawingPane.getViewport().getWidth();
         int height = parent.drawingPane.getViewport().getHeight();
         view = new Point(view.x + width / 2, view.y + height / 2);
