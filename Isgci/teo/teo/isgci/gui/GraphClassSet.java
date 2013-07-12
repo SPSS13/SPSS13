@@ -71,7 +71,7 @@ public class GraphClassSet {
     }
 
     public String toLongString() {
-//        System.out.println("label.toString() = " + label.toString());
+        // System.out.println("label.toString() = " + label.toString());
         return XsltUtil.latex(label.toString());
     }
 
