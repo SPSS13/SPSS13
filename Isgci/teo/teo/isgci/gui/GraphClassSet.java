@@ -54,6 +54,7 @@ public class GraphClassSet {
             for (GraphClass gc : set) {
                 if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
                     label = gc;
+                    break;
                 }
             }
         } else{

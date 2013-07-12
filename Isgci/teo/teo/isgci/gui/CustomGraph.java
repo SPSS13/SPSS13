@@ -1,6 +1,7 @@
 package teo.isgci.gui;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.util.mxPoint;
 import com.mxgraph.view.mxGraph;
 
 public class CustomGraph extends mxGraph {
@@ -22,22 +23,22 @@ public class CustomGraph extends mxGraph {
     
     public CustomGraph() {
         super();
-        setCellsEditable(false);
-        setCellsDisconnectable(false);
-        setCellsDeletable(false);
-        setCellsCloneable(false);
-        setAutoSizeCells(true);
-        setBorder(10);
-        setEdgeLabelsMovable(false);
-        setVertexLabelsMovable(false);
-        setSplitEnabled(false);
-        setResetEdgesOnMove(true);
-        setHtmlLabels(true);
-        setAllowDanglingEdges(false);
-        setConnectableEdges(false);
-        setDisconnectOnMove(false);
-        setCellsBendable(false);
-        setMultigraph(false);
-        setAllowLoops(false);
+        this.setCellsEditable(false);
+        this.setCellsDisconnectable(false);
+        this.setCellsDeletable(false);
+        this.setCellsCloneable(false);
+        this.setAutoSizeCells(true);
+        this.setBorder(10);
+        this.setEdgeLabelsMovable(false);
+        this.setVertexLabelsMovable(false);
+        this.setSplitEnabled(false);
+        this.setResetEdgesOnMove(true);
+        this.setHtmlLabels(true);
+        this.setAllowDanglingEdges(false);
+        this.setConnectableEdges(false);
+        this.setDisconnectOnMove(false);
+        this.setCellsBendable(false);
+        this.setMultigraph(false);
+        this.setAllowLoops(false);
     }
 }

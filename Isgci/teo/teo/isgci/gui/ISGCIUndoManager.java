@@ -12,6 +12,8 @@ import com.mxgraph.util.mxUndoableEdit;
  *
  */
 public class ISGCIUndoManager extends mxUndoManager{
+    private boolean significant = true;
+    
 	public ISGCIUndoManager(){
 		super();
 	}
@@ -22,7 +24,7 @@ public class ISGCIUndoManager extends mxUndoManager{
 	@Override
 	public void undo()
 	{
-		System.out.println("Before: undo(): " + indexOfNextAdd);	
+//		System.out.println("Before: undo(): " + indexOfNextAdd);	
 		while (indexOfNextAdd > 0)
 		{
 			mxUndoableEdit edit = history.get(--indexOfNextAdd);
@@ -42,7 +44,7 @@ public class ISGCIUndoManager extends mxUndoManager{
 	 * @param amount
 	 */
 	public void removeUndos(int amount){
-		System.out.println("Before: removeUndos(): " + indexOfNextAdd);
+//		System.out.println("Before: removeUndos(): " + indexOfNextAdd);
 		while(history.size() > 0 && amount > 0){
 			mxUndoableEdit edit = history.remove(--indexOfNextAdd);
 			edit.die();
@@ -52,10 +54,26 @@ public class ISGCIUndoManager extends mxUndoManager{
 	}
 	
 	/**
+	 * mark only significant edits
+	 */
+	@Override
+	public void undoableEditHappened(mxUndoableEdit undoableEdit){
+	    if(significant)
+	        super.undoableEditHappened(undoableEdit);
+	}
+	/**
 	 * Gives next Index from Stack of next to adding undo action
 	 * @return
 	 */
 	public int getIndexNext(){
 		return indexOfNextAdd;
 	}
+
+    public boolean isSignificant() {
+        return significant;
+    }
+
+    public void setSignificant(boolean significant) {
+        this.significant = significant;
+    }
 }
