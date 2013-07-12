@@ -25,6 +25,10 @@ import javax.swing.JLabel;
 import teo.isgci.db.DataSet;
 
 public class AboutDialog extends JDialog implements ActionListener {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3215510693714589168L;
     protected ISGCIMainFrame parent;
     protected JButton okButton;
 

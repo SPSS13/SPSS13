@@ -24,6 +24,10 @@ import teo.isgci.problem.Problem;
 
 public class ProblemsMenu extends JMenu implements ActionListener {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -167870926732279161L;
     protected Vector<JRadioButtonMenuItem> items;
     protected ISGCIMainFrame parent;
     protected ButtonGroup group;

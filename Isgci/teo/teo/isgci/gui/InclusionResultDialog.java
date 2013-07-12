@@ -45,6 +45,10 @@ import teo.isgci.grapht.Inclusion;
 import teo.isgci.util.LessLatex;
 
 public class InclusionResultDialog extends JDialog implements ActionListener {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6683695300688611738L;
     private ISGCIMainFrame parent;
     private JButton okButton;
     private JButton drawButton;
@@ -118,7 +122,7 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
         gridbag.setConstraints(line1, constraints);
         content.add(line1);
 
-        LatexLabel line2 = new LatexLabel(parent.latex, node1.toString()
+        LatexLabel line2 = new LatexLabel(ISGCIMainFrame.latex, node1.toString()
                 + " and " + node2.toString() + ".");
         // line2.setFont(new Font("TimesRoman",Font.PLAIN,14));
         gridbag.setConstraints(line2, constraints);
@@ -177,18 +181,18 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
         this(parent);
         upper = lower = null;
 
-        LatexLabel l = new LatexLabel(parent.latex, node1.toString());
+        LatexLabel l = new LatexLabel(ISGCIMainFrame.latex, node1.toString());
         // l.setFont(new Font("TimesRoman",Font.PLAIN,14));
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         gridbag.setConstraints(l, constraints);
         content.add(l);
 
-        LatexLabel equiv = new LatexLabel(parent.latex, "$\\equiv$");
+        LatexLabel equiv = new LatexLabel(ISGCIMainFrame.latex, "$\\equiv$");
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         gridbag.setConstraints(equiv, constraints);
         content.add(equiv);
 
-        l = new LatexLabel(parent.latex, node2.toString());
+        l = new LatexLabel(ISGCIMainFrame.latex, node2.toString());
         // l.setFont(new Font("TimesRoman",Font.PLAIN,14));
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         gridbag.setConstraints(l, constraints);
@@ -241,8 +245,6 @@ public class InclusionResultDialog extends JDialog implements ActionListener {
             List<Inclusion> pathba) {
         this(parent);
         upper = lower = null;
-        int col = 0;
-
         JPanel ab = makePathPanel(pathab, false);
         constraints.gridwidth = 1;
         constraints.insets = new Insets(5, 5, 5, 10);

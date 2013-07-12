@@ -17,7 +17,12 @@ import java.awt.event.ItemListener;
 import javax.swing.JMenu;
 
 public class ScaleMenu extends JMenu implements ItemListener {
-/*
+/**
+     * 
+     */
+    private static final long serialVersionUID = 6775522637412146160L;
+
+    /*
     protected CheckboxMenuItem mi25, mi50, mi75, mi100, mi150;
     protected float scale;
 
