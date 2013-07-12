@@ -1,25 +1,46 @@
 package teo.isgci.gui;
 
-
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.parser.ParserDelegator;
+
+import org.jsoup.examples.HtmlToPlainText;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import teo.XsltUtil;
+import teo.isgci.util.Latex2Html;
+import teo.isgci.util.LatexGlyph;
+
 import com.mxgraph.canvas.mxSvgCanvas;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.shape.mxCloudShape;
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxHtmlColor;
 import com.mxgraph.util.mxPoint;
 import com.mxgraph.util.mxRectangle;
 import com.mxgraph.util.mxUtils;
+import com.mxgraph.util.mxXmlUtils;
 import com.mxgraph.view.mxCellState;
 
 public class ISGCISvgCanvas extends mxSvgCanvas {
 
     private String delHtml = "";
     private int elementlength = 0;
+    protected int farX = 0;
+    protected int farY = 0;
 
     public ISGCISvgCanvas(Document document) {
         super(document);
@@ -32,13 +53,20 @@ public class ISGCISvgCanvas extends mxSvgCanvas {
      * @author Fabian Vollmer
      */
     public Object drawCell(mxCellState state) {
-
         Map<String, Object> style = state.getStyle();
         Element elem = null;
 
         if (state.getAbsolutePointCount() > 1) {
             // Edge
             List<mxPoint> pts = state.getAbsolutePoints();
+            for (mxPoint p : pts) {
+                if (p.getX() > farX) {
+                    farX = (int) p.getX();
+                }
+                if (p.getY() > farY) {
+                    farY = (int) p.getY();
+                }
+            }
 
             // Transpose all points by cloning into a new array
             pts = mxUtils.translatePoints(pts, translate.x, translate.y);
@@ -146,14 +174,14 @@ public class ISGCISvgCanvas extends mxSvgCanvas {
         if (s.startsWith("<sub>")) {
             Element tsp = document.createElement("tspan");
             tsp.setAttribute("font-size", String.valueOf(fontSize / 1.3));
-            tsp.setAttribute("dy", "3");
+            tsp.setAttribute("baseline-shift", "sub");
             tsp.setTextContent(s.substring(5, s.indexOf("</sub>")));
             elementlength = s.indexOf("</sub>") + 5;
             return tsp;
         } else if (s.startsWith("<sup>")) {
             Element tsp = document.createElement("tspan");
             tsp.setAttribute("font-size", String.valueOf(fontSize / 1.3));
-            tsp.setAttribute("dy", "-3");
+            tsp.setAttribute("baseline-shift", "super");
             tsp.setTextContent(s.substring(5, s.indexOf("</sup>")));
             elementlength = s.indexOf("</sup>") + 5;
             return tsp;
@@ -185,6 +213,12 @@ public class ISGCISvgCanvas extends mxSvgCanvas {
      */
     public Element drawShape(int x, int y, int w, int h,
             Map<String, Object> style) {
+        if (x > farX) {
+            farX = x;
+        }
+        if (y > farY) {
+            farY = y;
+        }
         Element elem = document.createElement("rect");
         elem.setAttribute("x", String.valueOf(x));
         elem.setAttribute("y", String.valueOf(y));
@@ -198,7 +232,13 @@ public class ISGCISvgCanvas extends mxSvgCanvas {
 
         elem.setAttribute("rx", r);
         elem.setAttribute("ry", r);
-        elem.setAttribute("fill", "white");
+        Color back = mxHtmlColor.parseColor(mxUtils.getString(style,
+                mxConstants.STYLE_FILLCOLOR));
+        int red = back.getRed();
+        int green = back.getGreen();
+        int blue = back.getBlue();
+        String fillcolor = "fill:rgb(" + red + "," + green + "," + blue + ")";
+        elem.setAttribute("style", fillcolor);
         elem.setAttribute("stroke", "black");
         elem.setAttribute("stroke-width", String.valueOf(2));
 

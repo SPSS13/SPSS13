@@ -257,6 +257,7 @@
 	</fileset>
 	<fileset dir="${data.dir}">
 		<include name="images/*.gif" />
+		<include name="images/*.png" />
 	</fileset>
 </jar>
 <!-- <signjar alias="isgci"

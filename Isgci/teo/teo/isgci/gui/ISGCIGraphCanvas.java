@@ -118,21 +118,22 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             + ";rounded=true" + ";selectable=false";
 
     // Implementation of custom cursors for panning events and clicking on nodes
-    private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
             Toolkit.getDefaultToolkit().createImage(
-                    "../teo/data/images/grab.png"), new Point(0, 0), "grab");
+                            this.getClass().getResource("/images/grab.png")),
+                    new Point(0, 0), "grab");
 
     private Cursor grabbingcursor = Toolkit.getDefaultToolkit()
             .createCustomCursor(
                     Toolkit.getDefaultToolkit().createImage(
-                            "../teo/data/images/grabbing.png"),
+                            this.getClass()
+                                    .getResource("/images/grabbing.png")),
                     new Point(0, 0), "grabbing");
 
     private Cursor pointcursor = Toolkit.getDefaultToolkit()
             .createCustomCursor(
                     Toolkit.getDefaultToolkit().createImage(
-                            "../teo/data/images/point.png"), new Point(0, 0),
-                    "point");
+                            this.getClass().getResource("/images/point.png")),
+                    new Point(0, 0), "point");
 
     public ISGCIGraphCanvas(ISGCIMainFrame parent, CustomGraph graph) {
         super(graph);
@@ -425,7 +426,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         for (Set<GraphClass> gc : result.vertexSet()) {
             allNeededClasses.addAll(gc);
         }
-        Object[] allVertexes = graph.getChildVertices(graph.getDefaultParent());
+        Object[] allVertexes = graph
+                .getChildVertices(graph.getDefaultParent());
         for (Object gc : allVertexes) {
             Set<GraphClass> value = ((GraphClassSet)((mxCell)gc).getValue())
                     .getSet();
@@ -588,9 +590,11 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         try {
-            for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
+            for (Object cell : graph
+                    .getChildVertices(graph.getDefaultParent())) {
                 // reset all labels, because the cell does the naming alone
-                GraphClassSet gcs = ((GraphClassSet)((mxCell)cell).getValue());
+                GraphClassSet gcs = ((GraphClassSet) ((mxCell) cell)
+                        .getValue());
                 gcs.setLabel(null);
                 graph.updateCellSize(cell);
             }
@@ -667,8 +671,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                         List<Inclusion> path = GAlg.getPath(DataSet.inclGraph,
                                 source.getSet().iterator().next(), target
                                         .getSet().iterator().next());
-                        if (!(Algo.isPathProper(path) || Algo.isPathProper(Algo
-                                .makePathProper(path)))) {
+                        if (!(Algo.isPathProper(path) || Algo
+                                .isPathProper(Algo.makePathProper(path)))) {
                             // uses color gray for drawing improper inclusions
                             graph.setCellStyles("startArrow", "improper",
                                     new Object[] { cell });
@@ -853,11 +857,11 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      * @date 01.07
      */
     public void mouseMoved(MouseEvent e) {
-        mxCell cell = (mxCell)((mxGraphComponent)parent.drawingPane).getCellAt(
-                e.getX(), e.getY());
+        mxCell cell = (mxCell) ((mxGraphComponent) parent.drawingPane)
+                .getCellAt(e.getX(), e.getY());
         if (cell != null) {
             if (cell.isVertex())
-                ((mxGraphComponent)parent.drawingPane).getGraphControl()
+                ((mxGraphComponent) parent.drawingPane).getGraphControl()
                         .setCursor(pointcursor);
         } else {
             // ((mxGraphComponent) parent.drawingPane).getGraphControl()
@@ -1061,8 +1065,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         int x = e.getX();
         int y = e.getY();
 
-        Point view = ((mxGraphComponent)parent.getContentPane().getComponent(0))
-                .getViewport().getViewPosition();
+        Point view = ((mxGraphComponent) parent.getContentPane().getComponent(
+                0)).getViewport().getViewPosition();
         int width = parent.drawingPane.getViewport().getWidth();
         int height = parent.drawingPane.getViewport().getHeight();
         view = new Point(view.x + width / 2, view.y + height / 2);

@@ -425,17 +425,19 @@ public class ExportDialog extends JDialog implements ActionListener {
 
         final int mywidth = (int)(parent.graphCanvas.getGraphControl()
                 .getWidth() * (parent.graphCanvas.getZoomFactor()));
+        System.out.println(parent.graphCanvas.getZoomFactor());
+        System.out.println(mywidth);
         final int myheight = (int)(parent.graphCanvas.getGraphControl()
                 .getHeight() * (parent.graphCanvas.getZoomFactor()));
-
+        System.out.println(myheight);
         Exception res = null;
         // DataOutputStream out = new DataOutputStream(f);
         Writer out = new OutputStreamWriter(f, "UTF-8");
 
         HashSet<Object> set = new HashSet<Object>();
 
-        Map<String, Object> map = ((mxGraphModel)parent.graphCanvas.getGraph()
-                .getModel()).getCells();
+        Map<String, Object> map = ((mxGraphModel) parent.graphCanvas
+                .getGraph().getModel()).getCells();
         for (Object o : map.values()) {
             set.add(o);
         }
@@ -454,6 +456,16 @@ public class ExportDialog extends JDialog implements ActionListener {
                             return can;
                         }
                     });
+            // resizing dependent on the drawn nodes
+            String myW = String.valueOf(can.farX + 600);
+            String myH = String.valueOf(can.farY + 200);
+
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("width", myW);
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("height", myH);
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("viewBox", "-10 -10 " + myW + " " + myH);
 
             out.write(mxXmlUtils.getXml(can.getDocument()));
             // out.writeBytes(mxXmlUtils.getXml(can.getDocument()));
