@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,8 +34,11 @@ import org.jgrapht.graph.SimpleDirectedGraph;
 import teo.isgci.db.Algo;
 import teo.isgci.db.DataSet;
 import teo.isgci.gc.GraphClass;
+import teo.isgci.grapht.BFSWalker;
 import teo.isgci.grapht.GAlg;
+import teo.isgci.grapht.GraphWalker;
 import teo.isgci.grapht.Inclusion;
+import teo.isgci.grapht.RevBFSWalker;
 import teo.isgci.problem.Complexity;
 import teo.isgci.problem.Problem;
 
@@ -58,7 +60,7 @@ import com.mxgraph.view.mxGraph;
 /**
  * A canvas that can display an inclusion graph.
  */
-public class ISGCIGraphCanvas extends CustomGraphComponent implements
+public class ISGCIGraphCanvas extends mxGraphComponent implements
         MouseListener, MouseMotionListener, MouseWheelListener {
 
     /**
@@ -70,7 +72,7 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     protected Problem problem;
     protected Algo.NamePref namingPref;
     private ISGCIMainFrame parent;
-    private final CustomGraph graph;
+    private final mxGraph graph;
     private mxCell lastSelected;
     private boolean neighbours = false;
     private boolean animationActivated = false;
@@ -87,23 +89,28 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 
     /** Margins around drawing */
     protected static final int LEFTMARGIN = 20;
+    protected static final int RIGHTMARGIN = 20;
     protected static final int TOPMARGIN = 20;
+    protected static final int BOTTOMMARGIN = 20;
 
     /** Colors for different complexities */
-    public static final Color COLOR_LIN = new Color(80, 235, 65);
-    public static final Color COLOR_P = new Color(0, 155, 0);
-    public static final Color COLOR_NPC = new Color(255, 20, 20);
+    public static final Color COLOR_LIN = new Color(80,235,65);
+    public static final Color COLOR_P = new Color(0,155,0);
+    public static final Color COLOR_NPC = new Color(255,20,20);
     public static final Color COLOR_INTERMEDIATE = SColor.brighter(Color.red);
     public static final Color COLOR_UNKNOWN = Color.white;
     private final HashMap<Set<GraphClass>, Object> map;
-    private mxHierarchicalLayout hierachicalLayout;
+    private mxHierarchicalLayout layout;
     private Point start;
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1a4eb8f49809e5a6e53c17e542865c9607125fa3
 
     private final String EDGE_COLOR = "black";
     private final String CELL_COLOR = "black";
-    // light blue
     private final String ALTERNATE_EDGE_COLOR = "#3d86b8";
-    // light blue
     private final String ALTERNATE_CELL_COLOR = "#3d86b8";
 
     private final String vertexStyle = "shape=rectangle;perimeter=rectanglePerimeter;rounded=true;fontColor="
@@ -113,29 +120,24 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             + ";spacingLeft=4;spacingRight=4;spacingTop=2;spacingBottom=2";
     private final String edgeStyle = "strokeColor=" + EDGE_COLOR
             + ";rounded=true" + ";selectable=false";
+    
+ // Implementation of custom cursors for panning events and clicking on nodes
+ 	private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 			Toolkit.getDefaultToolkit().createImage(
+ 					"../teo/data/images/grab.png"), new Point(0, 0),
+ 			"grab");
 
-    // Implementation of custom cursors for panning events and clicking on nodes
-    @SuppressWarnings("unused")
-    private Cursor grabcursor = Toolkit.getDefaultToolkit().createCustomCursor(
-            Toolkit.getDefaultToolkit().createImage(
-                    this.getClass().getResource("/images/grab.png")),
-            new Point(0, 0), "grab");
+ 	private Cursor grabbingcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 			Toolkit.getDefaultToolkit().createImage(
+ 					"../teo/data/images/grabbing.png"), new Point(0, 0),
+ 			"grabbing");
+ 	
+ 	private Cursor pointcursor = Toolkit.getDefaultToolkit().createCustomCursor(
+ 			Toolkit.getDefaultToolkit().createImage(
+ 					"../teo/data/images/point.png"), new Point(0, 0),
+ 			"point");
 
-    private Cursor grabbingcursor = Toolkit.getDefaultToolkit()
-            .createCustomCursor(
-                    Toolkit.getDefaultToolkit()
-                            .createImage(
-                                    this.getClass().getResource(
-                                            "/images/grabbing.png")),
-                    new Point(0, 0), "grabbing");
-
-    private Cursor pointcursor = Toolkit.getDefaultToolkit()
-            .createCustomCursor(
-                    Toolkit.getDefaultToolkit().createImage(
-                            this.getClass().getResource("/images/point.png")),
-                    new Point(0, 0), "point");
-
-    public ISGCIGraphCanvas(ISGCIMainFrame parent, CustomGraph graph) {
+    public ISGCIGraphCanvas(ISGCIMainFrame parent, mxGraph graph) {
         super(graph);
         this.parent = parent;
         this.latexgraphics = ISGCIMainFrame.latex;
@@ -146,16 +148,21 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         this.graph = graph;
         namingPref = Algo.NamePref.BASIC;
         // setWidthFunc(new NodeWidthFunc());
-        nodePopup = new NodePopup(parent, graph, map);
+        nodePopup = new NodePopup(parent, graph);
         edgePopup = new EdgePopup(parent);
         add(nodePopup);
         add(edgePopup);
-        hierachicalLayout = new mxHierarchicalLayout(graph);
-        hierachicalLayout.setParentBorder(0);
-        hierachicalLayout.setResizeParent(true);
-        hierachicalLayout.setInterHierarchySpacing(100);
-        this.graphControl = ((CustomGraphComponent)parent.drawingPane)
-                .getGraphControl();
+        layout = new mxHierarchicalLayout(graph);
+        layout.setParentBorder(0);
+        layout.setResizeParent(true);
+<<<<<<< HEAD
+=======
+        layout.setInterHierarchySpacing(100);
+        this.graphControl = ((CustomGraphComponent)parent.drawingPane).getGraphControl();
+        graph.setMinimumGraphSize(new mxRectangle(10, 10, 500, 400));
+        graph.setBorder(100);
+        graph.getView().setTranslate(new mxPoint(10, 10));
+>>>>>>> 1a4eb8f49809e5a6e53c17e542865c9607125fa3
     }
 
     /**
@@ -170,13 +177,10 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     public void drawHierarchy(Collection<GraphClass> nodes) {
 
         map.clear();
-        parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         ((mxGraphModel)graph.getModel()).clear();
         graph.getModel().endUpdate();
-        parent.undoManager.setSignificant(true);
-        // reset selection to prevent side effects
-        lastSelected = null;
+
         SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
                 .createHierarchySubgraph(nodes);
 
@@ -194,8 +198,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      */
     private void makeGraph(
             SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph) {
-        graph.getModel().beginUpdate();
         Object defaultParent = graph.getDefaultParent();
+        graph.getModel().beginUpdate();
         try {
             graph.setCellsResizable(true);
             // Add vertices
@@ -216,13 +220,14 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                     // add the node to the map
                     map.put(gc, vertex);
                     // update the size of the node to match the text
-                    graph.cellSizeUpdated(vertex, false);
+                    graph.updateCellSize(vertex);
                     ((mxCell)vertex).setConnectable(false);
                 } else {
+
                     // check if node is invisible
                     if (!cell.isVisible()) {
-                        graph.toggleCells(true,
-                                graph.addAllEdges(new Object[] { cell }));
+                        cell.setVisible(true);
+                        graph.toggleCells(true, graph.getEdges(cell));
                     }
                 }
             }
@@ -239,14 +244,14 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             parent.drawingPane.getComponent(0).validate();
             // make Layout, if no animation
             if (!neighbours || !animationActivated) {
-                hierachicalLayout.execute(graph.getDefaultParent());
+                layout.execute(graph.getDefaultParent());
                 // timer.schedule(new Task(), 0);
             }
             // make edges look nice
             if (drawUnproper) {
                 // set properness for all possible cells
-                setProperness(graph.getChildCells(graph.getDefaultParent(),
-                        false, true));
+                setProperness(graph.getAllEdges(new Object[] { graph
+                        .getDefaultParent() }));
             }
 
             // make nodes colorful
@@ -265,10 +270,10 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             graph.refresh();
         } finally {
             try {
-                // animation?
                 if (neighbours && animationActivated) {
                     neighbours = false;
                     animateGraph();
+                    // timer.schedule(new Task(), 2000);
                 } else {
                     graph.refresh();
                     parent.drawingPane.getComponent(0).validate();
@@ -277,12 +282,10 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                 graph.setCellsResizable(false);
 
             } finally {
+                getGraphControl().setTranslate(new Point(20, 20));
                 graph.getModel().endUpdate();
             }
         }
-        // translate the Graph a bit
-        this.getGraph().getView()
-                .setTranslate(new mxPoint(LEFTMARGIN, TOPMARGIN));
     }
 
     /**
@@ -333,7 +336,6 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         result = findMissingEdges(result);
         // add the new subgraph to the mxGraph
         makeGraph(result);
-        parent.drawingPane.getComponent(0).validate();
         centerNode(getSelectedCell());
     }
 
@@ -448,10 +450,11 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      * 
      */
 
-    public void drawSuperSub(Object[] cells) {
+    public void drawSuperSub(Collection<GraphClass> nodes) {
         // reduce the graph the Sets of equivalent Graphclasses
-        graph.toggleCells(true, cells, true);
-        hierachicalLayout.execute(graph.getDefaultParent());
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+                .createHierarchySubgraph(nodes);
+        makeGraph(edgegraph);
         centerNode(getSelectedCell());
     }
 
@@ -463,12 +466,40 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      * @date 22.06 9:30
      * @annotation redraw the graph and remove subgraph/superclass of the given
      *             class
-     * @annotation2 cleaned up a bit
+     * @annotation2 now deletes from the map too, cleaned up a bit
      * 
      */
 
-    public void deleteSuperSub(Object[] cells) {
-        graph.toggleCells(false, cells, true);
+    public void deleteSuperSub(Collection<GraphClass> nodes) {
+        SimpleDirectedGraph<Set<GraphClass>, DefaultEdge> edgegraph = Algo
+                .createHierarchySubgraph(nodes);
+        graph.getModel().beginUpdate();
+        try {
+            graph.setCellsResizable(true);
+
+            ArrayList<Object> toHide = new ArrayList<Object>();
+            // add nodes to an array to delete them
+            for (Set<GraphClass> gc : edgegraph.vertexSet()) {
+                Object cell = map.get(gc);
+                toHide.add(cell);
+            }
+            // add Edges to an array to delete them
+            for (DefaultEdge edge : edgegraph.edgeSet()) {
+                if (((mxGraphModel)graph.getModel()).getCell(edge.toString()) != null
+                        && getSelectedCell() != ((mxGraphModel)graph.getModel())
+                                .getCell(edge.toString())) {
+                    Object cell = ((mxGraphModel)graph.getModel()).getCell(edge
+                            .toString());
+                    toHide.add(cell);
+                }
+            }
+            // remove the gathered cells
+            Object[] cells = toHide.toArray(new Object[0]);
+            graph.toggleCells(false, cells);
+        } finally {
+            graph.getModel().endUpdate();
+            graph.setCellsResizable(false);
+        }
     }
 
     /**
@@ -476,34 +507,28 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      * 
      * @author philipp
      * @date 22.06 9:30
-     * @annotation
+     * @annotation includes parts of getNodes from
+     *             GraphClassSelectionDialog.java (bottom)
      * 
      */
 
-    public Object[] getSuperNodes(mxCell cell) {
-        // if the cell has associated edges in the given direction
-        Object[] edges = new Object[] {};
-        LinkedList<Object> queue = new LinkedList<Object>();
-        Set<Object> result = new HashSet<Object>();
-        // add root cell
-        queue.add(cell);
-        // find all superclasses with a BFS Search
-        while (!queue.isEmpty()) {
-            Object currentCell = queue.pollFirst();
-            edges = graph.addAllEdges(new Object[] { currentCell });
-            for (Object edge : edges) {
-                if ((((mxCell)edge).isEdge())) {
-                    Object temp = (((mxCell)edge).getSource());
-                    if (temp != currentCell) {
-                        // add it to the queue
-                        queue.add(temp);
-                        // add it to the result
-                        result.add(temp);
-                    }
+    public Collection<GraphClass> getSuperNodes(mxCell cell) {
+        final HashSet<GraphClass> result = new HashSet<GraphClass>();
+        if (cell != null) {
+            GraphClass gc = NodePopup.searchName(cell);
+            new RevBFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc,
+                    null, GraphWalker.InitCode.DYNAMIC) {
+                public void visit(GraphClass v) {
+                    result.add(v);
+                    super.visit(v);
                 }
-            }
+            }.run();
+            // retain just the classes, that are already in the Graph
+            result.retainAll(getClasses());
+            result.removeAll(((GraphClassSet)getSelectedCell().getValue())
+                    .getSet());
         }
-        return result.toArray();
+        return result;
     }
 
     /**
@@ -511,34 +536,28 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      * 
      * @author philipp
      * @date 22.06 9:30
-     * @annotation
+     * @annotation includes parts of getNodes from
+     *             GraphClassSelectionDialog.java (bottom)
      * 
      */
 
-    public Object[] getSubNodes(mxCell cell) {
-        // if the cell has associated edges in the given direction
-        Object[] edges = new Object[] {};
-        LinkedList<Object> queue = new LinkedList<Object>();
-        Set<Object> result = new HashSet<Object>();
-        // add root cell
-        queue.add(cell);
-        // find all subclasses with a BFS Search
-        while (!queue.isEmpty()) {
-            Object currentCell = queue.pollFirst();
-            edges = graph.addAllEdges(new Object[] { currentCell });
-            for (Object edge : edges) {
-                if ((((mxCell)edge).isEdge())) {
-                    Object temp = (((mxCell)edge).getTarget());
-                    if (temp != currentCell) {
-                        // add it to the queue
-                        queue.add(temp);
-                        // add it to the result
-                        result.add(temp);
-                    }
+    public Collection<GraphClass> getSubNodes(mxCell cell) {
+        final HashSet<GraphClass> result = new HashSet<GraphClass>();
+        if (cell != null) {
+            GraphClass gc = NodePopup.searchName(cell);
+            new BFSWalker<GraphClass, Inclusion>(DataSet.inclGraph, gc, null,
+                    GraphWalker.InitCode.DYNAMIC) {
+                public void visit(GraphClass v) {
+                    result.add(v);
+                    super.visit(v);
                 }
-            }
+            }.run();
+            // retain just the classes, that are already in the Graph
+            result.retainAll(getClasses());
+            result.removeAll(((GraphClassSet)getSelectedCell().getValue())
+                    .getSet());
         }
-        return result.toArray();
+        return result;
     }
 
     /**
@@ -588,26 +607,25 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      */
     public void setPreferedNames() {
         graph.setCellsResizable(true);
-        parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         try {
             for (Object cell : graph.getChildVertices(graph.getDefaultParent())) {
                 // reset all labels, because the cell does the naming alone
                 GraphClassSet gcs = ((GraphClassSet)((mxCell)cell).getValue());
                 gcs.setLabel(null);
-                graph.updateCellSize(cell);
+                graph.updateCellSize(cell, true);
             }
+
         } finally {
-            hierachicalLayout
-                    .run(graph.getChildCells(graph.getDefaultParent()));
+            layout.run(graph.getChildCells(graph.getDefaultParent()));
             graph.getModel().endUpdate();
-            parent.undoManager.setSignificant(true);
             graph.setCellsResizable(false);
         }
     }
 
     /**
-     * Find the cell for the given graph class or null
+     * Find the cell for the given graph class or null if not found assumes that
+     * you search with an HTML label
      * 
      * @author leo
      * @date 14.06; 25.06.13
@@ -635,7 +653,6 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      */
     public void setDrawUnproper(boolean b) {
         drawUnproper = b;
-        parent.undoManager.setSignificant(false);
         graph.getModel().beginUpdate();
         try {
             setProperness(graph.getAllEdges(new Object[] { graph
@@ -643,7 +660,6 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         } finally {
             ((mxGraphComponent)parent.drawingPane).refresh();
             graph.getModel().endUpdate();
-            parent.undoManager.setSignificant(true);
         }
     }
 
@@ -685,7 +701,6 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                 }
             }
         }
-
     }
 
     /**
@@ -773,9 +788,8 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      *             drawing it, despite the naming preference
      */
     public void setNodeName(List<GraphClass> classesList) {
-        graph.setCellsResizable(true);
+        // made getSelectedValues() to getSelectedValuesList()
         graph.getModel().beginUpdate();
-        parent.undoManager.setSignificant(false);
         try {
             for (GraphClass gc : classesList) {
                 mxCell cell = (mxCell)findNode(gc);
@@ -783,17 +797,13 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                     GraphClassSet graphClassSet = (GraphClassSet)cell
                             .getValue();
                     graphClassSet.setLabel(gc);
-
                     graph.updateCellSize(cell);
                 }
             }
-            hierachicalLayout.execute(graph.getDefaultParent());
+            layout.execute(graph.getDefaultParent());
         } finally {
-            ((mxGraphComponent)parent.drawingPane).refresh();
-            hierachicalLayout.run(graph.getDefaultParent());
             graph.getModel().endUpdate();
-            graph.setCellsResizable(false);
-            parent.undoManager.setSignificant(false);
+            ((mxGraphComponent)parent.drawingPane).refresh();
         }
 
     }
@@ -828,8 +838,6 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             ((ISGCIMainFrame)parent).centerCanvas(p);
         }
         setSelectedCell(cell);
-        this.getGraph().getView()
-                .setTranslate(new mxPoint(LEFTMARGIN, TOPMARGIN));
     }
 
     // ----------------------- MouseListener stuff --------------------------
@@ -851,24 +859,22 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     }
 
     /**
-     * Modified for changing cursor while on Canvas for different cursors on
-     * Cells and Plain
-     * 
-     * @author Fabian Vollmer
-     * @date 01.07
-     */
-    public void mouseMoved(MouseEvent e) {
-        mxCell cell = (mxCell)((mxGraphComponent)parent.drawingPane).getCellAt(
-                e.getX(), e.getY());
-        if (cell != null) {
-            if (cell.isVertex())
-                ((mxGraphComponent)parent.drawingPane).getGraphControl()
-                        .setCursor(pointcursor);
-        } else {
-            // ((mxGraphComponent) parent.drawingPane).getGraphControl()
-            // .setCursor(grabcursor);
-        }
-    }
+	 * Modified for changing cursor while on Canvas for different cursors on Cells and Plain
+	 * @author Fabian Vollmer
+	 * @date 01.07
+	 */
+	public void mouseMoved(MouseEvent e) {
+		mxCell cell = (mxCell)((mxGraphComponent) parent.drawingPane).getCellAt(
+				e.getX(), e.getY());
+		if(cell!=null){
+		    if(cell.isVertex())
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+			.setCursor(pointcursor);
+		}else{			
+//			((mxGraphComponent) parent.drawingPane).getGraphControl()
+//					.setCursor(grabcursor);
+		}
+	}
 
     /**
      * few Methods needed for "Show Information" and other Functionality
@@ -880,39 +886,37 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
      */
 
     public void setSelectedCell(mxCell cell) {
-        graph.setSelectionCell(null);
-        parent.getUndoM().setSignificant(false);
         graph.getModel().beginUpdate();
         try {
             if (lastSelected != null && cell != lastSelected) {
                 graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
                         new Object[] { lastSelected });
             }
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+                    new Object[] { cell });
             this.lastSelected = cell;
-            // update the sidebar
             setSidebarConent();
+
             // reset the old selection of edges
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, EDGE_COLOR,
                     highlitedEdges);
             graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
                     highlitedEdges);
             setProperness(highlitedEdges);
-
             // switch the selected edges
             highlitedEdges = graph.getEdges(cell);
-
             // color the new edges
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
                     ALTERNATE_EDGE_COLOR, highlitedEdges);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
                     highlitedEdges);
             setProperness(highlitedEdges);
+
             // reset the style of the old highlighted nodes
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, CELL_COLOR,
                     highlitedCells);
             graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1",
                     highlitedCells);
-
             // get and switch the associated cells
             Set<Object> temp = new HashSet<Object>();
             for (Object edge : graph.getIncomingEdges(cell)) {
@@ -925,34 +929,28 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
             // highlight the cells of the new highlighted nodes
             graph.setCellStyles(mxConstants.STYLE_STROKECOLOR,
                     ALTERNATE_CELL_COLOR, highlitedCells);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
+            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "2",
                     highlitedCells);
 
-            // make selected cell back
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "3",
-                    new Object[] { cell });
         } finally {
             graph.getModel().endUpdate();
-            parent.getUndoM().setSignificant(true);
         }
+
     }
 
     public mxCell getSelectedCell() {
         return lastSelected;
 
     }
-
+    
     public void setSidebarConent() {
         if (parent.sidebar.isVisible()) {
             if (getSelectedCell() != null) {
-                if (parent.sidebar.getContent() != ((GraphClassSet)getSelectedCell()
-                        .getValue()).getLabel().getID()) {
-                    parent.sidebar
-                            .changeContent(((GraphClassSet)getSelectedCell()
-                                    .getValue()).getLabel().getID());
+                if (parent.sidebar.getContent() != NodePopup.searchName(
+                        getSelectedCell()).getID()) {
+                    parent.sidebar.changeContent(NodePopup.searchName(
+                            getSelectedCell()).getID());
                 }
-            } else {
-                parent.sidebar.setDefaultText();
             }
         }
     }
@@ -975,37 +973,37 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     }
 
     /**
-     * Method to enable panning if the mouse is dragged with a pressed
-     * mousebutton.
-     */
-    public void mouseDragged(MouseEvent event) {
-        graph.getModel().beginUpdate();
-        try {
-            if (!event.isConsumed() && start != null) {
+	 * Method to enable panning if the mouse is dragged with a pressed
+	 * mousebutton.
+	 */
+	public void mouseDragged(MouseEvent event) {
+		if (!event.isConsumed() && start != null) {
 
-                // Cursor handling for dragging
-                ((mxGraphComponent)parent.drawingPane).getGraphControl()
-                        .setCursor(grabbingcursor);
+			//Cursor handling for dragging
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+					.setCursor(grabbingcursor);
+			
+			int dx = event.getX() - start.x;
+			int dy = event.getY() - start.y;
 
-                int dx = event.getX() - start.x;
-                int dy = event.getY() - start.y;
+			Rectangle r = parent.drawingPane.getViewport().getViewRect();
 
-                Rectangle r = parent.drawingPane.getViewport().getViewRect();
+			int right = r.x + ((dx > 0) ? 0 : r.width) - dx;
+			int bottom = r.y + ((dy > 0) ? 0 : r.height) - dy;
 
-                int right = r.x + ((dx > 0) ? 0 : r.width) - dx;
-                int bottom = r.y + ((dy > 0) ? 0 : r.height) - dy;
+			((mxGraphComponent) parent.drawingPane).getGraphControl()
+					.scrollRectToVisible(new Rectangle(right, bottom, 0, 0));
 
-                ((mxGraphComponent)parent.drawingPane)
-                        .getGraphControl()
-                        .scrollRectToVisible(new Rectangle(right, bottom, 0, 0));
+			event.consume();
+		}
 
-                event.consume();
-            }
-            super.repaint();
-        } finally {
-            graph.getModel().endUpdate();
-        }
-    }
+		// if (!dragInProcess) {
+		// markSetShadow(true);
+		// dragInProcess = true;
+		// }
+		// markSetShadowAnchorLocation(event.getPoint());
+		super.repaint();
+	}
 
     /**
      * Method for showing a popup menu if a node or an edge is rightclicked
@@ -1041,6 +1039,7 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                             event.getXOnScreen() - parent.getX(),
                             event.getYOnScreen() - parent.getY());
                 } else {
+                    nodePopup.setNode(c);
                     nodePopup.show(parent,
                             event.getXOnScreen() - parent.getX(),
                             event.getYOnScreen() - parent.getY());
@@ -1052,11 +1051,10 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     }
 
     /**
-     * Zooming Function by setting values after computing relative to the mouse
-     * position for the Scrollbars.
-     * 
      * @date 21.06.2013
      * @author Matthias
+     * @annotation Zooming Function by setting values after computing relative
+     *             to the mouse position for the Scrollbars ==> WORKS!!!
      */
 
     @Override
@@ -1076,15 +1074,12 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
         graph.getModel().beginUpdate();
         try {
             if (e.getWheelRotation() < 0) {
-                // Boundary for zooming in;
-                if (graph.getView().getScale() <= 50) {
-                    ((mxGraphComponent)parent.getContentPane().getComponent(0))
-                            .zoomIn();
-                    x = Math.round((float)(zoom * x + dx));
-                    y = Math.round((float)(zoom * y + dy));
-                    Point p = new Point(x, y);
-                    parent.centerCanvas(p);
-                }
+                ((mxGraphComponent)parent.getContentPane().getComponent(0))
+                        .zoomIn();
+                x = Math.round((float)(zoom * x + dx));
+                y = Math.round((float)(zoom * y + dy));
+                Point p = new Point(x, y);
+                parent.centerCanvas(p);
             } else {
                 ((mxGraphComponent)parent.getContentPane().getComponent(0))
                         .zoomOut();
@@ -1093,12 +1088,6 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                 Point p = new Point(x, y);
                 parent.centerCanvas(p);
             }
-
-            this.getGraph()
-                    .getView()
-                    .setTranslate(
-                            new mxPoint(LEFTMARGIN * zoom, TOPMARGIN * zoom));
-
         } finally {
             graph.getModel().endUpdate();
         }
@@ -1131,29 +1120,24 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
 
             double gw = graphSize.getWidth();
             double gh = graphSize.getHeight();
-            double gbw = bounds.getWidth() + bounds.getX();
-            double gbh = bounds.getHeight() + bounds.getY();
+            double gbw = bounds.getWidth()+bounds.getX();
+            double gbh = bounds.getHeight()+bounds.getY();
             double w = viewPortSize.getWidth();
             double h = viewPortSize.getHeight();
 
+//            System.out.println(bounds);
+//            System.out.println(viewPortSize);
             if (gbw < 0.75 * w && gbh < 0.75 * h) {
                 newScale = 0.95 * Math.min(w / gbw, h / gbh);
             } else {
                 newScale = Math.min(w / gw, h / gh);
             }
-            if (newScale < 0.05) {
-                newScale = 0.05;
-            }
+
             zoom(newScale);
-            this.getGraph()
-                    .getView()
-                    .setTranslate(
-                            new mxPoint(LEFTMARGIN * newScale, TOPMARGIN
-                                    * newScale));
+
         } finally {
             graph.getModel().endUpdate();
         }
-
     }
 
     /**
@@ -1188,12 +1172,13 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
                         graph.refresh();
                         graph.getModel().endUpdate();
                         parent.drawingPane.getComponent(0).validate();
-                        centerNode(getSelectedCell());
                     }
 
                 });
+
                 morph.startAnimation();
             }
+
         }
     }
 
@@ -1214,61 +1199,43 @@ public class ISGCIGraphCanvas extends CustomGraphComponent implements
     public boolean getAnimation() {
         return animationActivated;
     }
-
-    public NodePopup getNodePopup() {
-        return nodePopup;
-    }
-
-    /*
-     * shortened index method
-     * 
-     * @author Matthias Miller
-     */
-    public int ind() {
-        return parent.getUndoM().getIndexNext();
-    }
-
-    /**
-     * resets the graph to default color and no selected cell, also updates the
-     * map for fast access, always use this method with every undo/redo, never
-     * use it in other cases
-     * 
-     * @author leo
-     * @date 11.07.
-     */
-    public void resetGraph() {
-        if (lastSelected != null)
-            setSelectedCell(null);
-        map.clear();
-        for (Object cell : graph.getChildCells(graph.getDefaultParent(), true,
-                false)) {
-            map.put(((GraphClassSet)((mxCell)cell).getValue()).getSet(), cell);
-        }
-        setSidebarConent();
-        parent.getUndoM().setSignificant(false);
-        graph.getModel().beginUpdate();
-        try {
-            Object[] edges = graph.getChildCells(graph.getDefaultParent(),
-                    false, true);
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, EDGE_COLOR,
-                    edges);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1", edges);
-            Object[] vertexes = graph.getChildCells(graph.getDefaultParent(),
-                    true, false);
-            graph.setCellStyles(mxConstants.STYLE_STROKECOLOR, CELL_COLOR,
-                    vertexes);
-            graph.setCellStyles(mxConstants.STYLE_STROKEWIDTH, "1", vertexes);
-            // necessary because of possible label changes
-            for (Object cell : map.values()) {
-                graph.updateCellSize(cell);
-            }
-            // do a layout due to possible label changes
-            hierachicalLayout.execute(graph.getDefaultParent());
-        } finally {
-            graph.getModel().endUpdate();
-            parent.getUndoM().setSignificant(true);
-        }
-    }
+    
+//    public static void toPdf(File file, mxGraph graph) throws IOException {
+////        file = checkExtension(file, ".pdf"); // ensures that .pdf is the extension
+//        FileOutputStream fos = new FileOutputStream(file);
+//        try {
+//            mxRectangle bounds = ((mxGraph) graph).getGraphBounds();
+//            Rectangle rectangle = new Rectangle( (int)bounds.getWidth(), (int) bounds.getHeight());
+//            Document document = new Document(rectangle);
+//            PdfWriter writer = PdfWriter.getInstance(document, fos);
+//            document.open();
+//            PdfCanvasFactory pdfCanvasFactory = new PdfCanvasFactory(writer.getDirectContent());
+//            mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
+//                    .drawCells((mxGraph) graph, null, 1, null, pdfCanvasFactory);
+//            canvas.getGraphics().dispose();
+//            document.close();
+//        }
+//        catch (DocumentException e) {
+//            throw new IOException(e.getLocalizedMessage());
+//        }
+//        finally {
+//            if (fos != null) {
+//              fos.close();
+//            }
+//        }
+//    }
+//     private static final class PdfCanvasFactory extends CanvasFactory {
+//        private final PdfContentByte cb;
+//
+//        private PdfCanvasFactory(PdfContentByte cb) {
+//            this.cb = cb;
+//        }
+//
+//        public mxICanvas createCanvas(int width, int height) {
+//            Graphics2D g2 = cb.createGraphics(width, height);
+//            return new mxGraphics2DCanvas(g2);
+//        }
+//    }
 }
 
 /* EOF */

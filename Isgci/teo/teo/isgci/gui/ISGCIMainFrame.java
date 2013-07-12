@@ -194,7 +194,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                 .addListener(mxEvent.UNDO, undoHandler);
         ((mxGraphComponent)drawingPane).getGraph().getView()
                 .addListener(mxEvent.UNDO, undoHandler);
-        
+
         mxIEventListener undoHandler = new mxIEventListener() {
             public void invoke(Object source, mxEventObject evt) {
                 List<mxUndoableChange> changes = ((mxUndoableEdit)evt
@@ -273,7 +273,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
 
         fileMenu = new JMenu("File");
         fileMenu.add(miNew = new JMenuItem("New window"));
-        fileMenu.add(miExport = new JMenuItem("Export drawing..."));
+        fileMenu.add(miExport = new JMenuItem("Export SVG..."));
         fileMenu.add(miExit = new JMenuItem("Exit"));
         mainMenuBar.add(fileMenu);
 
@@ -303,9 +303,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         editMenu = new JMenu("Edit");
 
         editMenu.add(miAnimation = new JCheckBoxMenuItem("Animation", false));
-        editMenu.add(miUndo = new JMenuItem("Undo..."));
-        editMenu.add(miRedo = new JMenuItem("Redo..."));
-        editMenu.add(miLayout = new JMenuItem("Relayout"));
+        editMenu.add(miUndo = new JMenuItem("Undo"));
+        editMenu.add(miRedo = new JMenuItem("Redo"));
+        editMenu.add(miLayout = new JMenuItem("Reset Layout"));
 
         mainMenuBar.add(editMenu);
 
@@ -373,10 +373,8 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
     @Override
     public void menuSelected(MenuEvent e) {
         if (e.getSource() == selectionMenu) {
-            // System.out.println(((mxGraphComponent)drawingPane).getGraph().getSelectionCount());
             if (graphCanvas.getSelectedCell() == null) {
                 // disable all features
-                System.out.println("in");
                 miShowInformation.setEnabled(false);
                 miShowDetails.setEnabled(false);
                 miAddNeighbours.setEnabled(false);
@@ -410,6 +408,9 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
                                     miAddNeighbours);
                 }
             }
+        } else if (e.getSource() == editMenu) {
+            miUndo.setEnabled(undoManager.canUndo());
+            miRedo.setEnabled(undoManager.canRedo());
         }
 
     }
@@ -433,9 +434,7 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
      * @return the panel
      */
     protected JComponent createCanvasPanel() {
-        mxGraph graph = new CustomGraph();
-        setGraphSwitches(graph);
-        graph.setAllowDanglingEdges(false);
+        CustomGraph graph = new CustomGraph();
         CustomGraphComponent graphComponent = new CustomGraphComponent(graph);
         drawingPane = graphComponent;
         graphCanvas = new ISGCIGraphCanvas(this, graph);
@@ -449,27 +448,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         ((mxGraphComponent)drawingPane).setDragEnabled(false);
         ((mxGraphComponent)drawingPane).setToolTips(true);
         return drawingPane;
-    }
-
-    private void setGraphSwitches(mxGraph graph) {
-        graph.setCellsEditable(false);
-        graph.setCellsDisconnectable(false);
-        graph.setCellsDeletable(false);
-        graph.setCellsCloneable(false);
-        graph.setAutoSizeCells(true);
-        graph.setBorder(10);
-        graph.setEdgeLabelsMovable(false);
-        graph.setVertexLabelsMovable(false);
-        graph.setSplitEnabled(false);
-        graph.setResetEdgesOnMove(true);
-        graph.setHtmlLabels(true);
-        graph.setAllowDanglingEdges(false);
-        graph.setConnectableEdges(false);
-        graph.setDisconnectOnMove(false);
-        graph.setCellsBendable(false);
-        // does not seem to have any effect
-        graph.setMultigraph(false);
-
     }
 
     /**
@@ -553,13 +531,11 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
             export.pack();
             export.setVisible(true);
         } else if (object == miNaming) {
-            System.out.println("naming");
             JDialog d = new NamingDialog(this);
             d.setLocation(50, 50);
             d.pack();
             d.setVisible(true);
         } else if (object == miSearching) {
-            System.out.println("test");
             JDialog search = new SearchDialog(this);
             search.setLocation(50, 50);
             search.setVisible(true);
@@ -576,12 +552,22 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
 
         } else if (object == miUndo) {
             // undo last change in the drawingPane
+            Object tempCell = graphCanvas.getSelectedCell();
+            graphCanvas.setSelectedCell(null);
             undoManager.undo();
-            ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
+            graphCanvas.getGraph().setSelectionCell(null);
+            graphCanvas.resetGraph();
+            if (graphCanvas.getGraph().getModel().contains(tempCell))
+                graphCanvas.setSelectedCell((mxCell)tempCell);
         } else if (object == miRedo) {
             // redo change in the drawingPane
+            Object tempCell = graphCanvas.getSelectedCell();
+            graphCanvas.setSelectedCell(null);
             undoManager.redo();
-            ((mxGraphComponent)drawingPane).getGraph().setSelectionCell(null);
+            graphCanvas.getGraph().setSelectionCell(null);
+            graphCanvas.resetGraph();
+            if (graphCanvas.getGraph().getModel().contains(tempCell))
+                graphCanvas.setSelectedCell((mxCell)tempCell);
         } else if (object == miLayout) {
 
             graphCanvas.animateGraph();
@@ -689,11 +675,6 @@ public class ISGCIMainFrame extends JFrame implements WindowListener,
         if (object == miDrawUnproper) {
             graphCanvas.setDrawUnproper(((JCheckBoxMenuItem)object).getState());
         }
-    }
-
-    public void clear() {
-        System.out.println("#####################################removing");
-        // drawingPane.removeAll();
     }
 
     /**

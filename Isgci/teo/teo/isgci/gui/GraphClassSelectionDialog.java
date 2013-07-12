@@ -161,9 +161,9 @@ public class GraphClassSelectionDialog extends JDialog implements
     }
 
     /**
-     * Method for drawing and computing graph an canvas.
-     * Centering, if only one Class is selected in the Dialog for drawing, 
-     * else if more than one is selected, then fit graph in Window.
+     * Method for drawing and computing graph an canvas. Centering, if only one
+     * Class is selected in the Dialog for drawing, else if more than one is
+     * selected, then fit graph in Window.
      * 
      * @author Matthias Miller
      * @date 06.07.2013
@@ -175,32 +175,27 @@ public class GraphClassSelectionDialog extends JDialog implements
         } else if (source == newButton) {
             Cursor oldcursor = parent.getCursor();
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            System.out.print("vor drawHierarchy: ");
-            parent.graphCanvas.indOut();
             Collection<GraphClass> nodes = getNodes();
-            System.out.println("Nodes.Size: " + nodes.size());
-            parent.graphCanvas.getGraph().getModel().beginUpdate();
+//            parent.graphCanvas.getGraph().getModel().beginUpdate();
             try {
-            	parent.graphCanvas.drawHierarchy(nodes);
-                System.out.print("nach drawHierarchy: ");
-                parent.graphCanvas.indOut();
-                parent.graphCanvas.setNodeName(classesList.getSelectedValuesList());
-                System.out.print(classesList.getSelectedValuesList().size() + "GCSDialog setNodeName: ");
-    			// remove Undo for setNodeNames
-                ArrayList<GraphClass> list = (ArrayList<GraphClass>) classesList.getSelectedValuesList();
+                parent.graphCanvas.drawHierarchy(nodes);
+                parent.graphCanvas.setNodeName(classesList
+                        .getSelectedValuesList());
+                ArrayList<GraphClass> list = (ArrayList<GraphClass>)classesList
+                        .getSelectedValuesList();
                 parent.drawingPane.getComponent(0).validate();
-                if(list.size() > 1){
-                	parent.graphCanvas.fitInWindow();
+                if (list.size() > 1) {
+                    parent.graphCanvas.fitInWindow();
                 } else if (list.size() == 1) {
-                	mxCell cell = (mxCell) parent.graphCanvas.findNode(
-                            ((NodeList<GraphClass>)classesList).getSelectedNode());
+                    mxCell cell = (mxCell)parent.graphCanvas
+                            .findNode(((NodeList<GraphClass>)classesList)
+                                    .getSelectedNode());
                     parent.graphCanvas.centerNode(cell);
-    			}
+                }
             } finally {
-                parent.graphCanvas.getGraph().getModel().endUpdate();
+//                parent.graphCanvas.getGraph().getModel().endUpdate();
             }
-            
-            
+
             setCursor(oldcursor);
             closeDialog();
         } else if (source == search) {

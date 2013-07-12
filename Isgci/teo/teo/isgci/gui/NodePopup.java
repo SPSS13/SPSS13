@@ -13,13 +13,12 @@ package teo.isgci.gui;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
-import javax.swing.AbstractButton;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -158,14 +157,14 @@ public class NodePopup extends JPopupMenu implements ActionListener {
     private boolean checkVisibility(boolean superclassesORsubclasses,
             boolean visibility) {
         // if the cell has associated edges in the given direction
-        Object[] edges = new Object[]{};
-//                (superclassesORsubclasses ? graph
-//                .getIncomingEdges(cell) : graph.getOutgoingEdges(cell));
-//        // there is no sub- or supernode
-//        if (edges == null || edges.length == 0) {
-//            System.out.println("no super or subclasses");
-//            return false;
-//        }
+        Object[] edges = new Object[] {};
+        // (superclassesORsubclasses ? graph
+        // .getIncomingEdges(cell) : graph.getOutgoingEdges(cell));
+        // // there is no sub- or supernode
+        // if (edges == null || edges.length == 0) {
+        // System.out.println("no super or subclasses");
+        // return false;
+        // }
         LinkedList<Object> queue = new LinkedList<Object>();
         // add root cell
         queue.add(cell);
@@ -311,12 +310,12 @@ public class NodePopup extends JPopupMenu implements ActionListener {
         cell = parent.graphCanvas.getSelectedCell();
 
         // toggle menus
-        //sidebar
+        // sidebar
         miShowDetails.setEnabled(true);
         // superclasses
         boolean superclassesAddable = superclassesAddable();
         boolean subclassesAddable = subclassesAddable();
-        miHideSuperclasses.setEnabled(hideSuperclassesSwitch());      
+        miHideSuperclasses.setEnabled(hideSuperclassesSwitch());
         miShowSuperclasses.setEnabled(showSuperclassesSwitch());
         miAddSuperclasses.setEnabled(superclassesAddable);
         // subclasses
@@ -337,31 +336,11 @@ public class NodePopup extends JPopupMenu implements ActionListener {
             d.setSize(800, 600);
             d.setVisible(true);
         } else if (event.getActionCommand().startsWith(CHANGENAME)) {
-        	int a = parent.graphCanvas.ind();
             String fullname = event.getActionCommand().substring(
                     CHANGENAME.length());
-            graph.getModel().beginUpdate();
-    		graph.setCellsResizable(true);
-            try {
-                GraphClassSet graphClassSet = (GraphClassSet)cell.getValue();
-                // search the label matching the selection
-                GraphClass label = null;
-                for (GraphClass gc : ((GraphClassSet)cell.getValue()).getSet()) {
-                    if (gc.toString().equals(fullname)) {
-                        label = gc;
-                    }
-                }
-                // set the label
-                graphClassSet.setLabel(label);
-                graph.updateCellSize(cell);
-                parent.graphCanvas.animateGraph();
-            } finally {
-            	graph.setCellsResizable(false);
-            	graph.getModel().endUpdate();
-            	for (int i = 0; i < parent.graphCanvas.ind() - a; i++) {
-        			parent.getUndoM().removeUndos(1);
-        		}
-            }
+            List<GraphClass> node = new LinkedList<GraphClass>();
+            node.add(DataSet.getClass(fullname));
+            parent.graphCanvas.setNodeName(node);
         } else if (source == miShowDetails) {
             parent.visibleHaken.setState(true);
             parent.getContentPane().add("West", parent.sidebar);

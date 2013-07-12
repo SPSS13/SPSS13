@@ -15,50 +15,33 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleDirectedGraph;
+import org.w3c.dom.Element;
 
-import teo.isgci.db.Algo;
-import teo.isgci.gc.GraphClass;
-import teo.isgci.xml.GraphMLWriter;
-
-import com.mxgraph.canvas.mxGraphics2DCanvas;
 import com.mxgraph.canvas.mxICanvas;
-import com.mxgraph.canvas.mxSvgCanvas;
-import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxCellRenderer.CanvasFactory;
@@ -69,6 +52,10 @@ import com.mxgraph.view.mxGraph;
 //TODO make import work
 public class ExportDialog extends JDialog implements ActionListener {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7006637049631986533L;
     /** The card titles (and ids) */
     protected static final String CARD_FORMAT = "Please choose the file format";
     protected static final String CARD_PS = "Postscript options";
@@ -89,7 +76,6 @@ public class ExportDialog extends JDialog implements ActionListener {
 
     /* Postscript items */
     protected JCheckBox fittopage, keepsideratio, rotate, color;
-    protected JComboBox papersize;
 
     /* GraphML items */
     protected JRadioButton gmlPlain, gmlYed, gmlHtml, gmlLatex;
@@ -132,7 +118,7 @@ public class ExportDialog extends JDialog implements ActionListener {
 
         title = new JLabel("");
         Font f = title.getFont();
-        title.setFont(f.deriveFont((float) (f.getSize() * 1.2)));
+        title.setFont(f.deriveFont((float)(f.getSize() * 1.2)));
         title.setOpaque(true);
         title.setBackground(Color.darkGray);
         title.setForeground(Color.white);
@@ -142,12 +128,12 @@ public class ExportDialog extends JDialog implements ActionListener {
         content.add(buttonPanel, BorderLayout.SOUTH);
         content.add(cardPanel, BorderLayout.CENTER);
 
-        cardPanel.add(cardFormat(), CARD_FORMAT);
-        cardPanel.add(cardPS(), CARD_PS);
-        cardPanel.add(cardGML(), CARD_GML);
+//        cardPanel.add(cardFormat(), CARD_FORMAT);
+//        cardPanel.add(cardPS(), CARD_PS);
+//        cardPanel.add(cardGML(), CARD_GML);
         cardPanel.add(cardFile(), CARD_FILE);
 
-        showCard(CARD_FORMAT);
+        showCard(CARD_FILE);
     }
 
     /**
@@ -166,129 +152,129 @@ public class ExportDialog extends JDialog implements ActionListener {
         cancelButton.setVisible(card != CARD_FILE);
     }
 
-    /**
-     * Return the card where the user can select the file format.
-     */
-    private Component cardFormat() {
-        Box box = new Box(BoxLayout.Y_AXIS);
+    // /**
+    // * Return the card where the user can select the file format.
+    // */
+    // private Component cardFormat() {
+    // Box box = new Box(BoxLayout.Y_AXIS);
+    //
+    // formats = new ButtonGroup();
+    //
+    // radioPS = new JRadioButton("Postscript ( .ps)");
+    // radioPS.setAlignmentX(Component.LEFT_ALIGNMENT);
+    // formats.add(radioPS);
+    // box.add(radioPS);
+    // box.add(explText("A Postscript file can be included immediately in e.g. LaTeX\n"
+    // + "documents, but it cannot easily be edited."));
+    //
+    // radioSVG = new JRadioButton("Structured Vector Graphics ( .svg)");
+    // radioSVG.setAlignmentX(Component.LEFT_ALIGNMENT);
+    // formats.add(radioSVG);
+    // box.add(radioSVG);
+    // box.add(explText("An SVG file is suitable for editing the diagram, e.g. with\n"
+    // + "inkscape (http://www.inkscape.org), but cannot be included\n"
+    // + "directly in LaTeX."));
+    //
+    // radioGML = new JRadioButton("GraphML ( .graphml)");
+    // radioGML.setAlignmentX(Component.LEFT_ALIGNMENT);
+    // formats.add(radioGML);
+    // box.add(radioGML);
+    // box.add(explText("A graphml file contains the structure of the graph and is\n"
+    // + "suitable for processing by many graph tools, but does not\n"
+    // + "contain layout information and cannot be included directly\n"
+    // + "in LaTeX. Editing and laying out can be done with e.g. yEd.\n"
+    // + "(http://www.yworks.com)"));
+    //
+    // radioPS.setSelected(true);
+    //
+    // JPanel p = new JPanel();
+    // p.add(box, BorderLayout.CENTER);
+    // return p;
+    // }
 
-        formats = new ButtonGroup();
-
-        radioPS = new JRadioButton("Postscript ( .ps)");
-        radioPS.setAlignmentX(Component.LEFT_ALIGNMENT);
-        formats.add(radioPS);
-        box.add(radioPS);
-        box.add(explText("A Postscript file can be included immediately in e.g. LaTeX\n"
-                + "documents, but it cannot easily be edited."));
-
-        radioSVG = new JRadioButton("Structured Vector Graphics ( .svg)");
-        radioSVG.setAlignmentX(Component.LEFT_ALIGNMENT);
-        formats.add(radioSVG);
-        box.add(radioSVG);
-        box.add(explText("An SVG file is suitable for editing the diagram, e.g. with\n"
-                + "inkscape (http://www.inkscape.org), but cannot be included\n"
-                + "directly in LaTeX."));
-
-        radioGML = new JRadioButton("GraphML ( .graphml)");
-        radioGML.setAlignmentX(Component.LEFT_ALIGNMENT);
-        formats.add(radioGML);
-        box.add(radioGML);
-        box.add(explText("A graphml file contains the structure of the graph and is\n"
-                + "suitable for processing by many graph tools, but does not\n"
-                + "contain layout information and cannot be included directly\n"
-                + "in LaTeX. Editing and laying out can be done with e.g. yEd.\n"
-                + "(http://www.yworks.com)"));
-
-        radioPS.setSelected(true);
-
-        JPanel p = new JPanel();
-        p.add(box, BorderLayout.CENTER);
-        return p;
-    }
-
-    /**
-     * Return the card where the user can set Postscript options
-     */
-    private Component cardPS() {
-        Box box = new Box(BoxLayout.Y_AXIS);
-
-        fittopage = new JCheckBox("Fit to page", true);
-        box.add(fittopage);
-
-        keepsideratio = new JCheckBox("Keep side ratio", true);
-        box.add(keepsideratio);
-
-        rotate = new JCheckBox("Rotate 90 degrees", false);
-        box.add(rotate);
-
-        color = new JCheckBox("Colour", false);
-        box.add(color);
-
-        Box box2 = new Box(BoxLayout.X_AXIS);
-
-        JLabel label = new JLabel("Paper size:", JLabel.LEFT);
-        label.setBorder(new EmptyBorder(new Insets(0, 0, 0, 10)));
-        box2.add(label);
-
-        papersize = new JComboBox();
-        papersize.addItem("A4");
-        papersize.addItem("A3");
-        papersize.addItem("Letter");
-        papersize.addItem("Legal");
-        papersize.addItem("Tabloid");
-        papersize.setMaximumSize(papersize.getPreferredSize());
-        box2.add(papersize);
-        box.add(box2);
-
-        JPanel p = new JPanel();
-        p.add(box, BorderLayout.CENTER);
-        return p;
-    }
+    // /**
+    // * Return the card where the user can set Postscript options
+    // */
+    // private Component cardPS() {
+    // Box box = new Box(BoxLayout.Y_AXIS);
+    //
+    // fittopage = new JCheckBox("Fit to page", true);
+    // box.add(fittopage);
+    //
+    // keepsideratio = new JCheckBox("Keep side ratio", true);
+    // box.add(keepsideratio);
+    //
+    // rotate = new JCheckBox("Rotate 90 degrees", false);
+    // box.add(rotate);
+    //
+    // color = new JCheckBox("Colour", false);
+    // box.add(color);
+    //
+    // Box box2 = new Box(BoxLayout.X_AXIS);
+    //
+    // JLabel label = new JLabel("Paper size:", JLabel.LEFT);
+    // label.setBorder(new EmptyBorder(new Insets(0, 0, 0, 10)));
+    // box2.add(label);
+    //
+    // papersize = new JComboBox();
+    // papersize.addItem("A4");
+    // papersize.addItem("A3");
+    // papersize.addItem("Letter");
+    // papersize.addItem("Legal");
+    // papersize.addItem("Tabloid");
+    // papersize.setMaximumSize(papersize.getPreferredSize());
+    // box2.add(papersize);
+    // box.add(box2);
+    //
+    // JPanel p = new JPanel();
+    // p.add(box, BorderLayout.CENTER);
+    // return p;
+    // }
 
     /**
      * Return the card where the user can set GraphML options
      */
-    private Component cardGML() {
-        ButtonGroup b;
-        Box box = new Box(BoxLayout.Y_AXIS);
-
-        b = new ButtonGroup();
-
-        gmlPlain = new JRadioButton("Plain graphml");
-        gmlPlain.addActionListener(this);
-        b.add(gmlPlain);
-        box.add(gmlPlain);
-        box.add(explText("This contains the class names in Latex format as comments\n"
-                + "and the relations between the classes."));
-
-        gmlYed = new JRadioButton("Graphml for yEd");
-        gmlYed.setSelected(true);
-        gmlYed.addActionListener(this);
-        b.add(gmlYed);
-        box.add(gmlYed);
-        box.add(explText("This contains class names as labels of the nodes, styled\n"
-                + "arrows for (un)proper inclusions and colourings for\n"
-                + "algorithmic complexity. Note that for yEd the file must have\n"
-                + "extension .graphml."));
-
-        b = new ButtonGroup();
-        box.add(Box.createRigidArea(new Dimension(0, 20)));
-
-        gmlHtml = new JRadioButton("Html labels");
-        gmlHtml.setSelected(true);
-        b.add(gmlHtml);
-        box.add(gmlHtml);
-        box.add(explText("Class names are formatted using html"));
-
-        gmlLatex = new JRadioButton("Latex labels");
-        b.add(gmlLatex);
-        box.add(gmlLatex);
-        box.add(explText("Class names are unformatted LaTeX code"));
-
-        JPanel p = new JPanel();
-        p.add(box, BorderLayout.CENTER);
-        return p;
-    }
+//    private Component cardGML() {
+//        ButtonGroup b;
+//        Box box = new Box(BoxLayout.Y_AXIS);
+//
+//        b = new ButtonGroup();
+//
+//        gmlPlain = new JRadioButton("Plain graphml");
+//        gmlPlain.addActionListener(this);
+//        b.add(gmlPlain);
+//        box.add(gmlPlain);
+//        box.add(explText("This contains the class names in Latex format as comments\n"
+//                + "and the relations between the classes."));
+//
+//        gmlYed = new JRadioButton("Graphml for yEd");
+//        gmlYed.setSelected(true);
+//        gmlYed.addActionListener(this);
+//        b.add(gmlYed);
+//        box.add(gmlYed);
+//        box.add(explText("This contains class names as labels of the nodes, styled\n"
+//                + "arrows for (un)proper inclusions and colourings for\n"
+//                + "algorithmic complexity. Note that for yEd the file must have\n"
+//                + "extension .graphml."));
+//
+//        b = new ButtonGroup();
+//        box.add(Box.createRigidArea(new Dimension(0, 20)));
+//
+//        gmlHtml = new JRadioButton("Html labels");
+//        gmlHtml.setSelected(true);
+//        b.add(gmlHtml);
+//        box.add(gmlHtml);
+//        box.add(explText("Class names are formatted using html"));
+//
+//        gmlLatex = new JRadioButton("Latex labels");
+//        b.add(gmlLatex);
+//        box.add(gmlLatex);
+//        box.add(explText("Class names are unformatted LaTeX code"));
+//
+//        JPanel p = new JPanel();
+//        p.add(box, BorderLayout.CENTER);
+//        return p;
+//    }
 
     /**
      * Return the card where the user can select the destination file.
@@ -301,19 +287,19 @@ public class ExportDialog extends JDialog implements ActionListener {
         return file;
     }
 
-    /**
-     * Returns a component with explanation of e.g. a radiobutton.
-     */
-    private Component explText(String text) {
-        JTextArea t = new JTextArea(text);
-        // t.setLineWrap(true);
-        // t.setWrapStyleWord(true);
-        t.setEditable(false);
-        t.setAlignmentX(Component.LEFT_ALIGNMENT);
-        t.setOpaque(false);
-        t.setBorder(new EmptyBorder(new Insets(0, 20, 0, 0)));
-        return t;
-    }
+//    /**
+//     * Returns a component with explanation of e.g. a radiobutton.
+//     */
+//    private Component explText(String text) {
+//        JTextArea t = new JTextArea(text);
+//        // t.setLineWrap(true);
+//        // t.setWrapStyleWord(true);
+//        t.setEditable(false);
+//        t.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        t.setOpaque(false);
+//        t.setBorder(new EmptyBorder(new Insets(0, 20, 0, 0)));
+//        return t;
+//    }
 
     public void closeDialog() {
         setVisible(false);
@@ -324,32 +310,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         Object source = e.getSource();
         if (source == cancelButton)
             closeDialog();
-        else if (source == nextButton) {
-            if (current == CARD_FORMAT) {
-                if (radioPS.isSelected())
-                    showCard(CARD_PS);
-                else if (radioGML.isSelected())
-                    showCard(CARD_GML);
-                else
-                    showCard(CARD_FILE);
-            } else
-                showCard(CARD_FILE);
-        } else if (source == backButton) {
-            if (current == CARD_PS || current == CARD_GML)
-                showCard(CARD_FORMAT);
-            else if (radioPS.isSelected())
-                showCard(CARD_PS);
-            else if (radioGML.isSelected())
-                showCard(CARD_GML);
-            else
-                showCard(CARD_FORMAT);
-        } else if (source == gmlYed) {
-            gmlHtml.setEnabled(true);
-            gmlLatex.setEnabled(true);
-        } else if (source == gmlPlain) {
-            gmlHtml.setEnabled(false);
-            gmlLatex.setEnabled(false);
-        } else if (e.getActionCommand() == JFileChooser.APPROVE_SELECTION) {
+        if (e.getActionCommand() == JFileChooser.APPROVE_SELECTION) {
             if (export())
                 closeDialog();
         } else if (e.getActionCommand() == JFileChooser.CANCEL_SELECTION)
@@ -372,12 +333,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         }
 
         try {
-            if (radioPS.isSelected())
-                exportPS(f);
-            else if (radioGML.isSelected())
-                exportGML(f);
-            else if (radioSVG.isSelected())
-                exportSVG(f);
+            exportSVG(f);
         } catch (Exception e) {
             res = false;
             e.printStackTrace();
@@ -391,87 +347,89 @@ public class ExportDialog extends JDialog implements ActionListener {
      * Export to Postscript.
      */
 
-    protected void exportPS(FileOutputStream f) throws Exception {
-        // Exception res = null;
-        // byte[] outstr;
-        // DataOutputStream out = null;
-        //
-        // try {
-        // out = new DataOutputStream(f);
-        // final PSGraphics g = new PSGraphics(
-        // (String) papersize.getSelectedItem(),
-        // fittopage.isSelected(), keepsideratio.isSelected(),
-        // rotate.isSelected(), color.isSelected());
-        // mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
-        // .drawCells(parent.graphCanvas.getGraph(), null, 1, null,
-        // new CanvasFactory() {
-        // // public mxICanvas createCanvas(int width,
-        // // int height) {
-        // // mxGraphics2DCanvas canvas = new mxGraphics2DCanvas(
-        // // g.getG());
-        // // canvas.setDrawLabels(true);
-        // // return canvas;
-        // }
-        //
-        // });
-        //
-        // for (Object cell : parent.graphCanvas.getGraph().getChildCells(
-        // parent.graphCanvas.getGraph().getDefaultParent())) {
-        // //
-        // canvas.drawCell(parent.graphCanvas.getGraph().getModel().getStyle((((mxCell)cell))));
-        // }
-        //
-        // // outstr = g.getG().getBytes();
-        // g.dispose();
-        // // out.write(outstr);
-        // // } catch (IOException ex) {
-        // // res = ex;
-        // } finally {
-        // out.close();
-        // }
-        //
-        // if (res != null)
-        // throw res;
-    }
+    // protected void exportPS(FileOutputStream f) throws Exception {
+    // Exception res = null;
+    // byte[] outstr;
+    // DataOutputStream out = null;
+    //
+    // try {
+    // out = new DataOutputStream(f);
+    // final PSGraphics g = new PSGraphics(
+    // (String) papersize.getSelectedItem(),
+    // fittopage.isSelected(), keepsideratio.isSelected(),
+    // rotate.isSelected(), color.isSelected());
+    // mxGraphics2DCanvas canvas = (mxGraphics2DCanvas) mxCellRenderer
+    // .drawCells(parent.graphCanvas.getGraph(), null, 1, null,
+    // new CanvasFactory() {
+    // // public mxICanvas createCanvas(int width,
+    // // int height) {
+    // // mxGraphics2DCanvas canvas = new mxGraphics2DCanvas(
+    // // g.getG());
+    // // canvas.setDrawLabels(true);
+    // // return canvas;
+    // }
+    //
+    // });
+    //
+    // for (Object cell : parent.graphCanvas.getGraph().getChildCells(
+    // parent.graphCanvas.getGraph().getDefaultParent())) {
+    // //
+    // canvas.drawCell(parent.graphCanvas.getGraph().getModel().getStyle((((mxCell)cell))));
+    // }
+    //
+    // // outstr = g.getG().getBytes();
+    // g.dispose();
+    // // out.write(outstr);
+    // // } catch (IOException ex) {
+    // // res = ex;
+    // } finally {
+    // out.close();
+    // }
+    //
+    // if (res != null)
+    // throw res;
+    // }
 
-    /**
-     * Export to GraphML.
-     */
-    protected void exportGML(FileOutputStream f) throws Exception {
-        Exception res = null;
-        String outstr;
-        Writer out = null;
-
-        try {
-            out = new OutputStreamWriter(f, "UTF-8");
-            GraphMLWriter w = new GraphMLWriter(out,
-                    gmlYed.isSelected() ? GraphMLWriter.MODE_YED
-                            : GraphMLWriter.MODE_PLAIN,
-                    parent.graphCanvas.drawUnproper, gmlHtml.isSelected());
-
-            w.startDocument();
-            // parent.graphCanvas.write(w);
-            w.endDocument();
-        } catch (IOException ex) {
-            res = ex;
-        } finally {
-            out.close();
-        }
-
-        if (res != null)
-            throw res;
-    }
+    // /**
+    // * Export to GraphML.
+    // */
+    // protected void exportGML(FileOutputStream f) throws Exception {
+    // Exception res = null;
+    // String outstr;
+    // Writer out = null;
+    //
+    // try {
+    // out = new OutputStreamWriter(f, "UTF-8");
+    // GraphMLWriter w = new GraphMLWriter(out,
+    // gmlYed.isSelected() ? GraphMLWriter.MODE_YED
+    // : GraphMLWriter.MODE_PLAIN,
+    // parent.graphCanvas.drawUnproper, gmlHtml.isSelected());
+    //
+    // w.startDocument();
+    // // parent.graphCanvas.write(w);
+    // w.endDocument();
+    // } catch (IOException ex) {
+    // res = ex;
+    // } finally {
+    // out.close();
+    // }
+    //
+    // if (res != null)
+    // throw res;
+    // }
 
     /**
      * Export to SVG.
      */
     protected void exportSVG(FileOutputStream f) throws Exception {
 
-        final int mywidth = (int) (parent.graphCanvas.getGraphControl()
+        final int mywidth = (int)(parent.graphCanvas.getGraphControl()
                 .getWidth() * (parent.graphCanvas.getZoomFactor()));
-        final int myheight = (int) (parent.graphCanvas.getGraphControl()
+        System.out.println(parent.graphCanvas.getZoomFactor());
+        System.out.println(mywidth);
+        final int myheight = (int)(parent.graphCanvas.getGraphControl()
                 .getHeight() * (parent.graphCanvas.getZoomFactor()));
-
+        System.out.println(myheight);
         Exception res = null;
         // DataOutputStream out = new DataOutputStream(f);
         Writer out = new OutputStreamWriter(f, "UTF-8");
@@ -483,7 +441,7 @@ public class ExportDialog extends JDialog implements ActionListener {
         for (Object o : map.values()) {
             set.add(o);
         }
-        
+
         Object[] toDraw = set.toArray();
 
         try {
@@ -498,6 +456,16 @@ public class ExportDialog extends JDialog implements ActionListener {
                             return can;
                         }
                     });
+            // resizing dependent on the drawn nodes
+            String myW = String.valueOf(can.farX + 600);
+            String myH = String.valueOf(can.farY + 200);
+
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("width", myW);
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("height", myH);
+            ((Element) can.getDocument().getElementsByTagName("svg").item(0))
+                    .setAttribute("viewBox", "-10 -10 " + myW + " " + myH);
 
             out.write(mxXmlUtils.getXml(can.getDocument()));
             // out.writeBytes(mxXmlUtils.getXml(can.getDocument()));

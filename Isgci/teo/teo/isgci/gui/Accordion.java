@@ -52,13 +52,7 @@ public class Accordion extends JPanel implements Runnable {
     public Accordion(final ISGCIMainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
-		/*
-		 * Set default-content of Sidebar html possible here!!
-		 */
-		String defaultTextSidebar = "<div style='margin:10px;'>Please select Graph-Class...<div>";
-        GraphclassPane.setText(defaultTextSidebar);
-        InclusionPane.setText(defaultTextSidebar);
-        ProblemsPane.setText(defaultTextSidebar);
+        setDefaultText();
 
         final JSCAccordion acc = new JSCAccordion();
         acc.setTabOrientation(TabOrientation.VERTICAL);
@@ -67,10 +61,12 @@ public class Accordion extends JPanel implements Runnable {
         customizeLook(acc);
         setLayout(new BorderLayout());
 
+        /*
+         * This is the little Hide Button
+         */
         final BasicArrowButton button = new BasicArrowButton(
-                SwingConstants.WEST); // Hide Button as Arrow
+                SwingConstants.WEST);
         button.setBorder(new LineBorder(Color.BLACK, 2));
-        // button.setBackground(new Color(255, 255, 255));
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -86,9 +82,25 @@ public class Accordion extends JPanel implements Runnable {
         validate();
     }
 
+    /**
+     * Sets the text in the Sidebar to the default Text
+     * 
+     * @author leo
+     */
+    public void setDefaultText() {
+        /*
+         * Set default-content of Sidebar html possible here!!
+         */
+        String defaultTextSidebar = "<div style='margin:10px;'>Please select Graph-Class...<div>";
+        GraphclassPane.setText(defaultTextSidebar);
+        InclusionPane.setText(defaultTextSidebar);
+        ProblemsPane.setText(defaultTextSidebar);
+    }
+
     protected boolean visibilityChanged = false;
     protected boolean contentChanged = false;
 
+    @SuppressWarnings("deprecation")
     public void actualize() {
         if (visibilityChanged) {
             visibilityChanged = false;
@@ -96,6 +108,8 @@ public class Accordion extends JPanel implements Runnable {
             if (mainFrame.graphCanvas.getSelectedCell() != null) {
                 setContent(((GraphClassSet)mainFrame.graphCanvas
                         .getSelectedCell().getValue()).getLabel().getID());
+            } else {
+                setDefaultText();
             }
 
         }
@@ -157,16 +171,19 @@ public class Accordion extends JPanel implements Runnable {
         InclusionPane.setText(loadingLogo);
         ProblemsPane.setText(loadingLogo);
 
-        String url = "http://www.graphclasses.org/classes/" + u; // generating
-                                                                 // url
-        actualContent = u; // Saves current Nr. of shown content (Used for
-                           // abortion of show-request for the same node)
+        /*
+         * Generates the url of the website with the information about the
+         * currently selected graphclass
+         */
+
+        String url = "http://www.graphclasses.org/classes/" + u;
+        actualContent = u;
         try {
 
             /*
-             * A Parser is used to formate the Homepage-Content. The Array
-             * "text" contains now several html-blocks to be shown in the
-             * panels.
+             * The parser from the library jsoup is used to formate the
+             * Homepage-Content. The Array "text" contains now several
+             * html-blocks to be shown in the panels.
              */
             String[] text = fetchurl(url);
 
@@ -228,8 +245,8 @@ public class Accordion extends JPanel implements Runnable {
                             }
                         }
                         /*
-                         * If a browser is available on the user's system, it
-                         * starts and opens up the requested url.
+                         * Through the generic Desktop class the standard
+                         * browser will be called to open the given website
                          */
                         else if (Desktop.isDesktopSupported()) {
                             try {
@@ -273,40 +290,45 @@ public class Accordion extends JPanel implements Runnable {
         }
     }
 
-	/**
-	 * Fetches html from given URL of Graph-Class, bunches the information in
-	 * seperate html-blocks and returns them as a String-Array JSoup is used to
-	 * parse the html.
-	 */
-	public String[] fetchurl(String url) throws IOException {
+    /**
+     * Fetches html from given URL of Graph-Class, bunches the information in
+     * seperate html-blocks and returns them as a String-Array JSoup is used to
+     * parse the html. In every Section html-tables are used to illustrate the
+     * overscores
+     */
+    public String[] fetchurl(String url) throws IOException {
 
         String[] resultArray = new String[11];
         org.jsoup.select.Elements elements;
         org.jsoup.select.Elements links;
         int counter = 0;
 
-        // fetch html-document from url
+        /*
+         * fetches the html-document
+         */
         org.jsoup.nodes.Document doc = Jsoup.connect(url).get();
 
-        // Graphclass-Sections
-        elements = doc.select("h1");
+        /*
+         * Graphclass Sections
+         */elements = doc.select("h1");
         resultArray[0] = elements.toString().replace("<h1>", "")
                 .replace("</h1>", "");
 
-		resultArray[0] = resultArray[0]
-				.replace(
-						"<span class=\"complement\">",
-						"</b></td><td style=\"font:bold; border-top:1px solid; margin-right:-5; margin-left:-5; padding-top:-3; height:10px;\">");
-		resultArray[0] = resultArray[0].replace("</span>",
-				"</b></td><td style=\"padding-top:-3; font:bold;\"><b>");
-		resultArray[0] = "<div style='border-bottom: 1px solid;margin-left: -2 cm; width:100cm;'><table><tr><td style=\"padding-top:-3;\"><b>"
-				+ resultArray[0] + "</b></td></tr></table></div><br>";
+        resultArray[0] = resultArray[0]
+                .replace(
+                        "<span class=\"complement\">",
+                        "</b></td><td style=\"font:bold; border-top:1px solid; margin-right:-5; margin-left:-5; padding-top:-3; height:10px;\">");
+        resultArray[0] = resultArray[0].replace("</span>",
+                "</b></td><td style=\"padding-top:-3; font:bold;\"><b>");
+        resultArray[0] = "<div style='border-bottom: 1px solid;margin-left: -2 cm; width:100cm;'><table><tr><td style=\"padding-top:-3;\"><b>"
+                + resultArray[0] + "</b></td></tr></table></div><br>";
 
-		System.out.println(resultArray[0]);
-        // Definition Box
-        elements = doc.select("#definition>p"); // Selects the p-html-box from
-                                                // all blocks with the id:
-                                                // definition
+        System.out.println(resultArray[0]);
+        /*
+         * Definition BoxSelects the p-html-box from all blocks with the
+         * id:definition
+         */
+        elements = doc.select("#definition>p");
         resultArray[1] = "";
         if (!elements.isEmpty()) {
             resultArray[1] = elements.toString();
@@ -316,7 +338,9 @@ public class Accordion extends JPanel implements Runnable {
             elements = null;
         }
 
-        // Equivalent Classes
+        /*
+         * Equivalent Graphclasses Section
+         */
         elements = doc.select(".equivs>.classeslist>li>.graphclass");
         links = doc.select(".equivs>.classeslist>li>.graphclass>a[href]");
 
@@ -351,7 +375,9 @@ public class Accordion extends JPanel implements Runnable {
             counter = 0;
         }
 
-        // Complement Classes
+        /*
+         * Complement Classes
+         */
         elements = doc.select(".complements>.classeslist>li>.graphclass");
         links = doc.select(".complements>.classeslist>li>.graphclass>a[href]");
 
@@ -386,15 +412,16 @@ public class Accordion extends JPanel implements Runnable {
             counter = 0;
         }
 
-        // Related Classes
+        /*
+         * Related Classes
+         */
         elements = doc.select(".related>.classeslist>li>.graphclass>a");
         links = doc.select(".related>.classeslist>li>.graphclass>a[href]");
 
         resultArray[4] = "";
         if (!elements.isEmpty()) {
             for (Element e : elements) {
-                String link = links.get(counter).attr("href").toString();// .replace("/classes/",
-                                                                         // "http://www.graphclasses.org/classes/");
+                String link = links.get(counter).attr("href").toString();
 
                 String liElement;
 
@@ -484,8 +511,7 @@ public class Accordion extends JPanel implements Runnable {
         resultArray[8] = "";
         if (!elements.isEmpty()) {
             for (Element e : elements) {
-                String link = links.get(counter).attr("href").toString();// .replace("/classes/",
-                                                                         // "http://www.graphclasses.org/classes/");
+                String link = links.get(counter).attr("href").toString();
 
                 String liElement;
 
@@ -516,10 +542,9 @@ public class Accordion extends JPanel implements Runnable {
         // Problems-Sections
         resultArray[9] = ""; // doc.select("#problemssummary").toString();
 
-        // Problems-Table
         /*
-         * Select the table. Reduce it by applying several regular expressions
-         * to it. Convert the links to the applicable format
+         * Problems Table Select the table. Reduce it by applying several
+         * regular expressions to it. Convert the links to the applicable format
          */
         elements = doc.select("body>table>tbody>tr");
         String resultString = "";
@@ -564,12 +589,10 @@ public class Accordion extends JPanel implements Runnable {
         return resultArray;
     }
 
-    /**
-     * Hier wird die Information �ber die Graphklasse an den Sidebar
-     * �bergeben
+    /*
+     * This is where the parsed information is given to the sidebar
      */
     private void addtabs(JSCAccordion accordion) {
-        // Der Inhalt der Tabs
 
         UIManager.put("ScrollBar.background", new Color(240, 240, 240));
         JScrollPane bla1 = new JScrollPane(GraphclassPane);
@@ -582,7 +605,6 @@ public class Accordion extends JPanel implements Runnable {
         bla2.setOpaque(false);
         bla2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         bla2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
         bla3.setOpaque(false);
         bla3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
@@ -611,15 +633,12 @@ public class Accordion extends JPanel implements Runnable {
                 // available fields on accordionEvent.
                 switch (accordionEvent.getEventType()) {
                 case TAB_ADDED: {
-                    // add your logic here to react to a tab being added.
                     break;
                 }
                 case TAB_REMOVED: {
-                    // add your logic here to react to a tab being removed.
                     break;
                 }
                 case TAB_SELECTED: {
-                    // add your logic here to react to a tab being selected.
                     break;
                 }
                 }
@@ -627,12 +646,15 @@ public class Accordion extends JPanel implements Runnable {
         });
     }
 
+    /*
+     * This method is for optional Look customization of the Sidebar Accordion
+     * By default it does nothing
+     */
     private void customizeLook(JSCAccordion accordion) {
         accordion.setDrawShadow(true);
 
         SteelAccordionUI steelAccordionUI = (SteelAccordionUI)accordion.getUI();
 
-        // Padding vom Standard Accordion wegmachen
         steelAccordionUI.setHorizontalBackgroundPadding(0);
         steelAccordionUI.setVerticalBackgroundPadding(0);
         steelAccordionUI.setHorizontalTabPadding(0);
@@ -644,10 +666,12 @@ public class Accordion extends JPanel implements Runnable {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void visibilityChanged() {
         visibilityChanged = true;
     }
 
+    @SuppressWarnings("deprecation")
     public void changeContent(String NodeID) {
         actualContent = NodeID;
         contentChanged = true;

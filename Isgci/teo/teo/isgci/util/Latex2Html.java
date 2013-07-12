@@ -133,6 +133,13 @@ public class Latex2Html extends Latex {
         }
     }
 
+    
+    
+    /*
+     * This method truncates the HTML string for the Node Label
+     * It is called to truncate to 40 Characters and without suffix, since the default suffix is "..."
+     * 
+     */
     public static String truncateHTML(String text, int length, String suffix) {
         // if the plain text is shorter than the maximum length, return the
         // whole text
@@ -180,6 +187,7 @@ public class Latex2Html extends Latex {
 
         // splits all html-tags to scanable lines
         Matcher tagMatcher = tagPattern.matcher(text);
+        @SuppressWarnings("unused")
         int numTags = tagMatcher.groupCount();
 
         int totalLength = suffix.length();

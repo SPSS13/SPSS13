@@ -50,19 +50,19 @@ public class GraphClassSet {
      * @annotation
      */
     public void setLabel(GraphClass label) {
-        parent.getGraph().getModel().beginUpdate();
-        try{
-        	if (label == null) {
-                for (GraphClass gc : set) {
-                    if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
-                        label = gc;
-                    }
+        if (label == null) {
+            for (GraphClass gc : set) {
+                if (gc.toString().equals(Algo.getName(set, parent.namingPref))) {
+                    label = gc;
+                    break;
                 }
             }
-            this.label = label;	
-        } finally {
-        	parent.getGraph().getModel().endUpdate();	
+        } else{
+            //assertion
+            if(set.contains(label) == false)
+                throw new IllegalArgumentException("The label "+ label.toString() + " is not applicable for this node");
         }
+        this.label = label;
     }
 
     @Override
@@ -71,12 +71,8 @@ public class GraphClassSet {
     }
 
     public String toLongString() {
-//        System.out.println("label.toString() = " + label.toString());
+        // System.out.println("label.toString() = " + label.toString());
         return XsltUtil.latex(label.toString());
-    }
-    
-    public String toPlainString(){
-        return label.toString();
     }
 
 }
